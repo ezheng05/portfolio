@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ellen zheng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@350;400;600;700&family=Taviraj:wght@200;300;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f5f1ea;
+            --bg-secondary: #ebe6de;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent: #8b7dd8;
+            --accent-hover: #7a6bc7;
+            --border: rgba(26, 26, 26, 0.1);
+            --error-color: #c0392b;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #151515;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #f0eeea;
+            --text-secondary: #c2c2c2;
+            --accent: #a89be8;
+            --accent-hover: #b8aef0;
+            --border: rgba(255, 255, 255, 0.15);
+            --error-color: #e57373;
+        }
+
+        [data-theme="dark"][data-accent="blue"] {
+            --accent: #7ba3f7;
+            --accent-hover: #94b5f9;
+        }
+
+        [data-accent="blue"] {
+            --accent: #6495ED;
+            --accent-hover: #5487E3;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 350;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        p b, li b, .about-content b, .about-hobbies b {
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] body {
+            font-weight: 350;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        main a:not(.cta-button):not(.read-more) {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        main a:not(.cta-button):not(.read-more):hover {
+            color: var(--accent-hover);
+        }
+
+        main a:not(.cta-button):not(.read-more):visited {
+            color: var(--accent);
+        }
+
+        .serif {
+            font-family: 'Taviraj', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            background: rgba(238, 232, 222, 0.8);
+            transition: transform 0.4s ease, background 0.4s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(15, 15, 15, 0.8);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        /* Toggle Controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            width: 50px;
+            height: 26px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-btn.active::before {
+            transform: translateX(24px);
+        }
+
+        .toggle-btn:focus-visible,
+        #accentToggle:focus-visible,
+        .nav-links a:focus-visible,
+        .cta-button:focus-visible,
+        .read-more:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            z-index: 10000;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        #themeToggle {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        #themeToggle::before {
+            content: '☀';
+            position: static;
+            width: auto;
+            height: auto;
+            background: transparent;
+            border-radius: 0;
+            transform: none;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] #themeToggle::before {
+            content: '☾';
+        }
+
+        #themeToggle:hover {
+            transform: scale(1.1);
+        }
+
+        #accentToggle {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        #accentToggle::before {
+            content: '🎨';
+            position: static;
+            width: auto;
+            height: auto;
+            background: transparent;
+            border-radius: 0;
+            transform: none;
+        }
+
+        #accentToggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 4rem;
+        }
+
+        #home {
+            padding: 0;
+            margin: 0;
+        }
+
+        main #home.page.active {
+            margin: 0;
+        }
+
+        main:has(#home.page.active) {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* homepage only: fit nav + content + footer in one viewport */
+        body.home-active {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body.home-active main {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.home-active main #home.page.active {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+        }
+
+        body.home-active main #home .hero {
+            flex: 1;
+            min-height: 0;
+            height: auto;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Home Page */
+        .hero {
+            height: calc(100vh - 80px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5rem 6rem 5rem;
+        }
+
+        body.home-active .hero {
+            height: auto;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 600;
+            line-height: 0.95;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 2rem;
+            font-weight: 250;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* About Page */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1400px;
+            margin: 4rem auto;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.1;
+        }
+
+        .about-image:has(img)::before {
+            display: none;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 500px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carousel-stage {
+            flex: 1;
+            position: relative;
+            min-height: 0;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+        }
+
+        .carousel-slide.active {
+            display: flex;
+        }
+
+        .carousel-slide img,
+        .carousel-slide video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .carousel-slide video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            transition: background 0.2s, color 0.2s;
+            z-index: 2;
+        }
+
+        .carousel-nav:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .carousel-nav.prev { left: 12px; }
+        .carousel-nav.next { right: 12px; }
+
+        .carousel-thumbs {
+            display: flex;
+            gap: 6px;
+            padding: 10px 12px;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+
+        .carousel-thumb {
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s, opacity 0.2s;
+        }
+
+        .carousel-thumb:hover {
+            opacity: 0.9;
+        }
+
+        .carousel-thumb.active {
+            border-color: var(--accent);
+        }
+
+        .carousel-thumb img,
+        .carousel-thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            padding: 8px 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            text-align: center;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .about-card {
+            padding: 1.75rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--accent);
+        }
+
+        .about-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .about-card ul {
+            list-style: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .about-card li {
+            padding: 0.2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-card li:last-child {
+            border-bottom: none;
+        }
+
+        .about-card .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .about-card .tag-list li {
+            border: none;
+            padding: 0.35rem 0.75rem;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        /* Design Page */
+        .section-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            position: relative;
+            height: 450px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+
+        .project-card[data-project="enlaye"] {
+            background-image: url('enlaye-logo.png');
+            background-size: 90%;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            background-color: var(--bg-secondary);
+        }
+
+        .project-card[data-project="popple"] {
+            background-image: url('popple-logo.png');
+            background-size: 90%;
+            background-position: center 15%;
+            background-repeat: no-repeat;
+            background-color: var(--bg-secondary);
+        }
+
+        .project-card[data-project="streamlit"] {
+            background-image: url('streamlit-logo.png');
+            background-size: 90%;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            background-color: var(--bg-secondary);
+        }
+
+        .project-card[data-project="reco"] {
+            background-image: url('reco-logo.png');
+            background-size: 35%;
+            background-position: center 25%;
+            background-repeat: no-repeat;
+            background-color: var(--bg-secondary);
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, var(--bg-primary) 100%);
+            z-index: 1;
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+            z-index: 2;
+        }
+
+        .project-number {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .project-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .project-card[data-project] {
+            cursor: pointer;
+        }
+
+        /* Project detail pages */
+        .project-page {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .project-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+            transition: color 0.2s ease, gap 0.2s ease;
+        }
+
+        .project-back:hover {
+            color: var(--accent);
+            gap: 0.75rem;
+        }
+
+        .project-page h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .project-page .project-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-page .project-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .project-page .project-description:has(+ ul) {
+            margin-bottom: 0.35rem;
+        }
+
+        .project-page ul,
+        .project-page .project-description ul {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin: 0 0 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .project-page li,
+        .project-page .project-description li {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-media {
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .project-media img,
+        .project-media video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-media--logo {
+            padding: 1.25rem 2rem;
+            text-align: center;
+        }
+
+        .project-media--logo a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .project-media--logo img {
+            max-width: 100%;
+            width: auto;
+            margin: 0 auto;
+        }
+
+        #project-popple .project-media--logo {
+            overflow: visible;
+        }
+        #project-popple .project-media--logo img {
+            max-height: 250px;
+            transform: scale(1.2);
+            transform-origin: center;
+        }
+
+        .project-media-placeholder {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        .project-gallery .gallery-item {
+            min-width: 0;
+        }
+
+        .project-gallery .gallery-item.gallery-span-2 {
+            grid-column: span 2;
+        }
+
+        .project-gallery .gallery-item.gallery-span-3 {
+            grid-column: span 3;
+        }
+
+        .project-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: block;
+            background: var(--bg-secondary);
+        }
+
+        .project-gallery-title {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Enlaye password-gated section */
+        .enlaye-gate {
+            margin-top: 2.5rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .enlaye-gate-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .enlaye-gate-form label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .enlaye-gate-form input[type="password"] {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-width: 180px;
+        }
+
+        .enlaye-gate-form input:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .enlaye-gate-form .btn-unlock {
+            padding: 0.5rem 1.25rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .enlaye-gate-form .btn-unlock:hover {
+            background: var(--accent-hover);
+        }
+
+        .enlaye-gate-error {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--error-color);
+            display: none;
+        }
+
+        .enlaye-gate-error.visible {
+            display: block;
+        }
+
+        .enlaye-protected {
+            display: none;
+            margin-top: 2.5rem;
+        }
+
+        .enlaye-protected.visible {
+            display: block;
+            animation: enlayeFadeIn 0.4s ease;
+        }
+
+        @keyframes enlayeFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Research Page */
+        .research-under-construction {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px - 8rem);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .research-under-construction-title {
+            font-family: 'Taviraj', serif;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .research-under-construction-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .research-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .research-header {
+            margin-bottom: 4rem;
+        }
+
+        .research-header h2 {
+            font-size: clamp(3.5rem, 8vw, 8rem);
+            margin-bottom: 2rem;
+            line-height: 1;
+        }
+
+        .research-intro {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            line-height: 1.7;
+        }
+
+        .research-items {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .research-item {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .research-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .research-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .research-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .research-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .read-more:hover {
+            gap: 0.75rem;
+            color: var(--accent-hover);
+        }
+
+        [data-theme="dark"] .read-more {
+            color: #a89be8;
+        }
+
+        [data-theme="dark"] .read-more:hover {
+            color: #b8aef0;
+        }
+
+        [data-theme="dark"][data-accent="blue"] .read-more {
+            color: #7ba3f7;
+        }
+
+        [data-theme="dark"][data-accent="blue"] .read-more:hover {
+            color: #94b5f9;
+        }
+
+        [data-theme="dark"] .project-number,
+        [data-theme="dark"] .research-date {
+            color: #a89be8;
+        }
+
+        [data-theme="dark"][data-accent="blue"] .project-number,
+        [data-theme="dark"][data-accent="blue"] .research-date {
+            color: #7ba3f7;
+        }
+
+        [data-theme="dark"] main a:not(.cta-button):not(.read-more) {
+            color: #a89be8;
+        }
+
+        [data-theme="dark"] main a:not(.cta-button):not(.read-more):hover,
+        [data-theme="dark"] main a:not(.cta-button):not(.read-more):visited {
+            color: #b8aef0;
+        }
+
+        [data-theme="dark"][data-accent="blue"] main a:not(.cta-button):not(.read-more) {
+            color: #7ba3f7;
+        }
+
+        [data-theme="dark"][data-accent="blue"] main a:not(.cta-button):not(.read-more):hover,
+        [data-theme="dark"][data-accent="blue"] main a:not(.cta-button):not(.read-more):visited {
+            color: #94b5f9;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            main {
+                padding: 2rem;
+            }
+
+            .about-grid,
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .research-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .controls {
+                flex-direction: row;
+            }
+
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .carousel {
+                height: 360px;
+            }
+        }
+
+        /* Site footer */
+        .site-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg-primary);
+        }
+
+        .footer-email-wrap {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .footer-icon {
+            color: var(--text-secondary);
+            transition: color 0.2s ease, transform 0.2s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-icon:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .footer-icon svg {
+            display: block;
+        }
+
+        .footer-copy-toast {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-0.5rem);
+            padding: 0.35rem 0.6rem;
+            font-size: 0.75rem;
+            color: var(--bg-primary);
+            background: var(--text-primary);
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-copy-toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-0.25rem);
+        }
+
+        /* Utility Classes */
+        .fade-in {
+            animation: fadeIn 0.6s ease;
+        }
+
+        .slide-up {
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body data-theme="light" data-accent="purple">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <nav aria-label="Main navigation">
+        <a href="#home" class="logo serif">Ellen Zheng</a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active" data-page="home" aria-current="page">home</a>
+            <a href="#about" class="nav-link" data-page="about">about</a>
+            <a href="#design" class="nav-link" data-page="design">design</a>
+            <a href="#research" class="nav-link" data-page="research">research</a>
+        </div>
+        <div class="controls">
+            <button type="button" class="toggle-btn" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false"></button>
+            <button type="button" id="accentToggle" aria-label="Toggle accent color" aria-pressed="false"></button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page active" aria-labelledby="hero-heading">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 id="hero-heading" class="serif">hi,<br>i&rsquo;m ellen.</h1>
+                    <p class="hero-subtitle">I like people! And technology.<br>And using technology to make things.<br>Things that look delightful. And help people!</p>
+                    <a href="#design" class="cta-button" data-page="design">view my work</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <div class="about-grid">
+                <div class="about-image" aria-hidden="true"><img src="about-photo.png" alt=""></div>
+                <div class="about-content">
+                    <h2 class="serif">right now, i&rsquo;m...</h2>
+                    <p>A third year student at Boston University studying <b>Computer Engineering</b> and <b>Innovation & Entrepreneurship</b>, concentrating in <b>Technology Innovation</b> and <b>Machine Learning</b>.</p>
+                    <p>I've worked in roles across <b>product management, design, and engineering</b> at startups like Popple, ReCo Digital, and Enlaye. And I've conducted <b>research</b> in labs including BU WISE Circuits Lab, Multimedia Communications Lab, and BU Robotics Lab.</p>
+                    <p>I'm most passionate about <b>human-computer interaction, autonomous systems, machine learning, and cyber-physical systems</b>. And I'm a big fan of the intersection of things: where <b>technology, psychology, and design</b> meet.</p>
+                    <p>My top values are <b>empathy, discipline, authenticity, ambition, and growth</b>. I grew up in Beijing and NYC.</p>
+                </div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="serif">when i&rsquo;m not working, i&rsquo;m...</h2>
+                    <p>Trying new restaurants, playing drums or guitar, hanging out with friends, out in nature, working on my next project, or on a gloriously epic adventure!</p>
+                    <p>I LOVE new experiences and learning anything new. Everything from metalworking to skydiving, horseback riding to music production, boxing to meditation - I enjoy it all. Next on my list is bungee jumping.</p>
+                    <p>In the last 6 months, I've visited 18 different workout studios in Boston. I also snowboard and play tennis and basketball (and am teaching my friends!)</p>
+                    <p>I've traveled to 27 countries so far - my goal is 100.</p>
+                    <p>You should talk to me about...<br>Music, books (fiction, self-help, business, psychology, mystery), your favorite movies/TV shows, health/nutrition, technology, startups, AI, and design.</p>
+                    <p>Fun fact: I'm ranked #9 on <a href="https://beliapp.com/" target="_blank" rel="noopener">Beli</a> at Boston University 😮<br>To quantify this magnificent accomplishment, that's 1000+ restaurants rated!<br>P.S. If you don't know what Beli is, download the app and find out ;)</p>
+                </div>
+                <div class="carousel" role="region" aria-label="Hobbies gallery">
+                    <div class="carousel-stage">
+                        <button type="button" class="carousel-nav prev" aria-label="Previous">‹</button>
+                        <button type="button" class="carousel-nav next" aria-label="Next">›</button>
+                        <div class="carousel-slide active" data-index="0"><img src="portfolio-media/atv.jpg" alt=""></div>
+                        <div class="carousel-slide" data-index="1"><img src="portfolio-media/beli.png" alt=""></div>
+                        <div class="carousel-slide" data-index="2"><img src="portfolio-media/camel.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="3"><img src="portfolio-media/construction.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="4"><img src="portfolio-media/drum.jpg" alt=""></div>
+                        <div class="carousel-slide" data-index="5"><video src="portfolio-media/drumming.mov" controls></video></div>
+                        <div class="carousel-slide" data-index="6"><video src="portfolio-media/guitar.mov" controls></video></div>
+                        <div class="carousel-slide" data-index="7"><img src="portfolio-media/hike.jpg" alt=""></div>
+                        <div class="carousel-slide" data-index="8"><img src="portfolio-media/hike.PNG" alt=""></div>
+                        <div class="carousel-slide" data-index="9"><img src="portfolio-media/hult.JPEG" alt=""></div>
+                        <div class="carousel-slide" data-index="10"><img src="portfolio-media/pickleball.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="11"><img src="portfolio-media/scuba.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="12"><img src="portfolio-media/skydive.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="13"><video src="portfolio-media/sled.mov" controls></video></div>
+                        <div class="carousel-slide" data-index="14"><video src="portfolio-media/snowboarding.MOV" controls></video></div>
+                        <div class="carousel-slide" data-index="15"><img src="portfolio-media/sunset.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="16"><img src="portfolio-media/tennis.JPG" alt=""></div>
+                    </div>
+                    <p class="carousel-caption" id="carousel-caption">ATV in Iceland!</p>
+                    <div class="carousel-thumbs">
+                        <button type="button" class="carousel-thumb active" data-index="0" aria-label="View 1"><img src="portfolio-media/atv.jpg" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="1" aria-label="View 2"><img src="portfolio-media/beli.png" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="2" aria-label="View 3"><img src="portfolio-media/camel.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="3" aria-label="View 4"><img src="portfolio-media/construction.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="4" aria-label="View 5"><img src="portfolio-media/drum.jpg" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="5" aria-label="View 6"><video src="portfolio-media/drumming.mov" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="6" aria-label="View 7"><video src="portfolio-media/guitar.mov" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="7" aria-label="View 8"><img src="portfolio-media/hike.jpg" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="8" aria-label="View 9"><img src="portfolio-media/hike.PNG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="9" aria-label="View 10"><img src="portfolio-media/hult.JPEG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="10" aria-label="View 11"><img src="portfolio-media/pickleball.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="11" aria-label="View 12"><img src="portfolio-media/scuba.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="12" aria-label="View 13"><img src="portfolio-media/skydive.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="13" aria-label="View 14"><video src="portfolio-media/sled.mov" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="14" aria-label="View 15"><video src="portfolio-media/snowboarding.MOV" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="15" aria-label="View 16"><img src="portfolio-media/sunset.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="16" aria-label="View 17"><img src="portfolio-media/tennis.JPG" alt=""></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-cards" role="list">
+                <section class="about-card" aria-labelledby="card-classes">
+                    <h3 id="card-classes">Select Classes</h3>
+                    <ul>
+                        <li>Product Management</li>
+                        <li>Business of Technology Innovation</li>
+                        <li>Strategy for Tech-Based Firms</li>
+                        <li>Design Strategy</li>
+                        <li>Advertising</li>
+                        <li>Engineering Design</li>
+                        <li>Software Engineering</li>
+                        <li>Algorithms</li>
+                        <li>Machine Learning</li>
+                        <li>Deep Learning</li>
+                        <li>Engineering Mechanics</li>
+                        <li>Computer Architecture</li>
+                        <li>Computer Networking</li>
+                    </ul>
+                </section>
+                <section class="about-card" aria-labelledby="card-skills">
+                    <h3 id="card-skills">Skills</h3>
+                    <ul class="tag-list" role="list">
+                        <li>Python</li>
+                        <li>C++</li>
+                        <li>MATLAB</li>
+                        <li>HTML</li>
+                        <li>Verilog</li>
+                        <li>Flutter</li>
+                        <li>Streamlit</li>
+                        <li>PyTorch</li>
+                        <li>Arduino</li>
+                        <li>Mobile & Web App Development</li>
+                        <li>Machine Learning</li>
+                        <li>Neural Networks</li>
+                        <li>Computer Vision</li>
+                        <li>ROS</li>
+                        <li>Robotics</li>
+                        <li>Data Analysis</li>
+                        <li>Figma</li>
+                        <li>Framer</li>
+                        <li>UI/UX Design</li>
+                        <li>Prototyping</li>
+                        <li>Frontend UI</li>
+                        <li>Illustrator</li>
+                        <li>Photoshop</li>
+                        <li>InDesign</li>
+                        <li>Dreamweaver</li>
+                        <li>Animate</li>
+                        <li>Canva</li>
+                        <li>CAD</li>
+                        <li>OnShape</li>
+                        <li>Miro</li>
+                        <li>User Research & Interviews</li>
+                        <li>A/B Testing</li>
+                        <li>Agile</li>
+                        <li>Jira</li>
+                        <li>Kanban</li>
+                        <li>Scrum</li>
+                        <li>Systems Design</li>
+                        <li>Logic Pro</li>
+                        <li>Premiere Pro</li>
+                    </ul>
+                </section>
+                <section class="about-card" aria-labelledby="card-awards">
+                    <h3 id="card-awards">Awards</h3>
+                    <ul>
+                        <li>Dean's List</li>
+                        <li>BU Robotics Lab — UROP Funding (2026)</li>
+                        <li>AWS YouthTech Conference @ BU — 2nd Place (2026)</li>
+                        <li>Microsoft AI Skills Fest (2025)</li>
+                        <li>Anthony Janetos Climate Action Prize — Boston University (2025)</li>
+                        <li>Hult Prize Campus Program — Top 5 North America (2025)</li>
+                        <li>Engineers Without Borders Cross-College Hackathon — 2nd Place (2025)</li>
+                        <li>Spark! Launch Lab — UX Standout Award (2024)</li>
+                        <li>The Dominique Lap Award — Awarded to "a creative and independent thinker in all areas related to technology" (2022)</li>
+                    </ul>
+                </section>
+                <section class="about-card" aria-labelledby="card-favorites">
+                    <h3 id="card-favorites">Favorites (misc.)</h3>
+                    <ul>
+                        <li>meditation, daydreaming, philosophical discourse, acting, psychology, espresso, ampersands, The Rundown AI, dissonant harmonies, worldbuilding</li>
+                        <li>Universal Studios :)</li>
+                        <li>Barry's Bootcamp</li>
+                        <li>Copenhagen, New Zealand, Iceland</li>
+                        <li><em>Deep Work, Think Again, The Right It, Zero to One, Design of Everyday Things</em></li>
+                        <li><em>Harry Potter, Ready Player One, The Bell Jar, The Stranger, The Collector</em></li>
+                        <li><em>Iron Man, He's Just Not That Into You, Interstellar, Criminal Minds</em></li>
+                        <li><a href="https://vercel.com/font?type=mono" target="_blank" rel="noopener">Geist</a></li>
+                        <li>star gazing!</li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        <!-- Design Page -->
+        <section id="design" class="page">
+            <div class="section-header">
+                <h2 class="serif">featured work</h2>
+                <p>some of my recent projects! email for more details :)</p>
+            </div>
+            
+            <div class="project-grid">
+                <div class="project-card" data-project="enlaye" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">01</div>
+                        <h3>Enlaye</h3>
+                        <p>Mobile AI app · Web app · Website</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="popple" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">02</div>
+                        <h3>Popple mobile app</h3>
+                        <p>Social & events app</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="streamlit" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">03</div>
+                        <h3>Streamlit web app</h3>
+                        <p>Data visualization and sustainability analytics</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="reco" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">04</div>
+                        <h3>ReCo Digital web app</h3>
+                        <p>AI image recognition & data analytics</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project detail pages -->
+        <section id="project-enlaye" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
+                <h1 class="serif">Enlaye</h1>
+                <p class="project-meta">Mobile app · Web app · Website</p>
+                <p class="project-description">Product and design work across Enlaye's mobile app, web app, and company website.</p>
+                <div class="project-media project-media--logo">
+                    <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye-logo.png" alt="Enlaye logo"></a>
+                </div>
+                <p class="project-description"><b>Context:</b> Enlaye is an AI-powered risk management platform for the construction industry. I joined the team as the first designer the summer of 2025, and created mockups and prototypes for 9+ features across the mobile and web product suite.</p>
+                <p class="project-description"><b>Skills:</b> Figma, Framer, user research, systems design, product management, interaction design.</p>
+                <p class="project-description"><b>Impact:</b> Sped up product development by 2x, improved usability and user experience, and modernized the company's brand identity.</p>
+
+                <div id="enlaye-gate" class="enlaye-gate">
+                    <form id="enlaye-gate-form" class="enlaye-gate-form" aria-describedby="enlaye-gate-error">
+                        <label for="enlaye-password">Password to view more:</label>
+                        <input type="password" id="enlaye-password" name="password" autocomplete="off" placeholder="Enter password">
+                        <button type="submit" class="btn-unlock">Unlock</button>
+                        <p id="enlaye-gate-error" class="enlaye-gate-error" role="alert">Incorrect password.</p>
+                    </form>
+                </div>
+                <div id="enlaye-protected" class="enlaye-protected">
+                    <h2 class="serif" style="font-size: 1.5rem; margin-bottom: 1rem;">Details</h2>
+                    <p class="project-description"> I worked on projects from start to finish - from defining initial user requirements and writing PRDs, to handing off the final high fidelity prototype that can be implemented with Figma-to-code workflows.</p>
+                    <p class="project-description">Features/projects I designed include mobile AI risk logging, document management system, commercial website, project management system, mobile chats, navigation bars, document comparison tools, settings page, and more.</p>
+                    <p class="project-description"><b>Figma:</b> I created fully interactive prototypes, becoming fluent in variables, interactions, and conditional flows. I worked on projects of various scales and complexities, modernizing features to be more user-friendly, mobile-responsive, and intuitive. I also revamped the company's brand identity for consistency and scalability.</p>
+                    <p class="project-description"><b>Framer:</b> I learned to use Framer to build a new website. I learned about information architecture and content strategy. Working directly with the CEO, we improved the user journey and navigation to better serve user needs. I created wireframes to align the team. I taught a crash course on Framer so the team can continually update the website.</p>
+                    <p class="project-description"><b>Other:</b><ul>
+                        <li>Studied customer interviews to better understand user pain points and empathize with who we're serving.</li>
+                        <li>Brainstormed ideas for new features, integrated extracted insights into designs, and presented feature suggestions to the team.</li>
+                        <li>Researched Figma-to-code workflows that enabled faster frontend development, implementing some features with React and Next.js.</li>
+                        <li>Researched AWS S3 and ML features in my free time to better understand backend implementation.</li>
+                    </ul></p>
+                    <p class="project-description">For additional details, examples, or demos, please contact me!</p>
+
+                    <div class="project-media">
+                        <img src="enlaye/enlaye%20home.png" alt="Enlaye home">
+                    </div>
+                    <div class="project-media">
+                        <img src="enlaye/doc%20management.png" alt="Document management">
+                    </div>
+                    <div class="project-media">
+                        <img src="enlaye/doc%20comparison.png" alt="Document comparison">
+                    </div>
+                    <div class="project-media">
+                        <img src="enlaye/doc%20preview.png" alt="Document preview">
+                    </div>
+                    <div class="project-media" style="max-width: 35%; margin-left: auto; margin-right: auto;">
+                        <video src="enlaye/guardian%20angel.mp4" controls style="width:100%; border-radius:12px;"></video>
+                    </div>
+                    <div class="project-media">
+                        <video src="enlaye/project%20settings.mp4" controls style="width:100%; border-radius:12px;"></video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-popple" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
+                <h1 class="serif">Popple mobile app</h1>
+                <p class="project-meta">Social & events app</p>
+                <p class="project-description">Mobile app design and development for Popple.</p>
+                <div class="project-media project-media--logo">
+                    <a href="https://poppleapp.com/" target="_blank" rel="noopener"><img src="popple-logo.png" alt="Popple logo"></a>
+                </div>
+                <p class="project-description"><b>Context:</b> Popple is a social and events app for college students. I designed V2 and V3 of the app. Popple was part of Innovation Pathway at BU, Spark! Launch Lab, Hult Prize Nationals, and MassChallenge.</p>
+                <p class="project-description"><b>Skills:</b> Figma, Flutter, user interviews, user research, product management, user experience design.</p>
+                <p class="project-description"><b>Impact:</b> Led user growth from 100 to 3000+ users, drove 20% MoM growth, improved user engagement and retention, won UX Standout Award (Spark! Launch Lab).</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Joined as a SWE, pivoted to UI/UX design and user growth.</li>
+                    <li>Analyzed engagement metrics, conducted user interviews, collected user requirements, and translated pain points into actionable features.</li>
+                    <li>Sole UX designer, created 40+ Figma mockups for V3.</li>
+                    <li>Strategized feature roadmap and reimagined discovery features and personalized feed to boost DAU by 15%.</li>
+                    <li>Designed new user onboarding flow to improve user acquisition and retention.</li>
+                    <li>Authored user stories and conducted A/B tests to optimize usability and engagement.</li>
+                    <li>Wrote PRDs, conducted requirements analysis, and facilitated cross-functional collaboration.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">Design highlights</h2>
+                <div class="project-gallery">
+                    <div class="gallery-item gallery-span-2"><img src="popple-images/home.png" alt="New home page"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple-images/review.png" alt="Event review flow"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple-images/taste-map.png" alt="Taste map"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple-images/profile.png" alt="Weekend picks and profile"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple-images/misc-2.png" alt="Event details and chats"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple-images/misc.png" alt="Sign in, sign up, filters"></div>
+                    <div class="gallery-item"><img src="popple-images/find-people-1.png" alt="Event Stats 1"></div>
+                    <div class="gallery-item"><img src="popple-images/find-people-2.png" alt="Event Stats 2"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple-images/onboarding.png" alt="Onboarding flow"></div>
+                    <div class="gallery-item"><img src="popple-images/event-details-2.png" alt="Event details with stats"></div>
+                    <div class="gallery-item"><img src="popple-images/event-details.png" alt="Event details"></div>
+                    <div class="gallery-item"><img src="popple-images/feed.png" alt="Your feed - reviews"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-streamlit" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
+                <h1 class="serif">Streamlit web app</h1>
+                <p class="project-meta">Data visualization and sustainability analytics</p>
+                <p class="project-description">Web app built with Streamlit for environmental monitoring and sustainability analytics.</p>
+                <div class="project-media project-media--logo">
+                    <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit-logo.png" alt="BU College of Engineering"></a>
+                </div>
+                <p class="project-description"><b>Context:</b> I conducted research as one of three undergraduate researchers in the Multimedia Commmunications Lab at BU. We deployed an environmental monitoring system across 8 campus buildings as part of BU's climate action initiative.</p>
+                <p class="project-description"><b>Skills:</b> Streamlit, Python, CAD, MongoDB, data visualization, web development, sustainability analytics, data analysis.</p>
+                <p class="project-description"><b>Impact:</b> Designed public-facing interface for visualizing real-time environmental data and energy usage, funded by Campus Climate Lab initiative (one of seven funded projects), installed sensors in 20+ classrooms, won Anthony Janetos Climate Action Prize (Boston University).</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Designed custom sensor enclosures installed in 8 pilot classrooms, scaled to 20+ classrooms analyzing billions of data points.</li>
+                    <li>Architected data pipeline using Python, Numpy, and Pandas to process real-time environmental readings while optimizing our MongoDB schema for fast queries.</li>
+                    <li>Built Streamlit analytics platform where facilities managers can instantly identify current conditions and trends to improve air quality and energy efficiency.</li>
+                    <li>Optimized time-series database with Plotly/Matplotlib visualizations.</li>
+                    <li>Met with campus stakeholders to ensure platform delivered what they needed (e.g., custom date ranges, threshold analysis, multi-sensor comparisons).</li>
+                    <li>Added capability for complex queries and interactive visualizations that translate environmental data into actionable decisions.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">Project media</h2>
+                <div class="project-media">
+                    <img src="streamlit/poster.png" alt="Project poster">
+                </div>
+                <div class="project-media">
+                    <video src="streamlit/demo.mp4" controls style="width:100%; border-radius:12px;"></video>
+                </div>
+                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="gallery-item"><img src="streamlit/CAD1.png" alt="CAD 1"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD2.png" alt="CAD 2"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD3.png" alt="CAD 3"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD4.png" alt="CAD 4"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-reco" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
+                <h1 class="serif">ReCo Digital web app</h1>
+                <p class="project-meta">AI image recognition & data analytics</p>
+                <p class="project-description">Web dashboard for waste tracking and analytics.</p>
+                <div class="project-media project-media--logo">
+                    <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco-logo.png" alt="ReCo Digital"></a>
+                </div>
+                <p class="project-description"><b>Context:</b> ReCo Digital is a design and strategy consulting firm. I was one of two interns in charge of a sustainability project for a client. Our objective was to automate the quantification of food waste through receipt image recognition.</p>
+                <p class="project-description"><b>Skills:</b> Python, computer vision, OpenAI API, Gemini API, data analytics, data visualization, web development, Flask, Supabase.</p>
+                <p class="project-description"><b>Impact:</b> Delivered solution to client in 4 weeks, achieved 98% accuracy in receipt parsing, improved client's operational efficiency, reduced page load times by 40%.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Tackled multiple end-to-end sustainability-focused client projects.</li>
+                    <li>Led product development: extracted receipt data with image recognition to calculate input-to-waste ratios.</li>
+                    <li>Experimented with various LLM APIs and computer vision models to improve accuracy and efficiency.</li>
+                    <li>Engineered data pipeline that categorizes foods into 12 groups and calculates total weights by category.</li>
+                    <li>Evaluated feature trade-offs, applied prioritization frameworks, and implemented insights.</li>
+                    <li>Leveraged Gemini API for receipt reading, OpenAI for data processing, Supabase/PostgreSQL for database management, and Flask/JavaScript/CSS for the interactive frontend dashboard.</li>
+                    <li>Managed entire project lifecycle from technology selection through implementation to testing and deployment.</li>
+                    <li>Presented solution to client, continually iterated to optimize user experience based on feedback and needs.</li>
+                </ul>
+
+                <div class="project-media">
+                    <video src="demo.mp4" controls style="width:100%; border-radius:12px;"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Page -->
+        <section id="research" class="page">
+            <div class="research-under-construction">
+                <p class="research-under-construction-title">under construction!</p>
+                <p class="research-under-construction-subtitle">please come back later or reach out with questions :)</p>
+            </div>
+            <!--
+            <div class="research-layout">
+                <div class="research-header">
+                    <h2 class="serif">research</h2>
+                    <p class="research-intro">Exploring design thinking, user behavior, and emerging trends to inform better design decisions.</p>
+                </div>
+                
+                <div class="research-items">
+                    <div class="research-item">
+                        <div class="research-meta">
+                            <div class="research-date">Nov 2024</div>
+                            <div class="research-tags">
+                                <span class="tag">UX Research</span>
+                                <span class="tag">Psychology</span>
+                            </div>
+                        </div>
+                        <div class="research-content">
+                            <h3>The Psychology of Color in Digital Interfaces</h3>
+                            <p>An in-depth exploration of how color choices influence user behavior, emotional responses, and decision-making in digital products. This research examines case studies from leading tech companies and synthesizes findings into actionable design principles.</p>
+                            <a href="#" class="read-more">Read full article →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="research-item">
+                        <div class="research-meta">
+                            <div class="research-date">Oct 2024</div>
+                            <div class="research-tags">
+                                <span class="tag">Accessibility</span>
+                                <span class="tag">Inclusive Design</span>
+                            </div>
+                        </div>
+                        <div class="research-content">
+                            <h3>Designing for Cognitive Accessibility</h3>
+                            <p>Understanding and implementing design patterns that support users with cognitive differences. This study covers practical techniques for creating more inclusive digital experiences that work for everyone, regardless of cognitive ability.</p>
+                            <a href="#" class="read-more">Read full article →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="research-item">
+                        <div class="research-meta">
+                            <div class="research-date">Sep 2024</div>
+                            <div class="research-tags">
+                                <span class="tag">Design Systems</span>
+                                <span class="tag">Process</span>
+                            </div>
+                        </div>
+                        <div class="research-content">
+                            <h3>Building Scalable Design Systems</h3>
+                            <p>A comprehensive guide to creating design systems that grow with your product. From establishing foundational principles to maintaining consistency across platforms, this research provides a roadmap for systematic design at scale.</p>
+                            <a href="#" class="read-more">Read full article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-email-wrap">
+            <button type="button" id="footer-copy-email" aria-label="Copy email address" class="footer-icon" data-email="ellenz@bu.edu" title="Copy email"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button>
+            <span id="footer-copy-toast" class="footer-copy-toast" aria-live="polite" aria-atomic="true"></span>
+        </span>
+        <a href="https://www.linkedin.com/in/ellenzheng05/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://github.com/ezheng05" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="footer-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            themeToggle.classList.toggle('active');
+            themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+        });
+
+        const accentToggle = document.getElementById('accentToggle');
+        accentToggle.addEventListener('click', () => {
+            const currentAccent = body.getAttribute('data-accent');
+            const newAccent = currentAccent === 'purple' ? 'blue' : 'purple';
+            body.setAttribute('data-accent', newAccent);
+            accentToggle.classList.toggle('active');
+            accentToggle.setAttribute('aria-pressed', newAccent === 'blue');
+        });
+
+        // copy email to clipboard; show toast on success
+        const copyEmailBtn = document.getElementById('footer-copy-email');
+        const copyToast = document.getElementById('footer-copy-toast');
+        if (copyEmailBtn && copyToast) {
+            copyEmailBtn.addEventListener('click', () => {
+                const email = copyEmailBtn.getAttribute('data-email') || 'ellenz@bu.edu';
+                navigator.clipboard.writeText(email).then(() => {
+                    copyToast.textContent = 'Copied!';
+                    copyToast.classList.add('visible');
+                    copyEmailBtn.setAttribute('aria-label', 'Email copied');
+                    setTimeout(() => {
+                        copyToast.classList.remove('visible');
+                        copyToast.textContent = '';
+                        copyEmailBtn.setAttribute('aria-label', 'Copy email address');
+                    }, 2000);
+                });
+            });
+        }
+
+        // hide nav on scroll down, show on scroll up
+        const nav = document.querySelector('nav');
+        let lastScrollY = window.scrollY;
+        const scrollThreshold = 80;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y <= scrollThreshold) {
+                nav.classList.remove('nav-hidden');
+            } else if (y > lastScrollY) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+            lastScrollY = y;
+        }, { passive: true });
+
+        // Page Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const ctaButton = document.querySelector('.cta-button');
+
+        function showPage(pageName) {
+            // clear enlaye unlock when navigating away so it doesn't persist across sections
+            if (pageName !== 'project-enlaye') {
+                sessionStorage.removeItem('enlaye_unlock');
+            }
+
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            if (pageName === 'project-enlaye') {
+                updateEnlayeGateVisibility();
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkPage = link.getAttribute('data-page');
+                const isProjectPage = pageName && pageName.startsWith('project-');
+                if (linkPage === pageName || (isProjectPage && linkPage === 'design')) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+
+            // Toggle body class for home page
+            if (pageName === 'home') {
+                body.classList.add('home-active');
+            } else {
+                body.classList.remove('home-active');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // keep URL hash in sync so browser back/forward works
+            if (window.location.hash.slice(1) !== pageName) {
+                window.location.hash = pageName;
+            }
+        }
+
+        const ENLAYE_UNLOCK_KEY = 'enlaye_unlock';
+        const ENLAYE_UNLOCK_EXPIRY_MS = 60 * 60 * 1000; // 1 hour
+
+        function updateEnlayeGateVisibility() {
+            const gate = document.getElementById('enlaye-gate');
+            const protectedEl = document.getElementById('enlaye-protected');
+            const errorEl = document.getElementById('enlaye-gate-error');
+            if (!gate || !protectedEl) return;
+
+            let valid = false;
+            try {
+                const raw = sessionStorage.getItem(ENLAYE_UNLOCK_KEY);
+                if (raw) {
+                    const { expiresAt } = JSON.parse(raw);
+                    if (expiresAt > Date.now()) {
+                        valid = true;
+                    } else {
+                        sessionStorage.removeItem(ENLAYE_UNLOCK_KEY);
+                    }
+                }
+            } catch (_) {
+                sessionStorage.removeItem(ENLAYE_UNLOCK_KEY);
+            }
+
+            if (valid) {
+                gate.classList.remove('visible');
+                gate.style.display = 'none';
+                protectedEl.classList.add('visible');
+            } else {
+                gate.style.display = 'block';
+                protectedEl.classList.remove('visible');
+            }
+            if (errorEl) errorEl.classList.remove('visible');
+        }
+
+        document.getElementById('enlaye-gate-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('enlaye-password');
+            const errorEl = document.getElementById('enlaye-gate-error');
+            const gate = document.getElementById('enlaye-gate');
+            const protectedEl = document.getElementById('enlaye-protected');
+            const password = (input?.value || '').trim();
+
+            if (password === 'enlaye2025') {
+                sessionStorage.setItem(ENLAYE_UNLOCK_KEY, JSON.stringify({
+                    expiresAt: Date.now() + ENLAYE_UNLOCK_EXPIRY_MS
+                }));
+                if (errorEl) errorEl.classList.remove('visible');
+                if (gate) gate.style.display = 'none';
+                if (protectedEl) protectedEl.classList.add('visible');
+                if (input) input.value = '';
+            } else {
+                if (errorEl) errorEl.classList.add('visible');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageName = link.getAttribute('data-page');
+                showPage(pageName);
+            });
+        });
+
+        // CTA Button
+        if (ctaButton) {
+            ctaButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageName = ctaButton.getAttribute('data-page');
+                showPage(pageName);
+            });
+        }
+
+        // Project cards: click or Enter opens project page
+        document.querySelectorAll('.project-card[data-project]').forEach(card => {
+            const projectId = 'project-' + card.getAttribute('data-project');
+            card.addEventListener('click', () => showPage(projectId));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    showPage(projectId);
+                }
+            });
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--accent)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'var(--border)';
+            });
+        });
+
+        // Back link on project pages
+        document.querySelectorAll('.project-back').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(link.getAttribute('data-page'));
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        const animatedElements = document.querySelectorAll('.about-card, .project-card, .research-item');
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        if (document.getElementById('home')?.classList.contains('active')) {
+            body.classList.add('home-active');
+        }
+
+        const hash = window.location.hash.slice(1);
+        const validPages = ['home', 'about', 'design', 'research', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco'];
+        if (validPages.includes(hash)) {
+            showPage(hash);
+        }
+
+        window.addEventListener('hashchange', () => {
+            const h = window.location.hash.slice(1);
+            if (validPages.includes(h)) showPage(h);
+        });
+
+        // carousel: click through gallery, thumb strip, caption, pause video on leave
+        (function() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const thumbs = carousel.querySelectorAll('.carousel-thumb');
+            const captionEl = document.getElementById('carousel-caption');
+            const prevBtn = carousel.querySelector('.carousel-nav.prev');
+            const nextBtn = carousel.querySelector('.carousel-nav.next');
+            const captions = [
+                'ATV in Iceland!', 'beli 😎', 'camels in AUS!', 'community service in the BVI',
+                'performing drums', 'more drums!', 'guitar', 'hiking Huangshan', 'exploring Costa Rica',
+                'organizing Hult Prize', 'pickleball', 'scuba', 'skydiving!', 'reindeer sleds in Finland',
+                'snowboarding', 'Bali sunrise', 'tennis'
+            ];
+            let current = 0;
+
+            function goTo(i) {
+                current = (i + slides.length) % slides.length;
+                slides.forEach((s, j) => s.classList.toggle('active', j === current));
+                thumbs.forEach((t, j) => t.classList.toggle('active', j === current));
+                if (captionEl) captionEl.textContent = captions[current] || '';
+                thumbs[current]?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+                slides.forEach(s => {
+                    const v = s.querySelector('video');
+                    if (v) v.pause();
+                });
+                const activeSlide = slides[current];
+                const activeVideo = activeSlide?.querySelector('video');
+                if (activeVideo) activeVideo.currentTime = 0;
+            }
+
+            prevBtn?.addEventListener('click', () => goTo(current - 1));
+            nextBtn?.addEventListener('click', () => goTo(current + 1));
+            thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+        })();
+    </script>
+</body>
+</html>
