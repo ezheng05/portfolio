@@ -676,7 +676,7 @@
         }
 
         .project-card[data-project="enlaye"] {
-            background-image: url('enlaye-logo.png');
+            background-image: url('enlaye/enlaye-logo.png');
             background-size: 90%;
             background-position: center 30%;
             background-repeat: no-repeat;
@@ -684,7 +684,7 @@
         }
 
         .project-card[data-project="popple"] {
-            background-image: url('popple-logo.png');
+            background-image: url('popple/popple-logo.png');
             background-size: 90%;
             background-position: center 15%;
             background-repeat: no-repeat;
@@ -692,7 +692,7 @@
         }
 
         .project-card[data-project="streamlit"] {
-            background-image: url('streamlit-logo.png');
+            background-image: url('streamlit/streamlit-logo.png');
             background-size: 90%;
             background-position: center 30%;
             background-repeat: no-repeat;
@@ -700,7 +700,7 @@
         }
 
         .project-card[data-project="reco"] {
-            background-image: url('reco-logo.png');
+            background-image: url('reco/reco-logo.png');
             background-size: 35%;
             background-position: center 25%;
             background-repeat: no-repeat;
@@ -887,6 +887,34 @@
             border-radius: 12px;
             border: 1px solid var(--border);
             display: block;
+            background: var(--bg-secondary);
+        }
+
+        .project-media-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            align-items: stretch;
+        }
+        .project-media-row > * {
+            flex: 1;
+            min-width: 0;
+            min-height: 360px;
+        }
+        .project-media-row--video-2-3 > *:first-child {
+            flex: 2;
+        }
+        .project-media-row--video-2-3 > *:last-child {
+            flex: 1;
+        }
+        .project-media-row video,
+        .project-media-row img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid var(--border);
             background: var(--bg-secondary);
         }
 
@@ -1297,7 +1325,7 @@
         <!-- About Page -->
         <section id="about" class="page">
             <div class="about-grid">
-                <div class="about-image" aria-hidden="true"><img src="about-photo.png" alt=""></div>
+                <div class="about-image" aria-hidden="true"><img src="about/about-photo.png" alt=""></div>
                 <div class="about-content">
                     <h2 class="serif">right now, i&rsquo;m...</h2>
                     <p>A third year student at Boston University studying <b>Computer Engineering</b> and <b>Innovation & Entrepreneurship</b>, concentrating in <b>Technology Innovation</b> and <b>Machine Learning</b>.</p>
@@ -1321,43 +1349,43 @@
                     <div class="carousel-stage">
                         <button type="button" class="carousel-nav prev" aria-label="Previous">‹</button>
                         <button type="button" class="carousel-nav next" aria-label="Next">›</button>
-                        <div class="carousel-slide active" data-index="0"><img src="portfolio-media/atv.jpg" alt=""></div>
-                        <div class="carousel-slide" data-index="1"><img src="portfolio-media/beli.png" alt=""></div>
-                        <div class="carousel-slide" data-index="2"><img src="portfolio-media/camel.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="3"><img src="portfolio-media/construction.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="4"><img src="portfolio-media/drum.jpg" alt=""></div>
-                        <div class="carousel-slide" data-index="5"><video src="portfolio-media/drumming.mov" controls></video></div>
-                        <div class="carousel-slide" data-index="6"><video src="portfolio-media/guitar.mov" controls></video></div>
-                        <div class="carousel-slide" data-index="7"><img src="portfolio-media/hike.jpg" alt=""></div>
-                        <div class="carousel-slide" data-index="8"><img src="portfolio-media/hike.PNG" alt=""></div>
-                        <div class="carousel-slide" data-index="9"><img src="portfolio-media/hult.JPEG" alt=""></div>
-                        <div class="carousel-slide" data-index="10"><img src="portfolio-media/pickleball.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="11"><img src="portfolio-media/scuba.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="12"><img src="portfolio-media/skydive.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="13"><video src="portfolio-media/sled.mov" controls></video></div>
-                        <div class="carousel-slide" data-index="14"><video src="portfolio-media/snowboarding.MOV" controls></video></div>
-                        <div class="carousel-slide" data-index="15"><img src="portfolio-media/sunset.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="16"><img src="portfolio-media/tennis.JPG" alt=""></div>
+                        <div class="carousel-slide active" data-index="0"><img src="about/atv.jpg" alt=""></div>
+                        <div class="carousel-slide" data-index="1"><img src="about/beli.png" alt=""></div>
+                        <div class="carousel-slide" data-index="2"><img src="about/camel.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="3"><img src="about/construction.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="4"><img src="about/drum.jpg" alt=""></div>
+                        <div class="carousel-slide" data-index="5"><video src="about/drumming.mov" controls></video></div>
+                        <div class="carousel-slide" data-index="6"><video src="about/guitar.mov" controls></video></div>
+                        <div class="carousel-slide" data-index="7"><img src="about/hike.jpg" alt=""></div>
+                        <div class="carousel-slide" data-index="8"><img src="about/hike.PNG" alt=""></div>
+                        <div class="carousel-slide" data-index="9"><img src="about/hult.JPEG" alt=""></div>
+                        <div class="carousel-slide" data-index="10"><img src="about/pickleball.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="11"><img src="about/scuba.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="12"><img src="about/skydive.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="13"><video src="about/sled.mov" controls></video></div>
+                        <div class="carousel-slide" data-index="14"><video src="about/snowboarding.MOV" controls></video></div>
+                        <div class="carousel-slide" data-index="15"><img src="about/sunset.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="16"><img src="about/tennis.JPG" alt=""></div>
                     </div>
                     <p class="carousel-caption" id="carousel-caption">ATV in Iceland!</p>
                     <div class="carousel-thumbs">
-                        <button type="button" class="carousel-thumb active" data-index="0" aria-label="View 1"><img src="portfolio-media/atv.jpg" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="1" aria-label="View 2"><img src="portfolio-media/beli.png" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="2" aria-label="View 3"><img src="portfolio-media/camel.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="3" aria-label="View 4"><img src="portfolio-media/construction.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="4" aria-label="View 5"><img src="portfolio-media/drum.jpg" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="5" aria-label="View 6"><video src="portfolio-media/drumming.mov" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="6" aria-label="View 7"><video src="portfolio-media/guitar.mov" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="7" aria-label="View 8"><img src="portfolio-media/hike.jpg" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="8" aria-label="View 9"><img src="portfolio-media/hike.PNG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="9" aria-label="View 10"><img src="portfolio-media/hult.JPEG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="10" aria-label="View 11"><img src="portfolio-media/pickleball.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="11" aria-label="View 12"><img src="portfolio-media/scuba.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="12" aria-label="View 13"><img src="portfolio-media/skydive.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="13" aria-label="View 14"><video src="portfolio-media/sled.mov" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="14" aria-label="View 15"><video src="portfolio-media/snowboarding.MOV" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="15" aria-label="View 16"><img src="portfolio-media/sunset.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="16" aria-label="View 17"><img src="portfolio-media/tennis.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb active" data-index="0" aria-label="View 1"><img src="about/atv.jpg" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="1" aria-label="View 2"><img src="about/beli.png" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="2" aria-label="View 3"><img src="about/camel.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="3" aria-label="View 4"><img src="about/construction.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="4" aria-label="View 5"><img src="about/drum.jpg" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="5" aria-label="View 6"><video src="about/drumming.mov" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="6" aria-label="View 7"><video src="about/guitar.mov" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="7" aria-label="View 8"><img src="about/hike.jpg" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="8" aria-label="View 9"><img src="about/hike.PNG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="9" aria-label="View 10"><img src="about/hult.JPEG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="10" aria-label="View 11"><img src="about/pickleball.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="11" aria-label="View 12"><img src="about/scuba.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="12" aria-label="View 13"><img src="about/skydive.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="13" aria-label="View 14"><video src="about/sled.mov" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="14" aria-label="View 15"><video src="about/snowboarding.MOV" muted preload="metadata"></video></button>
+                        <button type="button" class="carousel-thumb" data-index="15" aria-label="View 16"><img src="about/sunset.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="16" aria-label="View 17"><img src="about/tennis.JPG" alt=""></button>
                     </div>
                 </div>
             </div>
@@ -1503,7 +1531,7 @@
                 <p class="project-meta">Mobile app · Web app · Website</p>
                 <p class="project-description">Product and design work across Enlaye's mobile app, web app, and company website.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye-logo.png" alt="Enlaye logo"></a>
+                    <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye/enlaye-logo.png" alt="Enlaye logo"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> Enlaye is an AI-powered risk management platform for the construction industry. I joined the team as the first designer the summer of 2025, and created mockups and prototypes for 9+ features across the mobile and web product suite.</p>
                 <p class="project-description"><b>Skills:</b> Figma, Framer, user research, systems design, product management, interaction design.</p>
@@ -1560,7 +1588,7 @@
                 <p class="project-meta">Social & events app</p>
                 <p class="project-description">Mobile app design and development for Popple.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://poppleapp.com/" target="_blank" rel="noopener"><img src="popple-logo.png" alt="Popple logo"></a>
+                    <a href="https://poppleapp.com/" target="_blank" rel="noopener"><img src="popple/popple-logo.png" alt="Popple logo"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> Popple is a social and events app for college students. I designed V2 and V3 of the app. Popple was part of Innovation Pathway at BU, Spark! Launch Lab, Hult Prize Nationals, and MassChallenge.</p>
                 <p class="project-description"><b>Skills:</b> Figma, Flutter, user interviews, user research, product management, user experience design.</p>
@@ -1578,18 +1606,18 @@
 
                 <h2 class="project-gallery-title">Design highlights</h2>
                 <div class="project-gallery">
-                    <div class="gallery-item gallery-span-2"><img src="popple-images/home.png" alt="New home page"></div>
-                    <div class="gallery-item gallery-span-2"><img src="popple-images/review.png" alt="Event review flow"></div>
-                    <div class="gallery-item gallery-span-2"><img src="popple-images/taste-map.png" alt="Taste map"></div>
-                    <div class="gallery-item gallery-span-2"><img src="popple-images/profile.png" alt="Weekend picks and profile"></div>
-                    <div class="gallery-item gallery-span-3"><img src="popple-images/misc-2.png" alt="Event details and chats"></div>
-                    <div class="gallery-item gallery-span-3"><img src="popple-images/misc.png" alt="Sign in, sign up, filters"></div>
-                    <div class="gallery-item"><img src="popple-images/find-people-1.png" alt="Event Stats 1"></div>
-                    <div class="gallery-item"><img src="popple-images/find-people-2.png" alt="Event Stats 2"></div>
-                    <div class="gallery-item gallery-span-3"><img src="popple-images/onboarding.png" alt="Onboarding flow"></div>
-                    <div class="gallery-item"><img src="popple-images/event-details-2.png" alt="Event details with stats"></div>
-                    <div class="gallery-item"><img src="popple-images/event-details.png" alt="Event details"></div>
-                    <div class="gallery-item"><img src="popple-images/feed.png" alt="Your feed - reviews"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/home.png" alt="New home page"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/review.png" alt="Event review flow"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/taste-map.png" alt="Taste map"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/profile.png" alt="Weekend picks and profile"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple/misc-2.png" alt="Event details and chats"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple/misc.png" alt="Sign in, sign up, filters"></div>
+                    <div class="gallery-item"><img src="popple/find-people-1.png" alt="Event Stats 1"></div>
+                    <div class="gallery-item"><img src="popple/find-people-2.png" alt="Event Stats 2"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple/onboarding.png" alt="Onboarding flow"></div>
+                    <div class="gallery-item"><img src="popple/event-details-2.png" alt="Event details with stats"></div>
+                    <div class="gallery-item"><img src="popple/event-details.png" alt="Event details"></div>
+                    <div class="gallery-item"><img src="popple/feed.png" alt="Your feed - reviews"></div>
                 </div>
             </div>
         </section>
@@ -1601,9 +1629,9 @@
                 <p class="project-meta">Data visualization and sustainability analytics</p>
                 <p class="project-description">Web app built with Streamlit for environmental monitoring and sustainability analytics.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit-logo.png" alt="BU College of Engineering"></a>
+                    <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering"></a>
                 </div>
-                <p class="project-description"><b>Context:</b> I conducted research as one of three undergraduate researchers in the Multimedia Commmunications Lab at BU. We deployed an environmental monitoring system across 8 campus buildings as part of BU's climate action initiative.</p>
+                <p class="project-description"><b>Context:</b> I conducted research as one of three undergraduate researchers in the Multimedia Communications Lab at BU. We deployed an environmental monitoring system across 8 campus buildings as part of BU's climate action initiative.</p>
                 <p class="project-description"><b>Skills:</b> Streamlit, Python, CAD, MongoDB, data visualization, web development, sustainability analytics, data analysis.</p>
                 <p class="project-description"><b>Impact:</b> Designed public-facing interface for visualizing real-time environmental data and energy usage, funded by Campus Climate Lab initiative (one of seven funded projects), installed sensors in 20+ classrooms, won Anthony Janetos Climate Action Prize (Boston University).</p>
                 <p class="project-description"><b>Details:</b>
@@ -1620,8 +1648,13 @@
                 <div class="project-media">
                     <img src="streamlit/poster.png" alt="Project poster">
                 </div>
-                <div class="project-media">
-                    <video src="streamlit/demo.mp4" controls style="width:100%; border-radius:12px;"></video>
+                <div class="project-media-row project-media-row--video-2-3">
+                    <div>
+                        <video src="streamlit/demo.mp4" controls></video>
+                    </div>
+                    <div>
+                        <img src="streamlit/news.png" alt="News coverage">
+                    </div>
                 </div>
                 <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr);">
                     <div class="gallery-item"><img src="streamlit/CAD1.png" alt="CAD 1"></div>
@@ -1639,7 +1672,7 @@
                 <p class="project-meta">AI image recognition & data analytics</p>
                 <p class="project-description">Web dashboard for waste tracking and analytics.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco-logo.png" alt="ReCo Digital"></a>
+                    <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco/reco-logo.png" alt="ReCo Digital"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> ReCo Digital is a design and strategy consulting firm. I was one of two interns in charge of a sustainability project for a client. Our objective was to automate the quantification of food waste through receipt image recognition.</p>
                 <p class="project-description"><b>Skills:</b> Python, computer vision, OpenAI API, Gemini API, data analytics, data visualization, web development, Flask, Supabase.</p>
@@ -1657,7 +1690,7 @@
                 </ul>
 
                 <div class="project-media">
-                    <video src="demo.mp4" controls style="width:100%; border-radius:12px;"></video>
+                    <video src="reco/demo.mp4" controls style="width:100%; border-radius:12px;"></video>
                 </div>
             </div>
         </section>
