@@ -707,6 +707,14 @@
             background-color: var(--bg-secondary);
         }
 
+        .project-card[data-project="artscape"] {
+            background-image: url('artscape/discover.png');
+            background-size: 45%;
+            background-position: center 20%;
+            background-repeat: no-repeat;
+            background-color: var(--bg-secondary);
+        }
+
         .project-card:hover {
             transform: scale(1.02);
         }
@@ -1532,6 +1540,13 @@
                         <p>AI image recognition & data analytics</p>
                     </div>
                 </div>
+                <div class="project-card" data-project="artscape" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">05</div>
+                        <h3>Designathon mobile app</h3>
+                        <p>Mobile app UI</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1703,6 +1718,46 @@
 
                 <div class="project-media">
                     <video src="reco/demo.mp4" controls style="width:100%; border-radius:12px;"></video>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-artscape" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
+                <h1 class="serif">Designathon mobile app</h1>
+                <p class="project-meta">Mobile app UI</p>
+                <p class="project-description">Mobile app design for <a href="https://catalyst-2026.devpost.com/" target="_blank" rel="noopener">Catalyst Designathon 2026</a>.</p>
+                <p class="project-description"><b>Context:</b> Formed a team with two strangers to participate in a nationwide virtual designathon. Ideated solutions and created high fidelity prototype with Figma.</p>
+                <p class="project-description"><b>Skills:</b> Figma, user research, wireframing, user experience design.</p>
+                <p class="project-description"><b>Impact:</b> Created complete app flow, curated full app experience, and collaborated to make pitch video all in one day.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Chose "After the Fact" track as a team and brainstormed existing problems in the space.</li>
+                    <li>Conducted background research to understand market, competitors, and pain points.</li>
+                    <li>Determined solutions and specific features through prioritization matrices, evaluating impact, cost, relevance, and reach.</li>
+                    <li>Ideated with wireframes and AI prototypes.</li>
+                    <li>Implemented complete prototype design and flow in Figma.</li>
+                    <li>Justified design decisions and pitched solution in written proposal and video submission.</li>
+                    <li>Learned to collaborate effectively with a new/unfamiliar team virtually.</li>
+                    <li>All executed in under 1.5 days.</li>
+                </ul>
+
+                <p class="project-description" style="margin-top: 1rem;">
+                    <a href="https://devpost.com/software/the-space-in-between-proj" target="_blank" rel="noopener">View project on Devpost &rarr;</a><br>
+                    <a href="https://www.youtube.com/watch?v=w_dAtZTdpSM" target="_blank" rel="noopener">Watch demo video &rarr;</a><br>
+                    <a href="https://www.figma.com/proto/k1uPs6LVF5RYhBoHB0qzcw/Catalyst-Designathon-2026?node-id=0-1&t=AtEB9IwCyJdaB1hV-1" target="_blank" rel="noopener">Try Figma prototype &rarr;</a>
+                </p>
+
+                <h2 class="project-gallery-title">App screens</h2>
+                <div class="project-gallery">
+                    <div class="gallery-item"><img src="artscape/onboarding.png" alt="Onboarding screen"></div>
+                    <div class="gallery-item"><img src="artscape/discover.png" alt="Discover feed"></div>
+                    <div class="gallery-item"><img src="artscape/event-page.png" alt="Event page"></div>
+                    <div class="gallery-item"><img src="artscape/memory-capsule.png" alt="Memory capsule"></div>
+                    <div class="gallery-item"><img src="artscape/add-media.png" alt="Add media flow"></div>
+                    <div class="gallery-item"><img src="artscape/profile.png" alt="Creative profile"></div>
+                    <div class="gallery-item"><img src="artscape/commission-inbox.png" alt="Commission inbox"></div>
                 </div>
             </div>
         </section>
@@ -2019,7 +2074,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco'];
+        const validPages = ['home', 'about', 'design', 'research', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
