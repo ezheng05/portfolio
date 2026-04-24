@@ -6,7 +6,7 @@
     <title>ellen zheng</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@350;400;600;700&family=Taviraj:wght@200;300;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,8 +19,8 @@
             --bg-secondary: #ebe6de;
             --text-primary: #1a1a1a;
             --text-secondary: #4a4a4a;
-            --accent: #8b7dd8;
-            --accent-hover: #7a6bc7;
+            --accent: #4D2E76;
+            --accent-hover: #412668;
             --border: rgba(26, 26, 26, 0.1);
             --error-color: #c0392b;
         }
@@ -30,38 +30,39 @@
             --bg-secondary: #1e1e1e;
             --text-primary: #f0eeea;
             --text-secondary: #c2c2c2;
-            --accent: #a89be8;
+            --accent: #A89BE8;
             --accent-hover: #b8aef0;
             --border: rgba(255, 255, 255, 0.15);
             --error-color: #e57373;
         }
 
         [data-theme="dark"][data-accent="blue"] {
-            --accent: #7ba3f7;
-            --accent-hover: #94b5f9;
+            --accent: #9AC2F5;
+            --accent-hover: #b0d1f8;
         }
 
         [data-accent="blue"] {
-            --accent: #6495ED;
-            --accent-hover: #5487E3;
+            --accent: #173753;
+            --accent-hover: #122d44;
         }
 
         body {
-            font-family: 'Nunito Sans', sans-serif;
-            font-weight: 350;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
             transition: background-color 0.3s ease, color 0.3s ease;
             overflow-x: hidden;
         }
 
         p b, li b, .about-content b, .about-hobbies b {
-            font-weight: 700;
+            font-weight: 600;
         }
 
         [data-theme="dark"] body {
-            font-weight: 350;
+            font-weight: 400;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -79,7 +80,7 @@
         }
 
         .serif {
-            font-family: 'Taviraj', serif;
+            font-family: 'Playfair Display', serif;
         }
 
         /* Navigation */
@@ -107,11 +108,12 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 500;
             color: var(--text-primary);
             text-decoration: none;
             transition: color 0.3s ease;
+            letter-spacing: -0.01em;
         }
 
         .nav-links {
@@ -123,30 +125,47 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
             transition: color 0.3s ease;
             position: relative;
+            z-index: 1;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
+            top: 50%;
+            left: 50%;
+            width: 130%;
+            height: 220%;
+            transform: translate(-50%, -50%) rotate(-8deg) scale(0);
+            border-radius: 50%;
+            background: radial-gradient(
+                ellipse at 40% 45%,
+                color-mix(in srgb, var(--accent) 38%, transparent),
+                color-mix(in srgb, var(--accent) 15%, transparent) 60%,
+                transparent 100%
+            );
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.15, 1), opacity 0.4s ease;
+            opacity: 0;
+            z-index: -1;
         }
 
         .nav-links a:hover {
             color: var(--text-primary);
         }
 
-        .nav-links a:hover::after,
+        .nav-links a:hover::after {
+            transform: translate(-50%, -50%) rotate(-8deg) scale(0.85);
+            opacity: 0.7;
+        }
+
         .nav-links a.active::after {
-            width: 100%;
+            transform: translate(-50%, -50%) rotate(-8deg) scale(1);
+            opacity: 1;
         }
 
         .nav-links a.active {
@@ -343,7 +362,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -355,11 +374,12 @@
         .hero {
             height: calc(100vh - 80px);
             display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 0 5rem 6rem 5rem;
+            padding: 0 5rem;
+            text-align: center;
         }
 
         body.home-active .hero {
@@ -367,37 +387,40 @@
         }
 
         .hero-content {
-            max-width: 1200px;
+            max-width: 800px;
             width: 100%;
-            margin-top: auto;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 600;
-            line-height: 0.95;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
             color: var(--text-secondary);
-            max-width: 650px;
-            margin-bottom: 2rem;
-            font-weight: 250;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1.2rem 3rem;
+            padding: 1rem 2.5rem;
             background: var(--accent);
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 6px;
+            font-size: 0.8rem;
             font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             transition: all 0.3s ease;
-            border: 2px solid var(--accent);
+            border: 1px solid var(--accent);
         }
 
         .cta-button:hover {
@@ -420,7 +443,7 @@
             width: 100%;
             height: 500px;
             background: var(--bg-secondary);
-            border-radius: 12px;
+            border-radius: 8px;
             position: relative;
             overflow: hidden;
         }
@@ -446,14 +469,14 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         .carousel {
             width: 100%;
             height: 500px;
             background: var(--bg-secondary);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
             display: flex;
@@ -567,16 +590,17 @@
         }
 
         .about-content h2 {
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(1.75rem, 4vw, 3rem);
             margin-bottom: 2rem;
-            line-height: 1.1;
+            line-height: 1.15;
+            font-weight: 400;
         }
 
         .about-content p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
-            line-height: 1.6;
+            line-height: 1.75;
         }
 
         .about-cards {
@@ -588,11 +612,11 @@
         }
 
         .about-card {
-            padding: 1.75rem;
+            padding: 2rem;
             background: var(--bg-secondary);
-            border-radius: 12px;
+            border-radius: 8px;
             border: 1px solid var(--border);
-            transition: border-color 0.2s ease;
+            transition: border-color 0.3s ease;
         }
 
         .about-card:hover {
@@ -600,19 +624,19 @@
         }
 
         .about-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.12em;
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .about-card ul {
             list-style: none;
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .about-card li {
@@ -634,26 +658,28 @@
             border: none;
             padding: 0.35rem 0.75rem;
             background: var(--bg-primary);
-            border-radius: 6px;
-            font-size: 0.875rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
         }
 
         /* Design Page */
         .section-header {
             max-width: 1400px;
-            margin: 0 auto 4rem;
+            margin: 0 auto 5rem;
         }
 
         .section-header h2 {
-            font-size: clamp(3rem, 8vw, 7rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             margin-bottom: 1rem;
-            line-height: 1;
+            line-height: 1.05;
+            font-weight: 400;
         }
 
         .section-header p {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             max-width: 600px;
+            font-weight: 300;
         }
 
         .project-grid {
@@ -668,7 +694,7 @@
             position: relative;
             height: 450px;
             background: var(--bg-secondary);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.4s ease;
@@ -715,6 +741,14 @@
             background-color: var(--bg-secondary);
         }
 
+        .project-card[data-project="lovable"] {
+            background-image: url('lovable/cover.png');
+            background-size: 88%;
+            background-position: center 28%;
+            background-repeat: no-repeat;
+            background-color: var(--bg-secondary);
+        }
+
         .project-card:hover {
             transform: scale(1.02);
         }
@@ -740,20 +774,26 @@
         }
 
         .project-number {
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             color: var(--accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
         .project-info h3 {
-            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
             margin-bottom: 0.5rem;
         }
 
         .project-info p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
         }
 
         .project-card[data-project] {
@@ -772,8 +812,11 @@
             gap: 0.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
-            margin-bottom: 2.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
             transition: color 0.2s ease, gap 0.2s ease;
         }
 
@@ -783,20 +826,24 @@
         }
 
         .project-page h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            margin-bottom: 0.75rem;
             line-height: 1.1;
+            font-weight: 400;
         }
 
         .project-page .project-meta {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
         }
 
         .project-page .project-description {
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: var(--text-secondary);
             margin-bottom: 2.5rem;
         }
@@ -807,8 +854,8 @@
 
         .project-page ul,
         .project-page .project-description ul {
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: var(--text-secondary);
             margin: 0 0 1.5rem 0;
             padding-left: 1.5rem;
@@ -816,8 +863,8 @@
 
         .project-page li,
         .project-page .project-description li {
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: var(--text-secondary);
             margin-bottom: 0.5rem;
         }
@@ -825,7 +872,7 @@
         .project-media {
             margin-top: 2.5rem;
             margin-bottom: 2.5rem;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -892,10 +939,32 @@
         .project-gallery img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
+            border-radius: 8px;
             border: 1px solid var(--border);
             display: block;
             background: var(--bg-secondary);
+        }
+
+        /* lovable: no tile chrome, same cell size per row, cover crops wider shots */
+        #project-lovable .project-gallery {
+            align-items: stretch;
+            gap: 0.75rem;
+        }
+
+        #project-lovable .project-gallery .gallery-item {
+            min-height: 0;
+            aspect-ratio: 9 / 16;
+            overflow: hidden;
+        }
+
+        #project-lovable .project-gallery .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border: none;
+            border-radius: 0;
+            background: transparent;
         }
 
         .project-media-row {
@@ -921,17 +990,19 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 8px;
             border: 1px solid var(--border);
             background: var(--bg-secondary);
         }
 
         .project-gallery-title {
-            font-size: 1.1rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            margin-top: 2.5rem;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
 
         /* Enlaye password-gated section */
@@ -940,7 +1011,7 @@
             padding: 2rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         .enlaye-gate-form {
@@ -958,8 +1029,9 @@
         .enlaye-gate-form input[type="password"] {
             padding: 0.5rem 0.75rem;
             border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-width: 180px;
@@ -971,18 +1043,22 @@
         }
 
         .enlaye-gate-form .btn-unlock {
-            padding: 0.5rem 1.25rem;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.95rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .enlaye-gate-form .btn-unlock:hover {
-            background: var(--accent-hover);
+            background: transparent;
+            color: var(--text-primary);
         }
 
         .enlaye-gate-error {
@@ -1023,16 +1099,17 @@
         }
 
         .research-under-construction-title {
-            font-family: 'Taviraj', serif;
+            font-family: 'Playfair Display', serif;
             font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 600;
+            font-weight: 400;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
         .research-under-construction-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
+            font-weight: 300;
         }
 
         .research-layout {
@@ -1093,9 +1170,10 @@
             padding: 0.4rem 1rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.85rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
             color: var(--text-secondary);
+            letter-spacing: 0.02em;
         }
 
         .research-content h3 {
@@ -1125,7 +1203,7 @@
         }
 
         [data-theme="dark"] .read-more {
-            color: #a89be8;
+            color: #A89BE8;
         }
 
         [data-theme="dark"] .read-more:hover {
@@ -1133,25 +1211,25 @@
         }
 
         [data-theme="dark"][data-accent="blue"] .read-more {
-            color: #7ba3f7;
+            color: #9AC2F5;
         }
 
         [data-theme="dark"][data-accent="blue"] .read-more:hover {
-            color: #94b5f9;
+            color: #b0d1f8;
         }
 
         [data-theme="dark"] .project-number,
         [data-theme="dark"] .research-date {
-            color: #a89be8;
+            color: #A89BE8;
         }
 
         [data-theme="dark"][data-accent="blue"] .project-number,
         [data-theme="dark"][data-accent="blue"] .research-date {
-            color: #7ba3f7;
+            color: #9AC2F5;
         }
 
         [data-theme="dark"] main a:not(.cta-button):not(.read-more) {
-            color: #a89be8;
+            color: #A89BE8;
         }
 
         [data-theme="dark"] main a:not(.cta-button):not(.read-more):hover,
@@ -1160,12 +1238,12 @@
         }
 
         [data-theme="dark"][data-accent="blue"] main a:not(.cta-button):not(.read-more) {
-            color: #7ba3f7;
+            color: #9AC2F5;
         }
 
         [data-theme="dark"][data-accent="blue"] main a:not(.cta-button):not(.read-more):hover,
         [data-theme="dark"][data-accent="blue"] main a:not(.cta-button):not(.read-more):visited {
-            color: #94b5f9;
+            color: #b0d1f8;
         }
 
         /* Responsive */
@@ -1300,6 +1378,31 @@
                 transform: translateY(0);
             }
         }
+
+        /* Resume */
+        .resume-viewer-wrap {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+            max-width: 740px;
+            margin: 0 auto;
+        }
+
+        .resume-embed {
+            display: block;
+            width: 100%;
+            height: 100vh;
+            min-height: 500px;
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            .resume-embed {
+                height: 70vh;
+            }
+        }
     </style>
 </head>
 <body data-theme="light" data-accent="purple">
@@ -1311,6 +1414,7 @@
             <a href="#about" class="nav-link" data-page="about">about</a>
             <a href="#design" class="nav-link" data-page="design">design</a>
             <a href="#research" class="nav-link" data-page="research">research</a>
+            <a href="#resume" class="nav-link" data-page="resume">resume</a>
         </div>
         <div class="controls">
             <button type="button" class="toggle-btn" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false"></button>
@@ -1323,7 +1427,7 @@
         <section id="home" class="page active" aria-labelledby="hero-heading">
             <div class="hero">
                 <div class="hero-content">
-                    <h1 id="hero-heading" class="serif">hi,<br>i&rsquo;m ellen.</h1>
+                    <h1 id="hero-heading" class="serif">hi, i&rsquo;m ellen.</h1>
                     <p class="hero-subtitle">I like people! And technology.<br>And using technology to make things.<br>Things that look delightful. And help people!</p>
                     <a href="#design" class="cta-button" data-page="design">view my work</a>
                 </div>
@@ -1349,9 +1453,9 @@
                     <p>Trying new restaurants, playing drums or guitar, hanging out with friends, out in nature, working on my next project, or on a gloriously epic adventure!</p>
                     <p>I LOVE new experiences and learning anything new. Everything from metalworking to skydiving, horseback riding to music production, boxing to meditation - I enjoy it all. Next on my list is bungee jumping.</p>
                     <p>In the last 6 months, I've visited 18 different workout studios in Boston. I also snowboard and play tennis and basketball (and am teaching my friends!)</p>
-                    <p>I've traveled to 28 countries so far - my goal is 100.</p>
+                    <p>I've traveled to 30 countries so far - my goal is 100.</p>
                     <p>You should talk to me about...<br>Music, food, books (fiction, self-help, business, psychology, mystery), your favorite movies/TV shows, health/nutrition, love, technology, startups, AI, and design.</p>
-                    <p>Fun fact: I'm ranked #9 on <a href="https://beliapp.com/" target="_blank" rel="noopener">Beli</a> at Boston University 😮<br>To quantify this magnificent accomplishment, that's 1000+ restaurants rated!<br>P.S. If you don't know what Beli is, download the app and find out ;)</p>
+                    <p>Fun fact: I'm ranked #8 on <a href="https://beliapp.com/" target="_blank" rel="noopener">Beli</a> at Boston University 😮<br>To quantify this magnificent accomplishment, that's 1000+ restaurants rated!<br>P.S. If you don't know what Beli is, download the app and find out ;)</p>
                 </div>
                 <div class="carousel" role="region" aria-label="Hobbies gallery">
                     <div class="carousel-stage">
@@ -1374,6 +1478,7 @@
                         <div class="carousel-slide" data-index="14"><video src="about/snowboarding.MOV" controls></video></div>
                         <div class="carousel-slide" data-index="15"><img src="about/sunset.JPG" alt=""></div>
                         <div class="carousel-slide" data-index="16"><img src="about/tennis.JPG" alt=""></div>
+                        <div class="carousel-slide" data-index="17"><img src="about/surfing.JPG" alt=""></div>
                     </div>
                     <p class="carousel-caption" id="carousel-caption">ATV in Iceland!</p>
                     <div class="carousel-thumbs">
@@ -1394,6 +1499,7 @@
                         <button type="button" class="carousel-thumb" data-index="14" aria-label="View 15"><video src="about/snowboarding.MOV" muted preload="metadata"></video></button>
                         <button type="button" class="carousel-thumb" data-index="15" aria-label="View 16"><img src="about/sunset.JPG" alt=""></button>
                         <button type="button" class="carousel-thumb" data-index="16" aria-label="View 17"><img src="about/tennis.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb" data-index="17" aria-label="View 18"><img src="about/surfing.JPG" alt=""></button>
                     </div>
                 </div>
             </div>
@@ -1490,10 +1596,10 @@
                 <section class="about-card" aria-labelledby="card-favorites">
                     <h3 id="card-favorites">Favorites (misc.)</h3>
                     <ul>
-                        <li>meditation, daydreaming, philosophical discourse, acting, psychology, espresso, ampersands, The Rundown AI, dissonant harmonies, worldbuilding</li>
+                        <li>meditation, daydreaming, philosophical discourse, acting, psychology, espresso, ampersands, Rundown AI, dissonant harmonies, worldbuilding</li>
                         <li>Universal Studios :)</li>
                         <li>Barry's Bootcamp</li>
-                        <li>Copenhagen, New Zealand, Iceland</li>
+                        <li>Denmark, New Zealand, Iceland</li>
                         <li><em>Deep Work, Think Again, The Right It, Zero to One, Design of Everyday Things</em></li>
                         <li><em>Harry Potter, Ready Player One, The Bell Jar, The Stranger, The Collector</em></li>
                         <li><em>Iron Man, He's Just Not That Into You, Interstellar, Criminal Minds</em></li>
@@ -1545,6 +1651,13 @@
                         <div class="project-number">05</div>
                         <h3>Designathon mobile app</h3>
                         <p>Mobile app UI</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="lovable" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">06</div>
+                        <h3>Lovable hackathon mobile app</h3>
+                        <p>Mobile app</p>
                     </div>
                 </div>
             </div>
@@ -1769,6 +1882,39 @@
             </div>
         </section>
 
+        <section id="project-lovable" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
+                <h1 class="serif">Lovable hackathon mobile app</h1>
+                <p class="project-meta">Mobile app</p>
+                <p class="project-description">Vibe-coded complete mobile app using Lovable in under 1.5 hours (frontend + backend).</p>
+                <div class="project-media project-media--logo">
+                    <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener"><img src="lovable/cover.png" alt="Lovable"></a>
+                </div>
+                <p class="project-description"><b>Context:</b> Invited to participate in a Lovable collegiate hackathon where we vibe coded entire web and mobile apps.</p>
+                <p class="project-description"><b>Skills:</b> Lovable, information hierarchy, UX design, navigation design.</p>
+                <p class="project-description"><b>Impact:</b> Learned to prioritize features and speed-run MVP development under extreme time pressure.</p>
+                <p class="project-description"><b>Details:</b> I started by defining the problem space and user pain points. I architected my solution and must-have features based on this. Next, I planned the app navigation, information hierarchy, layouts, user flow, styles and themes, and data visualization strategies. Using Lovable, I created an MVP and spent the remaining hackathon time iterating on it. I drove strategic decisions on feature prioritization, content flow, and layout logic, balancing product complexity against screen real estate constraints. In the process, I learned how to communicate large amounts of data in intuitive ways.</p>
+                <p class="project-description"><b>About the app:</b> A health intelligence layer that connects all your health data and wearable devices. Solves the problem of fragmented data, incomplete insights, and users' frustration of not understanding the why behind outcomes. Vita uncovers true causation and provides personalized and actionable insights, helping you achieve your goals faster and smarter.</p>
+                <p class="project-description" style="margin-top: 1rem;">
+                    <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener">Open live app &rarr;</a>
+                </p>
+
+                <h2 class="project-gallery-title">App screens</h2>
+                <div class="project-gallery">
+                    <div class="gallery-item"><img src="lovable/screen-home-metrics.png" alt="Home dashboard with body scan and health metrics"></div>
+                    <div class="gallery-item"><img src="lovable/screen-home-warning.png" alt="Home with lower body recovery warning"></div>
+                    <div class="gallery-item"><img src="lovable/insights-feed.png" alt="Activity and insights feed"></div>
+                    <div class="gallery-item"><img src="lovable/ai-insights.png" alt="AI insights and causal analysis"></div>
+                    <div class="gallery-item"><img src="lovable/screen-log-capture.png" alt="Log and capture menu"></div>
+                    <div class="gallery-item"><img src="lovable/screen-learn.png" alt="Learn resources for goals"></div>
+                    <div class="gallery-item"><img src="lovable/screen-profile.png" alt="Profile and settings"></div>
+                    <div class="gallery-item"><img src="lovable/screen-home-light.png" alt="Home in light theme with cardiovascular card"></div>
+                    <div class="gallery-item"><img src="lovable/screen-insights-cards.png" alt="Insights with hydration and stress charts"></div>
+                </div>
+            </div>
+        </section>
+
         <!-- Research Page -->
         <section id="research" class="page">
             <div class="research-under-construction">
@@ -1830,6 +1976,18 @@
                 </div>
             </div>
             -->
+        </section>
+
+        <!-- Resume Page -->
+        <section id="resume" class="page">
+            <div class="section-header">
+                <h2 class="serif">resume</h2>
+            </div>
+            <div class="resume-viewer-wrap">
+                <object class="resume-embed" data="resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" aria-label="Ellen Zheng Design Resume">
+                    <p>Your browser doesn't support embedded PDFs. <a href="resume.pdf" download="Ellen Zheng Design Resume.pdf">Download the resume instead.</a></p>
+                </object>
+            </div>
         </section>
     </main>
 
@@ -2081,7 +2239,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
@@ -2104,7 +2262,7 @@
                 'ATV in Iceland!', 'beli 😎', 'camels in AUS!', 'community service in the BVI',
                 'performing drums', 'more drums!', 'guitar', 'hiking Huangshan', 'exploring Costa Rica',
                 'organizing Hult Prize', 'pickleball', 'scuba', 'skydiving!', 'reindeer sleds in Finland',
-                'snowboarding', 'Bali sunrise', 'tennis'
+                'snowboarding', 'Bali sunrise', 'tennis', 'first time surfing in Aruba'
             ];
             let current = 0;
 
