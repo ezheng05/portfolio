@@ -1277,19 +1277,49 @@
         }
 
         @media (max-width: 768px) {
+            /* collapsed by default: name + controls on one row, tap name to show links */
             nav {
                 padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
+                flex-wrap: wrap;
             }
 
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
+            .logo {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+            }
+
+            .logo::after {
+                content: '';
+                width: 0.4em;
+                height: 0.4em;
+                border-right: 1.5px solid currentColor;
+                border-bottom: 1.5px solid currentColor;
+                transform: translateY(-25%) rotate(45deg);
+                transition: transform 0.3s ease;
+            }
+
+            nav.menu-open .logo::after {
+                transform: translateY(25%) rotate(-135deg);
             }
 
             .controls {
                 flex-direction: row;
+            }
+
+            .nav-links {
+                display: none;
+                order: 3;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding-top: 1rem;
+            }
+
+            nav.menu-open .nav-links {
+                display: flex;
             }
 
 
@@ -1409,7 +1439,7 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <nav aria-label="Main navigation">
         <a href="#home" class="logo serif">Ellen Zheng</a>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="#home" class="nav-link active" data-page="home" aria-current="page">home</a>
             <a href="#about" class="nav-link" data-page="about">about</a>
             <a href="#design" class="nav-link" data-page="design">design</a>
@@ -2047,7 +2077,7 @@
         const scrollThreshold = 80;
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
-            if (y <= scrollThreshold) {
+            if (y <= scrollThreshold || nav.classList.contains('menu-open')) {
                 nav.classList.remove('nav-hidden');
             } else if (y > lastScrollY) {
                 nav.classList.add('nav-hidden');
@@ -2172,7 +2202,62 @@
                 e.preventDefault();
                 const pageName = link.getAttribute('data-page');
                 showPage(pageName);
+                setMenuOpen(false);
             });
+        });
+
+        // mobile menu: tapping the name opens/closes the links
+        const logo = document.querySelector('.logo');
+        const mobileNav = window.matchMedia('(max-width: 768px)');
+
+        function setMenuOpen(open) {
+            nav.classList.toggle('menu-open', open);
+            if (mobileNav.matches) {
+                logo.setAttribute('aria-expanded', open);
+            }
+        }
+
+        function syncMenuMode() {
+            nav.classList.remove('menu-open');
+            if (mobileNav.matches) {
+                logo.setAttribute('role', 'button');
+                logo.setAttribute('aria-controls', 'nav-links');
+                logo.setAttribute('aria-expanded', 'false');
+            } else {
+                logo.removeAttribute('role');
+                logo.removeAttribute('aria-controls');
+                logo.removeAttribute('aria-expanded');
+            }
+        }
+
+        syncMenuMode();
+        mobileNav.addEventListener('change', syncMenuMode);
+
+        logo.addEventListener('click', (e) => {
+            if (!mobileNav.matches) return;
+            e.preventDefault();
+            setMenuOpen(!nav.classList.contains('menu-open'));
+        });
+
+        // links only activate on Enter; buttons also respond to Space
+        logo.addEventListener('keydown', (e) => {
+            if (e.key === ' ' && mobileNav.matches) {
+                e.preventDefault();
+                setMenuOpen(!nav.classList.contains('menu-open'));
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (nav.classList.contains('menu-open') && !nav.contains(e.target)) {
+                setMenuOpen(false);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('menu-open')) {
+                setMenuOpen(false);
+                logo.focus();
+            }
         });
 
         // CTA Button
