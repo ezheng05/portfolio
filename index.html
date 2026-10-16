@@ -120,6 +120,32 @@
             display: flex;
             gap: 3rem;
             align-items: center;
+            position: relative;
+        }
+
+        /* one shared blob that glides between nav links (desktop only, see moveNavIndicator) */
+        .nav-indicator {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            background: radial-gradient(
+                ellipse at 40% 45%,
+                color-mix(in srgb, var(--accent) 38%, transparent),
+                color-mix(in srgb, var(--accent) 15%, transparent) 60%,
+                transparent 100%
+            );
+            pointer-events: none;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.15, 1), width 0.5s cubic-bezier(0.4, 0, 0.15, 1);
+        }
+
+        .nav-links.has-indicator .nav-indicator {
+            display: block;
+        }
+
+        .nav-links.has-indicator a.active::after {
+            opacity: 0;
         }
 
         .nav-links a {
@@ -389,6 +415,75 @@
         .hero-content {
             max-width: 800px;
             width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* soft accent glow behind the headline: drifts on its own, follows the cursor on desktop */
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(70vw, 560px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, color-mix(in srgb, var(--accent) 20%, transparent), transparent 65%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: glow-drift 14s ease-in-out infinite alternate;
+        }
+
+        .hero.glow-tracking .hero-glow {
+            top: 0;
+            left: 0;
+            animation: none;
+        }
+
+        @keyframes glow-drift {
+            from { transform: translate(-60%, -45%); }
+            to { transform: translate(-40%, -55%); }
+        }
+
+        .hero h1 .word {
+            display: inline-block;
+            animation: rise-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+        }
+
+        .hero h1 .word:nth-child(2) { animation-delay: 0.08s; }
+        .hero h1 .word:nth-child(3) { animation-delay: 0.16s; }
+        .hero-subtitle { animation: rise-in 0.7s 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+        .hero .cta-button { animation: rise-in 0.7s 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+
+        @keyframes rise-in {
+            from {
+                opacity: 0;
+                transform: translateY(0.4em);
+            }
+        }
+
+        /* scroll-in reveal for cards (class toggled by IntersectionObserver) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.4s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* theme/accent switch: new colors wipe out in a circle from the button */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation: none;
+            mix-blend-mode: normal;
+        }
+
+        .no-transitions *,
+        .no-transitions *::before,
+        .no-transitions *::after {
+            transition: none !important;
         }
 
         .hero h1 {
@@ -751,8 +846,34 @@
             background-color: var(--bg-secondary);
         }
 
-        .project-card:hover {
-            transform: scale(1.02);
+        /* tilt toward the cursor; --rx/--ry/--mx/--my are set from JS on fine pointers */
+        .project-card.is-visible {
+            transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--lift, 1));
+        }
+
+        .project-card.tilting {
+            --lift: 1.015;
+            transition: transform 0.15s ease-out, border-color 0.4s ease;
+            will-change: transform;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.35), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="dark"] .project-card::after {
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.07), transparent 45%);
+        }
+
+        .project-card.tilting::after {
+            opacity: 1;
         }
 
         .project-card::before {
@@ -1531,6 +1652,7 @@
     <nav aria-label="Main navigation">
         <a href="#home" class="logo serif">Ellen Zheng</a>
         <div class="nav-links" id="nav-links">
+            <span class="nav-indicator" aria-hidden="true"></span>
             <a href="#home" class="nav-link active" data-page="home" aria-current="page">home</a>
             <a href="#about" class="nav-link" data-page="about">about</a>
             <a href="#design" class="nav-link" data-page="design">design</a>
@@ -1547,8 +1669,9 @@
         <!-- Home Page -->
         <section id="home" class="page active" aria-labelledby="hero-heading">
             <div class="hero">
+                <div class="hero-glow" aria-hidden="true"></div>
                 <div class="hero-content">
-                    <h1 id="hero-heading" class="serif">hi, i&rsquo;m ellen.</h1>
+                    <h1 id="hero-heading" class="serif"><span class="word">hi,</span> <span class="word">i&rsquo;m</span> <span class="word">ellen.</span></h1>
                     <p class="hero-subtitle">I like people! And technology.<br>And using technology to make things (or vice versa). Things that look and feel delightful. And help people!</p>
                     <a href="#design" class="cta-button" data-page="design">view my work</a>
                 </div>
@@ -2140,22 +2263,50 @@
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
-        
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+        // apply a color change as a circle growing out of the button; instant where unsupported
+        function withColorWipe(button, update) {
+            if (!document.startViewTransition || reducedMotion.matches) {
+                update();
+                return;
+            }
+            const r = button.getBoundingClientRect();
+            const x = r.left + r.width / 2;
+            const y = r.top + r.height / 2;
+            const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            // css transitions would make the new snapshot start from the old colors
+            document.documentElement.classList.add('no-transitions');
+            const transition = document.startViewTransition(update);
+            transition.ready.then(() => {
+                document.documentElement.animate(
+                    { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+                    { duration: 550, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', pseudoElement: '::view-transition-new(root)' }
+                );
+            });
+            transition.finished.finally(() => document.documentElement.classList.remove('no-transitions'));
+        }
+
         themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            themeToggle.classList.toggle('active');
-            themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+            withColorWipe(themeToggle, () => {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                body.setAttribute('data-theme', newTheme);
+                themeToggle.classList.toggle('active');
+                themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+            });
         });
 
         const accentToggle = document.getElementById('accentToggle');
         accentToggle.addEventListener('click', () => {
-            const currentAccent = body.getAttribute('data-accent');
-            const newAccent = currentAccent === 'purple' ? 'blue' : 'purple';
-            body.setAttribute('data-accent', newAccent);
-            accentToggle.classList.toggle('active');
-            accentToggle.setAttribute('aria-pressed', newAccent === 'blue');
+            withColorWipe(accentToggle, () => {
+                const currentAccent = body.getAttribute('data-accent');
+                const newAccent = currentAccent === 'purple' ? 'blue' : 'purple';
+                body.setAttribute('data-accent', newAccent);
+                accentToggle.classList.toggle('active');
+                accentToggle.setAttribute('aria-pressed', newAccent === 'blue');
+            });
         });
 
         // copy email to clipboard; show toast on success
@@ -2230,6 +2381,7 @@
                     link.removeAttribute('aria-current');
                 }
             });
+            moveNavIndicator();
 
             // Toggle body class for home page
             if (pageName === 'home') {
@@ -2244,6 +2396,28 @@
             // keep URL hash in sync so browser back/forward works
             if (window.location.hash.slice(1) !== pageName) {
                 window.location.hash = pageName;
+            }
+        }
+
+        // slide the shared blob under the active link; on mobile the per-link ::after blob is used instead
+        function moveNavIndicator(instant) {
+            const links = document.getElementById('nav-links');
+            const indicator = links.querySelector('.nav-indicator');
+            const active = links.querySelector('.nav-link.active');
+            const enabled = !!active && !window.matchMedia('(max-width: 768px)').matches;
+            links.classList.toggle('has-indicator', enabled);
+            if (!enabled) return;
+            const w = active.offsetWidth * 1.3;
+            const h = active.offsetHeight * 2.2;
+            const x = active.offsetLeft + (active.offsetWidth - w) / 2;
+            const y = active.offsetTop + (active.offsetHeight - h) / 2;
+            if (instant) indicator.style.transition = 'none';
+            indicator.style.width = `${w}px`;
+            indicator.style.height = `${h}px`;
+            indicator.style.transform = `translate(${x}px, ${y}px) rotate(-8deg)`;
+            if (instant) {
+                indicator.offsetWidth;
+                indicator.style.transition = '';
             }
         }
 
@@ -2391,6 +2565,29 @@
             card.addEventListener('mouseleave', function() {
                 this.style.borderColor = 'var(--border)';
             });
+
+            // tilt + sheen follow the cursor (mouse/trackpad only)
+            let rect;
+            card.addEventListener('pointerenter', () => {
+                if (!finePointer.matches || reducedMotion.matches) return;
+                rect = card.getBoundingClientRect();
+                card.classList.add('tilting');
+            });
+            card.addEventListener('pointermove', (e) => {
+                if (!rect) return;
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+                card.style.setProperty('--ry', `${(px - 0.5) * 8}deg`);
+                card.style.setProperty('--rx', `${(0.5 - py) * 8}deg`);
+                card.style.setProperty('--mx', `${px * 100}%`);
+                card.style.setProperty('--my', `${py * 100}%`);
+            });
+            card.addEventListener('pointerleave', () => {
+                rect = null;
+                card.classList.remove('tilting');
+                card.style.removeProperty('--rx');
+                card.style.removeProperty('--ry');
+            });
         });
 
         // Back link on project pages
@@ -2410,8 +2607,7 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('is-visible');
                 }
             });
         }, observerOptions);
@@ -2419,9 +2615,7 @@
         // Observe elements for animation
         const animatedElements = document.querySelectorAll('.about-card, .project-card, .research-item');
         animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.classList.add('reveal');
             observer.observe(el);
         });
 
@@ -2439,6 +2633,60 @@
             const h = window.location.hash.slice(1);
             if (validPages.includes(h)) showPage(h);
         });
+
+        moveNavIndicator(true);
+        document.fonts?.ready.then(() => moveNavIndicator(true));
+        window.addEventListener('resize', () => moveNavIndicator(true));
+
+        // hero glow eases toward the cursor, and back to center when it leaves
+        (function() {
+            const hero = document.querySelector('.hero');
+            const glow = hero?.querySelector('.hero-glow');
+            if (!glow || !finePointer.matches || reducedMotion.matches) return;
+            let x, y, tx, ty, frame = null;
+
+            function center() {
+                tx = hero.clientWidth / 2;
+                ty = hero.clientHeight / 2;
+            }
+
+            function tick() {
+                x += (tx - x) * 0.08;
+                y += (ty - y) * 0.08;
+                glow.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+                frame = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(tick) : null;
+            }
+
+            function follow() {
+                if (!frame) frame = requestAnimationFrame(tick);
+            }
+
+            let inside = false;
+            hero.classList.add('glow-tracking');
+
+            // also fires when home goes from hidden to shown, so the glow starts centered
+            new ResizeObserver(() => {
+                if (!hero.clientWidth) inside = false;
+                if (inside) return;
+                center();
+                x = tx;
+                y = ty;
+                glow.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+            }).observe(hero);
+
+            hero.addEventListener('pointermove', (e) => {
+                inside = true;
+                const r = hero.getBoundingClientRect();
+                tx = e.clientX - r.left;
+                ty = e.clientY - r.top;
+                follow();
+            });
+            hero.addEventListener('pointerleave', () => {
+                inside = false;
+                center();
+                follow();
+            });
+        })();
 
         // resume switcher: drag the thumb or tap a tab; resumes crossfade with thumb position
         (function() {
