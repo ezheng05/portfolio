@@ -429,7 +429,7 @@
             aspect-ratio: 1.6;
             transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
-            animation: glow-drift 15s ease-in-out infinite, glow-breathe 4s ease-in-out infinite alternate;
+            animation: glow-drift 10s ease-in-out infinite, glow-breathe 3s ease-in-out infinite alternate;
         }
 
         .hero-glow span {
@@ -447,11 +447,11 @@
         .hero-glow span:nth-child(4) { inset: 12% 48% 22% 2%; }
         .hero-glow span:nth-child(5) { inset: 4% 2% 38% 50%; }
 
-        .hero-glow span:nth-child(1) { animation: glow-blob-a 7s ease-in-out infinite alternate; }
-        .hero-glow span:nth-child(2) { animation: glow-blob-b 9s ease-in-out -3s infinite alternate; }
-        .hero-glow span:nth-child(3) { animation: glow-blob-c 11s ease-in-out -7s infinite alternate; }
-        .hero-glow span:nth-child(4) { animation: glow-blob-d 6s ease-in-out -2s infinite alternate; }
-        .hero-glow span:nth-child(5) { animation: glow-blob-e 8s ease-in-out -4s infinite alternate; }
+        .hero-glow span:nth-child(1) { animation: glow-blob-a 4.5s ease-in-out infinite alternate; }
+        .hero-glow span:nth-child(2) { animation: glow-blob-b 5.5s ease-in-out -2s infinite alternate; }
+        .hero-glow span:nth-child(3) { animation: glow-blob-c 7s ease-in-out -4s infinite alternate; }
+        .hero-glow span:nth-child(4) { animation: glow-blob-d 4s ease-in-out -1s infinite alternate; }
+        .hero-glow span:nth-child(5) { animation: glow-blob-e 5s ease-in-out -3s infinite alternate; }
 
         @keyframes glow-drift {
             0%, 100% { transform: translate(-50%, -50%) rotate(-12deg); }
@@ -465,29 +465,30 @@
             to { opacity: 1; }
         }
 
+        /* squash and stretch plus a little skew wobble keep the shape jelly-like */
         @keyframes glow-blob-a {
-            from { transform: translate(-12%, 6%) scale(0.85, 1.15); }
-            to { transform: translate(10%, -6%) scale(1.2, 0.82); }
+            from { transform: translate(-14%, 7%) scale(0.8, 1.25) skew(6deg, -3deg); }
+            to { transform: translate(12%, -7%) scale(1.3, 0.78) skew(-6deg, 3deg); }
         }
 
         @keyframes glow-blob-b {
-            from { transform: translate(14%, 9%) rotate(18deg) scale(0.7, 0.95); }
-            to { transform: translate(-10%, -10%) rotate(-16deg) scale(1.05, 0.68); }
+            from { transform: translate(16%, 10%) rotate(22deg) scale(0.68, 1) skew(-5deg, 4deg); }
+            to { transform: translate(-12%, -12%) rotate(-20deg) scale(1.12, 0.64) skew(5deg, -4deg); }
         }
 
         @keyframes glow-blob-c {
-            from { transform: translate(-8%, -12%) rotate(-24deg) scale(0.65, 0.95); }
-            to { transform: translate(12%, 12%) rotate(20deg) scale(0.95, 0.6); }
+            from { transform: translate(-10%, -14%) rotate(-28deg) scale(0.62, 1) skew(4deg, 5deg); }
+            to { transform: translate(14%, 14%) rotate(24deg) scale(1, 0.58) skew(-4deg, -5deg); }
         }
 
         @keyframes glow-blob-d {
-            from { transform: translate(-20%, 10%) scale(0.8); }
-            to { transform: translate(15%, -15%) scale(1.3); }
+            from { transform: translate(-22%, 12%) scale(0.75, 0.95) skew(-7deg, 2deg); }
+            to { transform: translate(18%, -17%) scale(1.38, 1.1) skew(7deg, -2deg); }
         }
 
         @keyframes glow-blob-e {
-            from { transform: translate(18%, -8%) scale(1.2, 0.8); }
-            to { transform: translate(-15%, 14%) scale(0.75, 1.15); }
+            from { transform: translate(20%, -10%) scale(1.28, 0.75) skew(5deg, -5deg); }
+            to { transform: translate(-17%, 16%) scale(0.72, 1.22) skew(-5deg, 5deg); }
         }
 
         .hero h1 .word {
@@ -2524,7 +2525,7 @@
         <!-- About Page -->
         <section id="about" class="page">
             <div class="about-grid">
-                <div class="about-image" aria-hidden="true"><img src="about/about-photo.png" alt=""></div>
+                <div class="about-image" aria-hidden="true"><img src="about/about-photo.png" alt="" loading="lazy" decoding="async"></div>
                 <div class="about-content">
                     <h2 class="serif">right now, i&rsquo;m...</h2>
                     <p>A fourth year student at Boston University studying <b>Computer Engineering</b> and <b>Innovation & Entrepreneurship</b>, concentrating in <b>Technology Innovation</b> and <b>Machine Learning</b>.</p>
@@ -2548,45 +2549,45 @@
                     <div class="carousel-stage">
                         <button type="button" class="carousel-nav prev" aria-label="Previous">‹</button>
                         <button type="button" class="carousel-nav next" aria-label="Next">›</button>
-                        <div class="carousel-slide active" data-index="0"><img src="about/atv.jpg" alt=""></div>
-                        <div class="carousel-slide" data-index="1"><img src="about/beli.png" alt=""></div>
-                        <div class="carousel-slide" data-index="2"><img src="about/camel.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="3"><img src="about/construction.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="4"><img src="about/drum.jpg" alt=""></div>
-                        <div class="carousel-slide" data-index="5"><video src="about/drumming.mov" controls></video></div>
-                        <div class="carousel-slide" data-index="6"><video src="about/guitar.mov" controls></video></div>
-                        <div class="carousel-slide" data-index="7"><img src="about/hike.jpg" alt=""></div>
-                        <div class="carousel-slide" data-index="8"><img src="about/hike.PNG" alt=""></div>
-                        <div class="carousel-slide" data-index="9"><img src="about/hult.JPEG" alt=""></div>
-                        <div class="carousel-slide" data-index="10"><img src="about/pickleball.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="11"><img src="about/scuba.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="12"><img src="about/skydive.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="13"><video src="about/sled.mov" controls></video></div>
-                        <div class="carousel-slide" data-index="14"><video src="about/snowboarding.MOV" controls></video></div>
-                        <div class="carousel-slide" data-index="15"><img src="about/sunset.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="16"><img src="about/tennis.JPG" alt=""></div>
-                        <div class="carousel-slide" data-index="17"><img src="about/surfing.JPG" alt=""></div>
+                        <div class="carousel-slide active" data-index="0"><img src="about/web/atv.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="1"><img src="about/web/beli.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="2"><img src="about/web/camel.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="3"><img src="about/web/construction.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="4"><img src="about/web/drum.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="5"><video src="about/web/drumming.mp4" poster="about/web/drumming.jpg" controls playsinline preload="none"></video></div>
+                        <div class="carousel-slide" data-index="6"><video src="about/web/guitar.mp4" poster="about/web/guitar.jpg" controls playsinline preload="none"></video></div>
+                        <div class="carousel-slide" data-index="7"><img src="about/web/hike.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="8"><img src="about/web/hike-2.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="9"><img src="about/web/hult.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="10"><img src="about/web/pickleball.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="11"><img src="about/web/scuba.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="12"><img src="about/web/skydive.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="13"><video src="about/web/sled.mp4" poster="about/web/sled.jpg" controls playsinline preload="none"></video></div>
+                        <div class="carousel-slide" data-index="14"><video src="about/web/snowboarding.mp4" poster="about/web/snowboarding.jpg" controls playsinline preload="none"></video></div>
+                        <div class="carousel-slide" data-index="15"><img src="about/web/sunset.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="16"><img src="about/web/tennis.jpg" alt="" loading="lazy" decoding="async"></div>
+                        <div class="carousel-slide" data-index="17"><img src="about/web/surfing.jpg" alt="" loading="lazy" decoding="async"></div>
                     </div>
                     <p class="carousel-caption" id="carousel-caption">ATV in Iceland!</p>
                     <div class="carousel-thumbs">
-                        <button type="button" class="carousel-thumb active" data-index="0" aria-label="View 1"><img src="about/atv.jpg" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="1" aria-label="View 2"><img src="about/beli.png" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="2" aria-label="View 3"><img src="about/camel.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="3" aria-label="View 4"><img src="about/construction.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="4" aria-label="View 5"><img src="about/drum.jpg" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="5" aria-label="View 6"><video src="about/drumming.mov" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="6" aria-label="View 7"><video src="about/guitar.mov" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="7" aria-label="View 8"><img src="about/hike.jpg" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="8" aria-label="View 9"><img src="about/hike.PNG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="9" aria-label="View 10"><img src="about/hult.JPEG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="10" aria-label="View 11"><img src="about/pickleball.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="11" aria-label="View 12"><img src="about/scuba.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="12" aria-label="View 13"><img src="about/skydive.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="13" aria-label="View 14"><video src="about/sled.mov" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="14" aria-label="View 15"><video src="about/snowboarding.MOV" muted preload="metadata"></video></button>
-                        <button type="button" class="carousel-thumb" data-index="15" aria-label="View 16"><img src="about/sunset.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="16" aria-label="View 17"><img src="about/tennis.JPG" alt=""></button>
-                        <button type="button" class="carousel-thumb" data-index="17" aria-label="View 18"><img src="about/surfing.JPG" alt=""></button>
+                        <button type="button" class="carousel-thumb active" data-index="0" aria-label="View 1"><img src="about/thumbs/atv.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="1" aria-label="View 2"><img src="about/thumbs/beli.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="2" aria-label="View 3"><img src="about/thumbs/camel.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="3" aria-label="View 4"><img src="about/thumbs/construction.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="4" aria-label="View 5"><img src="about/thumbs/drum.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="5" aria-label="View 6"><img src="about/thumbs/drumming.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="6" aria-label="View 7"><img src="about/thumbs/guitar.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="7" aria-label="View 8"><img src="about/thumbs/hike.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="8" aria-label="View 9"><img src="about/thumbs/hike-2.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="9" aria-label="View 10"><img src="about/thumbs/hult.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="10" aria-label="View 11"><img src="about/thumbs/pickleball.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="11" aria-label="View 12"><img src="about/thumbs/scuba.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="12" aria-label="View 13"><img src="about/thumbs/skydive.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="13" aria-label="View 14"><img src="about/thumbs/sled.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="14" aria-label="View 15"><img src="about/thumbs/snowboarding.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="15" aria-label="View 16"><img src="about/thumbs/sunset.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="16" aria-label="View 17"><img src="about/thumbs/tennis.jpg" alt="" loading="lazy" decoding="async"></button>
+                        <button type="button" class="carousel-thumb" data-index="17" aria-label="View 18"><img src="about/thumbs/surfing.jpg" alt="" loading="lazy" decoding="async"></button>
                     </div>
                 </div>
             </div>
@@ -2762,7 +2763,7 @@
                 <p class="project-meta">Mobile app · Web app · Website</p>
                 <p class="project-description">Product and design work across Enlaye’s mobile app, web app, and company website.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye/enlaye-logo.png" alt="Enlaye logo"></a>
+                    <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye/enlaye-logo.png" alt="Enlaye logo" loading="lazy" decoding="async"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> Enlaye is an AI-powered risk management platform for the construction industry. I joined the team as the first designer the summer of 2025, and created mockups and prototypes for 9+ features across the mobile and web product suite.</p>
                 <p class="project-description"><b>Skills:</b> Figma, Framer, user research, systems design, product management, interaction design.</p>
@@ -2791,22 +2792,22 @@
                     <p class="project-description">For additional details, examples, or demos, please contact me!</p>
 
                     <div class="project-media">
-                        <img src="enlaye/enlaye%20home.png" alt="Enlaye home">
+                        <img src="enlaye/enlaye%20home.png" alt="Enlaye home" loading="lazy" decoding="async">
                     </div>
                     <div class="project-media">
-                        <img src="enlaye/doc%20management.png" alt="Document management">
+                        <img src="enlaye/doc%20management.png" alt="Document management" loading="lazy" decoding="async">
                     </div>
                     <div class="project-media">
-                        <img src="enlaye/doc%20comparison.png" alt="Document comparison">
+                        <img src="enlaye/doc%20comparison.png" alt="Document comparison" loading="lazy" decoding="async">
                     </div>
                     <div class="project-media">
-                        <img src="enlaye/doc%20preview.png" alt="Document preview">
+                        <img src="enlaye/doc%20preview.png" alt="Document preview" loading="lazy" decoding="async">
                     </div>
                     <div class="project-media">
-                        <video src="enlaye/project%20settings.mp4" controls style="width:100%; border-radius:12px;"></video>
+                        <video src="enlaye/project%20settings.mp4" poster="enlaye/project-settings-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
                     </div>
                     <div class="project-media" style="max-width: 35%; margin-left: auto; margin-right: auto;">
-                        <video src="enlaye/guardian%20angel.mp4" controls style="width:100%; border-radius:12px;"></video>
+                        <video src="enlaye/guardian%20angel.mp4" poster="enlaye/guardian-angel-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
                     </div>
                 </div>
             </div>
@@ -2819,7 +2820,7 @@
                 <p class="project-meta">Social & events app</p>
                 <p class="project-description">Mobile app design and development for Popple.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://poppleapp.com/" target="_blank" rel="noopener"><img src="popple/popple-logo.png" alt="Popple logo"></a>
+                    <a href="https://poppleapp.com/" target="_blank" rel="noopener"><img src="popple/popple-logo.png" alt="Popple logo" loading="lazy" decoding="async"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> Popple is a social and events app for college students. I designed V2 and V3 of the app. Popple was part of Innovation Pathway at BU, Spark! Launch Lab, Hult Prize Nationals, and MassChallenge.</p>
                 <p class="project-description"><b>Skills:</b> Figma, Flutter, user interviews, user research, product management, user experience design.</p>
@@ -2837,18 +2838,18 @@
 
                 <h2 class="project-gallery-title">Design highlights</h2>
                 <div class="project-gallery">
-                    <div class="gallery-item gallery-span-2"><img src="popple/home.png" alt="New home page"></div>
-                    <div class="gallery-item gallery-span-2"><img src="popple/review.png" alt="Event review flow"></div>
-                    <div class="gallery-item gallery-span-2"><img src="popple/taste-map.png" alt="Taste map"></div>
-                    <div class="gallery-item gallery-span-2"><img src="popple/profile.png" alt="Weekend picks and profile"></div>
-                    <div class="gallery-item gallery-span-3"><img src="popple/misc-2.png" alt="Event details and chats"></div>
-                    <div class="gallery-item gallery-span-3"><img src="popple/misc.png" alt="Sign in, sign up, filters"></div>
-                    <div class="gallery-item"><img src="popple/find-people-1.png" alt="Event Stats 1"></div>
-                    <div class="gallery-item"><img src="popple/find-people-2.png" alt="Event Stats 2"></div>
-                    <div class="gallery-item gallery-span-3"><img src="popple/onboarding.png" alt="Onboarding flow"></div>
-                    <div class="gallery-item"><img src="popple/event-details-2.png" alt="Event details with stats"></div>
-                    <div class="gallery-item"><img src="popple/event-details.png" alt="Event details"></div>
-                    <div class="gallery-item"><img src="popple/feed.png" alt="Your feed - reviews"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/home.png" alt="New home page" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/review.png" alt="Event review flow" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/taste-map.png" alt="Taste map" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item gallery-span-2"><img src="popple/profile.png" alt="Weekend picks and profile" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple/misc-2.png" alt="Event details and chats" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple/misc.png" alt="Sign in, sign up, filters" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="popple/find-people-1.png" alt="Event Stats 1" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="popple/find-people-2.png" alt="Event Stats 2" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item gallery-span-3"><img src="popple/onboarding.png" alt="Onboarding flow" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="popple/event-details-2.png" alt="Event details with stats" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="popple/event-details.png" alt="Event details" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="popple/feed.png" alt="Your feed - reviews" loading="lazy" decoding="async"></div>
                 </div>
             </div>
         </section>
@@ -2860,7 +2861,7 @@
                 <p class="project-meta">Data visualization and sustainability analytics</p>
                 <p class="project-description">A public web app that turns continuous sensor data from BU classrooms into clear answers for facilities staff: which rooms are poorly ventilated, too hot or too cold, or exposed to particulates.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering"></a>
+                    <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering" loading="lazy" decoding="async"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> As one of three undergraduate researchers in BU’s Multimedia Communications Lab, I helped deploy sensors that measure CO2, particulates, temperature, humidity, and occupancy in classrooms. Raw readings from sensors in 20+ classrooms are unreadable to a facilities team, so I designed the web app that makes them useful, along with the sensor enclosures. Our partner and main user was BU Operations.</p>
                 <p class="project-description"><b>Skills:</b> Streamlit, Python, Plotly, Matplotlib, CAD, stakeholder interviews, information design, data visualization.</p>
@@ -2877,7 +2878,7 @@
 
                 <h2 class="project-gallery-title">Project media</h2>
                 <div class="project-media">
-                    <img src="streamlit/poster.png" alt="Project poster">
+                    <img src="streamlit/poster.png" alt="Project poster" loading="lazy" decoding="async">
                 </div>
                 <div class="project-media-row project-media-row--video-2-3">
                     <div>
@@ -2887,14 +2888,14 @@
                         </video>
                     </div>
                     <div>
-                        <img src="streamlit/news.png" alt="News coverage">
+                        <img src="streamlit/news.png" alt="News coverage" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="gallery-item"><img src="streamlit/CAD1.png" alt="CAD 1"></div>
-                    <div class="gallery-item"><img src="streamlit/CAD2.png" alt="CAD 2"></div>
-                    <div class="gallery-item"><img src="streamlit/CAD3.png" alt="CAD 3"></div>
-                    <div class="gallery-item"><img src="streamlit/CAD4.png" alt="CAD 4"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD1.png" alt="CAD 1" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD2.png" alt="CAD 2" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD3.png" alt="CAD 3" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="streamlit/CAD4.png" alt="CAD 4" loading="lazy" decoding="async"></div>
                 </div>
             </div>
         </section>
@@ -2906,7 +2907,7 @@
                 <p class="project-meta">AI image recognition & data analytics</p>
                 <p class="project-description">Web dashboard for waste tracking and analytics.</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco/reco-logo.png" alt="ReCo Digital"></a>
+                    <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco/reco-logo.png" alt="ReCo Digital" loading="lazy" decoding="async"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> ReCo Digital is a design and strategy consulting firm. I was one of two interns in charge of a sustainability project for a client. Our objective was to automate the quantification of food waste through receipt image recognition.</p>
                 <p class="project-description"><b>Skills:</b> Python, computer vision, OpenAI API, Gemini API, data analytics, data visualization, web development, Flask, Supabase.</p>
@@ -2924,7 +2925,7 @@
                 </ul>
 
                 <div class="project-media">
-                    <video src="reco/demo.mp4" controls style="width:100%; border-radius:12px;"></video>
+                    <video src="reco/demo.mp4" poster="reco/demo-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
                 </div>
             </div>
         </section>
@@ -2936,7 +2937,7 @@
                 <p class="project-meta">Mobile app UI</p>
                 <p class="project-description">Meet artscape - where the show never really ends!</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://devpost.com/software/the-space-in-between-proj" target="_blank" rel="noopener"><img src="artscape/cover-full.png" alt="Catalyst Designathon 2026" style="max-width: 55%;"></a>
+                    <a href="https://devpost.com/software/the-space-in-between-proj" target="_blank" rel="noopener"><img src="artscape/cover-full.png" alt="Catalyst Designathon 2026" style="max-width: 55%;" loading="lazy" decoding="async"></a>
                 </div>
                 <p class="project-description">Mobile app design for <a href="https://catalyst-2026.devpost.com/" target="_blank" rel="noopener">Catalyst Designathon 2026</a>.</p>
                 <p class="project-description"><b>Context:</b> Formed a team with two strangers to participate in a nationwide virtual designathon. Ideated solutions and created high fidelity prototype with Figma.</p>
@@ -2963,15 +2964,15 @@
 
                 <h2 class="project-gallery-title">App screens</h2>
                 <div class="project-gallery">
-                    <div class="gallery-item"><img src="artscape/onboarding.png" alt="Onboarding screen"></div>
-                    <div class="gallery-item"><img src="artscape/discover.png" alt="Discover feed"></div>
-                    <div class="gallery-item"><img src="artscape/event-page.png" alt="Event page"></div>
-                    <div class="gallery-item"><img src="artscape/memory-capsule.png" alt="Memory capsule"></div>
-                    <div class="gallery-item"><img src="artscape/add-media.png" alt="Add media flow"></div>
-                    <div class="gallery-item"><img src="artscape/creative-onboarding.png" alt="Creative onboarding"></div>
-                    <div class="gallery-item"><img src="artscape/creative-profile.png" alt="Creative profile page"></div>
-                    <div class="gallery-item"><img src="artscape/profile.png" alt="Profile with portfolio"></div>
-                    <div class="gallery-item"><img src="artscape/commission-inbox.png" alt="Commission inbox"></div>
+                    <div class="gallery-item"><img src="artscape/onboarding.png" alt="Onboarding screen" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/discover.png" alt="Discover feed" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/event-page.png" alt="Event page" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/memory-capsule.png" alt="Memory capsule" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/add-media.png" alt="Add media flow" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/creative-onboarding.png" alt="Creative onboarding" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/creative-profile.png" alt="Creative profile page" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/profile.png" alt="Profile with portfolio" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="artscape/commission-inbox.png" alt="Commission inbox" loading="lazy" decoding="async"></div>
                 </div>
             </div>
         </section>
@@ -2983,7 +2984,7 @@
                 <p class="project-meta">Mobile app</p>
                 <p class="project-description">Vibe-coded complete mobile app using Lovable in under 1.5 hours (frontend + backend).</p>
                 <div class="project-media project-media--logo">
-                    <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener"><img src="lovable/cover.png" alt="Lovable"></a>
+                    <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener"><img src="lovable/cover.png" alt="Lovable" loading="lazy" decoding="async"></a>
                 </div>
                 <p class="project-description"><b>Context:</b> Invited to participate in a Lovable collegiate hackathon where we vibe coded entire web and mobile apps.</p>
                 <p class="project-description"><b>Skills:</b> Lovable, information hierarchy, UX design, navigation design.</p>
@@ -2996,15 +2997,15 @@
 
                 <h2 class="project-gallery-title">App screens</h2>
                 <div class="project-gallery">
-                    <div class="gallery-item"><img src="lovable/screen-home-metrics.png" alt="Home dashboard with body scan and health metrics"></div>
-                    <div class="gallery-item"><img src="lovable/screen-home-warning.png" alt="Home with lower body recovery warning"></div>
-                    <div class="gallery-item"><img src="lovable/insights-feed.png" alt="Activity and insights feed"></div>
-                    <div class="gallery-item"><img src="lovable/ai-insights.png" alt="AI insights and causal analysis"></div>
-                    <div class="gallery-item"><img src="lovable/screen-log-capture.png" alt="Log and capture menu"></div>
-                    <div class="gallery-item"><img src="lovable/screen-learn.png" alt="Learn resources for goals"></div>
-                    <div class="gallery-item"><img src="lovable/screen-profile.png" alt="Profile and settings"></div>
-                    <div class="gallery-item"><img src="lovable/screen-home-light.png" alt="Home in light theme with cardiovascular card"></div>
-                    <div class="gallery-item"><img src="lovable/screen-insights-cards.png" alt="Insights with hydration and stress charts"></div>
+                    <div class="gallery-item"><img src="lovable/screen-home-metrics.png" alt="Home dashboard with body scan and health metrics" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/screen-home-warning.png" alt="Home with lower body recovery warning" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/insights-feed.png" alt="Activity and insights feed" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/ai-insights.png" alt="AI insights and causal analysis" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/screen-log-capture.png" alt="Log and capture menu" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/screen-learn.png" alt="Learn resources for goals" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/screen-profile.png" alt="Profile and settings" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/screen-home-light.png" alt="Home in light theme with cardiovascular card" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="lovable/screen-insights-cards.png" alt="Insights with hydration and stress charts" loading="lazy" decoding="async"></div>
                 </div>
             </div>
         </section>
@@ -3463,13 +3464,13 @@
                 <div class="resume-viewer-wrap" id="resume-panel" role="tabpanel" aria-labelledby="resume-tab-pm">
                     <div class="resume-stack">
                         <a class="resume-slide is-current" href="#" data-pdf="resume/pm.pdf.enc" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng PM Resume.pdf">
-                            <img data-src="resume/pm.webp.enc" width="1700" height="2200" alt="Ellen Zheng product management resume" decoding="async">
+                            <img data-src="resume/pm.webp.enc" width="1700" height="2200" alt="Ellen Zheng product management resume" decoding="async" loading="lazy" decoding="async">
                         </a>
                         <a class="resume-slide" href="#" data-pdf="resume/robotics.pdf.enc" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng Robotics Resume.pdf" style="opacity: 0" aria-hidden="true" tabindex="-1">
-                            <img data-src="resume/robotics.webp.enc" width="1700" height="2200" alt="Ellen Zheng robotics resume" decoding="async">
+                            <img data-src="resume/robotics.webp.enc" width="1700" height="2200" alt="Ellen Zheng robotics resume" decoding="async" loading="lazy" decoding="async">
                         </a>
                         <a class="resume-slide" href="#" data-pdf="resume/ml.pdf.enc" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng ML Resume.pdf" style="opacity: 0" aria-hidden="true" tabindex="-1">
-                            <img data-src="resume/ml.webp.enc" width="1700" height="2200" alt="Ellen Zheng machine learning resume" decoding="async">
+                            <img data-src="resume/ml.webp.enc" width="1700" height="2200" alt="Ellen Zheng machine learning resume" decoding="async" loading="lazy" decoding="async">
                         </a>
                     </div>
                 </div>
