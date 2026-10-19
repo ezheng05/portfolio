@@ -2989,11 +2989,11 @@
                 <ul>
                     <li>Built the system end to end in ROS 2: depth estimates from the camera feed a safety filter that limits the robot's speed, and any correction is sent to the stylus as a force.</li>
                     <li>Compared three depth models, chose ZoeDepth because it outputs distances in meters, and stopped the obstacle detection from locking onto the floor.</li>
-                    <li>Found a hidden calibration error by checking against a tape measure, and cut the typical depth error from 18.7 cm to 2.3 cm (about 8x).</li>
+                    <li>Found a hidden calibration error by checking against a tape measure at 7 distances across the full 0.3 to 1.5 m range, and cut the typical depth error from 18.7 cm to 2.3 cm (about 8x).</li>
                     <li>Implemented the safety filter as a direct formula so it runs at 20 Hz, with a timeout that stops the robot if commands stop arriving.</li>
                     <li>Fixed 3 bugs in the haptic device's C++ driver that dropped force commands or allowed unsafe forces, plus a unit mismatch (mm vs. m) in my code.</li>
                     <li>Ran a pilot test to set the force level: 0.8 N was clearly felt but easy to override, while 0.5 N or less was too weak.</li>
-                    <li>Caught two safety hazards before hardware testing and fixed them: the robot now moves only while the driver holds a button, and stops when the program exits.</li>
+                    <li>Tested in stages (synthetic inputs, then recorded data, then a person on the stylus) and caught two safety hazards before hardware testing: the robot now moves only while the driver holds a button, and stops when the program exits.</li>
                 </ul>
 
                 <h2 class="project-gallery-title">How it works</h2>
@@ -3182,10 +3182,10 @@
                 <ul>
                     <li>Chose the question after comparing several research directions for robot teams on novelty, what's feasible in a year, and potential for tests on real robots.</li>
                     <li>Set up GPU training on BU's Shared Computing Cluster from scratch, with reproducible batch job scripts.</li>
-                    <li>Trained 20 policies (MAPPO and IPPO, 5 random seeds each, on teams of 3 and teams of 2) and wrote a script that reports means with 95% confidence intervals.</li>
+                    <li>Trained 20 policies with MAPPO and IPPO kept identical except for the critic, so any difference comes from the training method (5 seeds each, teams of 3 and 2), and reported means with 95% confidence intervals.</li>
                     <li>Built a test harness that makes one robot fail at a chosen moment, as a stall or a vanish, with every robot taking a turn and the same starting layouts across conditions.</li>
                     <li>Measured progress toward goals, success, and collisions instead of reward, after finding that the simulator only gives a finishing bonus when every robot reaches its goal, which a failed robot never can.</li>
-                    <li>Trained teams of 2 from scratch as a reference for the best a team could do after losing a member.</li>
+                    <li>Compare each failure against the full team and against a team of 2 trained from scratch, the best a team could do after a loss, so the gap shows what the failure itself costs.</li>
                     <li>Searched for prior work: related papers crash agents mid task or compare training methods in grid worlds, but I haven't found a matched MAPPO vs. IPPO comparison under teammate loss in continuous robot navigation.</li>
                 </ul>
 
