@@ -917,6 +917,13 @@
             border: 1px solid var(--border);
         }
 
+        .project-card[data-project="capitalone"] {
+            background-image: url('capitalone/card.svg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
         .project-card[data-project="enlaye"] {
             background-image: url('enlaye/enlaye-logo.png');
             background-size: 90%;
@@ -2778,44 +2785,51 @@
             </div>
             
             <div class="project-grid">
-                <div class="project-card" data-project="enlaye" tabindex="0" role="button">
+                <div class="project-card" data-project="capitalone" tabindex="0" role="button">
                     <div class="project-info">
                         <div class="project-number">01</div>
+                        <h3>Capital One prefill logic</h3>
+                        <p>Product analytics · Business Analyst intern</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="enlaye" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">02</div>
                         <h3>Enlaye</h3>
                         <p>Mobile AI app · Web app · Website</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="popple" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">02</div>
+                        <div class="project-number">03</div>
                         <h3>Popple mobile app</h3>
                         <p>Social & events app</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="streamlit" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">03</div>
+                        <div class="project-number">04</div>
                         <h3>Air quality web app</h3>
                         <p>Data visualization and sustainability analytics</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="reco" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">04</div>
+                        <div class="project-number">05</div>
                         <h3>ReCo Digital web app</h3>
                         <p>AI image recognition & data analytics</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="artscape" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">05</div>
+                        <div class="project-number">06</div>
                         <h3>Designathon mobile app</h3>
                         <p>Mobile app UI</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="lovable" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">06</div>
+                        <div class="project-number">07</div>
                         <h3>Lovable hackathon mobile app</h3>
                         <p>Mobile app</p>
                     </div>
@@ -2824,6 +2838,29 @@
         </section>
 
         <!-- Project detail pages -->
+        <section id="project-capitalone" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
+                <h1 class="serif">Prefill Data Orchestrator source selection</h1>
+                <p class="project-meta">Capital One · Business Analyst Intern · Jun to Aug 2026</p>
+                <p class="project-description">When you apply for a Capital One credit card, prefill fills in your information so you type less. I defined the logic for deciding which data source should fill each field.</p>
+
+                <p class="project-description"><b>Context:</b> I interned on the Mainstreet Acquisitions team in the product management and analytics track. Every application entry point was hardwired to a single data source, but no one source is best for every field, customer segment, and entry point. That meant stale or incomplete prefills, more typing, and more applicants dropping off before finishing. The Prefill Data Orchestrator (PDO) is a planned system that routes each field to the best available source, and my job was to define its business logic.</p>
+                <p class="project-description"><b>Skills:</b> SQL (Snowflake), data profiling and segmentation, scoring model design, NPV and opportunity sizing, risk analysis, cross functional collaboration, executive communication.</p>
+                <p class="project-description"><b>Impact:</b> Prefill is one of the highest return levers in card acquisition: the program has delivered $60M in annualized NPV over the last two years, and consolidating sources alone was a $10M to $20M opportunity. At Capital One’s application volume, small gains in completion mean tens of thousands of new accounts. My source hierarchy is informing the next phase of PDO implementation, and Phase 1 testing is rolling out with an expected 3 to 8% lift in application completion, projected at 40K to 100K incremental accounts and $9M to $25M NPV.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Broke the problem into what drives source quality (coverage, freshness, accuracy, and cost) and built the analysis plan around those four.</li>
+                    <li>Profiled every source on those drivers by field, entry point, and customer segment using SQL in Snowflake.</li>
+                    <li>Turned the analysis into a ranked source hierarchy and formalized it as a scoring function, so ranking sources is systematic instead of a judgment call.</li>
+                    <li>Compared architecture options and recommended a two tier hierarchy with fallback and exception rules.</li>
+                    <li>Sized the NPV impact and evaluated the risks.</li>
+                    <li>On my own initiative, recommended adding identity verification prompts before prefill, tailored to each entry point.</li>
+                    <li>Worked with product, site, and business teams, and presented my findings and recommendations to a VP and a senior business director.</li>
+                </ul>
+            </div>
+        </section>
+
         <section id="project-enlaye" class="page project-detail">
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
@@ -3950,7 +3987,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl', 'project-carla', 'project-ccl'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl', 'project-carla', 'project-ccl'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
