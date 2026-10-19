@@ -2682,7 +2682,7 @@
                 <div class="project-card" data-project="streamlit" tabindex="0" role="button">
                     <div class="project-info">
                         <div class="project-number">03</div>
-                        <h3>Streamlit web app</h3>
+                        <h3>Air quality web app</h3>
                         <p>Data visualization and sustainability analytics</p>
                     </div>
                 </div>
@@ -2812,24 +2812,24 @@
         <section id="project-streamlit" class="page project-detail">
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
-                <h1 class="serif">Streamlit web app</h1>
+                <h1 class="serif">Air quality web app</h1>
                 <p class="project-meta">Data visualization and sustainability analytics</p>
-                <p class="project-description">Web app built with Streamlit for environmental monitoring and sustainability analytics.</p>
+                <p class="project-description">A public web app that turns continuous sensor data from BU classrooms into clear answers for facilities staff: which rooms are poorly ventilated, too hot or too cold, or exposed to particulates.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering"></a>
                 </div>
-                <p class="project-description"><b>Context:</b> I conducted research as one of three undergraduate researchers in the Multimedia Communications Lab at BU. We deployed an environmental monitoring system across 8 campus buildings as part of BU's climate action initiative.</p>
-                <p class="project-description"><b>Skills:</b> Streamlit, Python, CAD, MongoDB, data visualization, web development, sustainability analytics, data analysis.</p>
-                <p class="project-description"><b>Impact:</b> Designed public-facing interface for visualizing real-time environmental data and energy usage, funded by Campus Climate Lab initiative (one of seven funded projects), installed sensors in 20+ classrooms, won Anthony Janetos Climate Action Prize (Boston University).</p>
-                <p class="project-description"><b>Details:</b>
+                <p class="project-description"><b>Context:</b> As one of three undergraduate researchers in BU's Multimedia Communications Lab, I helped deploy sensors that measure CO2, particulates, temperature, humidity, and occupancy in classrooms. Raw readings from 21 sensors are unreadable to a facilities team, so I designed the web app that makes them useful, along with the sensor enclosures. Our partner and main user was BU Operations.</p>
+                <p class="project-description"><b>Skills:</b> Streamlit, Python, Plotly, Matplotlib, CAD, stakeholder interviews, information design, data visualization.</p>
+                <p class="project-description"><b>Impact:</b> Gave BU Operations evidence they could act on: rooms that need more ventilation, rooms where heating and cooling could save energy, and rooms that need air filtering. The project won the Anthony Janetos Climate Action Prize.</p>
+                <p class="project-description"><b>Design process:</b>
                 <ul>
-                    <li>Designed custom sensor enclosures installed in 8 pilot classrooms, scaled to 20+ classrooms analyzing billions of data points.</li>
-                    <li>Architected data pipeline using Python, Numpy, and Pandas to process real-time environmental readings while optimizing our MongoDB schema for fast queries.</li>
-                    <li>Built Streamlit analytics platform where facilities managers can instantly identify current conditions and trends to improve air quality and energy efficiency.</li>
-                    <li>Optimized time-series database with Plotly/Matplotlib visualizations.</li>
-                    <li>Met with campus stakeholders to ensure platform delivered what they needed (e.g., custom date ranges, threshold analysis, multi-sensor comparisons).</li>
-                    <li>Added capability for complex queries and interactive visualizations that translate environmental data into actionable decisions.</li>
+                    <li>Started from who would use it: facilities staff who need to decide what to fix, not researchers exploring data.</li>
+                    <li>Met with Operations to learn the questions they ask, which became the core controls: a custom date range, a metric picker, and comparing many sensors at once.</li>
+                    <li>Plotted every reading against health and comfort thresholds, so a chart answers "is this a problem?" without needing to know what a CO2 reading in ppm means.</li>
+                    <li>Designed summary metrics around exposure, not averages: time above threshold, time occupied, maximum exposure, and time occupied and above threshold, since a bad reading in an empty room matters less than one during class.</li>
+                    <li>Designed the sensor enclosures in CAD so the devices could be mounted in classrooms.</li>
                 </ul>
+                <p class="project-description">For the data pipeline, database design, and findings, see the <a href="#project-ccl">research version of this project</a>.</p>
 
                 <h2 class="project-gallery-title">Project media</h2>
                 <div class="project-media">
@@ -2837,7 +2837,10 @@
                 </div>
                 <div class="project-media-row project-media-row--video-2-3">
                     <div>
-                        <video src="streamlit/demo.mp4" controls></video>
+                        <video id="streamlit-demo" poster="ccl/demo-poster.jpg" controls playsinline preload="none">
+                            <source src="ccl/demo.mp4" type="video/mp4">
+                            <source src="ccl/demo.webm" type="video/webm">
+                        </video>
                     </div>
                     <div>
                         <img src="streamlit/news.png" alt="News coverage">
@@ -3345,7 +3348,8 @@
                 <a href="#research" class="project-back" data-page="research">← Back to research</a>
                 <h1 class="serif">Continuous Indoor Air Quality Assessment for BU Buildings</h1>
                 <p class="project-meta">Multimedia Communications Lab · Sep 2024 to May 2025</p>
-                <p class="project-description">A sensor network and data platform that continuously measures air quality and comfort in BU classrooms, so facilities staff can see which rooms need better ventilation, heating and cooling changes, or air filtering.</p>
+                <p class="project-description">Continuous time series sensing of CO2, PM2.5, temperature, humidity, and occupancy for each room of a campus building, with a data pipeline, time series database, and analytics portal for evaluating ventilation, thermal comfort, and particulate exposure.</p>
+                <p class="project-description">In plain terms: a sensor network that shows facilities staff which classrooms need better ventilation, heating and cooling changes, or air filtering.</p>
 
                 <figure class="hp-hero">
                     <video id="ccl-demo" style="aspect-ratio: 3024 / 1640" poster="ccl/demo-poster.jpg" muted playsinline controls preload="none" aria-label="Demo of the Streamlit air quality portal">
@@ -3356,7 +3360,7 @@
                 </figure>
 
                 <p class="project-description"><b>Context:</b> Campus buildings had no continuous data on air quality or comfort for each room, so facilities couldn't tell whether classrooms were ventilated enough, too hot or too cold, or exposing people to particulates. Our goal was to collect CO2, PM2.5, temperature, humidity, and occupancy data in each room, give facilities evidence to act on, and show people in the room their air quality. I was one of three undergraduate researchers, advised by Prof. Thomas Little, funded by the BU Institute for Global Sustainability with BU Sustainability and the Office of Research, and working with BU Operations as our facilities partner.</p>
-                <p class="project-description"><b>Skills:</b> CAD, IoT sensor deployment, Python (NumPy, Pandas), MongoDB, Streamlit, Plotly, Matplotlib, data cleaning and analysis, metric design, working with a non-technical stakeholder.</p>
+                <p class="project-description"><b>Skills:</b> Python (NumPy, Pandas), time series data pipelines, MongoDB schema design, Streamlit, Plotly, Matplotlib, CAD, IoT sensor deployment, data cleaning, exposure metric design.</p>
                 <p class="project-description"><b>Impact:</b> Turned building conditions nobody could see into evidence facilities could act on: ventilation fixes that affect student health and focus, heating and cooling changes that save energy, and targeted air filtering. The project won the Anthony Janetos Climate Action Prize, and we presented it at the IGS Month of Energy and Sustainability in March 2025.</p>
                 <p class="project-description"><b>System:</b> As a team, we installed 21 sensors across the EPIC building on March 7, 2025. Readings travel over the campus network to a lab server for logging, then to the Streamlit portal for analysis and to live gauge displays for people in the room.</p>
                 <p class="project-description"><b>Details:</b>
@@ -3368,6 +3372,7 @@
                     <li>Designed the metrics it reports, including time above threshold and time occupied and above threshold, which measures how long people were actually exposed.</li>
                     <li>Worked with the team across hardware and software, and with BU Operations as the end user.</li>
                 </ul>
+                <p class="project-description">For how the portal was designed around its users, see the <a href="#project-streamlit">design version of this project</a>.</p>
 
                 <h2 class="project-gallery-title">What the data showed</h2>
                 <figure>
@@ -3539,6 +3544,9 @@
             }
 
             // demo video only loads and plays while its page is open
+            const streamlitDemo = document.getElementById('streamlit-demo');
+            if (streamlitDemo && pageName !== 'project-streamlit') streamlitDemo.pause();
+
             const cclDemo = document.getElementById('ccl-demo');
             if (cclDemo && pageName !== 'project-ccl') cclDemo.pause();
 
