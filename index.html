@@ -2175,6 +2175,19 @@
             background-repeat: no-repeat;
         }
 
+        /* resume password gate; the resume files are AES-GCM encrypted (see tools/encrypt-resume.py) */
+        .resume-gate {
+            max-width: 560px;
+            margin: 2rem auto 0;
+        }
+
+        .resume-gate-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             nav {
@@ -3400,26 +3413,37 @@
             <div class="section-header">
                 <h2 class="serif">resume</h2>
             </div>
-            <div class="resume-switch" role="tablist" aria-label="Resume version">
-                <span class="resume-switch-thumb" aria-hidden="true"></span>
-                <button type="button" class="resume-switch-tab" role="tab" id="resume-tab-pm" aria-controls="resume-panel" aria-selected="true">PM</button>
-                <button type="button" class="resume-switch-tab" role="tab" id="resume-tab-robotics" aria-controls="resume-panel" aria-selected="false" tabindex="-1">Robotics</button>
-                <button type="button" class="resume-switch-tab" role="tab" id="resume-tab-ml" aria-controls="resume-panel" aria-selected="false" tabindex="-1">ML</button>
+            <div class="enlaye-gate resume-gate" id="resume-gate">
+                <form id="resume-gate-form" class="enlaye-gate-form" aria-describedby="resume-gate-error">
+                    <label for="resume-password">Password to view my resume:</label>
+                    <input type="password" id="resume-password" autocomplete="current-password" placeholder="Enter password" required>
+                    <button type="submit" class="btn-unlock">Unlock</button>
+                </form>
+                <p id="resume-gate-error" class="enlaye-gate-error" role="alert"></p>
+                <p class="resume-gate-note">Need the password? Email me at ellenz@bu.edu.</p>
             </div>
-            <div class="resume-viewer-wrap" id="resume-panel" role="tabpanel" aria-labelledby="resume-tab-pm">
-                <div class="resume-stack">
-                    <a class="resume-slide is-current" href="resume/pm.pdf" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng PM Resume.pdf">
-                        <img src="resume/pm.webp" width="1700" height="2200" alt="Ellen Zheng product management resume" decoding="async">
-                    </a>
-                    <a class="resume-slide" href="resume/robotics.pdf" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng Robotics Resume.pdf" style="opacity: 0" aria-hidden="true" tabindex="-1">
-                        <img src="resume/robotics.webp" width="1700" height="2200" alt="Ellen Zheng robotics resume" decoding="async">
-                    </a>
-                    <a class="resume-slide" href="resume/ml.pdf" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng ML Resume.pdf" style="opacity: 0" aria-hidden="true" tabindex="-1">
-                        <img src="resume/ml.webp" width="1700" height="2200" alt="Ellen Zheng machine learning resume" decoding="async">
-                    </a>
+            <div id="resume-content" hidden>
+                <div class="resume-switch" role="tablist" aria-label="Resume version">
+                    <span class="resume-switch-thumb" aria-hidden="true"></span>
+                    <button type="button" class="resume-switch-tab" role="tab" id="resume-tab-pm" aria-controls="resume-panel" aria-selected="true">PM</button>
+                    <button type="button" class="resume-switch-tab" role="tab" id="resume-tab-robotics" aria-controls="resume-panel" aria-selected="false" tabindex="-1">Robotics</button>
+                    <button type="button" class="resume-switch-tab" role="tab" id="resume-tab-ml" aria-controls="resume-panel" aria-selected="false" tabindex="-1">ML</button>
                 </div>
+                <div class="resume-viewer-wrap" id="resume-panel" role="tabpanel" aria-labelledby="resume-tab-pm">
+                    <div class="resume-stack">
+                        <a class="resume-slide is-current" href="#" data-pdf="resume/pm.pdf.enc" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng PM Resume.pdf">
+                            <img data-src="resume/pm.webp.enc" width="1700" height="2200" alt="Ellen Zheng product management resume" decoding="async">
+                        </a>
+                        <a class="resume-slide" href="#" data-pdf="resume/robotics.pdf.enc" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng Robotics Resume.pdf" style="opacity: 0" aria-hidden="true" tabindex="-1">
+                            <img data-src="resume/robotics.webp.enc" width="1700" height="2200" alt="Ellen Zheng robotics resume" decoding="async">
+                        </a>
+                        <a class="resume-slide" href="#" data-pdf="resume/ml.pdf.enc" target="_blank" rel="noopener" title="Open PDF" data-download="Ellen Zheng ML Resume.pdf" style="opacity: 0" aria-hidden="true" tabindex="-1">
+                            <img data-src="resume/ml.webp.enc" width="1700" height="2200" alt="Ellen Zheng machine learning resume" decoding="async">
+                        </a>
+                    </div>
+                </div>
+                <a class="resume-download" id="resume-download" href="#" download="Ellen Zheng PM Resume.pdf">download pdf ↓</a>
             </div>
-            <a class="resume-download" id="resume-download" href="resume/pm.pdf" download="Ellen Zheng PM Resume.pdf">download pdf ↓</a>
         </section>
     </main>
 
@@ -4344,6 +4368,84 @@
                     hit.addEventListener('blur', hide);
                 });
             });
+        })();
+        // resume tab: decrypt the encrypted resume files in the browser once the password is entered
+        (function() {
+            const gate = document.getElementById('resume-gate');
+            if (!gate) return;
+            const form = document.getElementById('resume-gate-form');
+            const input = document.getElementById('resume-password');
+            const errorEl = document.getElementById('resume-gate-error');
+            const content = document.getElementById('resume-content');
+            const button = form.querySelector('button');
+            const download = document.getElementById('resume-download');
+            const SESSION_KEY = 'resume_password';
+
+            async function deriveKey(password) {
+                const { salt, iterations } = await (await fetch('resume/key.json')).json();
+                const saltBytes = new Uint8Array(salt.match(/../g).map(h => parseInt(h, 16)));
+                const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+                return crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt: saltBytes, iterations, hash: 'SHA-256' },
+                    base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+                );
+            }
+
+            // each .enc file is a 12-byte IV followed by the ciphertext and GCM tag
+            async function decryptToUrl(key, url, type) {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('fetch failed');
+                const buf = await res.arrayBuffer();
+                const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: buf.slice(0, 12) }, key, buf.slice(12));
+                return URL.createObjectURL(new Blob([plain], { type }));
+            }
+
+            async function unlock(password) {
+                const key = await deriveKey(password);
+                const slides = [...document.querySelectorAll('.resume-slide')];
+                // the first file doubles as the password check: a wrong key fails GCM authentication
+                const firstImg = slides[0].querySelector('img');
+                firstImg.src = await decryptToUrl(key, firstImg.dataset.src, 'image/webp');
+                await Promise.all(slides.map(async (slide, i) => {
+                    const img = slide.querySelector('img');
+                    if (i > 0) img.src = await decryptToUrl(key, img.dataset.src, 'image/webp');
+                    slide.href = await decryptToUrl(key, slide.dataset.pdf, 'application/pdf');
+                }));
+                const current = document.querySelector('.resume-slide.is-current') || slides[0];
+                download.href = current.getAttribute('href');
+                gate.hidden = true;
+                content.hidden = false;
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const password = input.value;
+                button.disabled = true;
+                button.textContent = 'Unlocking…';
+                errorEl.classList.remove('visible');
+                try {
+                    await unlock(password);
+                    try { sessionStorage.setItem(SESSION_KEY, password); } catch (_) {}
+                    input.value = '';
+                } catch (err) {
+                    errorEl.textContent = err && err.name === 'OperationError'
+                        ? 'Incorrect password.'
+                        : 'Couldn’t load the resume. Please try again.';
+                    errorEl.classList.add('visible');
+                } finally {
+                    button.disabled = false;
+                    button.textContent = 'Unlock';
+                }
+            });
+
+            // stay unlocked for the rest of this browser session
+            let saved = null;
+            try { saved = sessionStorage.getItem(SESSION_KEY); } catch (_) {}
+            if (saved) {
+                unlock(saved).catch(() => {
+                    try { sessionStorage.removeItem(SESSION_KEY); } catch (_) {}
+                });
+            }
         })();
     </script>
 </body>
