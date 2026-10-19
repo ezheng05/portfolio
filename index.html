@@ -4466,10 +4466,14 @@
                     try { sessionStorage.setItem(SESSION_KEY, password); } catch (_) {}
                     input.value = '';
                 } catch (err) {
-                    console.error('resume unlock failed', err);
+                    console.error('resume unlock failed', err, location.href);
+                    // local copies and sandboxed previews can't fetch the encrypted files
+                    const offSite = location.protocol === 'file:' || location.origin === 'null';
                     errorEl.textContent = err && err.name === 'OperationError'
                         ? 'Incorrect password.'
-                        : `Couldn’t load the resume (${err && err.message ? err.message : err}). Please try again.`;
+                        : offSite
+                            ? 'The resume only loads on the live site: ezheng05.github.io/portfolio'
+                            : `Couldn’t load the resume (${err && err.message ? err.message : err} at ${location.origin}). Please try again.`;
                     errorEl.classList.add('visible');
                 } finally {
                     button.disabled = false;
