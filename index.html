@@ -2763,13 +2763,13 @@
                 <p class="project-description"><b>Impact:</b> Showed that one ordinary camera can measure distance accurately enough to run a haptic safety system: after my calibration fix, its typical error is 2.3 cm, small compared to the 30 cm safety margin. That means this kind of driver assistance doesn't need a map of the room made in advance, motion capture, or an expensive depth sensor, so it could work on small, inexpensive robots in places that haven't been mapped.</p>
                 <p class="project-description"><b>Details:</b>
                 <ul>
-                    <li>Built the system end to end in ROS 2 (4 nodes): a depth model estimates obstacle distance from the camera image, a safety filter limits the robot's speed, and the gap between the requested and allowed speed is sent to the stylus as a force. Also built a camera overlay and a force arrow in RViz to inspect the controller frame by frame.</li>
-                    <li>Benchmarked three depth models that work from a single camera image and chose ZoeDepth because it outputs distances in meters. Found that the obstacle detection kept locking onto the floor, and fixed it by excluding the bottom third of the frame.</li>
-                    <li>Checked the depth estimates against a tape measure at 7 distances, which exposed a hidden error in my first (linear) calibration, which had a typical error of 18.7 cm (RMSE). Switching to a quadratic calibration, constrained so a closer object can never read as farther away, cut it to 2.3 cm: about 8x better and close to the IR sensor on the robot (1.5 cm).</li>
-                    <li>Implemented the safety filter (a control barrier function) as a direct formula instead of an optimization problem, so it runs at 20 Hz without a solver, and added a 0.2 s timeout that stops the robot if commands stop arriving.</li>
-                    <li>Debugged the haptic device's C++ driver, which silently dropped force commands and never reset them, and could request about 20 N from a device that peaks around 3.3 N. Patched 3 bugs, added a 0.8 N hard limit, and fixed a unit mismatch (mm vs. m) in my code that made the stylus shake.</li>
-                    <li>Ran a pilot test to decide how strong the force should be: one operator tried forces from 0.05 N up to 0.8 N. At 0.8 N the push was clearly felt but still easy to override, while 0.5 N or less was too weak to work as a warning, so I set the maximum force to 0.8 N.</li>
-                    <li>Tested in stages (synthetic inputs, then recorded data, then a person on the stylus) and found two safety hazards before hardware testing: a docked stylus commanded full speed, and Ctrl-C didn't stop the robot. Fixed them by making the robot move only while the driver holds a button, and by sending a stop command on shutdown.</li>
+                    <li>Built the system end to end in ROS 2: depth estimates from the camera feed a safety filter that limits the robot's speed, and any correction is sent to the stylus as a force.</li>
+                    <li>Compared three depth models, chose ZoeDepth because it outputs distances in meters, and stopped the obstacle detection from locking onto the floor.</li>
+                    <li>Found a hidden calibration error by checking against a tape measure, and cut the typical depth error from 18.7 cm to 2.3 cm (about 8x).</li>
+                    <li>Implemented the safety filter as a direct formula so it runs at 20 Hz, with a timeout that stops the robot if commands stop arriving.</li>
+                    <li>Fixed 3 bugs in the haptic device's C++ driver that dropped force commands or allowed unsafe forces, plus a unit mismatch (mm vs. m) in my code.</li>
+                    <li>Ran a pilot test to set the force level: 0.8 N was clearly felt but easy to override, while 0.5 N or less was too weak.</li>
+                    <li>Caught two safety hazards before hardware testing and fixed them: the robot now moves only while the driver holds a button, and stops when the program exits.</li>
                 </ul>
 
                 <h2 class="project-gallery-title">How it works</h2>
