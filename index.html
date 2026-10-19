@@ -419,32 +419,53 @@
             z-index: 1;
         }
 
-        /* soft accent glow behind the headline, gently pulsing */
+        /* soft accent glow behind the headline: three blurred ovals drift and squish on
+           different cycles, so the combined shape keeps changing like a slow bubble */
         .hero-glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: min(120vw, 880px);
-            aspect-ratio: 1.7;
-            border-radius: 50%;
-            background: radial-gradient(ellipse,
-                color-mix(in srgb, var(--accent) 26%, transparent),
-                color-mix(in srgb, var(--accent) 10%, transparent) 40%,
-                transparent 68%);
-            transform: translate(-50%, -50%);
+            width: min(130vw, 1000px);
+            aspect-ratio: 1.6;
+            transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
-            animation: glow-pulse 4s ease-in-out infinite alternate;
+            animation: glow-drift 24s ease-in-out infinite;
         }
 
-        @keyframes glow-pulse {
-            from {
-                transform: translate(-53%, -46%) scale(0.85);
-                opacity: 0.75;
-            }
-            to {
-                transform: translate(-47%, -54%) scale(1.08);
-                opacity: 1;
-            }
+        .hero-glow span {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(ellipse closest-side,
+                color-mix(in srgb, var(--accent) 22%, transparent),
+                color-mix(in srgb, var(--accent) 9%, transparent) 55%,
+                transparent);
+            will-change: transform;
+        }
+
+        .hero-glow span:nth-child(1) { animation: glow-blob-a 9s ease-in-out infinite alternate; }
+        .hero-glow span:nth-child(2) { animation: glow-blob-b 12s ease-in-out -4s infinite alternate; }
+        .hero-glow span:nth-child(3) { animation: glow-blob-c 15s ease-in-out -9s infinite alternate; }
+
+        @keyframes glow-drift {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-12deg); }
+            33% { transform: translate(-46%, -54%) rotate(-7deg); }
+            66% { transform: translate(-54%, -47%) rotate(-16deg); }
+        }
+
+        @keyframes glow-blob-a {
+            from { transform: translate(-6%, 4%) scale(0.92, 1.06); opacity: 0.85; }
+            to { transform: translate(5%, -3%) scale(1.1, 0.88); opacity: 1; }
+        }
+
+        @keyframes glow-blob-b {
+            from { transform: translate(8%, 6%) rotate(10deg) scale(0.78, 0.9); }
+            to { transform: translate(-5%, -6%) rotate(-8deg) scale(0.98, 0.72); }
+        }
+
+        @keyframes glow-blob-c {
+            from { transform: translate(-4%, -8%) rotate(-14deg) scale(0.72, 0.92); }
+            to { transform: translate(7%, 7%) rotate(12deg) scale(0.9, 0.66); }
         }
 
         .hero h1 .word {
@@ -1873,7 +1894,7 @@
         <!-- Home Page -->
         <section id="home" class="page active" aria-labelledby="hero-heading">
             <div class="hero">
-                <div class="hero-glow" aria-hidden="true"></div>
+                <div class="hero-glow" aria-hidden="true"><span></span><span></span><span></span></div>
                 <div class="hero-content">
                     <h1 id="hero-heading" class="serif"><span class="word">hi,</span> <span class="word">i&rsquo;m</span> <span class="word">ellen.</span></h1>
                     <p class="hero-subtitle">I like people! And technology.<br>And using technology to make things (or vice versa). Things that look and feel delightful. And help people!</p>
