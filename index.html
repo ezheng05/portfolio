@@ -2478,10 +2478,12 @@
                 <p class="project-description"><b>Results:</b> Reduced depth error about 8x (from 18.7 to 2.3 cm RMSE), close to the robot's built-in IR sensor (1.5 cm RMSE). In a pilot test with one operator, a 0.8 N force was clearly felt but still easy to override, while 0.5 N or less was too weak to work as a warning.</p>
                 <p class="project-description"><b>Details:</b>
                 <ul>
-                    <li>Built the ROS 2 pipeline end to end: a depth model estimates obstacle distance from the camera image, a safety filter limits the robot's speed, and the gap between the requested and allowed speed is sent to the stylus as a force.</li>
-                    <li>Implemented the safety filter (a control barrier function) with a closed-form solution, so it runs at 20 Hz without an optimization solver.</li>
-                    <li>Fixed 3 bugs in the haptic device's C++ driver, plus a unit mismatch (mm vs. m) in my code that made the stylus shake.</li>
-                    <li>Found two safety hazards before hardware testing (a docked stylus commanded full speed, and Ctrl-C didn't stop the robot) and fixed them with a dead-man switch and a stop command on shutdown.</li>
+                    <li>Built the system end to end in ROS 2 (4 nodes): a depth model estimates obstacle distance from the camera image, a safety filter limits the robot's speed, and the gap between the requested and allowed speed is sent to the stylus as a force. Also built a camera overlay and a force arrow in RViz to inspect the controller frame by frame.</li>
+                    <li>Benchmarked three single-camera depth models and chose ZoeDepth because it outputs real-world distances. Found that the nearest-obstacle detection kept locking onto the floor, and fixed it by excluding the bottom third of the frame.</li>
+                    <li>Designed a tape-measure test at 7 distances that exposed a hidden calibration error, then replaced the linear calibration with a quadratic one, constrained so a closer object can never read as farther away.</li>
+                    <li>Implemented the safety filter (a control barrier function) with a closed-form solution, so it runs at 20 Hz without an optimization solver, and added a 0.2 s timeout that stops the robot if commands stop arriving.</li>
+                    <li>Debugged the haptic device's C++ driver, which silently dropped force commands and never reset them, and could request about 20 N from a device that peaks around 3.3 N. Patched 3 bugs, added a 0.8 N hard limit, and fixed a unit mismatch (mm vs. m) in my code that made the stylus shake.</li>
+                    <li>Tested in stages (synthetic inputs, then recorded data, then a person on the stylus) and found two safety hazards before hardware testing: a docked stylus commanded full speed, and Ctrl-C didn't stop the robot. Fixed them with a dead-man switch and a stop command on shutdown.</li>
                 </ul>
 
                 <h2 class="project-gallery-title">Try the safety filter</h2>
