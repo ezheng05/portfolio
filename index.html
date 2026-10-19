@@ -3185,7 +3185,7 @@
                     <li>Trained 20 policies with MAPPO and IPPO kept identical except for the critic, so any difference comes from the training method (5 seeds each, teams of 3 and 2), and reported means with 95% confidence intervals.</li>
                     <li>Built a test harness that makes one robot fail at a chosen moment, as a stall or a vanish, with every robot taking a turn and the same starting layouts across conditions.</li>
                     <li>Measured progress toward goals, success, and collisions instead of reward, after finding that the simulator only gives a finishing bonus when every robot reaches its goal, which a failed robot never can.</li>
-                    <li>Compare each failure against the full team and against a team of 2 trained from scratch, the best a team could do after a loss, so the gap shows what the failure itself costs.</li>
+                    <li>Set up the baselines: each failure is compared against the full team and against a team of 2 trained from scratch (the best possible after a loss), so the gap shows what the failure itself costs.</li>
                     <li>Searched for prior work: related papers crash agents mid task or compare training methods in grid worlds, but I haven't found a matched MAPPO vs. IPPO comparison under teammate loss in continuous robot navigation.</li>
                 </ul>
 
