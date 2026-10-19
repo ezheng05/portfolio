@@ -429,7 +429,7 @@
             aspect-ratio: 1.6;
             transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
-            animation: glow-drift 20s ease-in-out infinite, glow-breathe 5s ease-in-out infinite alternate;
+            animation: glow-drift 15s ease-in-out infinite, glow-breathe 4s ease-in-out infinite alternate;
         }
 
         .hero-glow span {
@@ -447,11 +447,11 @@
         .hero-glow span:nth-child(4) { inset: 12% 48% 22% 2%; }
         .hero-glow span:nth-child(5) { inset: 4% 2% 38% 50%; }
 
-        .hero-glow span:nth-child(1) { animation: glow-blob-a 9s ease-in-out infinite alternate; }
-        .hero-glow span:nth-child(2) { animation: glow-blob-b 12s ease-in-out -4s infinite alternate; }
-        .hero-glow span:nth-child(3) { animation: glow-blob-c 15s ease-in-out -9s infinite alternate; }
-        .hero-glow span:nth-child(4) { animation: glow-blob-d 8s ease-in-out -2s infinite alternate; }
-        .hero-glow span:nth-child(5) { animation: glow-blob-e 11s ease-in-out -6s infinite alternate; }
+        .hero-glow span:nth-child(1) { animation: glow-blob-a 7s ease-in-out infinite alternate; }
+        .hero-glow span:nth-child(2) { animation: glow-blob-b 9s ease-in-out -3s infinite alternate; }
+        .hero-glow span:nth-child(3) { animation: glow-blob-c 11s ease-in-out -7s infinite alternate; }
+        .hero-glow span:nth-child(4) { animation: glow-blob-d 6s ease-in-out -2s infinite alternate; }
+        .hero-glow span:nth-child(5) { animation: glow-blob-e 8s ease-in-out -4s infinite alternate; }
 
         @keyframes glow-drift {
             0%, 100% { transform: translate(-50%, -50%) rotate(-12deg); }
@@ -752,6 +752,12 @@
             gap: 1.5rem;
             max-width: 1400px;
             margin: 4rem auto 0;
+        }
+
+        /* classes and skills share the top row; awards and favorites run full width below */
+        .about-card[aria-labelledby="card-awards"],
+        .about-card[aria-labelledby="card-favorites"] {
+            grid-column: 1 / -1;
         }
 
         .about-card {
