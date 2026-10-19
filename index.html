@@ -1883,6 +1883,223 @@
             }
         }
 
+        /* MARL agent-failure research page (.ml); layout reuses the .hp page styles */
+        .project-card[data-project="marl"] {
+            background-image: url('marl/card.svg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .ml {
+            --ml-r1: #4b7bb5;
+            --ml-r2: #c58a2b;
+            --ml-r3: #3f8f6b;
+            --ml-failed: #9b958d;
+            --ml-base: #8a8580;
+        }
+
+        [data-theme="dark"] .ml {
+            --ml-r1: #7fa8dc;
+            --ml-r2: #e0ac55;
+            --ml-r3: #6cc28f;
+            --ml-failed: #6e6e6e;
+            --ml-base: #6e6e6e;
+        }
+
+        .ml-sim svg,
+        .ml-chart svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ml-sim {
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .ml-sim text,
+        .ml-chart text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            fill: var(--text-secondary);
+        }
+
+        .ml-sim .ml-robot-num {
+            font-size: 11px;
+            font-weight: 600;
+            fill: #fff;
+        }
+
+        .ml-sim .ml-tag {
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .ml-trail {
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.35;
+        }
+
+        .ml-sense {
+            fill: none;
+            stroke-width: 1;
+            stroke-dasharray: 2 4;
+            opacity: 0.55;
+        }
+
+        .ml-goal {
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .ml-modes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: min(420px, 100%);
+            margin: 0 auto;
+            padding: 4px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+        }
+
+        .ml-modes button {
+            padding: 0.6rem 0.5rem;
+            background: none;
+            border: none;
+            border-radius: 999px;
+            color: var(--text-secondary);
+            font: inherit;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        .ml-modes button:hover {
+            color: var(--text-primary);
+        }
+
+        .ml-modes button[aria-pressed="true"] {
+            background: color-mix(in srgb, var(--accent) 22%, var(--bg-primary));
+            color: var(--text-primary);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .ml-modes button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .ml-mode-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            min-height: 3em;
+        }
+
+        /* collision chart */
+        .ml-chart {
+            position: relative;
+        }
+
+        .ml-grid { stroke: var(--border); stroke-width: 1; }
+        .ml-axis { stroke: var(--text-secondary); stroke-width: 1; opacity: 0.6; }
+        .ml-bar-ippo { fill: var(--ml-base); }
+        .ml-bar-mappo { fill: var(--accent); }
+        .ml-ci { stroke: var(--text-primary); stroke-width: 1.5; }
+        .ml-chart .ml-val { fill: var(--text-primary); font-weight: 600; font-size: 11.5px; }
+        .ml-chart .ml-group { fill: var(--text-primary); font-size: 12px; font-weight: 500; }
+
+        .ml-bar-hit {
+            fill: transparent;
+            cursor: default;
+            outline: none;
+        }
+
+        .ml-bar-hit:focus-visible {
+            stroke: var(--accent);
+            stroke-width: 2;
+        }
+
+        .ml-legend {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .ml-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .ml-legend i {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .ml-tip {
+            position: absolute;
+            pointer-events: none;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translate(-50%, -100%);
+            transition: opacity 0.15s ease;
+        }
+
+        .ml-tip.visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 700px) {
+            .ml-sim text,
+            .ml-sim .ml-robot-num {
+                font-size: 18px;
+            }
+
+            .ml-sim .ml-tag {
+                font-size: 18px;
+            }
+
+            .ml-chart text {
+                font-size: 15px;
+            }
+
+            .ml-chart .ml-val,
+            .ml-chart .ml-group {
+                font-size: 15px;
+            }
+
+            .ml-modes button {
+                padding: 0.6rem 0.25rem;
+                letter-spacing: 0.06em;
+                white-space: nowrap;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             nav {
@@ -2685,6 +2902,13 @@
                         <p>BU Robotics Lab · ROS 2 · monocular depth · haptics</p>
                     </div>
                 </div>
+                <div class="project-card" data-project="marl" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">02</div>
+                        <h3>When a Robot Teammate Fails</h3>
+                        <p>Kulis Lab · MARL · PyTorch · robot teams</p>
+                    </div>
+                </div>
             </div>
             <!--
             <div class="research-layout">
@@ -2918,6 +3142,71 @@
                 </figure>
 
                 <p class="project-description"><b>Next:</b> So far this has run on recorded camera data with a real person on the stylus. Next is testing on the live robot, and letting it steer around obstacles instead of only braking.</p>
+            </div>
+        </section>
+
+        <section id="project-marl" class="page project-detail" data-parent="research">
+            <div class="project-page hp ml">
+                <a href="#research" class="project-back" data-page="research">← Back to research</a>
+                <h1 class="serif">When a Robot Teammate Fails</h1>
+                <p class="project-meta">Kulis Lab · Sep 2026 to present</p>
+                <p class="project-description">When one robot in a team fails partway through a task, do the others fall apart? I'm testing whether the way a robot team is trained makes it more fragile when it loses a teammate.</p>
+
+                <div class="hp-widget">
+                    <div class="ml-sim">
+                        <svg id="ml-sim" viewBox="0 0 680 280" role="img" aria-label="Three robots driving to their goals while robot 2 fails partway through">
+                            <defs>
+                                <pattern id="ml-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle class="hp-grid-dot" cx="10" cy="10" r="1"/></pattern>
+                            </defs>
+                            <rect class="hp-sketch-bg" width="680" height="280"/>
+                            <rect width="680" height="280" fill="url(#ml-grid)"/>
+                            <g id="ml-goals"></g>
+                            <g id="ml-trails"></g>
+                            <g id="ml-robots"></g>
+                        </svg>
+                    </div>
+                    <div class="ml-modes" role="group" aria-label="Failure mode">
+                        <button type="button" data-mode="none" aria-pressed="true">No failure</button>
+                        <button type="button" data-mode="stall" aria-pressed="false">Stall</button>
+                        <button type="button" data-mode="vanish" aria-pressed="false">Vanish</button>
+                    </div>
+                    <p class="ml-mode-note" id="ml-mode-note" aria-live="polite"></p>
+                    <p class="hp-note">An illustration of the two failure modes I test, not experimental results.</p>
+                </div>
+
+                <p class="project-description"><b>Context:</b> Most research on teams of learning robots (multi-agent reinforcement learning, or MARL) assumes the team stays the same for the whole task, but real robots break, run out of battery, or drop off the network. I'm comparing two standard ways to train a team: MAPPO, where a shared critic, like a coach, sees the whole team during training, and IPPO, where each robot learns on its own. In both, each robot acts only on its own sensors once it's running. My hypothesis is that the shared critic teaches robots to rely on each other more, so MAPPO teams will cope worse when a teammate fails. I'm advised by Prof. Brian Kulis, and I'm aiming for a workshop paper by the end of this school year.</p>
+                <p class="project-description"><b>Skills:</b> Python, PyTorch, multi-agent reinforcement learning (MAPPO, IPPO, PPO), BenchMARL, TorchRL, VMAS, Weights &amp; Biases, GPU cluster batch jobs (BU SCC), experimental design, statistics (random seeds, 95% confidence intervals).</p>
+                <p class="project-description"><b>Impact:</b> A robot fleet that breaks down when one unit fails can't be trusted in warehouses, search and rescue, or delivery. MAPPO is the default method for training robot teams, so if it turns out to be more fragile when a teammate is lost, that changes which method people should use on real robots. Very little work like this has been tested on physical robots, and the lab's robots make that possible later.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Chose the question after comparing several research directions for robot teams on novelty, what's feasible in a year, and potential for tests on real robots.</li>
+                    <li>Set up GPU training on BU's Shared Computing Cluster from scratch, with reproducible batch job scripts.</li>
+                    <li>Trained 20 policies (MAPPO and IPPO, 5 random seeds each, on teams of 3 and teams of 2) and wrote a script that reports means with 95% confidence intervals.</li>
+                    <li>Built a test harness that makes one robot fail at a chosen moment, as a stall or a vanish, with every robot taking a turn and the same starting layouts across conditions.</li>
+                    <li>Measured progress toward goals, success, and collisions instead of reward, after finding that the simulator only gives a finishing bonus when every robot reaches its goal, which a failed robot never can.</li>
+                    <li>Trained teams of 2 from scratch as a reference for the best a team could do after losing a member.</li>
+                    <li>Searched for prior work: related papers crash agents mid task or compare training methods in grid worlds, but I haven't found a matched MAPPO vs. IPPO comparison under teammate loss in continuous robot navigation.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">Early results</h2>
+                <p class="project-description">Both methods reach their goals about equally well: their scores overlap within the confidence intervals. But MAPPO robots collide about 2 to 3.7 times as often as IPPO robots, at both team sizes. That suggests the team trained with a shared critic already coordinates more tightly and takes more risks, before any robot fails. These numbers are preliminary and come from training logs, while the robots were still exploring.</p>
+                <div class="hp-widget">
+                    <div class="ml-legend" aria-hidden="true"><span><i style="background: var(--ml-base)"></i>IPPO</span><span><i style="background: var(--accent)"></i>MAPPO</span></div>
+                    <div class="ml-chart" id="ml-chart">
+                        <svg viewBox="0 0 640 270" role="img" aria-labelledby="ml-chart-desc">
+                            <desc id="ml-chart-desc">Collision penalty per step. Teams of 3: IPPO 0.6, MAPPO 2.2. Teams of 2: IPPO 0.8, MAPPO 1.5 (times 10 to the minus 3).</desc>
+                            <g id="ml-chart-plot"></g>
+                        </svg>
+                        <div class="ml-tip" id="ml-tip" role="status"></div>
+                    </div>
+                    <p class="hp-note">Collision penalty per step (lower is better), mean with 95% confidence interval over 5 seeds, from training logs.</p>
+                </div>
+                <p class="project-description">Teams of 2 trained from scratch score about the same as teams of 3, because each robot has its own goal. So any drop after a failure will come from the surviving robots adapting badly, not from the task getting harder.</p>
+
+                <h2 class="project-gallery-title">Training longer made it worse</h2>
+                <p class="project-description">My first full run went for 500 training iterations. The team learned the task in about 20 iterations and held a score near 1.0. Then, after iteration 300, collisions rose about 15 times and the score fell from 1.0 to 0.3. A second seed started drifting the same way around iteration 176. So "train until it stops improving" was the wrong rule. I capped training at 200 iterations, saved a checkpoint every 20, and kept the one with the best evaluation score, using the same rule for every run so nothing is hand picked. It also showed me that collision rate catches problems the reward curve hides, so it became a core metric.</p>
+
+                <p class="project-description"><b>Next:</b> Run the failure tests on all 20 trained policies, with both failure modes and several failure times, and compare how much each method drops relative to its own full team score. After that, I'll try training with random robot dropout, scenarios where survivors must cover a lost robot's work, and eventually tests on the lab's physical robots.</p>
             </div>
         </section>
 
@@ -3334,7 +3623,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
@@ -3671,6 +3960,199 @@
             dIn.addEventListener('input', update);
             vIn.addEventListener('input', update);
             draw();
+        })();
+        // marl page: failure-mode illustration and collision chart
+        (function() {
+            const page = document.getElementById('project-marl');
+            if (!page) return;
+            const NS = 'http://www.w3.org/2000/svg';
+            const make = (tag, attrs, parent) => {
+                const n = document.createElementNS(NS, tag);
+                for (const k in attrs) n.setAttribute(k, attrs[k]);
+                if (parent) parent.appendChild(n);
+                return n;
+            };
+
+            // illustration: a tiny steering sim; robot 2 fails at FAIL_AT
+            const sim = document.getElementById('ml-sim');
+            const goalsG = document.getElementById('ml-goals');
+            const trailsG = document.getElementById('ml-trails');
+            const robotsG = document.getElementById('ml-robots');
+            const note = document.getElementById('ml-mode-note');
+            const SPEED = 1.5, FAIL_AT = 78, END_AT = 480, R_SENSE = 44;
+            // robot 2 crosses the middle top to bottom, so when it fails it sits in the others' way
+            const defs = [
+                { n: 1, color: 'var(--ml-r1)', start: [60, 62], goal: [600, 218] },
+                { n: 2, color: 'var(--ml-r2)', start: [340, 24], goal: [340, 252] },
+                { n: 3, color: 'var(--ml-r3)', start: [60, 218], goal: [600, 62] }
+            ];
+            const notes = {
+                none: 'All three robots reach their goals, steering around each other.',
+                stall: 'Robot 2 freezes. Its teammates can still sense it and have to steer around it.',
+                vanish: 'Robot 2 disappears. Its teammates stop sensing it, as if it were never there.'
+            };
+            let mode = 'none';
+            let robots, frame, raf = null, visible = false;
+
+            defs.forEach(d => {
+                make('circle', { class: 'ml-goal', cx: d.goal[0], cy: d.goal[1], r: 13, style: `stroke: ${d.color}` }, goalsG);
+                make('text', { x: d.goal[0] + 20, y: d.goal[1] + 4 }, goalsG).textContent = `goal ${d.n}`;
+            });
+
+            const els = defs.map(d => {
+                const trail = make('polyline', { class: 'ml-trail', style: `stroke: ${d.color}` }, trailsG);
+                const g = make('g', {}, robotsG);
+                const sense = make('circle', { class: 'ml-sense', r: R_SENSE, style: `stroke: ${d.color}` }, g);
+                const body = make('circle', { r: 11 }, g);
+                const num = make('text', { class: 'ml-robot-num', 'text-anchor': 'middle', y: 4 }, g);
+                num.textContent = d.n;
+                const tag = make('text', { class: 'ml-tag', 'text-anchor': 'middle', y: 30 }, g);
+                return { trail, g, sense, body, num, tag };
+            });
+
+            function reset() {
+                frame = 0;
+                robots = defs.map(d => ({ x: d.start[0], y: d.start[1], done: false, failed: false, path: [] }));
+            }
+
+            function step() {
+                frame++;
+                const failing = mode !== 'none' && frame >= FAIL_AT;
+                robots[1].failed = failing;
+                robots.forEach((r, i) => {
+                    if (r.done || (i === 1 && failing)) return;
+                    const d = defs[i];
+                    let dx = d.goal[0] - r.x, dy = d.goal[1] - r.y;
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < 3) { r.done = true; return; }
+                    let vx = dx / dist * SPEED, vy = dy / dist * SPEED;
+                    robots.forEach((o, j) => {
+                        if (j === i) return;
+                        if (j === 1 && failing && mode === 'vanish') return;
+                        const ox = r.x - o.x, oy = r.y - o.y;
+                        const od = Math.hypot(ox, oy);
+                        if (od > 0 && od < R_SENSE) {
+                            const push = (R_SENSE - od) / R_SENSE * 1.6;
+                            // push away plus a sideways nudge so robots slide past instead of stalling head on
+                            vx += (ox / od - oy / od * 0.6) * push;
+                            vy += (oy / od + ox / od * 0.6) * push;
+                        }
+                    });
+                    const v = Math.hypot(vx, vy), cap = SPEED * 1.2;
+                    if (v > cap) { vx *= cap / v; vy *= cap / v; }
+                    r.x += vx;
+                    r.y += vy;
+                    if (frame % 3 === 0) r.path.push(`${r.x.toFixed(1)},${r.y.toFixed(1)}`);
+                });
+            }
+
+            function draw() {
+                robots.forEach((r, i) => {
+                    const e = els[i], d = defs[i];
+                    e.g.setAttribute('transform', `translate(${r.x}, ${r.y})`);
+                    e.trail.setAttribute('points', [`${d.start[0]},${d.start[1]}`, ...r.path, `${r.x},${r.y}`].join(' '));
+                    let color = d.color, bodyOpacity = 1, dashed = false, tag = '';
+                    if (r.failed && mode === 'stall') { color = 'var(--ml-failed)'; tag = 'stalled'; }
+                    if (r.failed && mode === 'vanish') {
+                        bodyOpacity = Math.max(0, 1 - (frame - FAIL_AT) / 45);
+                        dashed = true;
+                        tag = bodyOpacity > 0 ? 'vanished' : '';
+                    }
+                    e.body.style.fill = dashed ? 'none' : color;
+                    e.body.style.stroke = dashed ? d.color : 'none';
+                    e.body.style.strokeDasharray = dashed ? '3 3' : '';
+                    e.body.style.strokeWidth = dashed ? 1.5 : 0;
+                    e.g.style.opacity = bodyOpacity;
+                    e.num.style.fill = dashed ? d.color : '#fff';
+                    e.sense.style.display = r.done || (r.failed && mode === 'vanish') ? 'none' : '';
+                    e.tag.textContent = tag;
+                    e.tag.style.fill = r.failed && mode === 'stall' ? 'var(--text-secondary)' : d.color;
+                    e.trail.style.opacity = r.failed && mode === 'vanish' ? 0.12 : '';
+                });
+            }
+
+            function loop() {
+                step();
+                draw();
+                if (frame > END_AT) reset();
+                raf = visible ? requestAnimationFrame(loop) : null;
+            }
+
+            function start() {
+                if (reducedMotion.matches) {
+                    reset();
+                    while (frame < FAIL_AT + 90) step();
+                    draw();
+                    return;
+                }
+                if (!raf && visible) raf = requestAnimationFrame(loop);
+            }
+
+            function setMode(m) {
+                mode = m;
+                page.querySelectorAll('.ml-modes button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === m));
+                note.textContent = notes[m];
+                reset();
+                draw();
+                start();
+            }
+
+            page.querySelectorAll('.ml-modes button').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+
+            // only animate while the illustration is on screen
+            new IntersectionObserver(entries => {
+                visible = entries[0].isIntersecting;
+                if (visible) start();
+            }).observe(sim);
+
+            setMode('none');
+
+            // chart: grouped bars with 95% CI whiskers, values x 10^-3
+            const plot = document.getElementById('ml-chart-plot');
+            const tip = document.getElementById('ml-tip');
+            const chartBox = document.getElementById('ml-chart');
+            const X0 = 64, X1 = 620, Y0 = 220, YTOP = 30, YMAX = 3.2;
+            const y = v => Y0 - v / YMAX * (Y0 - YTOP);
+            [0, 1, 2, 3].forEach(t => {
+                make('line', { class: t === 0 ? 'ml-axis' : 'ml-grid', x1: X0, x2: X1, y1: y(t), y2: y(t) }, plot);
+                make('text', { x: X0 - 10, y: y(t) + 4, 'text-anchor': 'end' }, plot).textContent = t.toFixed(1);
+            });
+            make('text', { x: X0 - 10, y: 16, 'text-anchor': 'end' }, plot).textContent = '×10⁻³';
+            const groups = [
+                { label: 'Teams of 3 robots', cx: 210, bars: [['IPPO', 0.6, 0.1], ['MAPPO', 2.2, 0.8]] },
+                { label: 'Teams of 2 robots', cx: 470, bars: [['IPPO', 0.8, 0.2], ['MAPPO', 1.5, 0.3]] }
+            ];
+            const W = 64;
+            groups.forEach(g => {
+                make('text', { class: 'ml-group', x: g.cx, y: Y0 + 26, 'text-anchor': 'middle' }, plot).textContent = g.label;
+                g.bars.forEach(([name, mean, ci], k) => {
+                    const x = k === 0 ? g.cx - W - 1 : g.cx + 1;
+                    const top = y(mean), r = 4;
+                    make('path', {
+                        class: name === 'IPPO' ? 'ml-bar-ippo' : 'ml-bar-mappo',
+                        d: `M${x},${Y0} L${x},${top + r} Q${x},${top} ${x + r},${top} L${x + W - r},${top} Q${x + W},${top} ${x + W},${top + r} L${x + W},${Y0} Z`
+                    }, plot);
+                    const cx = x + W / 2, hi = y(mean + ci), lo = y(mean - ci);
+                    make('line', { class: 'ml-ci', x1: cx, x2: cx, y1: hi, y2: lo }, plot);
+                    make('line', { class: 'ml-ci', x1: cx - 6, x2: cx + 6, y1: hi, y2: hi }, plot);
+                    make('line', { class: 'ml-ci', x1: cx - 6, x2: cx + 6, y1: lo, y2: lo }, plot);
+                    make('text', { class: 'ml-val', x: cx, y: hi - 8, 'text-anchor': 'middle' }, plot).textContent = mean.toFixed(1);
+                    const hit = make('rect', { class: 'ml-bar-hit', x, y: YTOP, width: W, height: Y0 - YTOP, tabindex: 0, 'aria-label': `${g.label}, ${name}: ${mean} ± ${ci}` }, plot);
+                    const show = () => {
+                        const box = chartBox.getBoundingClientRect(), svgBox = plot.ownerSVGElement.getBoundingClientRect();
+                        const scale = svgBox.width / 640;
+                        tip.innerHTML = `<b>${name}</b>, ${g.label.toLowerCase()}<br>${mean.toFixed(1)} ± ${ci.toFixed(1)} ×10⁻³ per step`;
+                        tip.style.left = `${svgBox.left - box.left + cx * scale}px`;
+                        tip.style.top = `${svgBox.top - box.top + hi * scale - 30}px`;
+                        tip.classList.add('visible');
+                    };
+                    const hide = () => tip.classList.remove('visible');
+                    hit.addEventListener('mouseenter', show);
+                    hit.addEventListener('focus', show);
+                    hit.addEventListener('mouseleave', hide);
+                    hit.addEventListener('blur', hide);
+                });
+            });
         })();
     </script>
 </body>

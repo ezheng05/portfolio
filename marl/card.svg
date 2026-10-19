@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1.3" fill="#4a4a4a" opacity="0.18"/></pattern>
+  </defs>
+  <rect width="900" height="560" fill="#ebe6de"/>
+  <rect width="900" height="560" fill="url(#g)"/>
+  <g fill="none" stroke-width="3" stroke-linecap="round" opacity="0.45">
+    <path d="M110 90 C 300 100, 420 200, 560 250 S 760 300, 800 300" stroke="#4b7bb5"/>
+    <path d="M110 180 C 220 182, 300 186, 380 190" stroke="#c58a2b" stroke-dasharray="2 9"/>
+    <path d="M110 280 C 280 270, 330 150, 470 120 S 720 90, 800 90" stroke="#3f8f6b"/>
+  </g>
+  <g fill="none" stroke-width="3">
+    <circle cx="800" cy="300" r="16" stroke="#4b7bb5"/>
+    <circle cx="800" cy="190" r="16" stroke="#c58a2b" opacity="0.6"/>
+    <circle cx="800" cy="90" r="16" stroke="#3f8f6b"/>
+  </g>
+  <circle cx="560" cy="250" r="54" fill="#4b7bb5" opacity="0.08"/>
+  <circle cx="560" cy="250" r="20" fill="#4b7bb5"/>
+  <circle cx="380" cy="190" r="20" fill="#9b958d"/>
+  <path d="M372 182 L388 198 M388 182 L372 198" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="470" cy="120" r="54" fill="#3f8f6b" opacity="0.08"/>
+  <circle cx="470" cy="120" r="20" fill="#3f8f6b"/>
+</svg>
