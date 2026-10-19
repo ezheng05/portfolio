@@ -2167,6 +2167,14 @@
             }
         }
 
+        /* indoor air quality research page; layout reuses the .hp page styles */
+        .project-card[data-project="ccl"] {
+            background-image: url('ccl/card.jpg');
+            background-size: cover;
+            background-position: center 35%;
+            background-repeat: no-repeat;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             nav {
@@ -2983,6 +2991,13 @@
                         <p>EC518 Robot Learning · PyTorch · CARLA · DAgger</p>
                     </div>
                 </div>
+                <div class="project-card" data-project="ccl" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">04</div>
+                        <h3>Continuous Indoor Air Quality Assessment</h3>
+                        <p>Multimedia Communications Lab · IoT · MongoDB · Streamlit</p>
+                    </div>
+                </div>
             </div>
             <!--
             <div class="research-layout">
@@ -3325,6 +3340,56 @@
             </div>
         </section>
 
+        <section id="project-ccl" class="page project-detail" data-parent="research">
+            <div class="project-page hp">
+                <a href="#research" class="project-back" data-page="research">← Back to research</a>
+                <h1 class="serif">Continuous Indoor Air Quality Assessment for BU Buildings</h1>
+                <p class="project-meta">Multimedia Communications Lab · Sep 2024 to May 2025</p>
+                <p class="project-description">A sensor network and data platform that continuously measures air quality and comfort in BU classrooms, so facilities staff can see which rooms need better ventilation, heating and cooling changes, or air filtering.</p>
+
+                <figure class="hp-hero">
+                    <video id="ccl-demo" style="aspect-ratio: 3024 / 1640" poster="ccl/demo-poster.jpg" muted playsinline controls preload="none" aria-label="Demo of the Streamlit air quality portal">
+                        <source src="ccl/demo.mp4" type="video/mp4">
+                        <source src="ccl/demo.webm" type="video/webm">
+                    </video>
+                    <figcaption>The analytics portal I built: pick a date range, a metric, and sensors, and see readings against health and comfort thresholds.</figcaption>
+                </figure>
+
+                <p class="project-description"><b>Context:</b> Campus buildings had no continuous data on air quality or comfort for each room, so facilities couldn't tell whether classrooms were ventilated enough, too hot or too cold, or exposing people to particulates. Our goal was to collect CO2, PM2.5, temperature, humidity, and occupancy data in each room, give facilities evidence to act on, and show people in the room their air quality. I was one of three undergraduate researchers, advised by Prof. Thomas Little, funded by the BU Institute for Global Sustainability with BU Sustainability and the Office of Research, and working with BU Operations as our facilities partner.</p>
+                <p class="project-description"><b>Skills:</b> CAD, IoT sensor deployment, Python (NumPy, Pandas), MongoDB, Streamlit, Plotly, Matplotlib, data cleaning and analysis, metric design, working with a non-technical stakeholder.</p>
+                <p class="project-description"><b>Impact:</b> Turned building conditions nobody could see into evidence facilities could act on: ventilation fixes that affect student health and focus, heating and cooling changes that save energy, and targeted air filtering. The project won the Anthony Janetos Climate Action Prize, and we presented it at the IGS Month of Energy and Sustainability in March 2025.</p>
+                <p class="project-description"><b>System:</b> As a team, we installed 21 sensors across the EPIC building on March 7, 2025. Readings travel over the campus network to a lab server for logging, then to the Streamlit portal for analysis and to live gauge displays for people in the room.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Designed the sensor enclosures in CAD so the devices could be mounted and deployed in classrooms.</li>
+                    <li>Built a Python pipeline (NumPy, Pandas) that ingests, cleans, and analyzes the sensor streams, to study how occupancy, airflow, and building systems affect air quality and energy use.</li>
+                    <li>Designed a MongoDB schema with two collections, optimized for querying time series data, and automated data collection.</li>
+                    <li>Built the public Streamlit portal, which queries the lab server and plots readings against health and comfort thresholds for any date range, metric, and set of sensors.</li>
+                    <li>Designed the metrics it reports, including time above threshold and time occupied and above threshold, which measures how long people were actually exposed.</li>
+                    <li>Worked with the team across hardware and software, and with BU Operations as the end user.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">What the data showed</h2>
+                <figure>
+                    <div class="hp-figure-img"><img src="ccl/co2.png" alt="CO2 readings from about 20 sensors in the EPIC building over two days, with many rooms rising well above the 1000 ppm threshold during class hours, some peaking near 5000 ppm" loading="lazy"></div>
+                    <figcaption>CO2 across the EPIC building, March 17 to 19, 2025, with thresholds marked.</figcaption>
+                </figure>
+                <ul>
+                    <li><b>CO2:</b> levels on the 2nd floor pointed to insufficient ventilation, and CO2 from one class often wasn't cleared before the next class or even the next day.</li>
+                    <li><b>Temperature:</b> several classrooms ran above the comfort range while others were over chilled, two separate chances to save energy.</li>
+                    <li><b>PM2.5:</b> rooms 201-1, 201-2, and 102 had episodic particulate spikes, making them candidates for local air filtering.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">Sensor hardware</h2>
+                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0; margin-bottom: 2.5rem;">
+                    <div class="gallery-item"><img src="ccl/enclosure-cad.jpg" alt="CAD model of the sensor enclosure, an open box with mounting slots and openings for airflow" loading="lazy"></div>
+                    <div class="gallery-item"><img src="ccl/sensors.jpg" alt="The sensor units in their enclosures, laid out before installation" loading="lazy"></div>
+                </div>
+
+                <p class="project-description"><b>Next:</b> When I finished in May 2025, the project was moving toward measuring how long people are exposed to hazards, adding VOC sensors, and presenting results to BU Operations.</p>
+            </div>
+        </section>
+
         <!-- Resume Page -->
         <section id="resume" class="page">
             <div class="section-header">
@@ -3474,6 +3539,9 @@
             }
 
             // demo video only loads and plays while its page is open
+            const cclDemo = document.getElementById('ccl-demo');
+            if (cclDemo && pageName !== 'project-ccl') cclDemo.pause();
+
             const hapticDemo = document.getElementById('hp-demo');
             if (hapticDemo) {
                 if (pageName === 'project-haptic' && !reducedMotion.matches) {
@@ -3738,7 +3806,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl', 'project-carla'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl', 'project-carla', 'project-ccl'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
