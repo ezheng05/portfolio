@@ -1449,15 +1449,201 @@
             display: block;
         }
 
+        /* shared boxes */
+        .hp-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .hp-pipeline {
+            margin-bottom: 2.5rem;
+        }
+
+        .hp-pipeline .hp-svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .hp-sr {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+
+        /* pipeline diagram */
+        .hp-pipeline svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+
+        .hp-pipeline .hp-pipe-mobile {
+            display: none;
+        }
+
+        .hp-node rect {
+            fill: var(--bg-primary);
+            stroke: var(--border);
+            stroke-width: 1.5;
+        }
+
+        .hp-node text {
+            fill: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            text-anchor: middle;
+        }
+
+        .hp-node text.hp-node-sub {
+            fill: var(--text-secondary);
+            font-size: 11.5px;
+            font-weight: 400;
+        }
+
+        .hp-node.is-interactive {
+            cursor: pointer;
+            outline: none;
+        }
+
+        .hp-node.is-interactive rect {
+            stroke: var(--accent);
+            stroke-dasharray: 4 3;
+        }
+
+        .hp-node.is-interactive:hover rect,
+        .hp-node.is-interactive:focus-visible rect {
+            fill: color-mix(in srgb, var(--accent) 10%, var(--bg-primary));
+        }
+
+        .hp-node.is-interactive:focus-visible rect {
+            stroke-width: 3;
+        }
+
+        .hp-node.is-interactive.is-selected rect {
+            fill: var(--accent);
+            stroke: var(--accent);
+            stroke-dasharray: none;
+        }
+
+        .hp-node.is-selected text,
+        .hp-node.is-selected text.hp-node-sub {
+            fill: #fff;
+        }
+
+        [data-theme="dark"] .hp-node.is-selected text,
+        [data-theme="dark"] .hp-node.is-selected text.hp-node-sub {
+            fill: #151515;
+        }
+
+        .hp-edge {
+            fill: none;
+            stroke: var(--text-secondary);
+            stroke-width: 1.5;
+            opacity: 0.55;
+        }
+
+        .hp-edge--fb {
+            stroke: var(--warn);
+            opacity: 0.8;
+        }
+
+        .hp-edge-label {
+            fill: var(--text-secondary);
+            font-size: 11.5px;
+            font-style: italic;
+        }
+
+        .hp-dot {
+            fill: var(--accent);
+        }
+
+        .hp-dot--fb {
+            fill: var(--warn);
+        }
+
+        .hp-arrowhead {
+            fill: var(--text-secondary);
+            opacity: 0.55;
+        }
+
+        .hp-arrowhead--fb {
+            fill: var(--warn);
+            opacity: 0.8;
+        }
+
+        .hp-node-detail {
+            margin-top: 1rem;
+            min-height: 9rem;
+        }
+
+        .hp-node-detail h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hp-node-detail dl {
+            display: grid;
+            grid-template-columns: 9rem 1fr;
+            gap: 0.5rem 1rem;
+            margin: 0;
+        }
+
+        .hp-node-detail dt {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding-top: 0.2rem;
+        }
+
+        .hp-node-detail dd {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .hp code,
+        .hp-mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.85em;
+            background: color-mix(in srgb, var(--text-primary) 6%, transparent);
+            padding: 0.1em 0.35em;
+            border-radius: 4px;
+            color: var(--text-primary);
+        }
+
+        .hp-hint {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
         /* safety filter widget */
         .hp-widget {
             display: grid;
-            gap: 1.5rem;
+            gap: 1.75rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 2.5rem;
+        }
+
+        .hp-sketch {
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
         }
 
         .hp-sketch svg {
@@ -1467,46 +1653,63 @@
         }
 
         .hp-sketch text {
-            font-size: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 10.5px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             fill: var(--text-secondary);
         }
 
-        .hp-floor {
-            fill: var(--bg-primary);
-            stroke: var(--border);
+        .hp-sketch .hp-num {
+            letter-spacing: 0.02em;
+            text-transform: none;
+            font-variant-numeric: tabular-nums;
         }
 
-        .hp-ring {
-            fill: color-mix(in srgb, var(--warn) 10%, transparent);
+        .hp-sketch-bg { fill: var(--bg-primary); }
+        .hp-grid-dot { fill: var(--text-secondary); opacity: 0.22; }
+        .hp-hatch { stroke: var(--text-secondary); stroke-width: 1; opacity: 0.45; }
+
+        .hp-zone {
+            fill: color-mix(in srgb, var(--warn) 7%, transparent);
             stroke: var(--warn);
-            stroke-width: 2;
-            stroke-dasharray: 6 5;
+            stroke-width: 1.25;
+            stroke-dasharray: 5 5;
         }
 
-        .hp-sketch .hp-ring-label {
-            fill: var(--warn);
-            font-weight: 600;
-        }
+        .hp-sketch .hp-zone-label { fill: var(--warn); }
+        .hp-sketch .hp-label-short { display: none; }
 
-        .hp-box-obstacle {
-            fill: #b9875a;
-            stroke: #8a6240;
-        }
+        .hp-obstacle-base { fill: var(--bg-secondary); }
+        .hp-obstacle-edge { fill: none; stroke: var(--text-primary); stroke-width: 1.5; }
 
-        .hp-robot {
-            fill: color-mix(in srgb, var(--accent) 22%, var(--bg-primary));
+        .hp-robot-body {
+            fill: color-mix(in srgb, var(--accent) 16%, var(--bg-primary));
             stroke: var(--accent);
-            stroke-width: 2;
+            stroke-width: 1.5;
         }
+
+        .hp-robot-deck { fill: none; stroke: var(--accent); stroke-width: 1; opacity: 0.35; }
+        .hp-robot-wheel { fill: var(--text-primary); opacity: 0.75; }
+        .hp-robot-cam { fill: var(--accent); }
+        .hp-fov-start { stop-color: var(--accent); stop-opacity: 0.16; }
+        .hp-fov-end { stop-color: var(--accent); stop-opacity: 0; }
+
+        .hp-dim { stroke: var(--text-secondary); stroke-width: 1; }
+        .hp-dim-bg { fill: var(--bg-primary); }
 
         .hp-arrow-req {
             stroke: var(--text-secondary);
-            stroke-width: 3;
-            stroke-dasharray: 5 4;
+            stroke-width: 1.5;
+            stroke-dasharray: 4 4;
+            fill: none;
         }
 
+        .hp-arrow-req-head { fill: none; stroke: var(--text-secondary); stroke-width: 1.5; }
+
         .hp-arrow-safe {
-            stroke-width: 5;
+            stroke-width: 2.5;
             stroke-linecap: round;
         }
 
@@ -1519,16 +1722,21 @@
         .hp-control label {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            color: var(--text-primary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
             margin-bottom: 0.35rem;
         }
 
         .hp-control output {
             font-variant-numeric: tabular-nums;
-            color: var(--accent);
+            color: var(--text-primary);
             font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: none;
+            font-size: 0.85rem;
         }
 
         .hp-control input[type="range"] {
@@ -1537,47 +1745,81 @@
             height: 1.75rem;
         }
 
-        .hp-result {
-            display: flex;
-            align-items: center;
-            gap: 1rem 1.5rem;
-            flex-wrap: wrap;
+        .hp-metrics {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 1rem 2rem;
+            align-items: end;
+            border-top: 1px solid var(--border);
+            padding-top: 1.25rem;
         }
 
         .hp-status {
-            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            padding: 0.25rem 0.7rem;
-            border-radius: 999px;
-            border: 1px solid currentColor;
+            align-self: center;
+        }
+
+        .hp-status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 18%, transparent);
+            transition: background-color 0.3s ease;
         }
 
         .hp-status[data-state="safe"] { color: var(--safe); }
         .hp-status[data-state="brake"],
         .hp-status[data-state="back"] { color: var(--warn); }
 
-        .hp-stylus {
-            width: 130px;
-            flex-shrink: 0;
+        .hp-metric-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
         }
 
-        .hp-stylus-body {
-            fill: var(--text-secondary);
-        }
-
-        .hp-force-arrow {
-            fill: var(--warn);
-        }
-
-        .hp-readout {
+        .hp-metric-value {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            line-height: 1.1;
             color: var(--text-primary);
             font-variant-numeric: tabular-nums;
         }
 
-        .hp-readout strong {
-            font-weight: 600;
+        .hp-metric-value small {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-left: 0.2rem;
+        }
+
+        .hp-gauge {
+            display: block;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--border);
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .hp-gauge span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--warn);
+            border-radius: 2px;
+            transition: width 0.25s ease;
         }
 
         .hp-note {
@@ -1591,9 +1833,53 @@
                 grid-template-columns: 1fr;
             }
 
-            /* the sketch scales down to about half size, so double its text */
+            .hp-metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hp-status {
+                grid-column: 1 / -1;
+            }
+
+            /* the sketch scales down to under half size: enlarge its text and drop the
+               arrow labels, since the speeds are shown right below */
             .hp-sketch text {
-                font-size: 24px !important;
+                font-size: 24px;
+            }
+
+            #hp-w-req-label,
+            #hp-w-safe-label,
+            .hp-sketch .hp-label-long {
+                display: none;
+            }
+
+            .hp-sketch .hp-label-short {
+                display: inline;
+            }
+
+            .hp-pipeline .hp-pipe-desktop {
+                display: none;
+            }
+
+            .hp-pipeline .hp-pipe-mobile {
+                display: block;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .hp-node-detail dl {
+                grid-template-columns: 1fr;
+                gap: 0.15rem;
+            }
+
+            .hp-node-detail dd {
+                margin-bottom: 0.6rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hp-dot {
+                display: none;
             }
         }
 
@@ -2472,10 +2758,10 @@
                     <figcaption>Recorded test: a box moves toward the robot's camera. The overlay marks the nearest point and its estimated distance, and the overlay and the arrow on the right turn red once the box is within 30 cm.</figcaption>
                 </figure>
 
-                <p class="project-description"><b>Context:</b> When people drive a robot remotely through a camera feed, it's hard to judge distance, which leads to collisions. Haptic feedback, a force the driver feels through their controller, can warn them. But in prior haptic systems, the robot already knew where everything around it was, from a map of the room made in advance or a motion-capture system tracking it. A real robot usually has to sense its surroundings itself, and common depth sensors either miss glass and other see-through surfaces (infrared) or are too big and expensive for small robots (LiDAR). I tested whether a single ordinary camera could measure distance accurately enough to drive that feedback instead. I'm doing this as an undergraduate researcher with Prof. Roberto Tron and Dr. Dawei Zhang, and presented it at the BU UROP Symposium in October 2026.</p>
+                <p class="project-description"><b>Context:</b> When people drive a robot remotely through a camera feed, it's hard to judge distance, which leads to collisions. Haptic feedback, a force the driver feels through their controller, can warn them. But in prior haptic systems, the robot already knew where everything around it was, from a map of the room made in advance or a motion-capture system tracking it. A real robot usually has to sense its surroundings itself, and common depth sensors either perform poorly on transparent or reflective surfaces (infrared) or are too big and expensive for small robots (LiDAR). I tested whether a single ordinary camera could measure distance accurately enough to drive that feedback instead. I'm doing this as an undergraduate researcher with Prof. Roberto Tron and Dr. Dawei Zhang, and presented it at the BU UROP Symposium in October 2026.</p>
                 <p class="project-description"><b>Skills:</b> ROS 2, Python, C++, monocular depth estimation (ZoeDepth), control barrier functions, haptic feedback, Geomagic Touch, AgileX LIMO robot.</p>
                 <p class="project-description"><b>Impact:</b> Showed that one ordinary camera can measure distance accurately enough to run a haptic safety system: its error is small compared to the 30 cm safety margin. That means this kind of driver assistance doesn't need a pre-mapped room, motion capture, or an expensive depth sensor, so it could work on small, low-cost robots in places that haven't been mapped.</p>
-                <p class="project-description"><b>Results:</b> Reduced depth error about 8x (from 18.7 to 2.3 cm RMSE), close to the robot's built-in IR sensor (1.5 cm RMSE). In a pilot test with one operator, a 0.8 N force was clearly felt but still easy to override, while 0.5 N or less was too weak to work as a warning.</p>
+                <p class="project-description"><b>Results:</b> With my first (linear) calibration, the camera's distance estimates had a typical error of 18.7 cm (RMSE) when checked against a tape measure. After I found the problem and switched to a quadratic calibration, the error dropped to 2.3 cm, about 8x better and close to the robot's built-in IR sensor (1.5 cm). In a pilot test with one operator, a 0.8 N force was clearly felt but still easy to override, while 0.5 N or less was too weak to work as a warning.</p>
                 <p class="project-description"><b>Details:</b>
                 <ul>
                     <li>Built the system end to end in ROS 2 (4 nodes): a depth model estimates obstacle distance from the camera image, a safety filter limits the robot's speed, and the gap between the requested and allowed speed is sent to the stylus as a force. Also built a camera overlay and a force arrow in RViz to inspect the controller frame by frame.</li>
@@ -2486,38 +2772,127 @@
                     <li>Tested in stages (synthetic inputs, then recorded data, then a person on the stylus) and found two safety hazards before hardware testing: a docked stylus commanded full speed, and Ctrl-C didn't stop the robot. Fixed them with a dead-man switch and a stop command on shutdown.</li>
                 </ul>
 
+                <h2 class="project-gallery-title">How it works</h2>
+                <p class="project-description">Select a dashed box to see what that part does, why it matters, and what I did. Red arrows show the correction sent back to the driver.</p>
+                <div class="hp-pipeline">
+                    <svg class="hp-svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+                        <defs>
+                            <marker id="hp-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hp-arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+                            <marker id="hp-ah-fb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hp-arrowhead--fb" d="M0,0 L10,5 L0,10 z"/></marker>
+                        </defs>
+                    </svg>
+                    <svg class="hp-pipe-desktop" viewBox="0 0 880 300" role="group" aria-label="System pipeline">
+                        <path id="hpd-e1" class="hp-edge" d="M150,59 L188,59" marker-end="url(#hp-ah)"/>
+                        <path id="hpd-e2" class="hp-edge" d="M330,59 L368,59" marker-end="url(#hp-ah)"/>
+                        <path id="hpd-e3" class="hp-edge" d="M510,59 L548,59" marker-end="url(#hp-ah)"/>
+                        <path id="hpd-e4" class="hp-edge" d="M690,59 L728,59" marker-end="url(#hp-ah)"/>
+                        <path id="hpd-e5" class="hp-edge hp-edge--fb" d="M640,88 L640,208" marker-end="url(#hp-ah-fb)"/>
+                        <path id="hpd-e6" class="hp-edge hp-edge--fb" d="M550,232 L512,232" marker-end="url(#hp-ah-fb)"/>
+                        <path id="hpd-e7" class="hp-edge hp-edge--fb" d="M370,232 L332,232" marker-end="url(#hp-ah-fb)"/>
+                        <path id="hpd-e8" class="hp-edge" d="M330,250 L368,250" marker-end="url(#hp-ah)"/>
+                        <path id="hpd-e9" class="hp-edge" d="M440,208 L440,150 L590,150 L590,90" marker-end="url(#hp-ah)"/>
+                        <text class="hp-edge-label" x="648" y="152">correction</text>
+                        <text class="hp-edge-label" x="452" y="142">speed request</text>
+                        <text class="hp-edge-label" x="290" y="280" text-anchor="middle">feels force · moves stylus</text>
+
+                        <g class="hp-dots">
+                            <circle class="hp-dot" r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M10,59 L870,59" keyPoints="0;1" keyTimes="0;1"/></circle>
+                            <circle class="hp-dot hp-dot--fb" r="3.5"><animateMotion dur="2s" repeatCount="indefinite" path="M640,88 L640,232 L332,232"/></circle>
+                            <circle class="hp-dot" r="3.5"><animateMotion dur="2s" repeatCount="indefinite" begin="1s" path="M440,208 L440,150 L590,150 L590,90"/></circle>
+                        </g>
+
+                        <g class="hp-node"><rect x="10" y="30" width="140" height="58" rx="10"/><text x="80" y="55">Camera</text><text class="hp-node-sub" x="80" y="73">LIMO, one RGB image</text></g>
+                        <g class="hp-node is-interactive" data-node="depth" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="190" y="30" width="140" height="58" rx="10"/><text x="260" y="55">Depth model</text><text class="hp-node-sub" x="260" y="73">ZoeDepth</text></g>
+                        <g class="hp-node is-interactive" data-node="nearest" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="370" y="30" width="140" height="58" rx="10"/><text x="440" y="55">Nearest obstacle</text><text class="hp-node-sub" x="440" y="73">distance + bearing</text></g>
+                        <g class="hp-node is-interactive" data-node="filter" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="550" y="30" width="140" height="58" rx="10"/><text x="620" y="55">Safety filter</text><text class="hp-node-sub" x="620" y="73">CBF, 20 Hz</text></g>
+                        <g class="hp-node"><rect x="730" y="30" width="140" height="58" rx="10"/><text x="800" y="55">Robot</text><text class="hp-node-sub" x="800" y="73">safe speed to wheels</text></g>
+                        <g class="hp-node"><rect x="190" y="210" width="140" height="58" rx="10"/><text x="260" y="235">Driver</text><text class="hp-node-sub" x="260" y="253">hand on the stylus</text></g>
+                        <g class="hp-node is-interactive" data-node="stylus" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="370" y="210" width="140" height="58" rx="10"/><text x="440" y="235">Stylus driver</text><text class="hp-node-sub" x="440" y="253">Geomagic Touch, 1 kHz</text></g>
+                        <g class="hp-node is-interactive" data-node="force" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="550" y="210" width="140" height="58" rx="10"/><text x="620" y="235">Force feedback</text><text class="hp-node-sub" x="620" y="253">capped at 0.8 N</text></g>
+
+                    </svg>
+
+                    <svg class="hp-pipe-mobile" viewBox="0 0 360 450" role="group" aria-label="System pipeline">
+                        <path class="hp-edge" d="M85,68 L85,98" marker-end="url(#hp-ah)"/>
+                        <path class="hp-edge" d="M85,156 L85,188" marker-end="url(#hp-ah)"/>
+                        <path class="hp-edge" d="M85,246 L85,278" marker-end="url(#hp-ah)"/>
+                        <path class="hp-edge" d="M85,336 L85,378" marker-end="url(#hp-ah)"/>
+                        <path class="hp-edge hp-edge--fb" d="M160,318 L198,318" marker-end="url(#hp-ah-fb)"/>
+                        <path class="hp-edge hp-edge--fb" d="M275,280 L275,250" marker-end="url(#hp-ah-fb)"/>
+                        <path class="hp-edge hp-edge--fb" d="M262,190 L262,160" marker-end="url(#hp-ah-fb)"/>
+                        <path class="hp-edge" d="M288,158 L288,188" marker-end="url(#hp-ah)"/>
+                        <path class="hp-edge" d="M200,228 L180,228 L180,294 L164,294" marker-end="url(#hp-ah)"/>
+
+                        <g class="hp-dots">
+                            <circle class="hp-dot" r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M85,66 L85,378"/></circle>
+                            <circle class="hp-dot hp-dot--fb" r="3.5"><animateMotion dur="2s" repeatCount="indefinite" path="M160,318 L275,318 L275,280 L262,250 L262,160"/></circle>
+                        </g>
+
+                        <g class="hp-node"><rect x="10" y="10" width="150" height="56" rx="10"/><text x="85" y="34">Camera</text><text class="hp-node-sub" x="85" y="52">one RGB image</text></g>
+                        <g class="hp-node is-interactive" data-node="depth" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="10" y="100" width="150" height="56" rx="10"/><text x="85" y="124">Depth model</text><text class="hp-node-sub" x="85" y="142">ZoeDepth</text></g>
+                        <g class="hp-node is-interactive" data-node="nearest" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="10" y="190" width="150" height="56" rx="10"/><text x="85" y="214">Nearest obstacle</text><text class="hp-node-sub" x="85" y="232">distance + bearing</text></g>
+                        <g class="hp-node is-interactive" data-node="filter" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="10" y="280" width="150" height="56" rx="10"/><text x="85" y="304">Safety filter</text><text class="hp-node-sub" x="85" y="322">CBF, 20 Hz</text></g>
+                        <g class="hp-node"><rect x="10" y="380" width="150" height="56" rx="10"/><text x="85" y="404">Robot</text><text class="hp-node-sub" x="85" y="422">safe speed</text></g>
+                        <g class="hp-node"><rect x="200" y="100" width="150" height="56" rx="10"/><text x="275" y="124">Driver</text><text class="hp-node-sub" x="275" y="142">hand on stylus</text></g>
+                        <g class="hp-node is-interactive" data-node="stylus" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="200" y="190" width="150" height="56" rx="10"/><text x="275" y="214">Stylus driver</text><text class="hp-node-sub" x="275" y="232">Geomagic Touch</text></g>
+                        <g class="hp-node is-interactive" data-node="force" role="button" tabindex="0" aria-pressed="false" aria-controls="hp-node-detail"><rect x="200" y="280" width="150" height="56" rx="10"/><text x="275" y="304">Force feedback</text><text class="hp-node-sub" x="275" y="322">capped at 0.8 N</text></g>
+
+                    </svg>
+
+                    <div class="hp-box hp-node-detail" id="hp-node-detail" aria-live="polite"></div>
+                </div>
+
+
                 <h2 class="project-gallery-title">Try the safety filter</h2>
                 <p class="project-description">Drag the sliders to change the distance to the box and the speed the driver asks for. The safety filter sets a speed limit that gets lower as the robot nears the 30 cm margin and reaches zero at the margin. If the driver asks for more than the limit, the robot only gets the limit, and the stylus pushes back harder the bigger the difference.</p>
                 <div class="hp-widget">
                     <div class="hp-sketch">
-                        <svg viewBox="0 0 640 230" role="img" aria-labelledby="hp-w-readout">
+                        <svg viewBox="0 0 680 250" role="img" aria-label="Top-down view of the robot driving toward an obstacle, with its requested and allowed speed">
                             <defs>
-                                <marker id="hp-w-ah-req" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-secondary)"/></marker>
-                                <marker id="hp-w-ah-safe" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path id="hp-w-ah-safe-path" d="M0,0 L10,5 L0,10 z"/></marker>
+                                <pattern id="hp-w-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle class="hp-grid-dot" cx="10" cy="10" r="1"/></pattern>
+                                <pattern id="hp-w-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="hp-hatch" x1="0" y1="0" x2="0" y2="6"/></pattern>
+                                <linearGradient id="hp-w-fov" x1="0" x2="1" y1="0" y2="0"><stop class="hp-fov-start" offset="0"/><stop class="hp-fov-end" offset="1"/></linearGradient>
+                                <marker id="hp-w-ah-safe" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path id="hp-w-ah-safe-path" d="M0,0 L10,5 L0,10 z"/></marker>
                             </defs>
-                            <rect class="hp-floor" x="0" y="0" width="640" height="230" rx="8"/>
-                            <line class="hp-arrow-req" x1="14" y1="20" x2="44" y2="20"/>
-                            <text x="52" y="24" style="font-size: 11px">requested speed</text>
-                            <line x1="14" y1="48" x2="44" y2="48" style="stroke: var(--text-secondary); stroke-width: 5; stroke-linecap: round"/>
-                            <text x="52" y="52" style="font-size: 11px">allowed speed</text>
-                            <circle class="hp-ring" cx="540" cy="100" r="90"/>
-                            <text class="hp-ring-label" x="540" y="50" text-anchor="middle">30 cm</text>
-                            <rect class="hp-box-obstacle" x="540" y="65" width="60" height="70" rx="3"/>
-                            <text x="570" y="104" text-anchor="middle" style="fill: #fff; font-weight: 600">box</text>
+                            <rect class="hp-sketch-bg" width="680" height="250"/>
+                            <rect width="680" height="250" fill="url(#hp-w-grid)"/>
+
+                            <rect class="hp-zone" x="470" y="10" width="320" height="230" rx="90"/>
+                            <text class="hp-zone-label hp-label-long" x="585" y="62" text-anchor="middle">30 cm margin</text>
+                            <text class="hp-zone-label hp-label-short" x="585" y="62" text-anchor="middle">30 cm</text>
+                            <rect class="hp-obstacle-base" x="560" y="100" width="50" height="50" rx="2"/>
+                            <rect x="560" y="100" width="50" height="50" rx="2" fill="url(#hp-w-hatch)"/>
+                            <rect class="hp-obstacle-edge" x="560" y="100" width="50" height="50" rx="2"/>
+                            <text x="585" y="174" text-anchor="middle">obstacle</text>
+
                             <g id="hp-w-robot">
-                                <rect class="hp-robot" x="-70" y="75" width="70" height="50" rx="8"/>
-                                <text x="-35" y="104" text-anchor="middle" style="font-weight: 600; fill: var(--accent)">robot</text>
+                                <path d="M0,0 L230,-62 L230,62 Z" fill="url(#hp-w-fov)"/>
+                                <rect class="hp-robot-wheel" x="-68" y="-34" width="18" height="8" rx="3"/>
+                                <rect class="hp-robot-wheel" x="-26" y="-34" width="18" height="8" rx="3"/>
+                                <rect class="hp-robot-wheel" x="-68" y="26" width="18" height="8" rx="3"/>
+                                <rect class="hp-robot-wheel" x="-26" y="26" width="18" height="8" rx="3"/>
+                                <rect class="hp-robot-body" x="-76" y="-27" width="76" height="54" rx="10"/>
+                                <rect class="hp-robot-deck" x="-64" y="-16" width="46" height="32" rx="5"/>
+                                <rect class="hp-robot-cam" x="-7" y="-7" width="8" height="14" rx="2"/>
                             </g>
-                            <line id="hp-w-req" class="hp-arrow-req" x1="0" y1="62" x2="0" y2="62" marker-end="url(#hp-w-ah-req)"/>
-                            <line id="hp-w-safe" class="hp-arrow-safe" x1="0" y1="140" x2="0" y2="140" marker-end="url(#hp-w-ah-safe)"/>
-                            <line id="hp-w-dim" x1="0" y1="212" x2="540" y2="212" style="stroke: var(--text-secondary); stroke-width: 1"/>
-                            <text id="hp-w-dim-text" x="300" y="206" text-anchor="middle"></text>
+
+                            <path id="hp-w-req" class="hp-arrow-req" d="M0,0"/>
+                            <path id="hp-w-req-head" class="hp-arrow-req-head" d="M0,0"/>
+                            <text id="hp-w-req-label" x="0" y="64"></text>
+                            <line id="hp-w-safe" class="hp-arrow-safe" x1="0" y1="184" x2="0" y2="184" marker-end="url(#hp-w-ah-safe)"/>
+                            <text id="hp-w-safe-label" x="0" y="206"></text>
+
+                            <line id="hp-w-dim" class="hp-dim" x1="0" y1="232" x2="560" y2="232"/>
+                            <line id="hp-w-dim-l" class="hp-dim" x1="0" y1="226" x2="0" y2="238"/>
+                            <line class="hp-dim" x1="560" y1="226" x2="560" y2="238"/>
+                            <rect id="hp-w-dim-bg" class="hp-dim-bg" x="0" y="220" width="84" height="24"/>
+                            <text id="hp-w-dim-text" class="hp-num" x="0" y="236" text-anchor="middle"></text>
                         </svg>
                     </div>
 
                     <div class="hp-controls">
                         <div class="hp-control">
-                            <label for="hp-w-d">Distance to box <output id="hp-w-d-out" for="hp-w-d"></output></label>
+                            <label for="hp-w-d">Distance to obstacle <output id="hp-w-d-out" for="hp-w-d"></output></label>
                             <input type="range" id="hp-w-d" min="0.20" max="1.50" step="0.01" value="0.60">
                         </div>
                         <div class="hp-control">
@@ -2526,16 +2901,12 @@
                         </div>
                     </div>
 
-                    <div class="hp-result">
-                        <span class="hp-status" id="hp-w-status" data-state="safe"></span>
-                        <svg class="hp-stylus" viewBox="0 0 150 60" aria-hidden="true">
-                            <path id="hp-w-force" class="hp-force-arrow" d="M0,0"/>
-                            <rect class="hp-stylus-body" x="95" y="24" width="50" height="12" rx="6"/>
-                            <circle class="hp-stylus-body" cx="95" cy="30" r="7"/>
-                            <text x="120" y="54" text-anchor="middle" style="font-size: 11px; fill: var(--text-secondary)">stylus</text>
-                        </svg>
-                        <p class="hp-readout" id="hp-w-readout" aria-live="polite"></p>
+                    <div class="hp-metrics">
+                        <div class="hp-status" id="hp-w-status" data-state="safe"><span class="hp-status-dot"></span><span id="hp-w-status-text"></span></div>
+                        <div class="hp-metric"><span class="hp-metric-label">Allowed speed</span><span class="hp-metric-value" id="hp-w-safe-val"></span></div>
+                        <div class="hp-metric"><span class="hp-metric-label">Stylus force</span><span class="hp-metric-value" id="hp-w-force-val"></span><span class="hp-gauge"><span id="hp-w-gauge"></span></span></div>
                     </div>
+                    <p class="hp-sr" id="hp-w-readout" aria-live="polite"></p>
 
                     <p class="hp-note">Simplified to an obstacle straight ahead, using the same settings as the real filter. At 30 cm with 0.20 m/s requested, it stops the robot and pushes back with the maximum 0.8 N.</p>
                 </div>
@@ -3130,66 +3501,176 @@
             thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
         })();
 
-        // haptic page: safety-filter widget (r = 0.30 m, gamma = 0.8, k_f = 0.5, stylus gain 8)
+        // haptic page: system diagram details and safety-filter widget
         (function() {
+            const page = document.getElementById('project-haptic');
+            if (!page) return;
+
+            if (reducedMotion.matches) {
+                page.querySelectorAll('.hp-dots').forEach(g => g.remove());
+            }
+
+            // pipeline: one shared detail panel under the diagram
+            const nodeInfo = {
+                depth: {
+                    title: 'Camera and depth model (ZoeDepth)',
+                    what: 'Estimates the distance to everything in view from a single camera image.',
+                    why: 'Works with the robot\u2019s ordinary camera, instead of a LiDAR that is too big and expensive for small robots or an infrared sensor that performs poorly on transparent or reflective surfaces.',
+                    did: 'Benchmarked three monocular depth models, integrated ZoeDepth into ROS 2, and built and validated its calibration.'
+                },
+                nearest: {
+                    title: 'Nearest obstacle',
+                    what: 'Takes the closest point in the depth map and turns it into a distance and a bearing.',
+                    why: 'The safety filter only needs the most urgent threat, updated every frame.',
+                    did: 'Found that the nearest point kept locking onto the floor, so I excluded the bottom third of the frame.'
+                },
+                filter: {
+                    title: 'Safety filter (control barrier function)',
+                    what: 'Sets a speed limit that shrinks as the robot nears the 30 cm margin: <code>cos(α)·v ≤ γ·(d − 0.30 m)</code>. A request under the limit passes through unchanged.',
+                    why: 'The robot slows smoothly instead of stopping abruptly, and the driver stays in control whenever the request is safe.',
+                    did: 'Implemented a closed-form solution, so it runs at 20 Hz without an optimization solver, plus a 0.2 s timeout that stops the robot if commands stop arriving.'
+                },
+                force: {
+                    title: 'Force feedback',
+                    what: 'Turns the gap between the requested and allowed speed into a force: <code>F = k_f·(v_safe − v_requested)</code>, scaled up and capped at 0.8 N.',
+                    why: 'The driver only feels a force when the filter steps in, so a safe request produces no force at all.',
+                    did: 'Chose the scale and the 0.8 N cap through a pilot test with a person on the stylus.'
+                },
+                stylus: {
+                    title: 'Stylus driver (Geomagic Touch)',
+                    what: 'Sends the force to the haptic stylus 1,000 times a second, and reads the driver\u2019s hand position back as a speed request.',
+                    why: 'Before my fixes, the driver silently dropped force commands, and one setting could request about 20 N from a device that peaks around 3.3 N.',
+                    did: 'Patched 3 bugs in the C++ driver, added a 0.8 N hard limit, and fixed a unit mismatch (mm vs. m) in my code.'
+                }
+            };
+            const detail = document.getElementById('hp-node-detail');
+            const nodes = page.querySelectorAll('.hp-node.is-interactive');
+
+            function selectNode(key) {
+                const info = nodeInfo[key];
+                nodes.forEach(n => {
+                    const on = n.dataset.node === key;
+                    n.classList.toggle('is-selected', on);
+                    n.setAttribute('aria-pressed', on);
+                });
+                detail.innerHTML = `<h3>${info.title}</h3><dl><dt>What it does</dt><dd>${info.what}</dd><dt>Why it matters</dt><dd>${info.why}</dd><dt>What I did</dt><dd>${info.did}</dd></dl>`;
+            }
+
+            nodes.forEach(n => {
+                n.addEventListener('click', () => selectNode(n.dataset.node));
+                n.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        selectNode(n.dataset.node);
+                    }
+                });
+            });
+            selectNode('filter');
+
+
+            // widget: r = 0.30 m, gamma = 0.8, k_f = 0.5, stylus gain 8, clamped to 0.8 N
             const dIn = document.getElementById('hp-w-d');
             const vIn = document.getElementById('hp-w-v');
-            if (!dIn || !vIn) return;
             const el = id => document.getElementById(id);
             const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
-            const BOX_X = 540, PX_PER_M = 300, PX_PER_MPS = 450;
+            const BOX_X = 560, CY = 125, PX_PER_M = 300, PX_PER_MPS = 450;
+            const REQ_Y = 72, SAFE_Y = 184;
 
-            function update() {
-                const d = parseFloat(dIn.value);
-                const vRef = parseFloat(vIn.value);
+            function compute(d, vRef) {
                 const vSafe = Math.min(vRef, 0.8 * (d - 0.30));
-                const fStylus = clamp(8 * clamp(0.5 * (vSafe - vRef), -0.3, 0.3), -0.8, 0.8);
-                const fMag = Math.abs(fStylus);
-                const intervening = vSafe < vRef - 1e-9;
-                const state = vSafe < -1e-9 ? 'back' : intervening ? 'brake' : 'safe';
+                const force = Math.abs(clamp(8 * clamp(0.5 * (vSafe - vRef), -0.3, 0.3), -0.8, 0.8));
+                return { d, vRef, vSafe, force };
+            }
+
+            // shown values ease toward the slider values so the drawing glides instead of jumping
+            let target = compute(parseFloat(dIn.value), parseFloat(vIn.value));
+            let shown = { ...target };
+            let frame = null;
+
+            function draw() {
+                const t = target;
+                const intervening = t.vSafe < t.vRef - 1e-9;
+                const color = intervening ? 'var(--warn)' : 'var(--safe)';
                 const fmt = v => (Math.abs(v) < 0.005 ? 0 : v).toFixed(2);
+                const front = BOX_X - shown.d * PX_PER_M;
 
-                el('hp-w-d-out').textContent = `${d.toFixed(2)} m`;
-                el('hp-w-v-out').textContent = `${vRef.toFixed(2)} m/s`;
+                el('hp-w-robot').setAttribute('transform', `translate(${front}, ${CY})`);
 
-                const front = BOX_X - d * PX_PER_M;
-                el('hp-w-robot').setAttribute('transform', `translate(${front}, 0)`);
-                el('hp-w-dim').setAttribute('x1', front);
-                const dimText = el('hp-w-dim-text');
-                dimText.setAttribute('x', (front + BOX_X) / 2);
-                dimText.textContent = `${d.toFixed(2)} m`;
-
-                const req = el('hp-w-req');
-                req.setAttribute('x1', front);
-                req.setAttribute('x2', front + vRef * PX_PER_MPS);
-                req.style.visibility = vRef > 0.004 ? 'visible' : 'hidden';
+                const reqEnd = front + shown.vRef * PX_PER_MPS;
+                const showReq = shown.vRef > 0.004;
+                el('hp-w-req').setAttribute('d', showReq ? `M${front},${REQ_Y} L${reqEnd - 2},${REQ_Y}` : 'M0,0');
+                el('hp-w-req-head').setAttribute('d', showReq ? `M${reqEnd - 7},${REQ_Y - 5} L${reqEnd},${REQ_Y} L${reqEnd - 7},${REQ_Y + 5}` : 'M0,0');
+                const reqLabel = el('hp-w-req-label');
+                reqLabel.setAttribute('x', front - 76);
+                reqLabel.textContent = `requested ${t.vRef.toFixed(2)} m/s`;
 
                 // allowed speed leaves the front when driving forward, the back when reversing
                 const safe = el('hp-w-safe');
-                const color = intervening ? 'var(--warn)' : 'var(--safe)';
-                const start = vSafe >= 0 ? front : front - 70;
+                const start = shown.vSafe >= 0 ? front : front - 76;
                 safe.setAttribute('x1', start);
-                safe.setAttribute('x2', start + vSafe * PX_PER_MPS);
+                safe.setAttribute('x2', start + shown.vSafe * PX_PER_MPS);
                 safe.style.stroke = color;
                 el('hp-w-ah-safe-path').style.fill = color;
-                safe.style.visibility = Math.abs(vSafe) > 0.004 ? 'visible' : 'hidden';
+                safe.style.visibility = Math.abs(shown.vSafe) > 0.004 ? 'visible' : 'hidden';
+                const safeLabel = el('hp-w-safe-label');
+                safeLabel.setAttribute('x', front - 76);
+                safeLabel.textContent = `allowed ${fmt(t.vSafe)} m/s`;
+                safeLabel.style.fill = color;
 
-                // force arrow points back toward the operator, length scaled to the 0.8 N max
-                const len = fMag / 0.8 * 70;
-                el('hp-w-force').setAttribute('d', len > 1
-                    ? `M86,27 L${86 - len + 8},27 L${86 - len + 8},21 L${86 - len},30 L${86 - len + 8},39 L${86 - len + 8},33 L86,33 Z`
-                    : 'M0,0');
+                el('hp-w-dim').setAttribute('x1', front);
+                el('hp-w-dim-l').setAttribute('x1', front);
+                el('hp-w-dim-l').setAttribute('x2', front);
+                const mid = (front + BOX_X) / 2;
+                el('hp-w-dim-text').setAttribute('x', mid);
+                el('hp-w-dim-text').textContent = `${t.d.toFixed(2)} m`;
+                // size the label's backing to the text so the dimension line doesn't run through it
+                const box = el('hp-w-dim-text').getBBox();
+                const bg = el('hp-w-dim-bg');
+                bg.setAttribute('x', box.x - 5);
+                bg.setAttribute('y', box.y - 1);
+                bg.setAttribute('width', box.width + 10);
+                bg.setAttribute('height', box.height + 2);
 
-                const status = el('hp-w-status');
-                status.dataset.state = state;
-                status.textContent = state === 'safe' ? 'No correction' : state === 'brake' ? 'Braking' : 'Backing away';
-                const forceText = fMag < 0.005 ? 'none' : `${fMag.toFixed(2)} N`;
-                el('hp-w-readout').innerHTML = `Allowed speed <strong>${fmt(vSafe)} m/s</strong> · Stylus force <strong>${forceText}</strong>`;
+                el('hp-w-d-out').textContent = `${t.d.toFixed(2)} m`;
+                el('hp-w-v-out').textContent = `${t.vRef.toFixed(2)} m/s`;
+
+                const state = t.vSafe < -1e-9 ? 'back' : intervening ? 'brake' : 'safe';
+                el('hp-w-status').dataset.state = state;
+                el('hp-w-status-text').textContent = state === 'safe' ? 'No correction' : state === 'brake' ? 'Braking' : 'Backing away';
+                el('hp-w-safe-val').innerHTML = `${fmt(t.vSafe)}<small>m/s</small>`;
+                el('hp-w-force-val').innerHTML = `${t.force < 0.005 ? '0.00' : t.force.toFixed(2)}<small>N</small>`;
+                el('hp-w-gauge').style.width = `${t.force / 0.8 * 100}%`;
+                el('hp-w-readout').textContent = `Allowed speed ${fmt(t.vSafe)} meters per second, stylus force ${t.force.toFixed(2)} newtons.`;
+            }
+
+            function step() {
+                let moving = false;
+                for (const k of ['d', 'vRef', 'vSafe']) {
+                    const diff = target[k] - shown[k];
+                    if (Math.abs(diff) > 0.0005) {
+                        shown[k] += diff * 0.18;
+                        moving = true;
+                    } else {
+                        shown[k] = target[k];
+                    }
+                }
+                draw();
+                frame = moving ? requestAnimationFrame(step) : null;
+            }
+
+            function update() {
+                target = compute(parseFloat(dIn.value), parseFloat(vIn.value));
+                if (reducedMotion.matches) {
+                    shown = { ...target };
+                    draw();
+                } else if (!frame) {
+                    frame = requestAnimationFrame(step);
+                }
             }
 
             dIn.addEventListener('input', update);
             vIn.addEventListener('input', update);
-            update();
+            draw();
         })();
     </script>
 </body>
