@@ -748,14 +748,13 @@
 
         .about-cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             max-width: 1400px;
             margin: 4rem auto 0;
         }
 
-        /* classes and skills share the top row; awards and favorites run full width below */
-        .about-card[aria-labelledby="card-awards"],
+        /* classes, skills, and awards share the top row; favorites runs full width below */
         .about-card[aria-labelledby="card-favorites"] {
             grid-column: 1 / -1;
         }
@@ -3489,6 +3488,10 @@
     </footer>
 
     <script>
+        if (location.protocol === 'http:' && location.hostname.endsWith('github.io')) {
+            location.replace('https:' + location.href.slice(5));
+        }
+
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
@@ -4414,7 +4417,10 @@
             const SESSION_KEY = 'resume_password';
 
             async function deriveKey(password) {
-                const { salt, iterations } = await (await fetch('resume/key.json')).json();
+                if (!window.crypto || !crypto.subtle) throw new Error('this page needs to be opened over https');
+                const res = await fetch('resume/key.json', { cache: 'no-cache' });
+                if (!res.ok) throw new Error(`key.json returned ${res.status}`);
+                const { salt, iterations } = await res.json();
                 const saltBytes = new Uint8Array(salt.match(/../g).map(h => parseInt(h, 16)));
                 const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
                 return crypto.subtle.deriveKey(
@@ -4425,8 +4431,8 @@
 
             // each .enc file is a 12-byte IV followed by the ciphertext and GCM tag
             async function decryptToUrl(key, url, type) {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error('fetch failed');
+                const res = await fetch(url, { cache: 'no-cache' });
+                if (!res.ok) throw new Error(`${url} returned ${res.status}`);
                 const buf = await res.arrayBuffer();
                 const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: buf.slice(0, 12) }, key, buf.slice(12));
                 return URL.createObjectURL(new Blob([plain], { type }));
@@ -4460,9 +4466,10 @@
                     try { sessionStorage.setItem(SESSION_KEY, password); } catch (_) {}
                     input.value = '';
                 } catch (err) {
+                    console.error('resume unlock failed', err);
                     errorEl.textContent = err && err.name === 'OperationError'
                         ? 'Incorrect password.'
-                        : 'Couldn’t load the resume. Please try again.';
+                        : `Couldn’t load the resume (${err && err.message ? err.message : err}). Please try again.`;
                     errorEl.classList.add('visible');
                 } finally {
                     button.disabled = false;
