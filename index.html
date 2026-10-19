@@ -2100,6 +2100,73 @@
             }
         }
 
+        /* CARLA imitation learning project page (.ce); layout reuses the .hp page styles */
+        .project-card[data-project="carla"] {
+            background-image: url('carla/card.svg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .ce-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ce-table th {
+            text-align: left;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            padding: 0 0.75rem 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ce-table td {
+            padding: 0.7rem 0.75rem 0.7rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+
+        .ce-table td:first-child {
+            color: var(--text-primary);
+            font-weight: 500;
+            width: 34%;
+        }
+
+        .ce-table td.ce-score {
+            font-variant-numeric: tabular-nums;
+            color: var(--text-primary);
+            font-weight: 600;
+            white-space: nowrap;
+            width: 6.5rem;
+        }
+
+        .ce-table tr.ce-final td {
+            color: var(--text-primary);
+        }
+
+        .ce-table tr.ce-final td:first-child {
+            color: var(--accent);
+        }
+
+        @media (max-width: 700px) {
+            .ce-table {
+                font-size: 0.85rem;
+            }
+
+            .ce-table td:first-child {
+                width: auto;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             nav {
@@ -2891,7 +2958,7 @@
         <section id="research" class="page">
             <div class="section-header">
                 <h2 class="serif">research</h2>
-                <p>what i&rsquo;ve been building and testing in the lab.</p>
+                <p>research and projects in robotics and machine learning.</p>
             </div>
 
             <div class="project-grid">
@@ -2907,6 +2974,13 @@
                         <div class="project-number">02</div>
                         <h3>Agent Failure in Multi-Robot Reinforcement Learning</h3>
                         <p>Kulis Lab · MARL · PyTorch · robot teams</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="carla" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">03</div>
+                        <h3>Imitation Learning for Autonomous Driving</h3>
+                        <p>EC518 Robot Learning · PyTorch · CARLA · DAgger</p>
                     </div>
                 </div>
             </div>
@@ -3208,6 +3282,46 @@
                 <p class="project-description">My first run went for 500 training iterations. The team learned the task in about 20, but after iteration 300 collisions rose about 15x and the score fell from 1.0 to 0.3, and a second seed started drifting the same way. So I capped training at 200 iterations, saved a checkpoint every 20, and kept the one with the best evaluation score, using the same rule for every run. It also made collision rate a core metric, since it catches problems the reward curve hides.</p>
 
                 <p class="project-description"><b>Next:</b> Run the failure tests on all 20 trained policies, with both failure modes and several failure times, and compare how much each method drops relative to its own full team score. After that, I'll try training with random robot dropout, scenarios where survivors must cover a lost robot's work, and eventually tests on the lab's physical robots.</p>
+            </div>
+        </section>
+
+        <section id="project-carla" class="page project-detail" data-parent="research">
+            <div class="project-page hp">
+                <a href="#research" class="project-back" data-page="research">← Back to research</a>
+                <h1 class="serif">Imitation Learning for Autonomous Driving in CARLA</h1>
+                <p class="project-meta">BU EC518 Robot Learning · Fall 2026</p>
+                <p class="project-description">I built an imitation learning pipeline that trains a CNN to drive from camera images in the CARLA simulator, then ran controlled experiments to find which design choices actually make it drive better.</p>
+
+                <p class="project-description"><b>Context:</b> Imitation learning trains a policy by copying an expert, and it's how many robots and driving systems get their first policy. Its weakness is distribution shift: the network only sees states the expert visited, so one small mistake puts it somewhere it never trained on, and errors compound. Behavior cloning's cost can grow quadratically with the task length, while DAgger, which trains on the learner's own states, keeps it linear. I proved this bound for the course, then tested what helps in closed loop driving, not just on a validation set.</p>
+                <p class="project-description"><b>Skills:</b> Python, PyTorch, CNNs, imitation learning (behavior cloning, DAgger), CARLA, experiment design, data cleaning, GPU cluster jobs (BU SCC).</p>
+                <p class="project-description"><b>Impact:</b> Showed that offline metrics often don't predict driving: the model with the best braking recall scored 0 because it never moved. The final model, trained on one town, still drove in a town it had never seen.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Collected and cleaned 18,325 expert driving frames, adding recovery examples by nudging the steering and letting the expert correct it, and fixed a label leak in those frames.</li>
+                    <li>Built a CNN with 4.5M parameters that maps a camera frame to a driving action, and rewrote the loss after finding training stuck at exactly 2.6309 from softmax saturation.</li>
+                    <li>Implemented DAgger with a queryable expert and tracked on-policy loss across iterations.</li>
+                    <li>Ran 10+ experiments that each changed one variable, measured offline with per-class recall (85% of frames are "straight") and in closed loop driving, with top models rerun across 3 traffic seeds.</li>
+                    <li>Ran CARLA headless on BU's GPU cluster and built evaluation tools, including seeded traffic and frame by frame contact sheets for failure analysis.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">What I tested</h2>
+                <table class="ce-table">
+                    <thead>
+                        <tr><th>Change</th><th>Score</th><th>What happened</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Speed as an input</td><td class="ce-score">60</td><td>Strongest single model</td></tr>
+                        <tr><td>Class weights in the loss</td><td class="ce-score">0</td><td>Brake recall rose to 0.95, but the car never moved</td></tr>
+                        <tr><td>Stacking 2 frames</td><td class="ce-score">36.5</td><td>No vehicle contact, but left the lane</td></tr>
+                        <tr><td>Dropout 0.3</td><td class="ce-score">36</td><td>Closed the overfitting gap, but hit two cars from behind</td></tr>
+                        <tr><td>Braking earlier (p &gt; 0.3)</td><td class="ce-score">60 → 36</td><td>Two contacts instead of one</td></tr>
+                        <tr><td>DAgger, 3 iterations</td><td class="ce-score">60, 58.8, 36</td><td>No improvement with three short iterations</td></tr>
+                        <tr class="ce-final"><td>A separate head per navigation command (final)</td><td class="ce-score">10.27</td><td>Mean over 3 seeds on 4 routes in a town it never trained on</td></tr>
+                    </tbody>
+                </table>
+                <p class="hp-note">CARLA driving score: route completion times an infraction penalty. Scores are on a route in the training town unless noted.</p>
+
+                <p class="project-description" style="margin-top: 2rem"><b>What I learned:</b> Most failures were about timing, not perception. Frame by frame review showed the top models finishing the route but hitting a stopped motorcycle from behind, and the obvious fix, braking earlier, doubled the collisions instead of preventing them.</p>
             </div>
         </section>
 
@@ -3624,7 +3738,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl', 'project-carla'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
