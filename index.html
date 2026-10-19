@@ -2216,6 +2216,14 @@
             font-weight: 300;
         }
 
+        .ce-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             nav {
@@ -2621,54 +2629,47 @@
                         <li>Python</li>
                         <li>C++</li>
                         <li>MATLAB</li>
-                        <li>HTML</li>
                         <li>Verilog</li>
-                        <li>Flutter</li>
-                        <li>Streamlit</li>
+                        <li>HTML</li>
                         <li>PyTorch</li>
+                        <li>ROS</li>
                         <li>Arduino</li>
-                        <li>Supabase</li>
-                        <li>Firebase</li>
-                        <li>AI</li>
                         <li>Machine Learning</li>
                         <li>Neural Networks</li>
                         <li>Computer Vision</li>
-                        <li>ROS</li>
                         <li>Robotics</li>
-                        <li>Mobile & Web App Development</li>
+                        <li>CAD (Onshape)</li>
+                        <li>Systems Design</li>
                         <li>Data Analysis</li>
+                        <li>Data Visualization</li>
+                        <li>Flutter</li>
+                        <li>Streamlit</li>
+                        <li>Supabase</li>
+                        <li>Firebase</li>
+                        <li>Web & Mobile Apps</li>
+                        <li>UI/UX Design</li>
+                        <li>User Research</li>
+                        <li>User Flows</li>
+                        <li>Wireframes</li>
+                        <li>Mockups</li>
+                        <li>Prototyping</li>
+                        <li>Interaction Design</li>
+                        <li>A/B Testing</li>
                         <li>Figma</li>
                         <li>Framer</li>
-                        <li>UI/UX Design</li>
-                        <li>Prototyping</li>
-                        <li>Data Visualization</li>
-                        <li>Frontend UI</li>
-                        <li>Interaction Design</li>
-                        <li>Mockups</li>
-                        <li>Wireframes</li>
-                        <li>Illustrator</li>
-                        <li>Photoshop</li>
-                        <li>InDesign</li>
-                        <li>Dreamweaver</li>
-                        <li>Animate</li>
-                        <li>Canva</li>
-                        <li>Keynote</li>
-                        <li>CAD</li>
-                        <li>OnShape</li>
                         <li>Miro</li>
                         <li>Dovetail</li>
                         <li>ATLAS.ti</li>
-                        <li>User Flows</li>
-                        <li>User Research & Interviews</li>
-                        <li>A/B Testing</li>
-                        <li>Agile</li>
-                        <li>Jira</li>
-                        <li>Kanban</li>
-                        <li>Scrum</li>
-                        <li>Trello</li>
-                        <li>Systems Design</li>
-                        <li>Logic Pro</li>
+                        <li>Illustrator</li>
+                        <li>Photoshop</li>
+                        <li>InDesign</li>
                         <li>Premiere Pro</li>
+                        <li>Logic Pro</li>
+                        <li>Canva</li>
+                        <li>Agile</li>
+                        <li>Scrum</li>
+                        <li>Jira</li>
+                        <li>Trello</li>
                     </ul>
                 </section>
                 <section class="about-card" aria-labelledby="card-awards">
@@ -2692,7 +2693,7 @@
                         <li>Universal Studios :)</li>
                         <li>Barry’s Bootcamp</li>
                         <li>Denmark, New Zealand, Iceland</li>
-                        <li><em>Deep Work, Think Again, The Right It, Zero to One, Design of Everyday Things, The Tipping Point</em></li>
+                        <li><em>Deep Work, Think Again, The Right It, Zero to One, Design of Everyday Things, The Tipping Point, Stumbling on Happiness, Influence</em></li>
                         <li><em>The Seven Husbands of Evelyn Hugo, The Collector, Her Name in the Sky, Educated, AI 2041, Broken Country, Great Big Beautiful Life, A Little Life, And Then There Were None</em></li>
                         <li><em>Iron Man, He’s Just Not That Into You, Interstellar, Criminal Minds</em></li>
                         <li><a href="https://vercel.com/font?type=mono" target="_blank" rel="noopener">Geist</a></li>
@@ -3354,6 +3355,10 @@
                 <h1 class="serif">Imitation Learning for Autonomous Driving in CARLA</h1>
                 <p class="project-meta">BU EC518 Robot Learning · Fall 2026</p>
                 <p class="project-description">I built an imitation learning pipeline that trains a CNN to drive from camera images in the CARLA simulator, then ran controlled experiments to find which design choices actually make it drive better.</p>
+                <figure class="ce-photo">
+                    <img src="carla/collect.jpg" width="1056" height="594" alt="Third person view of a black sedan driving at night on a CARLA town road, with a HUD on the left showing speed, location, controls, nearby vehicles, and REC: ON and Perturb: ON" loading="lazy" decoding="async">
+                    <figcaption>Collecting expert data in CARLA, with recording and steering nudges both on.</figcaption>
+                </figure>
 
                 <p class="project-description"><b>Context:</b> Imitation learning trains a policy by copying an expert, and it’s how many robots and driving systems get their first policy. Its weakness is distribution shift: the network only sees states the expert visited, so one small mistake puts it somewhere it never trained on, and errors compound. Behavior cloning’s cost can grow quadratically with the task length, while DAgger, which trains on the learner’s own states, keeps it linear. I proved this bound for the course, then tested what helps in closed loop driving, not just on a validation set.</p>
                 <p class="project-description"><b>Skills:</b> Python, PyTorch, CNNs, imitation learning (behavior cloning, DAgger), CARLA, experiment design, data cleaning, GPU cluster jobs (BU SCC).</p>
@@ -3383,6 +3388,10 @@
                     </tbody>
                 </table>
                 <p class="hp-note">CARLA driving score: route completion times an infraction penalty. Scores are on a route in the training town unless noted.</p>
+                <figure class="ce-photo" style="margin-top: 2rem">
+                    <img src="carla/town02-turn.jpg" width="1600" height="599" alt="Eight dashcam frames from the final model approaching a junction in the unseen town. The road continues straight past parked cars and a motorcycle." loading="lazy" decoding="async">
+                    <figcaption>The final model in the unseen town, about 1 s per frame. The route turns at this junction, but the car keeps going straight, the main reason its scores there stay low.</figcaption>
+                </figure>
 
                 <p class="project-description" style="margin-top: 2rem"><b>What I learned:</b> Most failures were about timing, not perception. Frame by frame review showed the top models finishing the route but hitting a stopped motorcycle from behind, and the obvious fix, braking earlier, doubled the collisions instead of preventing them.</p>
             </div>
