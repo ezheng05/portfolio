@@ -2441,29 +2441,29 @@
                 <a href="#research" class="project-back" data-page="research">← Back to research</a>
                 <h1 class="serif">Vision-Based Haptic Navigation</h1>
                 <p class="project-meta">BU Robotics Lab · Sep 2025 to present</p>
-                <p class="project-description">A safety system for remotely driven robots. The robot uses its camera to detect nearby obstacles and slows down before hitting them, and the driver feels the controller push back.</p>
+                <p class="project-description">A safety system for remotely driven robots. It estimates how far away obstacles are using only the robot's camera, limits the robot's speed as it gets close, and pushes back on the driver's handheld controller (a haptic stylus) so they can feel the warning.</p>
 
                 <figure class="hp-hero">
                     <video id="hp-demo" poster="haptic/demo-poster.jpg" muted loop playsinline controls preload="none" aria-label="A box moves toward the robot's camera until it is 30 cm away">
                         <source src="haptic/demo.mp4" type="video/mp4">
                         <source src="haptic/demo.webm" type="video/webm">
                     </video>
-                    <figcaption>A box moving toward the robot's camera. The marker shows the distance the camera estimates, and the marker and force arrow turn red at 30 cm.</figcaption>
+                    <figcaption>Recorded test: a box moves toward the robot's camera. The overlay marks the nearest point and its estimated distance, and the overlay and the arrow on the right turn red once the box is within 30 cm.</figcaption>
                 </figure>
 
-                <p class="project-description"><b>Context:</b> Remote robot drivers crash a lot, because it's hard to judge distance from a camera feed. Feeling a force in your hand (haptic feedback) helps, but prior work on haptic systems was told where the obstacles were ahead of time. I wanted to see if one cheap camera could find them instead. I did this as an undergraduate researcher with Prof. Roberto Tron and Dr. Dawei Zhang, and presented it at the BU UROP Symposium in October 2026.</p>
+                <p class="project-description"><b>Context:</b> When people drive a robot remotely through a camera feed, it's hard to judge distance, which leads to collisions. Haptic feedback, a force the driver feels through their controller, can warn them. But prior work on haptic systems assumed the obstacle positions were already known from a map or motion capture. I tested whether a single ordinary camera could estimate obstacle distance accurately enough to drive that feedback instead. I'm doing this as an undergraduate researcher with Prof. Roberto Tron and Dr. Dawei Zhang, and presented it at the BU UROP Symposium in October 2026.</p>
                 <p class="project-description"><b>Skills:</b> ROS 2, Python, C++, monocular depth estimation (ZoeDepth), control barrier functions, haptic feedback, Geomagic Touch, AgileX LIMO robot.</p>
-                <p class="project-description"><b>Impact:</b> Cut depth error 8x (18.7 to 2.3 cm RMSE), close to the robot's own IR sensor (1.5 cm). Found in a pilot test that 0.8 N is the force an operator clearly feels and can still push through.</p>
+                <p class="project-description"><b>Impact:</b> Reduced depth error about 8x (from 18.7 to 2.3 cm RMSE), close to the robot's built-in IR sensor (1.5 cm RMSE). In a pilot test with one operator, a 0.8 N force was clearly felt but still easy to override, while 0.5 N or less was too weak to work as a warning.</p>
                 <p class="project-description"><b>Details:</b>
                 <ul>
-                    <li>Built the full ROS 2 pipeline: camera, depth estimation, nearest obstacle, safety filter, robot, and a force sent back to the stylus.</li>
-                    <li>Wrote the safety filter as a closed-form solve that runs at 20 Hz without an optimizer.</li>
-                    <li>Fixed 3 bugs in the haptic device's C++ driver, plus a mm/m mixup that made the stylus shake.</li>
-                    <li>Added a dead-man switch and stop-on-exit after finding two ways the robot could keep driving when it shouldn't.</li>
+                    <li>Built the ROS 2 pipeline end to end: a depth model estimates obstacle distance from the camera image, a safety filter limits the robot's speed, and the gap between the requested and allowed speed is sent to the stylus as a force.</li>
+                    <li>Implemented the safety filter (a control barrier function) with a closed-form solution, so it runs at 20 Hz without an optimization solver.</li>
+                    <li>Fixed 3 bugs in the haptic device's C++ driver, plus a unit mismatch (mm vs. m) in my code that made the stylus shake.</li>
+                    <li>Found two safety hazards before hardware testing (a docked stylus commanded full speed, and Ctrl-C didn't stop the robot) and fixed them with a dead-man switch and a stop command on shutdown.</li>
                 </ul>
 
                 <h2 class="project-gallery-title">Try the safety filter</h2>
-                <p class="project-description">Move the box closer or ask for more speed. The robot drives as fast as you ask until that would put it inside 30 cm of the box. Then it slows down, and the stylus pushes back by the difference.</p>
+                <p class="project-description">Drag the sliders to change the distance to the box and the speed the driver asks for. The safety filter sets a speed limit that gets lower as the robot nears the 30 cm margin and reaches zero at the margin. If the driver asks for more than the limit, the robot only gets the limit, and the stylus pushes back harder the bigger the difference.</p>
                 <div class="hp-widget">
                     <div class="hp-sketch">
                         <svg viewBox="0 0 640 230" role="img" aria-labelledby="hp-w-readout">
@@ -2513,11 +2513,11 @@
                         <p class="hp-readout" id="hp-w-readout" aria-live="polite"></p>
                     </div>
 
-                    <p class="hp-note">Simplified to an obstacle straight ahead. Same math as the real filter: at 30 cm and 0.20 m/s requested, it stops the robot and pushes back with the full 0.8 N.</p>
+                    <p class="hp-note">Simplified to an obstacle straight ahead, using the same settings as the real filter. At 30 cm with 0.20 m/s requested, it stops the robot and pushes back with the maximum 0.8 N.</p>
                 </div>
 
                 <h2 class="project-gallery-title">The calibration bug</h2>
-                <p class="project-description">My first depth calibration matched the robot's IR sensor, so I thought it worked. Then I checked it against a tape measure from 0.3 to 1.5 m, and the error grew with distance, up to 39 cm off at 1.5 m. Two things had hidden it: the IR sensor reads straight through clear objects, and my first check only went out to 0.77 m. A quadratic fit brought the error down to 2.3 cm.</p>
+                <p class="project-description">ZoeDepth predicts depth from a single image, but its raw output has to be calibrated to real distances. I first fit the calibration against the robot's IR sensor, and it looked accurate. When I checked it against a tape measure from 0.3 to 1.5 m, the error followed a curve instead of being random: about 15 cm too far at 0.5 m and 39 cm too close at 1.5 m. Two things had hidden this: the IR sensor reads straight through clear objects, and my first check only went out to 0.77 m. Switching to a quadratic calibration brought the error down to 2.3 cm RMSE.</p>
                 <figure>
                     <div class="hp-figure-img"><img src="haptic/depth-accuracy.png" alt="Two plots against tape-measured distance from 0.3 to 1.5 m. The IR sensor follows the ideal line. The linear calibration reads too far up close and too near far away, with error swinging from about +15 cm to about -39 cm. The quadratic refit stays within a few centimeters." loading="lazy"></div>
                 </figure>
@@ -3158,9 +3158,9 @@
 
                 const status = el('hp-w-status');
                 status.dataset.state = state;
-                status.textContent = state === 'safe' ? 'Not stepping in' : state === 'brake' ? 'Braking' : 'Backing away';
-                const forceText = fMag < 0.005 ? 'no force' : `${fMag.toFixed(2)} N push back`;
-                el('hp-w-readout').innerHTML = `Allowed <strong>${fmt(vSafe)} m/s</strong> · Stylus: <strong>${forceText}</strong>`;
+                status.textContent = state === 'safe' ? 'No correction' : state === 'brake' ? 'Braking' : 'Backing away';
+                const forceText = fMag < 0.005 ? 'none' : `${fMag.toFixed(2)} N`;
+                el('hp-w-readout').innerHTML = `Allowed speed <strong>${fmt(vSafe)} m/s</strong> · Stylus force <strong>${forceText}</strong>`;
             }
 
             dIn.addEventListener('input', update);
