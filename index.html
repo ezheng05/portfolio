@@ -433,25 +433,16 @@
                 transparent 68%);
             transform: translate(-50%, -50%);
             pointer-events: none;
-            animation: glow-pulse 10s ease-in-out infinite;
+            animation: glow-pulse 3.5s ease-in-out infinite alternate;
         }
 
-        /* drifts around the center while growing, shrinking and fading */
         @keyframes glow-pulse {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(0.85);
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
                 opacity: 0.75;
             }
-            25% {
-                transform: translate(-43%, -55%) scale(1.08);
-                opacity: 1;
-            }
-            50% {
-                transform: translate(-53%, -44%) scale(0.92);
-                opacity: 0.8;
-            }
-            75% {
-                transform: translate(-57%, -53%) scale(1.12);
+            to {
+                transform: translate(-50%, -50%) scale(1.1);
                 opacity: 1;
             }
         }
