@@ -2202,6 +2202,19 @@
             }
         }
 
+        .project-card[data-project="neuro"] {
+            background-image: url('neurobionics/card.svg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .nb-states {
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* CARLA imitation learning project page (.ce); layout reuses the .hp page styles */
         .project-card[data-project="carla"] {
             background-image: url('carla/card.svg');
@@ -3130,23 +3143,30 @@
                         <p>BU Robotics Lab · ROS 2 · monocular depth · haptics</p>
                     </div>
                 </div>
-                <div class="project-card" data-project="marl" tabindex="0" role="button">
+                <div class="project-card" data-project="neuro" tabindex="0" role="button">
                     <div class="project-info">
                         <div class="project-number">02</div>
+                        <h3>EMG Controlled Assistive Glove</h3>
+                        <p>Senior Design · EMG · LDA · Raspberry Pi</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="marl" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">03</div>
                         <h3>Agent Failure in Multi-Robot Reinforcement Learning</h3>
                         <p>Kulis Lab · MARL · PyTorch · robot teams</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="carla" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">03</div>
+                        <div class="project-number">04</div>
                         <h3>Imitation Learning for Autonomous Driving</h3>
                         <p>EC518 Robot Learning · PyTorch · CARLA · DAgger</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="ccl" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">04</div>
+                        <div class="project-number">05</div>
                         <h3>Continuous Indoor Air Quality Assessment</h3>
                         <p>Multimedia Communications Lab · IoT · MongoDB · Streamlit</p>
                     </div>
@@ -3384,6 +3404,57 @@
                 </figure>
 
                 <p class="project-description"><b>Next:</b> So far this has run on recorded camera data with a real person on the stylus. Next is testing on the live robot, and letting it steer around obstacles instead of only braking.</p>
+            </div>
+        </section>
+
+        <section id="project-neuro" class="page project-detail" data-parent="research">
+            <div class="project-page hp">
+                <a href="#research" class="project-back" data-page="research">← Back to research</a>
+                <h1 class="serif">EMG Controlled Assistive Glove for Stroke Rehabilitation</h1>
+                <p class="project-meta">BU ECE Senior Design · Neurobionics · Sep 2026 to present</p>
+                <p class="project-description">A soft robotic glove that closes a weak hand when forearm muscle signals (EMG) show the user is trying to grip. I proposed the project and own the calibration that keeps it working each time the glove goes back on.</p>
+
+                <p class="project-description"><b>Context:</b> About 40% of stroke survivors have lasting loss of arm and hand function, and many could keep improving at home. EMG controlled devices exist but mostly stay in the clinic: they cost $33,000+ and need someone to recalibrate them. Published classifiers reach about 95% accuracy only when the electrodes go on exactly the same way every session, and shifting them 1 cm can cut accuracy by about 25%. On a glove that moves your own fingers, a wrong guess is an unwanted squeeze.</p>
+                <p class="project-description"><b>Skills:</b> Requirements engineering, weighted tradeoff studies, EMG pattern recognition (LDA), Python on Raspberry Pi, literature and patent review, IEC/ISO safety standards, UI design, team leadership.</p>
+                <p class="project-description"><b>Impact:</b> Reframed the project from gesture accuracy, which is largely solved, to staying reliable after the glove is taken off and put back on, the barrier that keeps these devices out of homes. The team adopted the success metrics I proposed: accuracy the next day (75% or higher after a 60 s check, with no full retraining) and unintended activations at rest. The project is in the design phase, with testing in spring 2027.</p>
+                <p class="project-description"><b>Details:</b>
+                <ul>
+                    <li>Proposed the project and was the first lead of the 6 person team (Sep to Oct 2026), running meetings and design reviews through requirements and the Critical Design Review. Secured a faculty advisor in biosignal processing.</li>
+                    <li>Ran weighted tradeoff studies across 6 application areas and 4 device designs. Switched the target from post surgical therapy to stroke once the course required actuation, since grip assist only makes sense for weakness that persists.</li>
+                    <li>Own the session manager. Each session it loads the user’s model, records 5 s of rest, cues 4 gestures with the glove off, adapts the model, and checks electrode placement. I found the original calibration took 65 s against a 60 s limit and fixed the timing before building.</li>
+                    <li>Chose to update only the classifier’s class means: the model has 160 mean values but 528 covariance values, and calibration gives only about 190 independent windows of data.</li>
+                    <li>Turned design review feedback into new safety requirements, including a 50 ms overforce cutoff, safe behavior on power loss and controller crash, and a mechanical stop on each tendon.</li>
+                </ul>
+
+                <h2 class="project-gallery-title">Choosing a calibration method</h2>
+                <table class="ce-table">
+                    <thead>
+                        <tr><th>Method</th><th>Score</th><th>Result</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="ce-final"><td>Update class means from 5 reps</td><td class="ce-score">4.10</td><td>Picked</td></tr>
+                        <tr class="ce-final"><td>Scale features to today’s resting baseline</td><td class="ce-score">3.85</td><td>Picked, run together with the update</td></tr>
+                        <tr><td>Train with simulated electrode shift</td><td class="ce-score">3.80</td><td>Higher implementation risk</td></tr>
+                        <tr><td>Pretrain on public EMG data</td><td class="ce-score">3.15</td><td>Weakest on accuracy and risk</td></tr>
+                        <tr><td>Retrain fully every session</td><td class="ce-score">out</td><td>Can’t fit in 60 s</td></tr>
+                        <tr><td>Reuse yesterday’s model unchanged</td><td class="ce-score">control</td><td>Loses about 27% across days; kept as the test baseline</td></tr>
+                    </tbody>
+                </table>
+                <p class="hp-note">Weighted on next day accuracy 35%, calibration time 25%, implementation risk 20%, compute on the Pi 10%, and patent clearance 10%.</p>
+
+                <h2 class="project-gallery-title" style="margin-top: 2.5rem">How a session runs</h2>
+                <figure>
+                    <div class="hp-figure-img nb-states"><img src="neurobionics/session-states.png" width="900" height="1199" alt="Session manager state diagram. From idle, load the user’s profile, record a 5 s resting baseline, cue 4 gestures by 5 reps with the glove off, adapt the model, then check placement. At 70% or more it hands off to the classifier; under 70% it prompts the user to reposition and retries, and a second failure goes to full training with an operator. Each session ends by saving the model and refitting on all sessions." loading="lazy" decoding="async"></div>
+                    <figcaption>The session manager I designed. The glove stays off during calibration, so only the user’s own effort is recorded.</figcaption>
+                </figure>
+
+                <h2 class="project-gallery-title">Operator screens</h2>
+                <figure>
+                    <div class="hp-figure-img"><img src="neurobionics/operator-screens.png" width="1800" height="986" alt="Four operator screen mockups: calibrating, with a cue to close your hand and hold progress; reposition, showing 62% accuracy against a 70% target and which electrode to press down; classifying, showing the current intent and confidence; and fault, explaining a stall, confirming tension was released, and what to check before clearing." loading="lazy" decoding="async"></div>
+                    <figcaption>Screens I designed for each state the operator sees. Each one says what to do next, and the reposition screen shows per gesture accuracy so a failure is explainable.</figcaption>
+                </figure>
+
+                <p class="project-description"><b>Next:</b> Experts told us the original plan (custom glove, EMG board, safety controller, EEG) was too much at once, so we cut it to an existing glove, one therapy exercise, and a phone app. I now own calibration and the app. This fall I’m testing the calibration options offline on Ninapro DB6, a public EMG dataset recorded across days, before live tests with the glove.</p>
             </div>
         </section>
 
@@ -3987,7 +4058,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-marl', 'project-carla', 'project-ccl'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-ccl'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
