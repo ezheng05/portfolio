@@ -2009,8 +2009,7 @@
             --ml-base: #6e6e6e;
         }
 
-        .ml-sim svg,
-        .ml-chart svg {
+        .ml-sim svg {
             width: 100%;
             height: auto;
             display: block;
@@ -2022,8 +2021,7 @@
             border: 1px solid var(--border);
         }
 
-        .ml-sim text,
-        .ml-chart text {
+        .ml-sim text {
             font-family: 'DM Sans', sans-serif;
             font-size: 11px;
             fill: var(--text-secondary);
@@ -2120,68 +2118,8 @@
             opacity: 0.4;
         }
 
-        /* adaptation-drop chart */
-        .ml-chart {
-            position: relative;
-        }
-
-        .ml-grid { stroke: var(--border); stroke-width: 1; }
-        .ml-axis { stroke: var(--text-secondary); stroke-width: 1; opacity: 0.6; }
-        .ml-bar-ippo { fill: var(--ml-base); }
-        .ml-bar-mappo { fill: var(--accent); }
-        .ml-chart .ml-val { fill: var(--text-primary); font-weight: 600; font-size: 11.5px; }
-        .ml-chart .ml-group { fill: var(--text-primary); font-size: 12px; font-weight: 500; }
-
-        .ml-bar-hit {
-            fill: transparent;
-            cursor: default;
-            outline: none;
-        }
-
-        .ml-bar-hit:focus-visible {
-            stroke: var(--accent);
-            stroke-width: 2;
-        }
-
-        .ml-legend {
-            display: flex;
-            gap: 1.25rem;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .ml-legend span {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .ml-legend i {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
-            display: inline-block;
-        }
-
-        .ml-tip {
-            position: absolute;
-            pointer-events: none;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 0.4rem 0.6rem;
-            font-size: 0.8rem;
-            color: var(--text-primary);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-            white-space: nowrap;
-            opacity: 0;
-            transform: translate(-50%, -100%);
-            transition: opacity 0.15s ease;
-        }
-
-        .ml-tip.visible {
-            opacity: 1;
+        .ml-table td:first-child {
+            width: 30%;
         }
 
         @media (max-width: 700px) {
@@ -2192,15 +2130,6 @@
 
             .ml-sim .ml-tag {
                 font-size: 18px;
-            }
-
-            .ml-chart text {
-                font-size: 15px;
-            }
-
-            .ml-chart .ml-val,
-            .ml-chart .ml-group {
-                font-size: 15px;
             }
 
             .ml-modes button {
@@ -3499,50 +3428,38 @@
                     <p class="hp-note">An illustration of the two failure modes I test, not experimental data.</p>
                 </div>
 
-                <p class="project-description"><b>Context:</b> Most multi-agent reinforcement learning (MARL) assumes the team stays the same for the whole task. Real robots break, lose power, or drop off the network. I’m comparing two standard ways to train a robot team. In MAPPO, each robot acts on its own sensors, but during training a shared critic (the “coach” that scores actions) sees the whole team. In IPPO, each robot learns completely on its own. My hypothesis is that the shared critic makes robots lean on their teammates more, so MAPPO teams should adapt worse when one fails. I’m advised by Prof. Brian Kulis and aiming for a workshop paper by the end of the 2026-27 school year. This is also the experiential part of my ML concentration, and I’m extending it with a teammate as our EC518 Robot Learning project.</p>
-                <p class="project-description"><b>Skills:</b> Python, PyTorch, multi-agent reinforcement learning (MAPPO, IPPO, PPO, actor-critic), BenchMARL, TorchRL, VMAS, Hydra, Weights &amp; Biases, GPU cluster batch jobs (BU SCC), experimental design, statistics (t-tests, Welch’s test, Fisher’s method, 95% confidence intervals), literature review.</p>
-                <p class="project-description"><b>Impact:</b> Trained 40 policies across 2 algorithms, 4 team sizes, and 5 seeds. Showed that a frozen teammate cuts survivor success by up to 7 percentage points, that about two-thirds of that is goals the frozen robot is physically blocking, and that MAPPO’s remaining adaptation failure is about 35% larger than IPPO’s, replicated with 3 and 6 robots (combined p ≈ 0.012). A robot fleet that falls apart when one unit dies isn’t deployable, and MAPPO is the default method, so this matters for which one people pick for real robots.</p>
+                <p class="project-description"><b>Context:</b> Most multi-agent reinforcement learning (MARL) assumes the team never changes, but real robots break, lose power, or drop off the network. I compare two standard training methods that differ in one thing. In MAPPO, a shared critic (a “coach” that scores actions) sees the whole team during training. In IPPO, each robot learns alone. Once deployed, both act only on their own sensors. My hypothesis is that the shared coach makes robots lean on each other, so MAPPO teams cope worse when one fails. I’m advised by Prof. Brian Kulis and aiming for a workshop paper by spring 2027.</p>
+                <p class="project-description"><b>Skills:</b> Python, PyTorch, multi-agent RL (MAPPO, IPPO, PPO), BenchMARL, TorchRL, VMAS, Weights &amp; Biases, GPU cluster jobs (BU SCC), experimental design, statistics (Welch’s t-test, Fisher’s method).</p>
+                <p class="project-description"><b>Impact:</b> Trained 60+ policies and found that the answer depends on the task. When each robot has its own goal, a frozen teammate cuts success by up to 7 points, and MAPPO adapts about 35% worse than IPPO, replicated with 3 and 6 robots (combined p ≈ 0.012). When robots share a map to cover, a failure costs both methods about a quarter of the team’s output and they don’t differ. MAPPO is the default for robot teams, so this shows when its extra fragility matters.</p>
                 <p class="project-description"><b>Details:</b>
                 <ul>
-                    <li>Chose the question after comparing several multi-robot directions (task allocation, learned bidding, communication robustness, agent failure) on novelty, what’s feasible in a year, and potential for tests on real robots.</li>
-                    <li>Set up GPU training on BU’s Shared Computing Cluster from scratch, with reproducible batch job scripts.</li>
-                    <li>Used VMAS navigation in BenchMARL: each robot has its own goal, senses only with lidar, and is penalized for collisions.</li>
-                    <li>Trained 40 policies: MAPPO and IPPO, 5 seeds each, at 4 team sizes (3 and 6 robots, plus 2 and 5 robot teams trained from scratch as the best possible after losing one). The two methods match in everything except the critic.</li>
-                    <li>Used one checkpoint rule for every run after finding that training too long hurts: cap at about 200 iterations, save every 20, keep the best evaluation score.</li>
-                    <li>Built a test harness that makes one robot stall (freeze in place, still visible) or vanish (removed, no longer sensed) at step 5, 15, or 30. Every robot takes a turn failing, on the same starting layouts.</li>
-                    <li>Measured success from robot positions, not reward. The simulator only gives a finishing bonus when every robot reaches its goal, which a failed robot never can.</li>
-                    <li>Added a check for goals the frozen robot is sitting on, and a hand-coded controller (no learning, steers around obstacles with lidar) as a reference, plus a more cautious version of it.</li>
-                    <li>Ran per-seed statistics: t-tests for each drop, Welch’s t-test for MAPPO vs. IPPO, and Fisher’s method to combine team sizes. I fixed the main test after the 3 robot results, so the 6 robot run counted as a real replication.</li>
-                    <li>Read the closest paper (Barta et al. 2025) in full. It adds sensor noise to MAPPO robots for a whole episode. Related work crashes agents mid-task or compares methods in grid worlds, but I haven’t found a matched MAPPO vs. IPPO comparison under mid-task teammate loss in continuous robot navigation.</li>
+                    <li>Set up every comparison to isolate one cause: the methods differ only in the critic, every robot takes a turn failing on the same starting layouts, and results are checked against a team trained one robot smaller and a hand-coded controller.</li>
+                    <li>Measured success from robot positions instead of reward, after noticing the simulator’s finishing bonus requires every robot to arrive, which would punish every failure.</li>
+                    <li>Locked the statistical test after the 3 robot results, so the 6 robot run counted as a true replication.</li>
+                    <li>In the shared task, raw numbers made the methods look different, but MAPPO’s team started weaker (68.9 vs. 80.5). Comparing each run to its own no-failure score made the difference disappear.</li>
+                    <li>Got a third task to train after it barely beat random, by adding reward shaping and random start points to the simulator.</li>
+                    <li>Built the GPU training pipeline on BU’s cluster from scratch, and presented the project in a 40 minute talk to the research group.</li>
                 </ul>
 
-                <h2 class="project-gallery-title">What I found so far</h2>
-                <p class="project-description">Both methods learn the task equally well at every team size, with best evaluation scores between 1.05 and 1.09. Teams trained one robot smaller score about the same as the full team, since each robot has its own goal. So any drop after a failure comes from the survivors, not from the task getting harder. All results are in simulation.</p>
-                <ul>
-                    <li><b>A frozen teammate hurts; a missing one doesn’t.</b> Vanish never lowers success and even helps slightly, with one fewer robot to avoid. Stall cuts survivor success by up to about 7 points.</li>
-                    <li><b>Damage peaks mid-task.</b> A stall at step 15 hurts more than at step 5 or 30. Early, the frozen robot is out of the way near the start; late, most survivors have arrived. With 6 robots and a stall at step 15, success fell from 0.981 to 0.930 for IPPO and from 0.971 to 0.916 for MAPPO.</li>
-                    <li><b>About two-thirds of the drop is blocked goals</b> (about 70% with 6 robots). No controller could finish those.</li>
-                    <li><b>The rest is a real adaptation failure.</b> On goals that are still reachable, both methods drop at every failure time (p ≤ 0.006), while the hand-coded controller reaches at least 99.8% of them, even the cautious version.</li>
-                    <li><b>Survivors get stuck; they don’t crash.</b> Progress toward goals barely changes (about 1%) and collisions don’t rise. Robots get almost all the way there and fail the final approach.</li>
-                    <li><b>Learned policies trade a little reach for a lot of safety.</b> The hand-coded controller collides 50 to 150x more often.</li>
-                </ul>
-                <p class="project-description"><b>MAPPO adapts worse than IPPO, and it replicated.</b> On reachable goals, MAPPO’s drop is about a third larger at both team sizes and at every failure time. The effect is small, 0.4 to 0.5 points on top of a 1 to 2 point drop, but consistent. At test time MAPPO robots also use only their own sensors, so the extra fragility comes from behavior they learned in training.</p>
-                <div class="hp-widget">
-                    <div class="ml-legend" aria-hidden="true"><span><i style="background: var(--ml-base)"></i>IPPO</span><span><i style="background: var(--accent)"></i>MAPPO</span></div>
-                    <div class="ml-chart" id="ml-chart">
-                        <svg viewBox="0 0 640 284" role="img" aria-labelledby="ml-chart-desc">
-                            <desc id="ml-chart-desc">Drop in success on reachable goals after a stall, in percentage points. Teams of 3: IPPO 1.36, MAPPO 1.86, Welch p = 0.035. Teams of 6: IPPO 1.25, MAPPO 1.66, Welch p = 0.048.</desc>
-                            <g id="ml-chart-plot"></g>
-                        </svg>
-                        <div class="ml-tip" id="ml-tip" role="status"></div>
-                    </div>
-                    <p class="hp-note">Drop in success on goals still reachable after a stall, in percentage points (lower is better). Mean over 5 seeds, pooled over failure times.</p>
-                </div>
+                <h2 class="project-gallery-title">Same failure, two tasks</h2>
+                <p class="project-description">Navigation tests whether survivors get thrown off. Sampling, where robots collect value by covering a map, tests whether they make up a lost teammate’s share.</p>
+                <table class="ce-table ml-table">
+                    <thead>
+                        <tr><th></th><th>Navigation</th><th>Sampling</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Cost of a frozen robot</td><td>Up to 7 points of success</td><td>About 25% of team output</td></tr>
+                        <tr><td>vs. a team trained one robot smaller</td><td>Still a gap on reachable goals</td><td>Matches it</td></tr>
+                        <tr><td>MAPPO vs. IPPO</td><td>MAPPO about 35% worse (p ≈ 0.012)</td><td>No difference (p ≥ 0.32)</td></tr>
+                    </tbody>
+                </table>
+                <p class="hp-note" style="margin-bottom: 1.75rem">Simulation, 5 seeds per method. Navigation with teams of 3 and 6, Sampling with 3.</p>
+                <p class="project-description">So MAPPO’s extra fragility shows up where a frozen teammate gets in the others’ way, not where survivors just keep doing their own job. Matching the smaller team is an outcome, though, not proof that survivors reacted to the failure. That’s the next thing I’m testing.</p>
 
                 <h2 class="project-gallery-title">Is it the robot or the geometry?</h2>
-                <p class="project-description">When a robot froze, survivors reached their goals up to 7 points less often. It looked like a clean adaptation failure. Then I asked whether the task had simply become impossible: if a robot freezes on top of someone’s goal, no controller could finish. I added a check for that, plus a simple hand-coded controller as a reference. About two-thirds of the drop turned out to be blocked goals. The remaining third was real: the hand-coded controller reached nearly every reachable goal, and the learned robots didn’t. That remainder is the actual finding, and it’s where MAPPO and IPPO differ.</p>
+                <p class="project-description">When a robot froze, survivors reached their goals up to 7 points less often. Before calling it an adaptation failure, I asked whether the task had become impossible: a robot frozen on top of someone’s goal blocks it for any controller. I added a check for that, plus a hand-coded controller as a reference. Two-thirds of the drop was blocked goals. The other third was real: the hand-coded controller reached nearly every reachable goal, and the learned robots didn’t. That remainder is the actual finding, and it’s where MAPPO and IPPO differ.</p>
 
-                <p class="project-description"><b>Next:</b> Find out why survivors with a clear path still fail, whether it’s a deadlock near the frozen robot or drifting. Then test losing several robots at once with 6 robot teams, and move to a shared task where losing a robot leaves real work undone. After that comes training with random robot dropout, possibly critics built to handle a changing team size, and eventually tests on the lab’s physical LIMO robots.</p>
+                <p class="project-description"><b>Next:</b> Finish a third task, and compare survivors’ paths with the identical no-failure episode to see whether they actually react. Then train with random failures and a signal for which teammates are still active, aimed at closing the navigation gap, and eventually test on the lab’s physical LIMO robots.</p>
             </div>
         </section>
 
@@ -4418,7 +4335,7 @@
             vIn.addEventListener('input', update);
             draw();
         })();
-        // marl page: failure-mode illustration and adaptation-drop chart
+        // marl page: failure-mode illustration
         (function() {
             const page = document.getElementById('project-marl');
             if (!page) return;
@@ -4580,51 +4497,6 @@
             }).observe(sim);
 
             setMode('none');
-
-            // chart: grouped bars, adaptation drop on reachable goals in percentage points
-            const plot = document.getElementById('ml-chart-plot');
-            const tip = document.getElementById('ml-tip');
-            const chartBox = document.getElementById('ml-chart');
-            const X0 = 64, X1 = 620, Y0 = 220, YTOP = 30, YMAX = 2.2;
-            const y = v => Y0 - v / YMAX * (Y0 - YTOP);
-            [0, 0.5, 1, 1.5, 2].forEach(t => {
-                make('line', { class: t === 0 ? 'ml-axis' : 'ml-grid', x1: X0, x2: X1, y1: y(t), y2: y(t) }, plot);
-                make('text', { x: X0 - 10, y: y(t) + 4, 'text-anchor': 'end' }, plot).textContent = t.toFixed(1);
-            });
-            make('text', { x: X0 - 10, y: 16, 'text-anchor': 'end' }, plot).textContent = 'points';
-            const groups = [
-                { label: 'Teams of 3 robots', sub: 'MAPPO +37%, p = 0.035', cx: 210, bars: [['IPPO', 1.36], ['MAPPO', 1.86]] },
-                { label: 'Teams of 6 robots', sub: 'MAPPO +33%, p = 0.048', cx: 470, bars: [['IPPO', 1.25], ['MAPPO', 1.66]] }
-            ];
-            const W = 64;
-            groups.forEach(g => {
-                make('text', { class: 'ml-group', x: g.cx, y: Y0 + 26, 'text-anchor': 'middle' }, plot).textContent = g.label;
-                make('text', { x: g.cx, y: Y0 + 46, 'text-anchor': 'middle' }, plot).textContent = g.sub;
-                g.bars.forEach(([name, mean], k) => {
-                    const x = k === 0 ? g.cx - W - 1 : g.cx + 1;
-                    const top = y(mean), r = 4;
-                    make('path', {
-                        class: name === 'IPPO' ? 'ml-bar-ippo' : 'ml-bar-mappo',
-                        d: `M${x},${Y0} L${x},${top + r} Q${x},${top} ${x + r},${top} L${x + W - r},${top} Q${x + W},${top} ${x + W},${top + r} L${x + W},${Y0} Z`
-                    }, plot);
-                    const cx = x + W / 2, hi = y(mean);
-                    make('text', { class: 'ml-val', x: cx, y: hi - 8, 'text-anchor': 'middle' }, plot).textContent = mean.toFixed(2);
-                    const hit = make('rect', { class: 'ml-bar-hit', x, y: YTOP, width: W, height: Y0 - YTOP, tabindex: 0, 'aria-label': `${g.label}, ${name}: ${mean} point drop` }, plot);
-                    const show = () => {
-                        const box = chartBox.getBoundingClientRect(), svgBox = plot.ownerSVGElement.getBoundingClientRect();
-                        const scale = svgBox.width / 640;
-                        tip.innerHTML = `<b>${name}</b>, ${g.label.toLowerCase()}<br>${mean.toFixed(2)} point drop on reachable goals`;
-                        tip.style.left = `${svgBox.left - box.left + cx * scale}px`;
-                        tip.style.top = `${svgBox.top - box.top + hi * scale - 30}px`;
-                        tip.classList.add('visible');
-                    };
-                    const hide = () => tip.classList.remove('visible');
-                    hit.addEventListener('mouseenter', show);
-                    hit.addEventListener('focus', show);
-                    hit.addEventListener('mouseleave', hide);
-                    hit.addEventListener('blur', hide);
-                });
-            });
         })();
         // resume tab: decrypt the encrypted resume files in the browser once the password is entered
         (function() {
