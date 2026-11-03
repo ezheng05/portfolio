@@ -2707,6 +2707,15 @@
             margin-bottom: 0.6rem;
         }
 
+        .vs .vs-screen-text p,
+        .vs .vs-sys-block > p:not(.vs-small) {
+            font-size: 0.98rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 0.85rem;
+        }
+
         .vs-screen-text li b,
         .vs-sys-block li b {
             color: var(--text-primary);
@@ -3688,13 +3697,13 @@
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">VitaSalus</h1>
                 <p class="project-meta">Personal project · Solo · Research, product strategy, UX/UI · Ongoing</p>
-                <p class="vs-lede">A health app that sits on top of the wearables people already own. When you open it, it tells you where you stand on your goal, why, what to do in the next hour, and the one change that would help most over time.</p>
+                <p class="vs-lede">VitaSalus is a health app that sits on top of the wearables you already own. Open it and it tells you where you stand on your goal, why, what to do in the next hour, and the one habit that would help most over time.</p>
 
                 <figure class="vs-figure vs-figure--hero">
                     <button type="button" class="vs-zoom" aria-label="Enlarge the five final screens">
                         <img src="vitasalus/screens-overview.jpg" width="1600" height="756" alt="The five final VitaSalus screens side by side: Home (energy 3 with the ring running off the right edge, Running low), Why (Mostly sleep, partly food), Goal (Behind, 3 of 5 afternoons you crashed), Check-in (How's your energy?), and Before an appointment (Physical therapy, Thu 9:00)." decoding="async">
                     </button>
-                    <figcaption>The five final screens: home, why, goal, check-in, and a summary prepared before an appointment. High-fidelity concepts built from my design system; names and health values are sample data.</figcaption>
+                    <figcaption>The five final screens. They’re high-fidelity concepts built from my design system, and the names and health values are sample data.</figcaption>
                 </figure>
 
                 <dl class="vs-facts">
@@ -3723,26 +3732,26 @@
                 <section class="vs-section" id="vs-problem" aria-labelledby="vs-problem-h">
                     <p class="vs-kicker">01 · The problem</p>
                     <h2 class="serif vs-h2" id="vs-problem-h">People who track their health have plenty of data and very little guidance.</h2>
-                    <p class="project-description">I started broad, with an AI health and wellness app. That space is crowded (Apple, Google, Samsung, Oura, WHOOP, Garmin and dozens of AI coaching apps), so I didn’t design anything until I knew exactly where the pain was.</p>
-                    <p class="project-description">I began by listening. I ran 50+ customer discovery interviews with people who track their health and read through complaint threads in the WHOOP, Oura, Garmin and Fitbit communities. I sorted what I heard into five themes and ranked them by how often and how strongly they came up.</p>
+                    <p class="project-description">I started with a broad idea, an AI health and wellness app, in a space already full of Apple, Google, Samsung, Oura, WHOOP, Garmin and dozens of AI coaches. I didn’t want to design a single screen until I knew where it actually hurt.</p>
+                    <p class="project-description">So I listened first. I ran 50+ customer discovery interviews with people who track their health and read through complaint threads in the WHOOP, Oura, Garmin and Fitbit communities. Then I sorted what I heard into five themes and ranked them by how often and how strongly they came up.</p>
 
                     <div class="vs-two">
                         <div>
                             <h3 class="vs-label">Top pain themes, ranked</h3>
                             <ol class="vs-ranked">
-                                <li><b>Accuracy and reliability.</b> Heart rate, steps and sleep stages that don’t match reality, so people stop trusting the score.</li>
-                                <li><b>Pricing and value.</b> Subscription resentment and features moving behind paywalls.</li>
-                                <li><b>Support.</b> Emotional complaints about service and replacements.</li>
+                                <li><b>Accuracy and reliability.</b> A bike ride counted as steps, or sleep stages that don’t match how you slept. After enough of that, people stop trusting the score.</li>
+                                <li><b>Pricing and value.</b> People resent subscriptions, especially when features they had move behind a paywall.</li>
+                                <li><b>Support.</b> The most emotional complaints, mostly about customer service and replacements.</li>
                                 <li><b>No actionable insight.</b> “Why is my recovery low, and what do I do about it?”</li>
-                                <li><b>Fragmentation.</b> Goals, nutrition, training and labs split across apps and devices.</li>
+                                <li><b>Fragmentation.</b> Goals, nutrition, training and labs live in different apps and devices.</li>
                             </ol>
                         </div>
                         <div>
-                            <h3 class="vs-label">Rising, but nobody handles them well</h3>
+                            <h3 class="vs-label">Growing, and nobody handles them well</h3>
                             <ul class="vs-plain">
-                                <li><b>Data anxiety.</b> People feel tired because their sleep score told them they should.</li>
-                                <li><b>Switching devices.</b> Trust in subscription-only wearables is dropping, so software that works on any device has an edge.</li>
-                                <li><b>Dashboard fatigue.</b> People want the next action handed to them, not another app to dig through.</li>
+                                <li><b>Data anxiety.</b> People feel tired because their sleep score said they should.</li>
+                                <li><b>Switching devices.</b> Trust in subscription-only wearables is dropping, which favors software that works on any device.</li>
+                                <li><b>Dashboard fatigue.</b> People want the next step handed to them, and they’re tired of opening yet another app to find it.</li>
                             </ul>
                         </div>
                     </div>
@@ -3757,7 +3766,7 @@
                             <p class="vs-reframe-new">How might we help people who already own wearables <em>trust</em> their data and turn it into one clear next step, without making them anxious?</p>
                         </div>
                     </div>
-                    <p class="project-description">The problem is trust and action, not a lack of data. Every later decision, including what not to build, came back to that question.</p>
+                    <p class="project-description">The people I talked to already had more data than they could use. What they were missing was a reason to trust it and one clear thing to do with it. That question shaped every decision after this, including what I chose not to build.</p>
                 </section>
 
                 <!-- 02 Research -->
@@ -3780,84 +3789,84 @@
                         <button type="button" class="vs-zoom" aria-label="Enlarge the competitive positioning map">
                             <img src="vitasalus/competitive-map.jpg" width="1600" height="1059" alt="Competitive map. The horizontal axis runs from locked to one ecosystem to works across devices; the vertical axis from metrics and dashboards to a concrete next step with explained confidence. Apple Health, WHOOP, Oura, Garmin, Ultrahuman and Eight Sleep sit locked to one ecosystem; Google Health, Samsung Health and Levels sit higher but still locked; Cora, Vora, InsideTracker and Bearable work across devices but sit near the middle. The upper right is the whitespace VitaSalus targets." loading="lazy" decoding="async">
                         </button>
-                        <figcaption>My competitive map (qualitative, from my research). Collecting data is basically solved and generic AI coaching is becoming a commodity. Every company wants to own the user, so nobody is neutral across devices, and few end in a concrete next step.</figcaption>
+                        <figcaption>My competitive map. It’s qualitative, so placement is directional. Collecting data is close to solved, and every big platform now has an AI summary. But each company wants to own the user, so nobody is neutral across devices, and very few end with a concrete next step.</figcaption>
                     </figure>
 
                     <h3 class="vs-h3">Deciding what to build</h3>
-                    <p class="project-description">I tested three positioning ideas and combined the best of each.</p>
+                    <p class="project-description">I tested three positioning ideas. Each had one part worth keeping, so I combined them.</p>
                     <div class="vs-ideas">
-                        <div><span class="vs-label">Idea 1</span><h3>An “anti-AI” accountability app</h3><p>Simple streaks and commitments, with the AI hidden.</p><p class="vs-took">Took: a calm, simple front end</p></div>
-                        <div><span class="vs-label">Idea 2</span><h3>A longevity aggregator</h3><p>One place for the ring, glucose monitor, labs and smart bed people stack up.</p><p class="vs-took">Took: the aggregator underneath</p></div>
-                        <div><span class="vs-label">Idea 3</span><h3>A “why” engine</h3><p>Turns odd readings into small, timed tasks (“walk 5 minutes before this meeting”).</p><p class="vs-took">Took: the main interaction</p></div>
+                        <div><span class="vs-label">Idea 1</span><h3>An “anti-AI” accountability app</h3><p>Simple streaks and commitments, with the AI hidden.</p><p class="vs-took">I kept: a calm, simple front end</p></div>
+                        <div><span class="vs-label">Idea 2</span><h3>A longevity aggregator</h3><p>One place for the ring, glucose monitor, labs and smart bed people stack up.</p><p class="vs-took">I kept: the aggregator underneath</p></div>
+                        <div><span class="vs-label">Idea 3</span><h3>A “why” engine</h3><p>Turns odd readings into small, timed tasks (“walk 5 minutes before this meeting”).</p><p class="vs-took">I kept: the main interaction</p></div>
                     </div>
                 </section>
 
                 <!-- 03 Iteration -->
                 <section class="vs-section" id="vs-iteration" aria-labelledby="vs-iteration-h">
                     <p class="vs-kicker">03 · Iteration</p>
-                    <h2 class="serif vs-h2" id="vs-iteration-h">Four rounds, each fixing a specific problem with the one before.</h2>
-                    <p class="project-description">I reviewed every round as the person I’m designing for: an optimizer who already owns a wearable and is tired of digging for answers. One person I interviewed described chatting with their WHOOP’s AI and digging through its dashboards just to work out what to do as a painstaking experience.</p>
+                    <h2 class="serif vs-h2" id="vs-iteration-h">Four rounds, each one fixing a problem I found in the last.</h2>
+                    <p class="project-description">I reviewed every round as the person I’m designing for: an optimizer who already owns a wearable and is tired of digging for answers. One person I interviewed told me that chatting with their WHOOP’s AI and digging through its dashboards just to work out what to do was a painstaking experience. That’s the experience I wanted VitaSalus to replace.</p>
 
                     <figure class="vs-figure">
                         <button type="button" class="vs-zoom" aria-label="Enlarge the home screen across four rounds">
                             <img src="vitasalus/iteration-home.jpg" width="1600" height="1232" alt="The home screen across four rounds. Round 1, a nicer dashboard with a readiness ring and cards. Round 2, a real brand system with a gold arc running off the edge. Round 3, four questions with an energy bar. Round 4, a pulsing ring running off the right edge (finalist A2) with Running low and a Start button." loading="lazy" decoding="async">
                         </button>
-                        <figcaption>The home screen across the four rounds. Select any image to enlarge it.</figcaption>
+                        <figcaption>Home in each round. Click any image to see it full size.</figcaption>
                     </figure>
 
                     <ol class="vs-rounds">
                         <li>
                             <p class="vs-label">Round 1</p>
                             <h3>A nicer dashboard</h3>
-                            <p><span class="vs-kept">Worked:</span> one score, one insight, one next step.</p>
-                            <p><span class="vs-problem">Didn’t:</span> every piece sat in its own card, so it looked like every other health app. My sage brand green was also too close to the green “good” color to tell apart.</p>
+                            <p><span class="vs-kept">Worked:</span> one score, one insight and one next step.</p>
+                            <p><span class="vs-problem">Didn’t:</span> every piece lived in its own card, so it looked like every other health app. And my sage brand green was so close to the green I used for “good” that you couldn’t tell them apart.</p>
                         </li>
                         <li>
                             <p class="vs-label">Round 2</p>
                             <h3>A real brand system</h3>
-                            <p><span class="vs-kept">Worked:</span> I removed the cards, introduced the engraved gutter, made gold a line-only accent and made blue mean “on track.” It finally looked like its own product.</p>
-                            <p><span class="vs-problem">Didn’t:</span> too much at once. A score arc, a day curve, an insight and metric rows. I’d still have to work out what it all meant.</p>
+                            <p><span class="vs-kept">Worked:</span> I took out the cards, added the engraved gutter, kept gold to thin lines and made blue mean “on track.” For the first time it looked like its own product.</p>
+                            <p><span class="vs-problem">Didn’t:</span> it showed too much at once: a score arc, a day curve, an insight and two metric rows. You’d still have to work out what it all meant.</p>
                         </li>
                         <li>
                             <p class="vs-label">Round 3</p>
                             <h3>Four questions</h3>
-                            <p>An optimizer I interviewed named four questions they want answered when they open the app, so I rebuilt the home screen to answer only those: <b>Where am I with my goal? Why? What do I do in the next hour? What change would help most so this doesn’t happen again?</b></p>
-                            <p><span class="vs-problem">Didn’t:</span> I cut too much. The screen was clear but flat, and losing the “why” also lost the trust signals (device disagreement and confidence). The goal chart’s thick bars looked heavy next to the thin lines of the rest of the system.</p>
+                            <p>An optimizer I interviewed told me the four things they want to know when they open the app, so I rebuilt home to answer those and nothing else: <b>Where am I with my goal? Why? What do I do in the next hour? What change would help most so this doesn’t happen again?</b></p>
+                            <p><span class="vs-problem">Didn’t:</span> I cut too much. The screen was clear but flat, and dropping the “why” also dropped the trust signals: when devices disagree, and how sure the app is. The thick bars on the goal chart also felt heavy next to the thin lines everywhere else.</p>
                         </li>
                         <li>
                             <p class="vs-label">Round 4</p>
                             <h3>Visual again, with the best of round 2 brought back</h3>
-                            <p><span class="vs-kept">Changed:</span> the energy bar became a pulsing ring, so the screen has a focal point you can read before any text. The day number, the gold action label, the lighter body text and the red arrow came back from round 2. The “why” returned as its own screen, one tap away, rewritten to read in seconds.</p>
+                            <p><span class="vs-kept">Changed:</span> I turned the energy bar into a pulsing ring so the screen has one place to look first. I also brought back four details round 2 did better: the day number, the gold action label, the lighter body text and the red arrow. The “why” came back as its own screen, one tap away, and I rewrote it so it reads in seconds.</p>
                         </li>
                     </ol>
 
-                    <h3 class="vs-h3">Comparing options instead of guessing</h3>
-                    <p class="project-description">Two things from round 2 I couldn’t decide on: the ring running off the edge vs. centered, and the action as a text link vs. a button. So I built all four combinations with the same content.</p>
+                    <h3 class="vs-h3">Four versions of home</h3>
+                    <p class="project-description">Round 2 left me with two questions I couldn’t settle by staring at one screen. Should the ring run off the edge or sit centered? Should the action be a text link or a button? So I built all four combinations with identical content and compared them side by side.</p>
                     <figure class="vs-figure">
                         <button type="button" class="vs-zoom" aria-label="Enlarge the four home screen versions">
                             <img src="vitasalus/home-options.jpg" width="1600" height="1029" alt="Four versions of the home screen with the same content. A1: ring off the edge, action as text. A2: ring off the edge, action as a button. B1: ring centered, action as text. B2: ring centered, action as a button." loading="lazy" decoding="async">
                         </button>
-                        <figcaption>A1 and B1 lose the action in the surrounding text, so the button versions moved forward. I also changed the label from “Add to plan” to “Start,” which feels more urgent for something to do today.</figcaption>
+                        <figcaption>In A1 and B1 the action disappears into the text around it, so the button versions moved on. I also renamed it from “Add to plan” to “Start.” This is something to do today, and “Add to plan” made it sound like it could wait.</figcaption>
                     </figure>
-                    <p class="project-description">That left two finalists. <b>B2</b> (ring centered) is the safer choice: more structured and easier to scan. <b>A2</b> (ring off the edge) is more memorable. I’m keeping both to test with users rather than deciding alone.</p>
+                    <p class="project-description">That left two finalists, and I don’t think I should pick between them alone. B2, with the ring centered, is safer and easier to scan. A2, with the ring off the edge, is the one people would remember. I’m keeping both to test with users.</p>
 
-                    <h3 class="vs-h3">Same information, easier to read</h3>
+                    <h3 class="vs-h3">Why and goal, before and after</h3>
                     <figure class="vs-figure">
                         <button type="button" class="vs-zoom" aria-label="Enlarge the Why and Goal before and after">
                             <img src="vitasalus/iteration-why-goal.jpg" width="1600" height="1123" alt="Before and after for the Why screen and the goal chart. The Why screen goes from exact numbers and source labels on every line to a one-line verdict with causes ranked Big, Some and A little. The goal chart goes from two thick colored bars to one thin 0 to 10 line with the gap hatched." loading="lazy" decoding="async">
                         </button>
-                        <figcaption>Left: the Why screen went from exact numbers and source labels on every line (accurate, but hard to read quickly) to a one-line verdict and causes ranked Big / Some / A little. Right: the goal chart went from two thick bars to one thin 0–10 line with the gap hatched, because the gap is the whole argument for the habit.</figcaption>
+                        <figcaption>The first Why screen put an exact number, a percentage and a source on every line. It was accurate, but it took work to read. Now it opens with a one-line verdict and ranks the causes as Big, Some or A little. On the goal chart, two thick bars became one thin 0–10 line with the gap between the two values hatched.</figcaption>
                     </figure>
 
-                    <p class="project-description">For the Why screen I wasn’t sure about two details: the type style of the cause names, and whether the impact words should be in color. I built four versions, kept the two with color, then added a fifth that brought back round 2’s gutter format.</p>
+                    <p class="project-description">I wasn’t sure about two details on the Why screen: how to set the cause names, and whether the impact words (Big, Some, A little) should be in color. I built four versions. The two with color were easier to read, so I kept those and added a fifth that brings back the gutter format from round 2.</p>
                     <figure class="vs-figure">
                         <button type="button" class="vs-zoom" aria-label="Enlarge the three Why screen versions">
                             <img src="vitasalus/why-options.jpg" width="1600" height="1357" alt="Three versions of the Why screen with impact words in color. W3 uses title case cause names, W4 uses all caps names, and W5 uses the round 2 gutter label: the name in caps beside a ring icon with a short caps qualifier underneath." loading="lazy" decoding="async">
                         </button>
-                        <figcaption>W3 is the clearest to read. W5 matches the engraved-gutter look used across the app and is my favorite, so it’s the default, with W3 as the backup to test against it.</figcaption>
+                        <figcaption>W3 is the easiest to read. W5 is my favorite because it matches the engraved gutter used across the app, so W5 is the default and W3 is the backup I’ll test it against.</figcaption>
                     </figure>
 
-                    <h3 class="vs-h3">Small calls that mattered</h3>
+                    <h3 class="vs-h3">Two smaller fixes</h3>
                     <div class="vs-pairs">
                         <figure class="vs-pair">
                             <div class="vs-pair-imgs">
@@ -3865,7 +3874,7 @@
                                 <span class="vs-arrow" aria-hidden="true">&rarr;</span>
                                 <img src="vitasalus/checkin.jpg" width="456" height="989" alt="Final check-in: How's your energy, with a 0 to 10 slider set to 3 and a large microphone button." loading="lazy" decoding="async">
                             </div>
-                            <figcaption><b>Matching scales.</b> The first check-in used a 1–5 tap while home said “3 of 10.” I changed it to a 0–10 slider so the two match.</figcaption>
+                            <figcaption>The first check-in asked for a 1–5 tap, while home said “3 of 10.” I switched to a 0–10 slider so you rate yourself on the same scale the app shows you.</figcaption>
                         </figure>
                         <figure class="vs-pair">
                             <div class="vs-pair-imgs">
@@ -3873,7 +3882,7 @@
                                 <span class="vs-arrow" aria-hidden="true">&rarr;</span>
                                 <img src="vitasalus/appointment.jpg" width="456" height="989" alt="Final summary screen, Physical therapy Thu 9:00, prepared from the calendar for Sam Lee, PT." loading="lazy" decoding="async">
                             </div>
-                            <figcaption><b>Removing a step.</b> The first summary asked “Who’s it for?” The app already knows from the calendar who the next appointment is with, so now it just writes for that person, with “Not this one?” as an escape.</figcaption>
+                            <figcaption>The first summary screen asked “Who’s it for?” But the app already knows from your calendar who you’re seeing next, so now it just writes for that person. “Not this one?” covers a wrong guess.</figcaption>
                         </figure>
                     </div>
 
@@ -3883,11 +3892,11 @@
                             <tr><th>What I noticed</th><th>What I decided</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>I’d ignore any chart that doesn’t tell me right away whether I’m succeeding or failing.</td><td>Home answers four questions and nothing else. A chart stays only if it shows success or failure at a glance.</td></tr>
-                            <tr><td>I’d give the app lots of data, but only if it costs me almost no effort.</td><td>Devices and the calendar sync on their own. The check-in is one swipe and one spoken sentence, which also captures mental and emotional context.</td></tr>
-                            <tr><td>Red arrows are useful, but only when they mean something.</td><td>Arrows appear only where there’s a real change to show: ▼ 4 vs. your usual, ▼ 1.5 h of sleep, ▲ 20% running volume. Never as decoration.</td></tr>
-                            <tr><td>Very few people own both a WHOOP and an Apple Watch, so that disagreement example wasn’t realistic.</td><td>The example compares a wearable with your phone, a pair almost everyone has.</td></tr>
-                            <tr><td>I trust a number more than a phrase like “fairly sure.”</td><td>Confidence is shown as 88%, next to how many sources agree. Words vs. numbers is on my list to test.</td></tr>
+                            <tr><td>I’d ignore any chart that doesn’t tell me right away whether I’m succeeding or failing.</td><td>Home answers four questions and nothing else. A chart only stays if it shows success or failure at a glance.</td></tr>
+                            <tr><td>I’d give the app as much data as I can, as long as it costs almost no effort.</td><td>Devices and the calendar sync on their own. The check-in is one swipe and one spoken sentence, which also picks up how you’re feeling mentally and emotionally.</td></tr>
+                            <tr><td>Red arrows only help when they mean something.</td><td>An arrow shows up only for a real change: ▼ 4 vs. your usual, ▼ 1.5 h of sleep, ▲ 20% running volume. I never use one as decoration.</td></tr>
+                            <tr><td>Very few people own both a WHOOP and an Apple Watch, so my first disagreement example wasn’t realistic.</td><td>The example now compares a wearable with your phone, a pair almost everyone has.</td></tr>
+                            <tr><td>I trust a number more than a phrase like “fairly sure.”</td><td>Confidence shows as 88%, next to how many sources agree. Words vs. numbers is on my list to test.</td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -3903,12 +3912,9 @@
                         <div class="vs-screen-text">
                             <p class="vs-label">01 · Home</p>
                             <h3 class="serif">“Running low.” <span class="vs-delta">▼ 4</span></h3>
-                            <ul>
-                                <li><b>A ring as the focal point.</b> The gold arc fills to your energy now (3 of 10) and a mark on the same circle shows your usual for this hour (7). You’re compared to your own baseline, not other people, and the gap between the two is the problem, so you see it right away.</li>
-                                <li><b>Rings that pulse at the speed of your state:</b> faster when you’re strained, slower when you’re recovered. The number and the sentence say the same thing, so nothing depends on motion, and the pulse turns off for reduced motion.</li>
-                                <li><b>One action, not a list.</b> “Next hour” in gold, one thing to do, a Start button and what to expect (“lifts you ~2 pts within 30 min”), so you can check later whether it worked.</li>
-                                <li><b>Detail is one tap away.</b> “How I know” and “See why” keep the first screen clear.</li>
-                            </ul>
+                            <p>The ring is the first thing you see. The gold arc fills to your energy right now (3 of 10), and a small mark on the same circle shows what’s usual for you at this hour (7). I compare you to your own baseline instead of to other people, because that’s what an optimizer actually cares about. The gap between the arc and the mark is the problem, and you can see it before you read a word.</p>
+                            <p>The outer rings pulse faster when you’re strained and slower when you’ve recovered. The number and the sentence say the same thing, so nobody has to rely on motion, and the pulse turns off for anyone who has reduced motion set.</p>
+                            <p>Below that is one action for the next hour, a Start button, and what to expect: “lifts you ~2 pts within 30 min.” One action is easier to act on than a list, and the expected lift lets you check later whether it worked. “How I know” and “See why” keep the detail one tap away.</p>
                         </div>
                     </div>
 
@@ -3917,12 +3923,9 @@
                         <div class="vs-screen-text">
                             <p class="vs-label">02 · Why</p>
                             <h3 class="serif">“Mostly sleep. Partly food.”</h3>
-                            <ul>
-                                <li><b>Causes ranked in plain words</b> (Big / Some / A little), each with a thin line in its own color. “Big” is the same deep blue as the sleep line, so the word and its line read as one unit.</li>
-                                <li><b>Disagreement shown, not hidden.</b> WHOOP says 5 h 40, your phone says 6 h 25. The app says which one it trusted and why, and you can switch in one tap. This answers the top pain point from my research, accuracy, by being open about it.</li>
-                                <li><b>Confidence as a number,</b> 88%, next to “3 sources point to sleep,” so you can see where it comes from.</li>
-                                <li><b>One arrow,</b> on sleep only, because it’s the one cause with a real shortfall to measure.</li>
-                            </ul>
+                            <p>Causes are ranked in plain words (Big, Some, A little), each with a thin line in its own color. I set “Big” in the same deep blue as the sleep line so the word and its line read as one thing.</p>
+                            <p>Accuracy was the top complaint in my research, so when sources disagree, the app says so. Here WHOOP says 5 h 40 and your phone says 6 h 25. The app tells you which one it went with and why (“it measures your sleep; your phone only knows when you put it down”), and you can switch with one tap.</p>
+                            <p>Confidence is a number, 88%, with “3 sources point to sleep” beside it so you can see where it comes from. The only red arrow is on sleep, because that’s the one cause with a real shortfall to measure.</p>
                         </div>
                     </div>
 
@@ -3931,11 +3934,9 @@
                         <div class="vs-screen-text">
                             <p class="vs-label">03 · Goal</p>
                             <h3 class="serif">“Behind. 3 of 5 afternoons, you crashed.”</h3>
-                            <ul>
-                                <li><b>One thin-line chart.</b> Afternoon energy after late nights (4.9) vs. when you’re asleep by 11 (7.4), with the gap hatched in gold and “▼ 2.5 points after late nights.” The gap is the whole argument for the habit.</li>
-                                <li><b>This week as ring marks</b> with the day letter inside: a solid blue center for nights you hit, a coral double ring for misses. Shape and color both carry the meaning, so it works for people who are color-blind.</li>
-                                <li><b>It ends in a commitment,</b> “Wind down at 10:30 tonight,” not more analysis.</li>
-                            </ul>
+                            <p>The chart compares your afternoon energy after late nights (4.9) with nights you’re asleep by 11 (7.4). I hatched the gap in gold and added “▼ 2.5 points after late nights,” since that gap is the whole case for the habit.</p>
+                            <p>Each night this week is a ring with its day letter inside: solid blue for nights you hit, a coral double ring for misses. Shape carries the meaning as well as color, so it still works if you’re color-blind.</p>
+                            <p>The screen ends on a commitment, “Wind down at 10:30 tonight,” so the last thing you see is something to do.</p>
                         </div>
                     </div>
 
@@ -3944,11 +3945,9 @@
                         <div class="vs-screen-text">
                             <p class="vs-label">04 · Check-in</p>
                             <h3 class="serif">“How’s your energy?”</h3>
-                            <ul>
-                                <li><b>A 0–10 slider,</b> the same scale as home.</li>
-                                <li><b>“Anything else? Just say it.”</b> One spoken sentence (“Coffee at 3, big exam tomorrow, kind of anxious”) becomes tags. Speaking takes less effort than a form and captures mental and emotional context.</li>
-                                <li><b>“Already syncing: WHOOP · Apple Health · Calendar,”</b> so people know they only add what a device can’t.</li>
-                            </ul>
+                            <p>The slider runs 0–10, the same scale as home.</p>
+                            <p>Then: “Anything else? Just say it.” You say one sentence, like “Coffee at 3, big exam tomorrow, kind of anxious,” and it becomes tags for caffeine, stress and mood. Talking takes less effort than filling in a form, and it picks up how you’re feeling, which a wearable can’t.</p>
+                            <p>“Already syncing: WHOOP · Apple Health · Calendar” tells you that you only need to add what your devices can’t.</p>
                         </div>
                     </div>
 
@@ -3957,11 +3956,9 @@
                         <div class="vs-screen-text">
                             <p class="vs-label">05 · Before an appointment</p>
                             <h3 class="serif">“Physical therapy, Thu 9:00.”</h3>
-                            <ul>
-                                <li><b>Prepared from the calendar,</b> so there’s no “who is this for?” step. Coaches and doctors get their own version the same way.</li>
-                                <li><b>One headline for the reader,</b> then three lines with one-word verdicts (Watch / Too fast / Steady). A PT can read it in under a minute.</li>
-                                <li><b>“Trends, not a diagnosis” and “You choose what’s included,”</b> which keeps the product in the wellness lane and the user in control of what’s shared.</li>
-                            </ul>
+                            <p>The app sees physical therapy on your calendar for Thursday and writes the summary for your PT ahead of time. A coach or doctor gets their own version the same way.</p>
+                            <p>It leads with one headline for Sam (“Your knee hurts after long runs, not after strength days”), then three lines with one-word verdicts: Watch, Too fast, Steady. A PT can read it in under a minute.</p>
+                            <p>“Trends, not a diagnosis” keeps VitaSalus a wellness product, and “You choose what’s included” leaves you in charge of what gets shared.</p>
                         </div>
                     </div>
                 </section>
@@ -3970,7 +3967,7 @@
                 <section class="vs-section" id="vs-system" aria-labelledby="vs-system-h">
                     <p class="vs-kicker">05 · The visual system</p>
                     <h2 class="serif vs-h2" id="vs-system-h">A precision instrument with a human voice.</h2>
-                    <p class="project-description">VitaSalus measures you all night and says one sensible thing in the morning. I wanted it to look exact and engineered, but sound like a person.</p>
+                    <p class="project-description">VitaSalus measures you all night and says one sensible thing in the morning. I wanted it to look exact, like an instrument, and sound like a person.</p>
 
                     <div class="vs-system">
                         <div class="vs-sys-block">
@@ -3987,11 +3984,8 @@
                                     <span class="vs-g-delta"></span>
                                 </div>
                             </div>
-                            <ul>
-                                <li><b>No cards.</b> Content sits on the background, separated by thin lines and space. When every element is a box of the same weight, a screen reads as a dashboard, and dashboards are what my users are tired of.</li>
-                                <li><b>The engraved gutter</b> (above): a small caps label and qualifier on the left, the value large on the right. It’s based on lab readouts and the engraved plates on instruments, and it’s much harder to copy than a color.</li>
-                                <li><b>Strong contrast in size.</b> A large serif verdict next to tiny monospace labels makes the important line obvious.</li>
-                            </ul>
+                            <p>I dropped cards entirely. Content sits right on the background, with thin lines and space between sections. When every element is a box of the same weight, a screen reads as a dashboard, and dashboards are what my users are tired of.</p>
+                            <p>The engraved gutter (above) is my most recognizable element: a small caps label on the left, the value large on the right, and a thin line under each row. I based it on lab readouts and the engraved plates on instruments, and it’s much harder to copy than a color. Next to tiny monospace labels, a big serif number makes it obvious which line matters.</p>
                         </div>
 
                         <div class="vs-sys-block">
@@ -4003,14 +3997,14 @@
                                 </div>
                                 <div class="vs-type-row">
                                     <p class="vs-type-sample vs-f-sans">You slept 5 h 40 and haven’t eaten since 9:00.</p>
-                                    <p class="vs-type-meta"><b>Hanken Grotesk</b> · body text and buttons. Warm and easy to read small, and it stays out of the way.</p>
+                                    <p class="vs-type-meta"><b>Hanken Grotesk</b> · body text and buttons. It’s warm, easy to read at small sizes, and stays out of the way.</p>
                                 </div>
                                 <div class="vs-type-row">
                                     <p class="vs-type-sample vs-f-mono">NEXT HOUR · 14:10 · DAY 214</p>
                                     <p class="vs-type-meta"><b>IBM Plex Mono</b> · labels, units and timestamps. The “instrument” voice.</p>
                                 </div>
                             </div>
-                            <p class="vs-small">Rejected: Fraunces (felt like a craft bakery, not a clinic), Geist (a developer tool) and Figtree (a consumer fitness app). For the body font I compared the two finalists, Manrope and Hanken Grotesk, on x-height, cap height and digit width, at real size on the actual screens.</p>
+                            <p class="vs-small">I tried and rejected Fraunces (it felt like a craft bakery, not a clinic), Geist (a developer tool) and Figtree (a consumer fitness app). For body text it came down to Manrope and Hanken Grotesk, so I put both on the real screens at real size and compared x-height, cap height and digit width. I went with Hanken Grotesk.</p>
                         </div>
 
                         <div class="vs-sys-block">
@@ -4023,13 +4017,10 @@
                                 <li><span class="vs-sw" style="--c:#d95a3c"></span><b>Coral</b> Behind, and change arrows</li>
                                 <li><span class="vs-sw" style="--c:#d08f3e"></span><b>Amber</b> Watch</li>
                             </ul>
-                            <ul>
-                                <li><b>No green status color.</b> My first palette used green for both the brand and “good,” which made them impossible to tell apart. A health app without a green status color also stands out.</li>
-                                <li><b>Gold once per screen, as a line.</b> Gold filling a large area looks cheap; as a thin line it looks like brass on an instrument.</li>
-                                <li><b>Gold text gets its own darker shade.</b> The brand gold reaches only 3.03:1 on the background, below the 4.5:1 needed for text, so text uses a darker gold at 4.71:1.</li>
-                                <li><b>Dark mode uses half the color intensity,</b> so it stays warm without looking brown.</li>
-                            </ul>
-                            <p class="vs-small">I cut about ten palettes, including my original cream and sage, and wrote down why each was rejected so decisions don’t get reopened without new information.</p>
+                            <p>There’s no green status color. My first palette used green for the brand and for “good,” and the two were impossible to tell apart, so “on track” is blue, “behind” is coral and “watch” is amber. A health app without a green status color also stands out.</p>
+                            <p>Gold shows up once per screen, as a line or a mark. A big area of gold looks cheap; a thin gold line looks like brass on an instrument.</p>
+                            <p>Gold text gets its own darker shade. The brand gold only reaches 3.03:1 against the background, short of the 4.5:1 text needs, so text uses a darker gold at 4.71:1. Dark mode runs at half the color intensity so it stays warm without turning brown.</p>
+                            <p class="vs-small">I cut about ten palettes along the way, including my original cream and sage, and wrote down why for each one, so I wouldn’t reopen a decision without new information.</p>
                         </div>
 
                         <div class="vs-sys-block">
@@ -4060,11 +4051,11 @@
                                     <input type="range" id="vs-ring-input" min="0" max="10" step="1" value="3">
                                 </div>
                             </div>
-                            <p class="vs-small">A sketch I coded for this page to show the ring’s logic, not the app itself. Drag the slider: the arc follows your energy, the mark stays at your usual, and the outer rings pulse faster the further below usual you are. With reduced motion turned on, the rings stay still and the words carry the meaning.</p>
+                            <p class="vs-small">I coded this sketch for the page to show how the ring behaves; it isn’t the app itself. Drag the slider and the arc follows your energy while the mark stays at your usual. The further below usual you go, the faster the outer rings pulse. If you have reduced motion turned on, the rings stay still and the words carry the meaning.</p>
                         </div>
                     </div>
 
-                    <p class="project-description" style="margin-top: 2.5rem"><b>Built in code, not just mocked up.</b> The design system is real code (Next.js, React, Tailwind v4 and shadcn), with every color, font and spacing value defined in one file for light and dark mode, and reusable pieces for the signature elements: the engraved gutter rows, the gold score arc and the day curve. Text contrast is checked in both themes, color is never the only signal, and reduced motion is respected.</p>
+                    <p class="project-description" style="margin-top: 2.5rem">I built the design system in code (Next.js, React, Tailwind v4 and shadcn). Every color, font and spacing value lives in one file for light and dark mode, and the signature pieces, like the gutter rows, the gold score arc and the day curve, are reusable components. I check text contrast in both themes, never use color as the only signal, and respect reduced motion.</p>
                 </section>
 
                 <!-- 06 What's next -->
@@ -4082,19 +4073,19 @@
                             <tr><td>Cause names: gutter caps (W5) or title case (W3)?</td><td>W5, with W3 as backup</td><td>Which one people scan fastest. The amber “Some” also needs a darker shade for text contrast</td></tr>
                         </tbody>
                     </table>
-                    <p class="project-description" style="margin-top: 2rem">The first test is simple: can another optimizer open the home screen and say where they are, why, and what to do within five seconds? After that, whether showing confidence and device disagreements actually increases trust.</p>
+                    <p class="project-description" style="margin-top: 2rem">The first test is simple: can another optimizer open home and say where they are, why, and what to do within five seconds? After that, I want to know whether showing confidence and device disagreements actually makes people trust the app more.</p>
 
                     <h3 class="vs-h3">Rules I took from iterating</h3>
                     <ul>
-                        <li><b>Verdict first, then the reason, then the action.</b></li>
-                        <li><b>A chart has to show success or failure at a glance,</b> or it goes.</li>
-                        <li><b>Trust should be visible but not noisy.</b> Show disagreements and confidence in a form people can read in a second.</li>
-                        <li><b>Most data, least effort.</b></li>
-                        <li><b>Every visual element has to earn its place,</b> arrows, color and charts alike.</li>
+                        <li>Verdict first, then the reason, then the action.</li>
+                        <li>If a chart can’t show success or failure at a glance, it goes.</li>
+                        <li>Make trust visible without making it noisy. Show disagreements and confidence in a form people can read in a second.</li>
+                        <li>Most data, least effort.</li>
+                        <li>Arrows, color and charts all have to earn their place.</li>
                     </ul>
 
                     <h3 class="vs-h3">How I used AI</h3>
-                    <p class="project-description">I used Claude to generate each round of mockups from my design system and research, then reviewed every round and decided what changed next. The research direction and every design decision on this page are mine.</p>
+                    <p class="project-description">I used Claude to generate each round of mockups from my design system and research. I reviewed every round and decided what changed next, and the research direction and design decisions on this page are mine.</p>
                 </section>
             </div>
             <dialog class="vs-lightbox" id="vs-lightbox" aria-label="Enlarged image">
