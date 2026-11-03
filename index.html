@@ -2359,6 +2359,26 @@
             transition: border-color 0.2s ease, color 0.2s ease;
         }
 
+        .vs-toc {
+            gap: 0.75rem 2rem;
+        }
+
+        .vs-toc-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vs-toc-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-right: 0.25rem;
+        }
+
         .vs-toc a span {
             font-size: 0.7rem;
             color: var(--accent);
@@ -3685,13 +3705,18 @@
                 </dl>
 
                 <div class="vs-toc" role="navigation" aria-label="On this page">
-                    <a href="#vs-problem" data-vs-jump><span>01</span> Problem</a>
-                    <a href="#vs-research" data-vs-jump><span>02</span> Research</a>
-                    <a href="#vs-strategy" data-vs-jump><span>03</span> Strategy</a>
-                    <a href="#vs-iteration" data-vs-jump><span>04</span> Iteration</a>
-                    <a href="#vs-final" data-vs-jump><span>05</span> Final screens</a>
-                    <a href="#vs-system" data-vs-jump><span>06</span> Visual system</a>
-                    <a href="#vs-next" data-vs-jump><span>07</span> What’s next</a>
+                    <div class="vs-toc-group">
+                        <span class="vs-toc-label">Design process</span>
+                        <a href="#vs-problem" data-vs-jump><span>01</span> Problem</a>
+                        <a href="#vs-research" data-vs-jump><span>02</span> Research</a>
+                        <a href="#vs-iteration" data-vs-jump><span>03</span> Iteration</a>
+                    </div>
+                    <div class="vs-toc-group">
+                        <span class="vs-toc-label">Design execution</span>
+                        <a href="#vs-final" data-vs-jump><span>04</span> Final screens</a>
+                        <a href="#vs-system" data-vs-jump><span>05</span> Visual system</a>
+                        <a href="#vs-next" data-vs-jump><span>06</span> What’s next</a>
+                    </div>
                 </div>
 
                 <!-- 01 Problem -->
@@ -3745,52 +3770,31 @@
                         </thead>
                         <tbody>
                             <tr><td>Discover</td><td>What frustrates people who already track their health?</td><td>Pain points across five types of users</td></tr>
-                            <tr><td>Define</td><td>Which pain is strongest and least served?</td><td>Ranked themes, personas, a phased launch</td></tr>
+                            <tr><td>Define</td><td>Which pain is strongest and least served?</td><td>Ranked themes, personas, and optimizers as the first users, since they have the most data and feel the “why?” problem most</td></tr>
                             <tr><td>Scan</td><td>Where is the gap in the market?</td><td>A layer that works across devices and turns scores into next steps</td></tr>
-                            <tr><td>De-risk</td><td>Can I legally and technically build it?</td><td>Stay in the “general wellness” lane; a phased integration plan</td></tr>
-                            <tr class="ce-final"><td>Design and pitch</td><td>Does it hold up in front of other people?</td><td>Won every category in the class pitch competition</td></tr>
+                            <tr><td>De-risk</td><td>Can I legally and technically build it?</td><td>A regulatory and API audit kept it in the “general wellness” lane, so it shows trends, never diagnoses</td></tr>
                         </tbody>
                     </table>
 
-                    <p class="project-description" style="margin-top: 2rem"><b>Users.</b> I defined five personas and sequenced them instead of designing for everyone at once. Phase 1 is fitness enthusiasts and optimizers (heavy WHOOP, Oura, Apple Watch and Garmin users), because they have the most data and feel the accuracy and “why?” problems most. Phase 2 is people tracking chronic illness or symptoms, who need pacing and reports for their care team. Phase 3 is general wellness users and older adults, who need simplicity and privacy.</p>
-                    <p class="project-description"><b>Competitors.</b> I mapped four layers: hardware, the platform apps (Apple Health, Google Health, Samsung Health), third-party apps and AI coaches, and care platforms. I fact-checked AI-assisted research against primary sources and caught real errors, like Oura’s actual battery life and which devices really have FDA-cleared sleep apnea features. Three things stood out:</p>
-                    <ul>
-                        <li>Collecting data is basically solved. Every major device tracks HRV, sleep, oxygen and temperature.</li>
-                        <li>Generic AI coaching is becoming a commodity. The big platforms all offer AI summaries, but they’re broad and wordy and rarely end in a concrete action.</li>
-                        <li>No one is neutral. Every company wants to own the user, so people with several devices end up with competing dashboards.</li>
-                    </ul>
-
-                    <figure class="vs-figure">
+                    <figure class="vs-figure" style="margin-top: 2.5rem">
                         <button type="button" class="vs-zoom" aria-label="Enlarge the competitive positioning map">
                             <img src="vitasalus/competitive-map.jpg" width="1600" height="1059" alt="Competitive map. The horizontal axis runs from locked to one ecosystem to works across devices; the vertical axis from metrics and dashboards to a concrete next step with explained confidence. Apple Health, WHOOP, Oura, Garmin, Ultrahuman and Eight Sleep sit locked to one ecosystem; Google Health, Samsung Health and Levels sit higher but still locked; Cora, Vora, InsideTracker and Bearable work across devices but sit near the middle. The upper right is the whitespace VitaSalus targets." loading="lazy" decoding="async">
                         </button>
-                        <figcaption>My competitive map. It’s qualitative and directional, based on my research, and it shows the open space: software that works across devices and ends in a concrete next step with explained confidence.</figcaption>
+                        <figcaption>My competitive map (qualitative, from my research). Collecting data is basically solved and generic AI coaching is becoming a commodity. Every company wants to own the user, so nobody is neutral across devices, and few end in a concrete next step.</figcaption>
                     </figure>
 
-                    <p class="project-description"><b>Feasibility.</b> Before designing features, I audited the regulations that apply (HIPAA, the FTC Health Breach Notification Rule, GDPR, CCPA/CPRA, Washington’s My Health My Data Act and FDA rules for medical software) and checked API access for 10 platforms. That’s why VitaSalus stays in the FDA “general wellness” lane, starts with an aggregator but connects to Strava directly (Strava bans aggregators), and asks for consent to share on its own screen.</p>
-                </section>
-
-                <!-- 03 Strategy -->
-                <section class="vs-section" id="vs-strategy" aria-labelledby="vs-strategy-h">
-                    <p class="vs-kicker">03 · Deciding what to build</p>
-                    <h2 class="serif vs-h2" id="vs-strategy-h">I tested three positioning ideas and combined the best of each.</h2>
+                    <h3 class="vs-h3">Deciding what to build</h3>
+                    <p class="project-description">I tested three positioning ideas and combined the best of each.</p>
                     <div class="vs-ideas">
                         <div><span class="vs-label">Idea 1</span><h3>An “anti-AI” accountability app</h3><p>Simple streaks and commitments, with the AI hidden.</p><p class="vs-took">Took: a calm, simple front end</p></div>
                         <div><span class="vs-label">Idea 2</span><h3>A longevity aggregator</h3><p>One place for the ring, glucose monitor, labs and smart bed people stack up.</p><p class="vs-took">Took: the aggregator underneath</p></div>
                         <div><span class="vs-label">Idea 3</span><h3>A “why” engine</h3><p>Turns odd readings into small, timed tasks (“walk 5 minutes before this meeting”).</p><p class="vs-took">Took: the main interaction</p></div>
                     </div>
-                    <p class="project-description">I scoped it with MoSCoW. The must-haves were pulling in data from the devices people already own, explaining cause and effect, giving specific next steps, sharing summaries with doctors, coaches and physical therapists, handling device conflicts openly, and a clear stance on data anxiety. A few product decisions shaped the design:</p>
-                    <ul>
-                        <li><b>Device-agnostic on purpose.</b> I’m not trying to beat device makers on hardware. VitaSalus gets more useful the more devices someone owns or switches between.</li>
-                        <li><b>Free core, paid AI,</b> a direct response to the subscription fatigue I heard in interviews.</li>
-                        <li><b>Integration order by value and access:</b> Apple HealthKit and Google Health Connect first, then Oura and WHOOP, then Strava.</li>
-                        <li><b>Privacy from day one:</b> a short plain-language summary, consent asked at the moment it’s needed, and one-tap “delete my data.”</li>
-                    </ul>
                 </section>
 
-                <!-- 04 Iteration -->
+                <!-- 03 Iteration -->
                 <section class="vs-section" id="vs-iteration" aria-labelledby="vs-iteration-h">
-                    <p class="vs-kicker">04 · Iteration</p>
+                    <p class="vs-kicker">03 · Iteration</p>
                     <h2 class="serif vs-h2" id="vs-iteration-h">Four rounds, each fixing a specific problem with the one before.</h2>
                     <p class="project-description">I reviewed every round as the person I’m designing for: an optimizer who already owns a wearable and is tired of digging for answers. I’m one of them. Today I chat with my WHOOP’s AI and dig through its dashboards to work out what to do, and it’s a painstaking experience.</p>
 
@@ -3884,15 +3888,13 @@
                             <tr><td>Red arrows are useful, but only when they mean something.</td><td>Arrows appear only where there’s a real change to show: ▼ 4 vs. your usual, ▼ 1.5 h of sleep, ▲ 20% running volume. Never as decoration.</td></tr>
                             <tr><td>Very few people own both a WHOOP and an Apple Watch, so that disagreement example wasn’t realistic.</td><td>The example compares a wearable with your phone, a pair almost everyone has.</td></tr>
                             <tr><td>I trust a number more than a phrase like “fairly sure.”</td><td>Confidence is shown as 88%, next to how many sources agree. Words vs. numbers is on my list to test.</td></tr>
-                            <tr><td>I don’t want VitaSalus to become another data dashboard.</td><td>The Why screen explains causes in plain language and hides raw metrics by default. Whether people want them is something to test.</td></tr>
-                            <tr><td>“Next 10 minutes” was too narrow.</td><td>The action is framed as “Next hour.”</td></tr>
                         </tbody>
                     </table>
                 </section>
 
-                <!-- 05 Final screens -->
+                <!-- 04 Final screens -->
                 <section class="vs-section" id="vs-final" aria-labelledby="vs-final-h">
-                    <p class="vs-kicker">05 · The final screens</p>
+                    <p class="vs-kicker">04 · The final screens</p>
                     <h2 class="serif vs-h2" id="vs-final-h">Verdict first, then the reason, then the action.</h2>
                     <p class="project-description">Every screen opens with a plain sentence like “Running low” or “Behind,” so you know where you stand before you read anything else.</p>
 
@@ -3964,9 +3966,9 @@
                     </div>
                 </section>
 
-                <!-- 06 Visual system -->
+                <!-- 05 Visual system -->
                 <section class="vs-section" id="vs-system" aria-labelledby="vs-system-h">
-                    <p class="vs-kicker">06 · The visual system</p>
+                    <p class="vs-kicker">05 · The visual system</p>
                     <h2 class="serif vs-h2" id="vs-system-h">A precision instrument with a human voice.</h2>
                     <p class="project-description">VitaSalus measures you all night and says one sensible thing in the morning. I wanted it to look exact and engineered, but sound like a person.</p>
 
@@ -4065,9 +4067,9 @@
                     <p class="project-description" style="margin-top: 2.5rem"><b>Built in code, not just mocked up.</b> The design system is real code (Next.js, React, Tailwind v4 and shadcn), with every color, font and spacing value defined in one file for light and dark mode, and reusable pieces for the signature elements: the engraved gutter rows, the gold score arc and the day curve. Text contrast is checked in both themes, color is never the only signal, and reduced motion is respected.</p>
                 </section>
 
-                <!-- 07 What's next -->
+                <!-- 06 What's next -->
                 <section class="vs-section" id="vs-next" aria-labelledby="vs-next-h">
-                    <p class="vs-kicker">07 · What’s next</p>
+                    <p class="vs-kicker">06 · What’s next</p>
                     <h2 class="serif vs-h2" id="vs-next-h">I made a starting call on each open question. Now I want to test them.</h2>
                     <table class="ce-table vs-table">
                         <thead>
@@ -4092,13 +4094,7 @@
                     </ul>
 
                     <h3 class="vs-h3">How I used AI</h3>
-                    <p class="project-description">I gave each tool one job instead of using one chatbot for everything: Perplexity, Grok, Manus and Parallel for research; v0, Lovable and Claude for design; Claude, Cursor and Gemini for the build. I used Claude to generate each round of mockups from my design system and research, then reviewed every round and decided what changed next. AI did most of the typing; the research direction and every design decision are mine. I checked research against primary sources and kept a rule against uncited medical claims.</p>
-                    <figure class="vs-figure">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge the AI workflow diagram">
-                            <img src="vitasalus/ai-workflow.jpg" width="1600" height="880" alt="AI workflow diagram: research, design and build tools by area, and my feature loop. I write the spec, the AI proposes a plan, I approve it, the AI builds and tests, an AI review pass, then I review and merge." loading="lazy" decoding="async">
-                        </button>
-                        <figcaption>Tools by area, and my loop for each feature: I write the spec, the AI proposes a plan, I approve it, the AI builds and tests, there’s an AI review pass, and then I review and merge.</figcaption>
-                    </figure>
+                    <p class="project-description">I used Claude to generate each round of mockups from my design system and research, then reviewed every round and decided what changed next. The research direction and every design decision on this page are mine.</p>
                 </section>
             </div>
             <dialog class="vs-lightbox" id="vs-lightbox" aria-label="Enlarged image">
