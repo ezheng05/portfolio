@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1.3" fill="#4a4a4a" opacity="0.18"/></pattern>
+    <radialGradient id="hot" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#4D2E76" stop-opacity="0.55"/><stop offset="1" stop-color="#4D2E76" stop-opacity="0"/></radialGradient>
+    <linearGradient id="scale" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e3dcef"/><stop offset="1" stop-color="#4D2E76"/></linearGradient>
+  </defs>
+  <rect width="900" height="560" fill="#ebe6de"/>
+  <rect width="900" height="560" fill="url(#g)"/>
+  <!-- axial brain slice -->
+  <g transform="translate(410 190) scale(0.68)">
+    <path d="M0 -205 C 120 -205, 200 -130, 200 -10 C 200 110, 140 205, 0 205 C -140 205, -200 110, -200 -10 C -200 -130, -120 -205, 0 -205 Z" fill="#e3dcef" stroke="#4D2E76" stroke-width="3"/>
+    <path d="M0 -205 C 8 -120, -8 -40, 6 40 S -6 160, 0 205" fill="none" stroke="#4D2E76" stroke-width="2.5" opacity="0.5"/>
+    <g fill="none" stroke="#4D2E76" stroke-width="2" opacity="0.28">
+      <path d="M-40 -160 C -120 -150, -165 -80, -160 -10 C -155 70, -110 150, -40 165"/>
+      <path d="M40 -160 C 120 -150, 165 -80, 160 -10 C 155 70, 110 150, 40 165"/>
+      <path d="M-50 -110 C -110 -100, -120 -30, -115 10 C -110 60, -90 110, -45 120"/>
+      <path d="M50 -110 C 110 -100, 120 -30, 115 10 C 110 60, 90 110, 45 120"/>
+    </g>
+    <circle cx="-95" cy="-95" r="70" fill="url(#hot)"/>
+    <circle cx="105" cy="-80" r="60" fill="url(#hot)"/>
+    <circle cx="-120" cy="40" r="55" fill="url(#hot)"/>
+    <circle cx="90" cy="95" r="65" fill="url(#hot)"/>
+    <circle cx="10" cy="-150" r="40" fill="url(#hot)"/>
+  </g>
+  <!-- centiloid scale -->
+  <rect x="600" y="70" width="22" height="240" rx="13" fill="url(#scale)" stroke="#4D2E76" stroke-width="2"/>
+  <g stroke="#4D2E76" stroke-width="2" opacity="0.5">
+    <line x1="630" y1="105" x2="644" y2="105"/>
+    <line x1="630" y1="190" x2="644" y2="190"/>
+    <line x1="630" y1="275" x2="644" y2="275"/>
+  </g>
+  <path d="M578 140 L 592 148 L 578 156 Z" fill="#4D2E76"/>
+</svg>
