@@ -1142,6 +1142,69 @@
             }
         }
 
+        /* Designathon page: phones sit right on the page under the decision they show */
+        .as-block {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .as-block:last-of-type {
+            margin-bottom: 1.5rem;
+        }
+
+        .as-block .vs-label {
+            margin-bottom: 1rem;
+        }
+
+        .project-page .as-block .project-description {
+            margin-bottom: 1rem;
+        }
+
+        .as-phones {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 230px));
+            gap: 2.5rem;
+            margin-top: 1.75rem;
+        }
+
+        .as-phones--3 {
+            grid-template-columns: repeat(3, minmax(0, 230px));
+        }
+
+        .as-phone {
+            margin: 0;
+            min-width: 0;
+        }
+
+        .as-phone figcaption {
+            margin-top: 0.85rem;
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .ce-table.as-score th {
+                font-size: 0.6rem;
+                letter-spacing: 0.04em;
+                padding-right: 0.4rem;
+            }
+
+            .ce-table.as-score td {
+                padding-right: 0.4rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .as-phones,
+            .as-phones--3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1.25rem;
+            }
+        }
+
         /* Popple case study: wide boards full width, label and text above the image */
         .pp-wide {
             padding: 2rem 0;
@@ -4966,7 +5029,7 @@
                     <li><b>Pitch.</b> Explained our design decisions in a written proposal and a pitch video. Working virtually with two people I’d never met, we had to be deliberate about writing decisions down.</li>
                 </ul>
 
-                <table class="ce-table">
+                <table class="ce-table as-score">
                     <thead>
                         <tr><th>Feature</th><th>Impact</th><th>Feasibility</th><th>Reach</th><th>Fit</th><th>Total</th></tr>
                     </thead>
@@ -4982,14 +5045,46 @@
                 <p class="project-description" style="margin-top: 1rem;">The event archive scored highest, so it became the core of the app. Next came a community space for each event, creative profiles that work as portfolios, and search with genre filters. Messaging and the map scored lowest, so we left them for later.</p>
 
                 <h2 class="project-gallery-title">Design decisions</h2>
-                <ul>
-                    <li><b>Organized around the event.</b> Instagram and TikTok organize content around people and algorithms. artscape organizes it around the show, so you can find everyone who was there and see the night through their eyes.</li>
-                    <li><b>Tabs so fans and creatives don’t compete.</b> This was our hardest problem. One shared feed would bury creative work under casual fan posts, but a fully separate creative section would make the app harder to navigate. Tabs on each event page give creatives’ work its own space and keep capsules personal, all from the same entry point.</li>
-                    <li><b>Two kinds of users, two paths.</b> Fans pick a few genres and go straight in. Organizers and creatives take a separate path (“I’m an organizer or creative”) that asks what they create, so fans never see questions that don’t apply to them.</li>
-                    <li><b>Capsules are a diary first.</b> Photos, a short reflection and feeling tags for one event. Each capsule can stay private or be shared, because some memories are just for you.</li>
-                    <li><b>A cycle that pays creatives.</b> Fans add memories, creatives get seen and get commissions, and organizers get an archive that markets their next event. The commission inbox shows the item, price and show on each request, with accept, decline and message right on the card.</li>
-                    <li><b>A comma in the logo.</b> The “a” holds a comma, a reminder to pause and reflect after the show. The app stays in dark mode to feel like a concert, with purple and yellow standing out against it to pull attention where it matters.</li>
-                </ul>
+
+                <div class="as-block">
+                    <p class="vs-label">01 · Opening the app</p>
+                    <p class="project-description"><b>Two kinds of users, two paths.</b> Fans pick a few genres and go straight in. Organizers and creatives take a separate path (“I’m an organizer or creative”) that asks what they create, so fans never see questions that don’t apply to them.</p>
+                    <p class="project-description"><b>A comma in the logo.</b> The “a” holds a comma, a reminder to pause and reflect after the show. The app stays in dark mode to feel like a concert, with purple and yellow standing out against it to pull attention where it matters.</p>
+                    <div class="as-phones">
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: First open: sign in or sign up, then pick genres"><img src="artscape/s/onboarding.webp" width="640" height="1323" alt="First screen: the artscape logo, genre picks and Enter artscape, with a link for organizers and creatives" loading="lazy" decoding="async"></button><figcaption>First open: sign in or sign up, then pick genres</figcaption></figure>
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: The creator path: what do you create?"><img src="artscape/s/creative-onboarding.webp" width="640" height="1323" alt="Creative account setup asking which mediums you create: photography, graphic design, illustration, videography or mixed media" loading="lazy" decoding="async"></button><figcaption>The creator path: what do you create?</figcaption></figure>
+                    </div>
+                </div>
+
+                <div class="as-block">
+                    <p class="vs-label">02 · Discovering a show</p>
+                    <p class="project-description"><b>Organized around the event.</b> Instagram and TikTok organize content around people and algorithms. artscape organizes it around the show, so you can find everyone who was there and see the night through their eyes.</p>
+                    <p class="project-description"><b>Tabs so fans and creatives don’t compete.</b> This was our hardest problem. One shared feed would bury creative work under casual fan posts, but a fully separate creative section would make the app harder to navigate. Tabs on each event page give creatives’ work its own space and keep capsules personal, all from the same entry point.</p>
+                    <div class="as-phones">
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Discover"><img src="artscape/s/discover.webp" width="640" height="1323" alt="Discover page: shows picked for you, an event archive and upcoming shows with RSVP" loading="lazy" decoding="async"></button><figcaption>Discover</figcaption></figure>
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: A concert’s page, with tabs"><img src="artscape/s/event-page.webp" width="640" height="1323" alt="Event page for Rowan Parker at House of Blues: uploads, capsules, creatives and fans, with Archive, Community, Creatives and Capsule tabs" loading="lazy" decoding="async"></button><figcaption>A concert’s page, with tabs</figcaption></figure>
+                    </div>
+                </div>
+
+                <div class="as-block">
+                    <p class="vs-label">03 · Memory capsules</p>
+                    <p class="project-description"><b>Capsules are a diary first.</b> Photos, a short reflection and feeling tags for one event. Each capsule can stay private or be shared, because some memories are just for you.</p>
+                    <div class="as-phones">
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Making a memory capsule"><img src="artscape/s/memory-capsule.webp" width="640" height="1323" alt="Memory capsule for a concert: your photos, a written reflection, feeling tags and a privacy setting" loading="lazy" decoding="async"></button><figcaption>Making a memory capsule</figcaption></figure>
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Uploading media from the show"><img src="artscape/s/add-media.webp" width="640" height="1323" alt="Add media step: photos from the concert and a Next button" loading="lazy" decoding="async"></button><figcaption>Uploading media from the show</figcaption></figure>
+                    </div>
+                </div>
+
+                <div class="as-block">
+                    <p class="vs-label">04 · Creators</p>
+                    <p class="project-description"><b>A cycle that pays creatives.</b> Fans add memories, creatives get seen and get commissions, and organizers get an archive that markets their next event. The commission inbox shows the item, price and show on each request, with accept, decline and message right on the card.</p>
+                    <div class="as-phones as-phones--3">
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: A creator’s profile, as a fan sees it"><img src="artscape/s/creative-profile.webp" width="640" height="1323" alt="A creator profile seen by a fan: commission rates, Commission and Follow buttons, and a portfolio" loading="lazy" decoding="async"></button><figcaption>A creator’s profile, as a fan sees it</figcaption></figure>
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Your own profile, as a creator"><img src="artscape/s/profile.webp" width="640" height="1323" alt="A creator viewing their own profile: Edit, settings and a Review commission inbox button" loading="lazy" decoding="async"></button><figcaption>Your own profile, as a creator</figcaption></figure>
+                        <figure class="as-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: The commission inbox"><img src="artscape/s/commission-inbox.webp" width="640" height="1323" alt="Commission inbox: pending, potential and earned totals, and requests with accept, decline and message" loading="lazy" decoding="async"></button><figcaption>The commission inbox</figcaption></figure>
+                    </div>
+                </div>
+
                 <p class="project-description"><b>What’s next:</b> an interactive map of the events you’ve been to, a commission marketplace with pricing tiers, capsules that several fans can make together, and tools for venues to embed artscape archives on their own event pages.</p>
 
                 <p class="project-description" style="margin-top: 1rem;">
@@ -4997,20 +5092,11 @@
                     <a href="https://www.youtube.com/watch?v=w_dAtZTdpSM" target="_blank" rel="noopener">Watch demo video &rarr;</a><br>
                     <a href="https://www.figma.com/proto/k1uPs6LVF5RYhBoHB0qzcw/Catalyst-Designathon-2026?node-id=0-1&t=AtEB9IwCyJdaB1hV-1" target="_blank" rel="noopener">Try Figma prototype &rarr;</a>
                 </p>
-
-                <h2 class="project-gallery-title">App screens</h2>
-                <div class="project-gallery">
-                    <div class="gallery-item"><img src="artscape/onboarding.png" alt="Onboarding screen" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/discover.png" alt="Discover feed" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/event-page.png" alt="Event page" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/memory-capsule.png" alt="Memory capsule" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/add-media.png" alt="Add media flow" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/creative-onboarding.png" alt="Creative onboarding" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/creative-profile.png" alt="Creative profile page" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/profile.png" alt="Profile with portfolio" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="artscape/commission-inbox.png" alt="Commission inbox" loading="lazy" decoding="async"></div>
-                </div>
             </div>
+            <dialog class="vs-lightbox" id="as-lightbox" aria-label="Enlarged image">
+                <button type="button" class="vs-lightbox-close" aria-label="Close">&times;</button>
+                <img alt="">
+            </dialog>
         </section>
 
         <section id="project-lovable" class="page project-detail">
@@ -6806,6 +6892,26 @@
                 }
             });
             if (!canZoom) return;
+            box.querySelector('.vs-lightbox-close').addEventListener('click', () => box.close());
+            box.addEventListener('click', (e) => {
+                if (e.target === box) box.close();
+            });
+        })();
+
+        // Designathon page: image lightbox
+        (function() {
+            const page = document.getElementById('project-artscape');
+            const box = document.getElementById('as-lightbox');
+            const boxImg = box?.querySelector('img');
+            if (!page || !box || typeof box.showModal !== 'function') return;
+            page.querySelectorAll('.vs-zoom').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const img = btn.querySelector('img');
+                    boxImg.src = img.currentSrc || img.src;
+                    boxImg.alt = img.alt;
+                    box.showModal();
+                });
+            });
             box.querySelector('.vs-lightbox-close').addEventListener('click', () => box.close());
             box.addEventListener('click', (e) => {
                 if (e.target === box) box.close();
