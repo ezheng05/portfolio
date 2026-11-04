@@ -1181,7 +1181,11 @@
         }
 
         .pp-row--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; }
-        .pp-row--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .pp-row--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; }
+
+        /* low-res exports: show them smaller instead of stretching them */
+        .vs-zoom.pp-lowres { max-width: 600px; }
+        .vs-zoom.pp-phone { max-width: 200px; }
 
 
         /* tilt toward the cursor; --rx/--ry/--mx/--my are set from JS on fine pointers */
@@ -4728,21 +4732,12 @@
                             <h3 class="serif">Sign in, sign up, or reset your password.</h3>
                             <p>The screens before onboarding. People can sign in with their email or Google, create an account, or reset a forgotten password.</p>
                         </div>
-                        <button type="button" class="vs-zoom" aria-label="Enlarge: Sign in, sign up and reset password"><img src="popple/sign-in.png" width="774" height="576" alt="Sign in with email or Google, sign up, and reset password" loading="lazy" decoding="async"></button>
+                        <button type="button" class="vs-zoom pp-lowres" aria-label="Enlarge: Sign in, sign up and reset password"><img src="popple/sign-in.png" width="774" height="576" alt="Sign in with email or Google, sign up, and reset password" loading="lazy" decoding="async"></button>
                     </div>
 
                     <div class="pp-wide">
                         <div class="vs-screen-text">
-                            <p class="vs-label">02 · Onboarding</p>
-                            <h3 class="serif">One question per screen.</h3>
-                            <p>The screens I created for how new users build their profile: school, graduation year, gender, interests, relationship status, major, and how they heard about us. Each question gets its own screen with a progress bar. This V2 flow was still more basic than V3.</p>
-                        </div>
-                        <button type="button" class="vs-zoom" aria-label="Enlarge: V2 onboarding flow"><img src="popple/onboarding.png" width="1356" height="1166" alt="V2 onboarding: university, graduation year, gender, up to 5 interests, relationship status, major, and how did you hear about us, one question per screen" loading="lazy" decoding="async"></button>
-                    </div>
-
-                    <div class="pp-wide">
-                        <div class="vs-screen-text">
-                            <p class="vs-label">03 · Home, events and groups</p>
+                            <p class="vs-label">02 · Home, events and groups</p>
                             <h3 class="serif">Find an event, then find your group.</h3>
                             <ul>
                                 <li><b>Home</b> put the map first, so you could see what’s happening around you.</li>
@@ -4756,13 +4751,13 @@
                     </div>
 
                     <div class="vs-screen">
-                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Event joined confirmation"><img src="popple/join-confirm.png" width="262" height="576" alt="Event Joined confirmation with a View chat button" loading="lazy" decoding="async"></button></div>
-                        <div class="vs-screen-text"><p class="vs-label">04 · Joining a group</p><h3 class="serif">“Event joined!”</h3><p>Once you join a group to attend an event, a confirmation pops up with a shortcut straight to the group chat.</p></div>
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom pp-phone" aria-label="Enlarge: Event joined confirmation"><img src="popple/join-confirm.png" width="262" height="576" alt="Event Joined confirmation with a View chat button" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">03 · Joining a group</p><h3 class="serif">“Event joined!”</h3><p>Once you join a group to attend an event, a confirmation pops up with a shortcut straight to the group chat.</p></div>
                     </div>
 
                     <div class="vs-screen">
-                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Filters"><img src="popple/filters.png" width="254" height="576" alt="Filter screen with event categories, time and date, and attendance size" loading="lazy" decoding="async"></button></div>
-                        <div class="vs-screen-text"><p class="vs-label">05 · Filters</p><h3 class="serif">For people who know what they want.</h3><p>The searchability side of our debate. Filters narrow events by category, date, and how many people are going, so someone looking for something specific gets to it fast.</p></div>
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom pp-phone" aria-label="Enlarge: Filters"><img src="popple/filters.png" width="254" height="576" alt="Filter screen with event categories, time and date, and attendance size" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">04 · Filters</p><h3 class="serif">For people who know what they want.</h3><p>The searchability side of our debate. Filters narrow events by category, date, and how many people are going, so someone looking for something specific gets to it fast.</p></div>
                     </div>
                 </section>
 
@@ -4823,6 +4818,15 @@
                     <div class="vs-screen ff-screen">
                         <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Weekend picks and Popple DNA"><img src="popple/profile.png" width="1202" height="1472" alt="Weekend picks with a top interests chart and match percentages, and a profile with Popple DNA stats on attended events, peak months and neighborhoods" loading="lazy" decoding="async"></button></div>
                         <div class="vs-screen-text"><p class="vs-label">04 · Data visualizations</p><h3 class="serif">Weekend picks and Popple DNA.</h3><p><b>Left:</b> weekend picks, based on the types of events someone has liked before. <b>Right:</b> an experiment with a Popple DNA page, where people can see statistics about the events they’ve been to.</p></div>
+                    </div>
+
+                    <div class="pp-wide">
+                        <div class="vs-screen-text">
+                            <p class="vs-label">05 · Onboarding</p>
+                            <h3 class="serif">Collecting the data the visualizations need.</h3>
+                            <p>The more data-heavy features needed to know who someone is. Event stats, for example, show who’s interested by school, relationship status and gender. So onboarding asks for that up front: school, graduation year, gender, interests, relationship status, major, and how they heard about us. Each question gets its own screen with a progress bar.</p>
+                        </div>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Onboarding flow"><img src="popple/onboarding.png" width="1356" height="1166" alt="Onboarding: university, graduation year, gender, up to 5 interests, relationship status, major, and how did you hear about us, one question per screen" loading="lazy" decoding="async"></button>
                     </div>
                 </section>
 
