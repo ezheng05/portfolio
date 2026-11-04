@@ -4606,46 +4606,7 @@
                         <p id="enlaye-gate-error" class="enlaye-gate-error" role="alert">Incorrect password.</p>
                     </form>
                 </div>
-                <div id="enlaye-protected" class="enlaye-protected">
-                    <h2 class="serif" style="font-size: 1.5rem; margin-bottom: 1rem;">Details</h2>
-                    <p class="project-description">Features/projects I designed include mobile AI risk logging, document management system, commercial website, project management system, mobile chats, navigation bars, document comparison tools, settings page, and more.</p>
-                    <p class="project-description"><b>Figma:</b> I created fully interactive prototypes, becoming fluent in variables, interactions, and conditional flows. I worked on projects of various scales and complexities, modernizing features to be more user-friendly, mobile-responsive, and intuitive. I also revamped the company’s brand identity for consistency and scalability.</p>
-                    <p class="project-description"><b>Framer:</b> I learned to use Framer to build a new website. I learned about information architecture and content strategy. Working directly with the CEO, we improved the user journey and navigation to better serve user needs. I created wireframes to align the team. I taught a crash course on Framer so the team can continually update the website.</p>
-                    <p class="project-description"><b>Other:</b> I researched AWS S3 and ML features in my free time to better understand backend implementation.</p>
-
-                    <h2 class="project-gallery-title">Design decisions</h2>
-                    <div class="project-media">
-                        <img src="enlaye/enlaye%20home.png" alt="Enlaye project home with project tools, project progress, site weather, an issue log and recent activity" loading="lazy" decoding="async">
-                    </div>
-                    <p class="media-caption"><b>Project home.</b> Project tools sit up top, with the issue log and recent activity beside them, so what needs attention on a project is visible as soon as you open it.</p>
-
-                    <div class="project-media">
-                        <img src="enlaye/doc%20management.png" alt="Document management system in grid view, with project folders and file previews" loading="lazy" decoding="async">
-                    </div>
-                    <p class="media-caption"><b>Document management system.</b> All project files in one place, organized in folders, with a grid view that previews drawings and a list view for finding a specific file.</p>
-
-                    <div class="project-media">
-                        <img src="enlaye/doc%20comparison.png" alt="Document comparison tool showing two versions of a 170 page contract side by side, with a list of changes by page labeled Delete, Insert and Review" loading="lazy" decoding="async">
-                    </div>
-                    <p class="media-caption"><b>Document comparison tool.</b> Nobody asked me to build this. While watching customer interviews, I kept hearing customers complain that they couldn’t easily see edits, changes, or updates in their really long, dense documents, so I designed it on my own. Two versions sit side by side, and a panel lists every change by page, labeled Delete, Insert, or Review, so you can jump straight to what changed.</p>
-
-                    <div class="project-media">
-                        <img src="enlaye/doc%20preview.png" alt="Document management in list view with a preview window open in tabs and a file menu with Preview, Summarize and Compare options" loading="lazy" decoding="async">
-                    </div>
-                    <p class="media-caption"><b>File preview.</b> I added a preview function to the document management system because of needs I heard in customer interviews. Files open in tabs on top of the list, so you can check several without leaving the page or downloading them.</p>
-
-                    <div class="project-media">
-                        <video src="enlaye/project%20settings.mp4" poster="enlaye/project-settings-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
-                    </div>
-                    <p class="media-caption"><b>Project settings.</b></p>
-
-                    <div class="project-media" style="max-width: 35%; margin-left: auto; margin-right: auto;">
-                        <video src="enlaye/guardian%20angel.mp4" poster="enlaye/guardian-angel-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
-                    </div>
-                    <p class="media-caption" style="text-align: center; max-width: 32rem; margin-left: auto; margin-right: auto;"><b>Mobile issue logging.</b> Logging an issue is really tedious across the construction industry today. I kept only the information that’s truly necessary, so logging an issue is as easy, quick, and effective as possible.</p>
-
-                    <p class="project-description">For additional details, examples, or demos, please contact me!</p>
-                </div>
+                <div id="enlaye-protected" class="enlaye-protected"></div>
             </div>
         </section>
 
@@ -5853,11 +5814,6 @@
         const ctaButton = document.querySelector('.cta-button');
 
         function showPage(pageName) {
-            // clear enlaye unlock when navigating away so it doesn't persist across sections
-            if (pageName !== 'project-enlaye') {
-                sessionStorage.removeItem('enlaye_unlock');
-            }
-
             // Hide all pages
             pages.forEach(page => {
                 page.classList.remove('active');
@@ -5941,59 +5897,106 @@
             }
         }
 
-        const ENLAYE_UNLOCK_KEY = 'enlaye_unlock';
-        const ENLAYE_UNLOCK_EXPIRY_MS = 60 * 60 * 1000; // 1 hour
+        // Enlaye tab: the "Details" section is AES-256-GCM encrypted; decrypt it in the browser after the password
+        const ENLAYE_PASSWORD_KEY = 'enlaye_password';
+        let enlayeUnlocked = false;
+        const enlayeBlobUrls = [];
 
+        async function enlayeDeriveKey(password) {
+            if (!window.crypto || !crypto.subtle) throw new Error('this page needs to be opened over https');
+            const res = await fetch('enlaye/key.json', { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`key.json returned ${res.status}`);
+            const { salt, iterations } = await res.json();
+            const saltBytes = new Uint8Array(salt.match(/../g).map(h => parseInt(h, 16)));
+            const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+            return crypto.subtle.deriveKey(
+                { name: 'PBKDF2', salt: saltBytes, iterations, hash: 'SHA-256' },
+                base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+            );
+        }
+
+        // each .enc file is a 12-byte IV followed by the ciphertext and GCM tag
+        async function enlayeDecrypt(key, url) {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`${url} returned ${res.status}`);
+            const buf = await res.arrayBuffer();
+            return crypto.subtle.decrypt({ name: 'AES-GCM', iv: buf.slice(0, 12) }, key, buf.slice(12));
+        }
+
+        async function enlayeDecryptToUrl(key, url, type) {
+            const objUrl = URL.createObjectURL(new Blob([await enlayeDecrypt(key, url)], { type }));
+            enlayeBlobUrls.push(objUrl);
+            return objUrl;
+        }
+
+        async function enlayeUnlock(password) {
+            const key = await enlayeDeriveKey(password);
+            const protectedEl = document.getElementById('enlaye-protected');
+            // decrypting the fragment doubles as the password check: a wrong key fails GCM authentication
+            const html = new TextDecoder().decode(await enlayeDecrypt(key, 'enlaye/protected.html.enc'));
+            protectedEl.innerHTML = html;
+            await Promise.all([...protectedEl.querySelectorAll('[data-enc]')].map(async (el) => {
+                el.src = await enlayeDecryptToUrl(key, el.dataset.enc, el.dataset.type);
+                if (el.dataset.posterEnc) el.poster = await enlayeDecryptToUrl(key, el.dataset.posterEnc, el.dataset.posterType);
+            }));
+            enlayeUnlocked = true;
+            try { sessionStorage.setItem(ENLAYE_PASSWORD_KEY, password); } catch (_) {}
+            document.getElementById('enlaye-gate').style.display = 'none';
+            protectedEl.classList.add('visible');
+        }
+
+        // called by showPage when the Enlaye page opens
         function updateEnlayeGateVisibility() {
             const gate = document.getElementById('enlaye-gate');
             const protectedEl = document.getElementById('enlaye-protected');
             const errorEl = document.getElementById('enlaye-gate-error');
             if (!gate || !protectedEl) return;
-
-            let valid = false;
-            try {
-                const raw = sessionStorage.getItem(ENLAYE_UNLOCK_KEY);
-                if (raw) {
-                    const { expiresAt } = JSON.parse(raw);
-                    if (expiresAt > Date.now()) {
-                        valid = true;
-                    } else {
-                        sessionStorage.removeItem(ENLAYE_UNLOCK_KEY);
-                    }
-                }
-            } catch (_) {
-                sessionStorage.removeItem(ENLAYE_UNLOCK_KEY);
-            }
-
-            if (valid) {
-                gate.classList.remove('visible');
+            if (errorEl) errorEl.classList.remove('visible');
+            if (enlayeUnlocked) {
                 gate.style.display = 'none';
                 protectedEl.classList.add('visible');
+                return;
+            }
+            let saved = null;
+            try { saved = sessionStorage.getItem(ENLAYE_PASSWORD_KEY); } catch (_) {}
+            if (saved) {
+                enlayeUnlock(saved).catch(() => {
+                    try { sessionStorage.removeItem(ENLAYE_PASSWORD_KEY); } catch (_) {}
+                    gate.style.display = 'block';
+                    protectedEl.classList.remove('visible');
+                });
             } else {
                 gate.style.display = 'block';
                 protectedEl.classList.remove('visible');
             }
-            if (errorEl) errorEl.classList.remove('visible');
         }
 
-        document.getElementById('enlaye-gate-form')?.addEventListener('submit', (e) => {
+        document.getElementById('enlaye-gate-form')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const input = document.getElementById('enlaye-password');
             const errorEl = document.getElementById('enlaye-gate-error');
-            const gate = document.getElementById('enlaye-gate');
-            const protectedEl = document.getElementById('enlaye-protected');
+            const button = e.currentTarget.querySelector('button');
             const password = (input?.value || '').trim();
-
-            if (password === 'enlaye2025') {
-                sessionStorage.setItem(ENLAYE_UNLOCK_KEY, JSON.stringify({
-                    expiresAt: Date.now() + ENLAYE_UNLOCK_EXPIRY_MS
-                }));
-                if (errorEl) errorEl.classList.remove('visible');
-                if (gate) gate.style.display = 'none';
-                if (protectedEl) protectedEl.classList.add('visible');
+            if (!password) return;
+            if (button) { button.disabled = true; button.textContent = 'Unlocking…'; }
+            if (errorEl) errorEl.classList.remove('visible');
+            try {
+                await enlayeUnlock(password);
                 if (input) input.value = '';
-            } else {
-                if (errorEl) errorEl.classList.add('visible');
+            } catch (err) {
+                console.error('enlaye unlock failed', err, location.href);
+                // local copies and sandboxed previews can't fetch the encrypted files
+                const offSite = location.protocol === 'file:' || location.origin === 'null';
+                if (errorEl) {
+                    errorEl.textContent = err && err.name === 'OperationError'
+                        ? 'Incorrect password.'
+                        : offSite
+                            ? 'This section only loads on the live site: ezheng05.github.io/portfolio'
+                            : 'Couldn’t load this section. Please try again.';
+                    errorEl.classList.add('visible');
+                }
+            } finally {
+                if (button) { button.disabled = false; button.textContent = 'Unlock'; }
             }
         });
 

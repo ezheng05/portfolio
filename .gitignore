@@ -1,1 +1,12 @@
 .DS_Store
+
+# Enlaye gated section: plaintext sources never get published (only the .enc files do)
+enlaye/protected.html
+enlaye/enlaye home.png
+enlaye/doc management.png
+enlaye/doc comparison.png
+enlaye/doc preview.png
+enlaye/project settings.mp4
+enlaye/project-settings-poster.jpg
+enlaye/guardian angel.mp4
+enlaye/guardian-angel-poster.jpg
