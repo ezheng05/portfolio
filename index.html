@@ -2244,14 +2244,6 @@
             max-width: 46rem;
         }
 
-        .vs-figure {
-            margin: 0 0 2.5rem;
-        }
-
-        .vs-figure--hero {
-            margin-bottom: 2rem;
-        }
-
         .vs figcaption {
             font-size: 0.9rem;
             color: var(--text-secondary);
@@ -2410,17 +2402,6 @@
             color: var(--text-secondary);
         }
 
-        .vs-two {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            margin: 0.5rem 0 2.5rem;
-        }
-
-        .vs-two .vs-label {
-            margin-bottom: 0.75rem;
-        }
-
         .vs .vs-ranked,
         .vs .vs-plain {
             list-style: none;
@@ -2543,41 +2524,6 @@
             font-size: 0.85rem;
         }
 
-        /* rounds timeline */
-        .vs .vs-rounds {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1rem;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-        }
-
-        .vs .vs-rounds li {
-            margin: 0;
-            padding-top: 1rem;
-            border-top: 2px solid var(--border);
-            font-size: 0.92rem;
-            line-height: 1.6;
-        }
-
-        .vs .vs-rounds li:last-child {
-            border-top-color: var(--accent);
-        }
-
-        .vs-rounds h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            font-size: 1.15rem;
-            line-height: 1.3;
-            color: var(--text-primary);
-            margin: 0.35rem 0 0.6rem;
-        }
-
-        .vs-rounds p {
-            margin-bottom: 0.6rem;
-        }
-
         .vs-kept,
         .vs-problem {
             font-weight: 600;
@@ -2591,53 +2537,15 @@
             color: var(--error-color);
         }
 
-        /* before/after pairs */
-        .vs-pairs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .vs-pair {
-            margin: 0;
-        }
-
-        .vs-pair-imgs {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1.25rem;
-            background: var(--vs-bone);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-        }
-
-        .vs-pair-imgs img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .vs-arrow {
-            color: var(--vs-muted);
-            font-size: 1.2rem;
-        }
-
         /* decisions table */
         .vs-table td:first-child {
             width: 30%;
         }
 
-        .vs-decisions td:first-child {
-            width: 45%;
-            font-weight: 400;
-        }
-
         /* final screens */
         .vs-screen {
             display: grid;
-            grid-template-columns: minmax(180px, 260px) 1fr;
+            grid-template-columns: minmax(160px, 220px) 1fr;
             gap: 2.5rem;
             align-items: start;
             padding: 2rem 0;
@@ -2649,10 +2557,7 @@
         }
 
         .vs-screen-img {
-            background: var(--vs-bone);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.25rem;
+            padding: 0 0.5rem;
         }
 
         .vs-screen-img img {
@@ -2985,6 +2890,346 @@
             accent-color: var(--vs-verdant);
         }
 
+        /* embedded phone screens */
+        .vs-phone {
+            margin: 0;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vs-phone-cap {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.15rem 0.5rem;
+            margin-bottom: 0.75rem;
+            min-height: 2.6rem;
+        }
+
+        .vs-phone-k,
+        .vs-badge {
+            line-height: 1.5;
+        }
+
+        .vs-flow .vs-phone-cap,
+        .vs-grid4 .vs-phone-cap,
+        .vs-grid3 .vs-phone-cap,
+        .vs-grid2 .vs-phone-cap {
+            min-height: 4.4rem;
+            align-content: flex-start;
+        }
+
+        .vs-phone-k {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .vs-phone-t {
+            flex-basis: 100%;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .vs-badge {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0 0.55rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .vs-phone.is-backup .vs-badge {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: inset 0 0 0 1px var(--accent);
+        }
+
+        .vs-zoom.vs-zoom--phone {
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            overflow: visible;
+            position: relative;
+        }
+
+        .vs-zoom--phone img {
+            filter: drop-shadow(0 10px 18px rgba(40, 32, 20, 0.16));
+        }
+
+        .vs-zoom--phone:hover img {
+            transform: translateY(-3px);
+        }
+
+        .vs-phone.is-chosen .vs-zoom--phone::after {
+            content: '';
+            display: block;
+            height: 3px;
+            margin: 0.8rem 18% 0;
+            border-radius: 3px;
+            background: var(--accent);
+        }
+
+        .vs-phone.is-out img {
+            opacity: 0.45;
+            filter: grayscale(0.5);
+        }
+
+        .vs-phone.is-out .vs-phone-t {
+            color: var(--text-secondary);
+        }
+
+        .vs-phone-note {
+            margin-top: 0.75rem;
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .vs-phone.is-out .vs-phone-note {
+            color: var(--error-color);
+            font-weight: 400;
+        }
+
+        .vs-phone.is-chosen .vs-phone-note {
+            color: var(--text-primary);
+        }
+
+        /* hero row of the five final screens */
+        .vs-hero {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 1.25rem;
+            margin: 0 0 0.75rem;
+        }
+
+        .vs-hero .vs-phone-cap {
+            order: 2;
+        }
+
+        .vs-hero .vs-phone-cap {
+            min-height: 0;
+            margin: 0.8rem 0 0;
+            justify-content: center;
+        }
+
+        .vs-hero .vs-phone-t {
+            text-align: center;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .vs-hero-note {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* progressions: screens joined by large arrows */
+        .vs-flow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+
+        .vs-flow > .vs-phone {
+            flex: 1 1 0;
+            align-self: stretch;
+        }
+
+        .vs-arrow {
+            flex: 0 0 auto;
+            width: 2.75rem;
+            color: var(--accent);
+        }
+
+        .vs-arrow svg,
+        .vs-down svg {
+            display: block;
+            width: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .vs-flow--2 > .vs-phone {
+            max-width: 220px;
+        }
+
+        .vs-pairs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2.5rem;
+        }
+
+        .vs-pairs .vs-flow {
+            margin: 0.5rem 0 2rem;
+        }
+
+        .vs-grid4,
+        .vs-grid3,
+        .vs-grid2 {
+            display: grid;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .vs-grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .vs-grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 720px; }
+        .vs-grid2 { grid-template-columns: repeat(2, minmax(0, 240px)); justify-content: center; gap: 3rem; }
+
+        .vs-down {
+            width: 1.75rem;
+            margin: 0.5rem auto 0.5rem;
+            color: var(--accent);
+        }
+
+        .vs-step-note {
+            max-width: 32rem;
+            margin: 0 auto 1rem;
+            text-align: center;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        /* key decisions */
+        .vs-keys {
+            margin-bottom: 2rem;
+        }
+
+        .vs-keys .vs-label {
+            margin-bottom: 0.75rem;
+        }
+
+        .vs .vs-keys ol {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .vs .vs-keys li {
+            font-size: 1rem;
+            line-height: 1.65;
+            margin-bottom: 0.45rem;
+        }
+
+        .vs-keys li b {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* competitive map */
+        .vs-map-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .vs-map {
+            display: block;
+            width: 100%;
+            min-width: 560px;
+            height: auto;
+        }
+
+        .vs-map text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            fill: var(--text-primary);
+        }
+
+        .vs-map .vs-map-ax {
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            fill: var(--text-secondary);
+        }
+
+        .vs-map-axis {
+            stroke: var(--border);
+            stroke-width: 1;
+        }
+
+        .vs-map-space {
+            fill: var(--vs-hatch);
+            stroke: var(--vs-gold);
+            stroke-width: 1;
+            stroke-dasharray: 4 3;
+        }
+
+        .vs-map .vs-map-space-t {
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            fill: var(--vs-gold-text);
+        }
+
+        [data-theme="dark"] .vs-map .vs-map-space-t {
+            fill: var(--vs-gold);
+        }
+
+        .vs-map-dev circle { fill: #b2aba0; }
+        .vs-map-ai circle { fill: #2a5f93; }
+
+        [data-theme="dark"] .vs-map-ai circle { fill: #7aa7d8; }
+
+        .vs-map-vs circle {
+            fill: none;
+            stroke: var(--vs-gold);
+            stroke-width: 2;
+        }
+
+        .vs-map .vs-map-vs text {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+        }
+
+        .vs-map-key {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1.5rem;
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .vs .vs-map-key {
+            padding: 0;
+            margin: 0 0 0.25rem;
+        }
+
+        .vs .vs-map-key li {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .vs-k {
+            display: inline-block;
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            margin-right: 0.4rem;
+            vertical-align: -0.05rem;
+        }
+
+        .vs-k-dev { background: #b2aba0; }
+        .vs-k-ai { background: #2a5f93; }
+        .vs-k-vs { box-shadow: inset 0 0 0 2px var(--vs-gold); }
+
         /* lightbox */
         .vs-lightbox {
             border: none;
@@ -3007,7 +3252,6 @@
             width: auto;
             height: auto;
             border-radius: 6px;
-            background: var(--vs-bone);
         }
 
         .vs-lightbox-close {
@@ -3042,30 +3286,64 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .vs .vs-rounds {
-                grid-template-columns: 1fr 1fr;
-            }
-
             .vs-system {
                 grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 700px) {
-            .vs-two,
-            .vs-reframe,
-            .vs-ideas,
+        @media (max-width: 900px) {
             .vs-pairs {
+                grid-template-columns: 1fr;
+            }
+
+            .vs-flow--2 {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .vs-hero,
+            .vs-flow--4,
+            .vs-grid4,
+            .vs-grid3 {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding-bottom: 0.75rem;
+                margin-right: -1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .vs-hero > .vs-phone,
+            .vs-flow--4 > .vs-phone,
+            .vs-grid4 > .vs-phone,
+            .vs-grid3 > .vs-phone {
+                flex: 0 0 52%;
+                scroll-snap-align: start;
+            }
+
+            .vs-flow--4 > .vs-arrow {
+                width: 2rem;
+            }
+
+            .vs-grid2 {
+                gap: 1.25rem;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .vs-arrow {
+                width: 2rem;
+            }
+
+            .vs-reframe,
+            .vs-ideas {
                 grid-template-columns: 1fr;
             }
 
             .vs-reframe {
                 padding: 1.5rem;
                 gap: 1.25rem;
-            }
-
-            .vs .vs-rounds {
-                grid-template-columns: 1fr;
             }
 
             .vs-screen {
@@ -3674,27 +3952,29 @@
         </section>
 
         <!-- Project detail pages -->
-        <section id="project-vitasalus" class="page project-detail">
+                <section id="project-vitasalus" class="page project-detail">
             <div class="project-page vs">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">VitaSalus</h1>
                 <p class="project-meta">Personal project · Solo · Research, product strategy, UX/UI · Ongoing</p>
-                <p class="vs-lede">VitaSalus is a health app that sits on top of the wearables you already own. Open it and it tells you where you stand on your goal, why, what to do in the next hour, and the one habit that would help most over time.</p>
-
-                <figure class="vs-figure vs-figure--hero">
-                    <button type="button" class="vs-zoom" aria-label="Enlarge the five final screens">
-                        <img src="vitasalus/screens-overview.jpg" width="1600" height="756" alt="The five final VitaSalus screens side by side: Home (energy 3 with the ring running off the right edge, Running low), Why (Mostly sleep, partly food), Goal (Behind, 3 of 5 afternoons you crashed), Check-in (How's your energy?), and Before an appointment (Physical therapy, Thu 9:00)." decoding="async">
-                    </button>
-                    <figcaption>The five final screens. They’re high-fidelity concepts built from my design system, and the names and health values are sample data.</figcaption>
-                </figure>
-
-                <dl class="vs-facts">
-                    <div><dt>Role</dt><dd>Solo: customer discovery, research, product strategy, UX/UI, the design system, the pitch and the financial model</dd></div>
-                    <div><dt>Research</dt><dd>50+ customer discovery interviews, community listening, a competitive teardown, a regulatory and API feasibility audit</dd></div>
-                    <div><dt>Design</dt><dd>Brand system, a design system built in code, five high-fidelity mobile screens, four rounds of iteration</dd></div>
+                <p class="vs-lede">A health app that sits on top of the wearables you already own. Open it and it tells you where you stand on your goal, why, what to do in the next hour, and the one habit that would help most over time.</p>
+<div class="vs-hero"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Home</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Home"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Home: energy 3 of 10 on a gold ring that runs off the right edge, Running low, down 4, and one action for the next hour with a Start button" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Why</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Why"><img src="vitasalus/s/why-w5.webp" width="445" height="943" alt="Why: Mostly sleep, partly food. Causes ranked Big, Some and A little, WHOOP and your phone disagreeing on sleep, confidence 88%" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Goal</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Goal"><img src="vitasalus/s/goal.webp" width="445" height="943" alt="Goal: Behind, 3 of 5 afternoons you crashed. Asleep by 11 is the biggest lever, shown on a thin 0 to 10 line" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Check-in</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Check-in"><img src="vitasalus/s/checkin.webp" width="456" height="966" alt="Check-in: an energy slider at 3 of 10 and a microphone for one spoken sentence" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Appointment</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Before an appointment"><img src="vitasalus/s/appointment.webp" width="456" height="966" alt="Before an appointment: a summary for a physical therapist, prepared from the calendar" decoding="async"></button></figure></div>
+<p class="vs-hero-note">The five final screens. High-fidelity concepts built from my design system; names and health values are sample data. Click any screen to enlarge it.</p>
+<dl class="vs-facts">
+                    <div><dt>Role</dt><dd>Solo: research, product strategy, UX/UI, the design system and the pitch</dd></div>
+                    <div><dt>Research</dt><dd>50+ customer discovery interviews, community listening, competitive and feasibility research</dd></div>
+                    <div><dt>Design</dt><dd>A design system built in code, five high-fidelity screens, four rounds of iteration</dd></div>
                     <div><dt>Result</dt><dd>Won every category in my business class’s pitch competition, including Best Overall and Audience Choice</dd></div>
                 </dl>
-
+                <div class="vs-keys">
+                    <h2 class="vs-label">Key design decisions</h2>
+                    <ol>
+                        <li><b>Home answers four questions and nothing else:</b> where you are, why, what to do in the next hour, and what would help most long term.</li>
+                        <li><b>When devices disagree, the app shows both readings</b> and a confidence number, since inaccurate data was the top complaint in my interviews.</li>
+                        <li><b>One action, one Start button, and its expected effect,</b> so you know what to do now and can check later whether it worked.</li>
+                        <li><b>No cards and no green status color,</b> so it doesn’t read as another dashboard and “good” never blends into the brand green.</li>
+                    </ol>
+                </div>
                 <div class="vs-toc" role="navigation" aria-label="On this page">
                     <div class="vs-toc-group">
                         <span class="vs-toc-label">Design process</span>
@@ -3710,34 +3990,17 @@
                     </div>
                 </div>
 
-                <!-- 01 Problem -->
                 <section class="vs-section" id="vs-problem" aria-labelledby="vs-problem-h">
                     <p class="vs-kicker">01 · The problem</p>
                     <h2 class="serif vs-h2" id="vs-problem-h">People who track their health have plenty of data and very little guidance.</h2>
-                    <p class="project-description">I started with a broad idea, an AI health and wellness app, in a space already full of Apple, Google, Samsung, Oura, WHOOP, Garmin and dozens of AI coaches. I didn’t want to design a single screen until I knew where it actually hurt.</p>
-                    <p class="project-description">So I listened first. I ran 50+ customer discovery interviews with people who track their health and read through complaint threads in the WHOOP, Oura, Garmin and Fitbit communities. Then I sorted what I heard into five themes and ranked them by how often and how strongly they came up.</p>
-
-                    <div class="vs-two">
-                        <div>
-                            <h3 class="vs-label">Top pain themes, ranked</h3>
-                            <ol class="vs-ranked">
-                                <li><b>Accuracy and reliability.</b> A bike ride counted as steps, or sleep stages that don’t match how you slept. After enough of that, people stop trusting the score.</li>
-                                <li><b>Pricing and value.</b> People resent subscriptions, especially when features they had move behind a paywall.</li>
-                                <li><b>Support.</b> The most emotional complaints, mostly about customer service and replacements.</li>
-                                <li><b>No actionable insight.</b> “Why is my recovery low, and what do I do about it?”</li>
-                                <li><b>Fragmentation.</b> Goals, nutrition, training and labs live in different apps and devices.</li>
-                            </ol>
-                        </div>
-                        <div>
-                            <h3 class="vs-label">Growing, and nobody handles them well</h3>
-                            <ul class="vs-plain">
-                                <li><b>Data anxiety.</b> People feel tired because their sleep score said they should.</li>
-                                <li><b>Switching devices.</b> Trust in subscription-only wearables is dropping, which favors software that works on any device.</li>
-                                <li><b>Dashboard fatigue.</b> People want the next step handed to them, and they’re tired of opening yet another app to find it.</li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    <p class="project-description">The space was already crowded with Apple, Google, Oura, WHOOP, Garmin and dozens of AI coaches, so I didn’t design a single screen until I knew where it actually hurt. I ran 50+ customer discovery interviews, read complaint threads in the WHOOP, Oura, Garmin and Fitbit communities, and ranked what I heard by how often and how strongly it came up.</p>
+                    <ol class="vs-ranked">
+                        <li><b>Accuracy and reliability.</b> For example, a bike ride counted as steps. After enough of that, people stop trusting the score.</li>
+                        <li><b>Pricing and value.</b> Resentment about subscriptions and paywalls.</li>
+                        <li><b>Support.</b> The most emotional complaints, mostly about service and replacements.</li>
+                        <li><b>No actionable insight.</b> “Why is my recovery low, and what do I do about it?”</li>
+                        <li><b>Fragmentation.</b> Goals, nutrition, training and labs live in different apps.</li>
+                    </ol>
                     <div class="vs-reframe">
                         <div>
                             <p class="vs-label">The obvious framing</p>
@@ -3748,208 +4011,74 @@
                             <p class="vs-reframe-new">How might we help people who already own wearables <em>trust</em> their data and turn it into one clear next step, without making them anxious?</p>
                         </div>
                     </div>
-                    <p class="project-description">The people I talked to already had more data than they could use. What they were missing was a reason to trust it and one clear thing to do with it. That question shaped every decision after this, including what I chose not to build.</p>
                 </section>
 
-                <!-- 02 Research -->
                 <section class="vs-section" id="vs-research" aria-labelledby="vs-research-h">
                     <p class="vs-kicker">02 · Research</p>
-                    <h2 class="serif vs-h2" id="vs-research-h">Each research stage had one question to answer before I moved on.</h2>
-                    <table class="ce-table vs-table">
-                        <thead>
-                            <tr><th>Stage</th><th>Question</th><th>What came out of it</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Discover</td><td>What frustrates people who already track their health?</td><td>Pain points across five types of users</td></tr>
-                            <tr><td>Define</td><td>Which pain is strongest and least served?</td><td>Ranked themes, personas, and optimizers as the first users, since they have the most data and feel the “why?” problem most</td></tr>
-                            <tr><td>Scan</td><td>Where is the gap in the market?</td><td>A layer that works across devices and turns scores into next steps</td></tr>
-                            <tr><td>De-risk</td><td>Can I legally and technically build it?</td><td>A regulatory and API audit kept it in the “general wellness” lane, so it shows trends, never diagnoses</td></tr>
-                        </tbody>
-                    </table>
-
-                    <figure class="vs-figure" style="margin-top: 2.5rem">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge the competitive positioning map">
-                            <img src="vitasalus/competitive-map.jpg" width="1600" height="1059" alt="Competitive map. The horizontal axis runs from locked to one ecosystem to works across devices; the vertical axis from metrics and dashboards to a concrete next step with explained confidence. Apple Health, WHOOP, Oura, Garmin, Ultrahuman and Eight Sleep sit locked to one ecosystem; Google Health, Samsung Health and Levels sit higher but still locked; Cora, Vora, InsideTracker and Bearable work across devices but sit near the middle. The upper right is the whitespace VitaSalus targets." loading="lazy" decoding="async">
-                        </button>
-                        <figcaption>My competitive map. It’s qualitative, so placement is directional. Collecting data is close to solved, and every big platform now has an AI summary. But each company wants to own the user, so nobody is neutral across devices, and very few end with a concrete next step.</figcaption>
-                    </figure>
-
+                    <h2 class="serif vs-h2" id="vs-research-h">Every major device collects the data. Almost none tell you what to do with it.</h2>
+                    <p class="project-description">I mapped hardware makers, the platform apps, third-party apps and AI coaches on two questions: does it work across devices, and does it end in a concrete next step? The upper right was empty. I also checked the regulations and API access for 10 platforms, which kept VitaSalus in the “general wellness” lane: it shows trends and never diagnoses.</p>
+<div class="vs-map-wrap"><svg class="vs-map" viewBox="0 0 600 380" role="img" aria-labelledby="vs-map-t vs-map-d">
+<title id="vs-map-t">Competitive map</title>
+<desc id="vs-map-d">Horizontal axis: locked to one ecosystem on the left, works across devices on the right. Vertical axis: metrics and dashboards at the bottom, a concrete next step with explained confidence at the top. Apple Health, WHOOP, Oura, Garmin, Ultrahuman and Eight Sleep sit locked to one ecosystem and lean toward dashboards. Google Health, Samsung Health and Levels sit a little higher but are still locked in. Cora, Vora, InsideTracker and Bearable work across devices but stay near the middle. The upper right, where VitaSalus aims, is empty.</desc>
+<rect class="vs-map-space" x="372.3" y="39.9" width="207.7" height="112.4" rx="4"/>
+<text class="vs-map-space-t" x="572.0" y="55.9" text-anchor="end">OPEN SPACE</text>
+<line class="vs-map-axis" x1="20" y1="190.0" x2="580" y2="190.0"/><line class="vs-map-axis" x1="299.7" y1="12" x2="299.7" y2="368"/>
+<text class="vs-map-ax" x="22" y="206.0">← LOCKED TO ONE ECOSYSTEM</text>
+<text class="vs-map-ax" x="578" y="206.0" text-anchor="end">WORKS ACROSS DEVICES →</text>
+<text class="vs-map-ax" x="307.7" y="22">↑ CONCRETE NEXT STEP + CONFIDENCE</text>
+<text class="vs-map-ax" x="307.7" y="364">↓ METRICS AND DASHBOARDS</text>
+<g class="vs-map-pt vs-map-ai"><circle cx="142.9" cy="133.5" r="5"/><text x="152.9" y="137.5">Google Health</text></g><g class="vs-map-pt vs-map-ai"><circle cx="43.0" cy="154.4" r="5"/><text x="53.0" y="158.4">Samsung Health</text></g><g class="vs-map-pt vs-map-dev"><circle cx="256.7" cy="157.0" r="5"/><text x="246.7" text-anchor="end" y="161.0">Levels</text></g><g class="vs-map-pt vs-map-dev"><circle cx="304.5" cy="162.8" r="5"/><text x="314.5" y="166.8">InsideTracker</text></g><g class="vs-map-pt vs-map-ai"><circle cx="501.9" cy="172.2" r="5"/><text x="511.9" y="176.2">Vora</text></g><g class="vs-map-pt vs-map-ai"><circle cx="418.4" cy="184.2" r="5"/><text x="428.4" y="188.2">Cora</text></g><g class="vs-map-pt vs-map-dev"><circle cx="169.5" cy="226.1" r="5"/><text x="179.5" y="230.1">Ultrahuman</text></g><g class="vs-map-pt vs-map-dev"><circle cx="86.6" cy="238.1" r="5"/><text x="96.6" y="242.1">WHOOP</text></g><g class="vs-map-pt vs-map-dev"><circle cx="225.8" cy="255.9" r="5"/><text x="235.8" y="259.9">Eight Sleep</text></g><g class="vs-map-pt vs-map-dev"><circle cx="56.3" cy="267.9" r="5"/><text x="56.3" text-anchor="middle" y="257.9">Apple Health</text></g><g class="vs-map-pt vs-map-dev"><circle cx="127.8" cy="273.7" r="5"/><text x="137.8" y="277.7">Oura</text></g><g class="vs-map-pt vs-map-dev"><circle cx="60.6" cy="303.5" r="5"/><text x="70.6" y="307.5">Garmin</text></g><g class="vs-map-pt vs-map-dev"><circle cx="354.8" cy="255.9" r="5"/><text x="364.8" y="259.9">Bearable</text></g>
+<g class="vs-map-vs"><circle cx="446.8" cy="93.8" r="11"/><circle cx="446.8" cy="93.8" r="6"/><text x="464.8" y="99.8">VitaSalus</text></g>
+</svg></div>
+<ul class="vs-map-key"><li><span class="vs-k vs-k-dev"></span>Device makers and single-purpose apps</li><li><span class="vs-k vs-k-ai"></span>AI coaching layers</li><li><span class="vs-k vs-k-vs"></span>VitaSalus</li></ul>
+                    <p class="vs-small">Qualitative and directional, based on my research.</p>
                     <h3 class="vs-h3">Deciding what to build</h3>
-                    <p class="project-description">I tested three positioning ideas. Each had one part worth keeping, so I combined them.</p>
                     <div class="vs-ideas">
                         <div><span class="vs-label">Idea 1</span><h3>An “anti-AI” accountability app</h3><p>Simple streaks and commitments, with the AI hidden.</p><p class="vs-took">I kept: a calm, simple front end</p></div>
                         <div><span class="vs-label">Idea 2</span><h3>A longevity aggregator</h3><p>One place for the ring, glucose monitor, labs and smart bed people stack up.</p><p class="vs-took">I kept: the aggregator underneath</p></div>
-                        <div><span class="vs-label">Idea 3</span><h3>A “why” engine</h3><p>Turns odd readings into small, timed tasks (“walk 5 minutes before this meeting”).</p><p class="vs-took">I kept: the main interaction</p></div>
+                        <div><span class="vs-label">Idea 3</span><h3>A “why” engine</h3><p>Turns odd readings into small, timed tasks.</p><p class="vs-took">I kept: the main interaction</p></div>
                     </div>
                 </section>
 
-                <!-- 03 Iteration -->
                 <section class="vs-section" id="vs-iteration" aria-labelledby="vs-iteration-h">
                     <p class="vs-kicker">03 · Iteration</p>
-                    <h2 class="serif vs-h2" id="vs-iteration-h">Four rounds, each one fixing a problem I found in the last.</h2>
-                    <p class="project-description">I reviewed every round as the person I’m designing for: an optimizer who already owns a wearable and is tired of digging for answers. One person I interviewed told me that chatting with their WHOOP’s AI and digging through its dashboards just to work out what to do was a painstaking experience. That’s the experience I wanted VitaSalus to replace.</p>
+                    <h2 class="serif vs-h2" id="vs-iteration-h">Four rounds of home, each fixing a problem I found in the last.</h2>
+                    <p class="project-description">I reviewed every round as the person I’m designing for: an optimizer who already owns a wearable and is tired of digging for answers. One of them told me the four things they want to know when they open the app: where am I with my goal, why, what do I do in the next hour, and what would help most so this doesn’t happen again.</p>
+<div class="vs-flow vs-flow--4"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Round 1</span><span class="vs-phone-t">A nicer dashboard</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 1 home"><img src="vitasalus/s/r1-home.webp" width="480" height="1013" alt="Round 1 home: a readiness score of 72 in a green ring, an AI insight card and a next step card" loading="lazy" decoding="async"></button><p class="vs-phone-note">Every piece sat in its own card, so it looked like every other health app.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Round 2</span><span class="vs-phone-t">A real brand system</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 2 home"><img src="vitasalus/s/r2-home.webp" width="458" height="970" alt="Round 2 home: readiness 72 with a gold arc off the edge, a day curve, a focus action and two metric rows" loading="lazy" decoding="async"></button><p class="vs-phone-note">No cards and gold only as a line, but still a score, a curve and two metrics to decode.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Round 3</span><span class="vs-phone-t">Four questions</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 3 home"><img src="vitasalus/s/r3-home.webp" width="447" height="947" alt="Round 3 home: Running low with a horizontal energy bar, why, next 10 minutes and the biggest lever" loading="lazy" decoding="async"></button><p class="vs-phone-note">Answers only the four questions. Clear, but flat, and it lost the trust signals.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">Round 4</span><span class="vs-badge">Final</span><span class="vs-phone-t">A ring that pulses</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 4 home"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Round 4 home: a pulsing gold ring off the edge, Running low, down 4, and a Start button" loading="lazy" decoding="async"></button><p class="vs-phone-note">The bar became a ring you can read before any text.</p></figure></div>
+                    <h3 class="vs-h3">Two calls I tested side by side</h3>
+                    <p class="project-description">I couldn’t settle two things on one screen: should the ring run off the edge or sit centered, and should the action be a text link or a button? So I built all four combinations with identical content.</p>
+<div class="vs-grid4"><figure class="vs-phone is-out"><p class="vs-phone-cap"><span class="vs-phone-k">A1</span><span class="vs-phone-t">Off the edge · text link</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: A1"><img src="vitasalus/s/v-a1.webp" width="480" height="1017" alt="A1: ring off the edge, Add to plan as a text link" loading="lazy" decoding="async"></button><p class="vs-phone-note">Ruled out: the action gets lost in the text.</p></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">A2</span><span class="vs-phone-t">Off the edge · button</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: A2"><img src="vitasalus/s/v-a2.webp" width="480" height="1017" alt="A2: ring off the edge, Add to plan as a button" loading="lazy" decoding="async"></button><p class="vs-phone-note">Kept.</p></figure><figure class="vs-phone is-out"><p class="vs-phone-cap"><span class="vs-phone-k">B1</span><span class="vs-phone-t">Centered · text link</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: B1"><img src="vitasalus/s/v-b1.webp" width="480" height="1017" alt="B1: ring centered, Add to plan as a text link" loading="lazy" decoding="async"></button><p class="vs-phone-note">Ruled out: same problem as A1.</p></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">B2</span><span class="vs-phone-t">Centered · button</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: B2"><img src="vitasalus/s/v-b2.webp" width="480" height="1017" alt="B2: ring centered, Add to plan as a button" loading="lazy" decoding="async"></button><p class="vs-phone-note">Kept.</p></figure></div>
+                    <div class="vs-down" aria-hidden="true"><svg viewBox="0 0 24 48"><path d="M12 2v40M3 32l9 11 9-11"/></svg></div>
+                    <p class="vs-step-note">The buttons stay, and “Add to plan” becomes “Start.” This is something to do today, and “Add to plan” made it sound like it could wait.</p>
+<div class="vs-grid2"><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">A2</span><span class="vs-badge">Finalist</span><span class="vs-phone-t">More memorable</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Finalist A2"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Finalist A2: ring off the edge with a Start button" loading="lazy" decoding="async"></button><p class="vs-phone-note">Breaks the frame like round 2. Shown in the final screens.</p></figure><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">B2</span><span class="vs-badge">Finalist</span><span class="vs-phone-t">The safer choice</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Finalist B2"><img src="vitasalus/s/home-b2.webp" width="480" height="1017" alt="Finalist B2: ring centered with a Start button" loading="lazy" decoding="async"></button><p class="vs-phone-note">More structured and easier to scan.</p></figure></div>
+                    <p class="project-description">I’m keeping both finalists to test with users: which one people remember, and which one they act on faster.</p>
 
-                    <figure class="vs-figure">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge the home screen across four rounds">
-                            <img src="vitasalus/iteration-home.jpg" width="1600" height="1232" alt="The home screen across four rounds. Round 1, a nicer dashboard with a readiness ring and cards. Round 2, a real brand system with a gold arc running off the edge. Round 3, four questions with an energy bar. Round 4, a pulsing ring running off the right edge (finalist A2) with Running low and a Start button." loading="lazy" decoding="async">
-                        </button>
-                        <figcaption>Home in each round. Click any image to see it full size.</figcaption>
-                    </figure>
-
-                    <ol class="vs-rounds">
-                        <li>
-                            <p class="vs-label">Round 1</p>
-                            <h3>A nicer dashboard</h3>
-                            <p><span class="vs-kept">Worked:</span> one score, one insight and one next step.</p>
-                            <p><span class="vs-problem">Didn’t:</span> every piece lived in its own card, so it looked like every other health app. And my sage brand green was so close to the green I used for “good” that you couldn’t tell them apart.</p>
-                        </li>
-                        <li>
-                            <p class="vs-label">Round 2</p>
-                            <h3>A real brand system</h3>
-                            <p><span class="vs-kept">Worked:</span> I took out the cards, added the engraved gutter, kept gold to thin lines and made blue mean “on track.” For the first time it looked like its own product.</p>
-                            <p><span class="vs-problem">Didn’t:</span> it showed too much at once: a score arc, a day curve, an insight and two metric rows. You’d still have to work out what it all meant.</p>
-                        </li>
-                        <li>
-                            <p class="vs-label">Round 3</p>
-                            <h3>Four questions</h3>
-                            <p>An optimizer I interviewed told me the four things they want to know when they open the app, so I rebuilt home to answer those and nothing else: <b>Where am I with my goal? Why? What do I do in the next hour? What change would help most so this doesn’t happen again?</b></p>
-                            <p><span class="vs-problem">Didn’t:</span> I cut too much. The screen was clear but flat, and dropping the “why” also dropped the trust signals: when devices disagree, and how sure the app is. The thick bars on the goal chart also felt heavy next to the thin lines everywhere else.</p>
-                        </li>
-                        <li>
-                            <p class="vs-label">Round 4</p>
-                            <h3>Visual again, with the best of round 2 brought back</h3>
-                            <p><span class="vs-kept">Changed:</span> I turned the energy bar into a pulsing ring so the screen has one place to look first. I also brought back four details round 2 did better: the day number, the gold action label, the lighter body text and the red arrow. The “why” came back as its own screen, one tap away, and I rewrote it so it reads in seconds.</p>
-                        </li>
-                    </ol>
-
-                    <h3 class="vs-h3">Four versions of home</h3>
-                    <p class="project-description">Round 2 left me with two questions I couldn’t settle by staring at one screen. Should the ring run off the edge or sit centered? Should the action be a text link or a button? So I built all four combinations with identical content and compared them side by side.</p>
-                    <figure class="vs-figure">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge the four home screen versions">
-                            <img src="vitasalus/home-options.jpg" width="1600" height="1029" alt="Four versions of the home screen with the same content. A1: ring off the edge, action as text. A2: ring off the edge, action as a button. B1: ring centered, action as text. B2: ring centered, action as a button." loading="lazy" decoding="async">
-                        </button>
-                        <figcaption>In A1 and B1 the action disappears into the text around it, so the button versions moved on. I also renamed it from “Add to plan” to “Start.” This is something to do today, and “Add to plan” made it sound like it could wait.</figcaption>
-                    </figure>
-                    <p class="project-description">That left two finalists, and I don’t think I should pick between them alone. B2, with the ring centered, is safer and easier to scan. A2, with the ring off the edge, is the one people would remember. I’m keeping both to test with users.</p>
-
-                    <h3 class="vs-h3">Why and goal, before and after</h3>
-                    <figure class="vs-figure">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge the Why and Goal before and after">
-                            <img src="vitasalus/iteration-why-goal.jpg" width="1600" height="1123" alt="Before and after for the Why screen and the goal chart. The Why screen goes from exact numbers and source labels on every line to a one-line verdict with causes ranked Big, Some and A little. The goal chart goes from two thick colored bars to one thin 0 to 10 line with the gap hatched." loading="lazy" decoding="async">
-                        </button>
-                        <figcaption>The first Why screen put an exact number, a percentage and a source on every line. It was accurate, but it took work to read. Now it opens with a one-line verdict and ranks the causes as Big, Some or A little. On the goal chart, two thick bars became one thin 0–10 line with the gap between the two values hatched.</figcaption>
-                    </figure>
-
-                    <p class="project-description">I wasn’t sure about two details on the Why screen: how to set the cause names, and whether the impact words (Big, Some, A little) should be in color. I built four versions. The two with color were easier to read, so I kept those and added a fifth that brings back the gutter format from round 2.</p>
-                    <figure class="vs-figure">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge the three Why screen versions">
-                            <img src="vitasalus/why-options.jpg" width="1600" height="1357" alt="Three versions of the Why screen with impact words in color. W3 uses title case cause names, W4 uses all caps names, and W5 uses the round 2 gutter label: the name in caps beside a ring icon with a short caps qualifier underneath." loading="lazy" decoding="async">
-                        </button>
-                        <figcaption>W3 is the easiest to read. W5 is my favorite because it matches the engraved gutter used across the app, so W5 is the default and W3 is the backup I’ll test it against.</figcaption>
-                    </figure>
-
+                    <h3 class="vs-h3">Same information, easier to read</h3>
+                    <div class="vs-pairs">
+<div class="vs-flow vs-flow--2"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Before</span><span class="vs-phone-t">Every number on every line</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Earlier Why screen"><img src="vitasalus/s/why-before.webp" width="458" height="970" alt="Earlier Why screen: exact numbers, percentages and a source on every line" loading="lazy" decoding="async"></button><p class="vs-phone-note">Accurate, but it took work to read.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">After</span><span class="vs-badge">Final</span><span class="vs-phone-t">A verdict, then ranked causes</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Final Why screen"><img src="vitasalus/s/why-w5.webp" width="445" height="943" alt="Final Why screen: Mostly sleep, partly food, with causes ranked Big, Some and A little" loading="lazy" decoding="async"></button><p class="vs-phone-note">Readable in seconds.</p></figure></div><div class="vs-flow vs-flow--2"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Before</span><span class="vs-phone-t">Two thick bars</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Earlier goal screen"><img src="vitasalus/s/goal-before.webp" width="447" height="947" alt="Earlier goal screen: two thick colored bars" loading="lazy" decoding="async"></button><p class="vs-phone-note">Heavy next to the thin lines everywhere else.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">After</span><span class="vs-badge">Final</span><span class="vs-phone-t">One thin line, gap hatched</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Final goal screen"><img src="vitasalus/s/goal.webp" width="445" height="943" alt="Final goal screen: one thin 0 to 10 line with the gap hatched" loading="lazy" decoding="async"></button><p class="vs-phone-note">The gap is the reason to change the habit.</p></figure></div></div>
+                    <h3 class="vs-h3">Labeling the causes</h3>
+                    <p class="project-description">I compared four Why screens on two details: how to set the cause names, and whether the impact words (Big, Some, A little) are in color. Color read faster, so I kept those and added a fifth version that brings back the gutter labels from round 2.</p>
+<div class="vs-grid3"><figure class="vs-phone is-backup"><p class="vs-phone-cap"><span class="vs-phone-k">W3</span><span class="vs-badge">Backup</span><span class="vs-phone-t">Title case</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: W3"><img src="vitasalus/s/why-w3.webp" width="445" height="943" alt="W3: title case cause names with impact words in color" loading="lazy" decoding="async"></button><p class="vs-phone-note">Easiest to read.</p></figure><figure class="vs-phone is-out"><p class="vs-phone-cap"><span class="vs-phone-k">W4</span><span class="vs-phone-t">All caps</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: W4"><img src="vitasalus/s/why-w4.webp" width="454" height="963" alt="W4: all caps cause names with sentence qualifiers and impact words in color" loading="lazy" decoding="async"></button><p class="vs-phone-note">Not chosen: caps names with sentence details, between the other two.</p></figure><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">W5</span><span class="vs-badge">Default</span><span class="vs-phone-t">Gutter labels</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: W5"><img src="vitasalus/s/why-w5.webp" width="445" height="943" alt="W5: round 2 gutter labels with short caps qualifiers and impact words in color" loading="lazy" decoding="async"></button><p class="vs-phone-note">Matches the engraved gutter across the app.</p></figure></div>
                     <h3 class="vs-h3">Two smaller fixes</h3>
                     <div class="vs-pairs">
-                        <figure class="vs-pair">
-                            <div class="vs-pair-imgs">
-                                <img src="vitasalus/checkin-before.jpg" width="519" height="1100" alt="First check-in: How's your energy, with five buttons numbered 1 to 5." loading="lazy" decoding="async">
-                                <span class="vs-arrow" aria-hidden="true">&rarr;</span>
-                                <img src="vitasalus/checkin.jpg" width="456" height="989" alt="Final check-in: How's your energy, with a 0 to 10 slider set to 3 and a large microphone button." loading="lazy" decoding="async">
-                            </div>
-                            <figcaption>The first check-in asked for a 1–5 tap, while home said “3 of 10.” I switched to a 0–10 slider so you rate yourself on the same scale the app shows you.</figcaption>
-                        </figure>
-                        <figure class="vs-pair">
-                            <div class="vs-pair-imgs">
-                                <img src="vitasalus/report-before.jpg" width="519" height="1100" alt="First summary screen asking Who's it for, with Coach, Physical therapist and Doctor buttons." loading="lazy" decoding="async">
-                                <span class="vs-arrow" aria-hidden="true">&rarr;</span>
-                                <img src="vitasalus/appointment.jpg" width="456" height="989" alt="Final summary screen, Physical therapy Thu 9:00, prepared from the calendar for Sam Lee, PT." loading="lazy" decoding="async">
-                            </div>
-                            <figcaption>The first summary screen asked “Who’s it for?” But the app already knows from your calendar who you’re seeing next, so now it just writes for that person. “Not this one?” covers a wrong guess.</figcaption>
-                        </figure>
-                    </div>
-
-                    <h3 class="vs-h3">What I noticed, and what I decided</h3>
-                    <table class="ce-table vs-table vs-decisions">
-                        <thead>
-                            <tr><th>What I noticed</th><th>What I decided</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>I’d ignore any chart that doesn’t tell me right away whether I’m succeeding or failing.</td><td>Home answers four questions and nothing else. A chart only stays if it shows success or failure at a glance.</td></tr>
-                            <tr><td>I’d give the app as much data as I can, as long as it costs almost no effort.</td><td>Devices and the calendar sync on their own. The check-in is one swipe and one spoken sentence, which also picks up how you’re feeling mentally and emotionally.</td></tr>
-                            <tr><td>Red arrows only help when they mean something.</td><td>An arrow shows up only for a real change: ▼ 4 vs. your usual, ▼ 1.5 h of sleep, ▲ 20% running volume. I never use one as decoration.</td></tr>
-                            <tr><td>Very few people own both a WHOOP and an Apple Watch, so my first disagreement example wasn’t realistic.</td><td>The example now compares a wearable with your phone, a pair almost everyone has.</td></tr>
-                            <tr><td>I trust a number more than a phrase like “fairly sure.”</td><td>Confidence shows as 88%, next to how many sources agree. Words vs. numbers is on my list to test.</td></tr>
-                        </tbody>
-                    </table>
+<div class="vs-flow vs-flow--2"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Before</span><span class="vs-phone-t">A 1–5 tap</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: First check-in"><img src="vitasalus/s/checkin-before.webp" width="480" height="1017" alt="First check-in: a 1 to 5 tap" loading="lazy" decoding="async"></button></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">After</span><span class="vs-badge">Final</span><span class="vs-phone-t">A 0–10 slider</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Final check-in"><img src="vitasalus/s/checkin.webp" width="456" height="966" alt="Final check-in: a 0 to 10 slider" loading="lazy" decoding="async"></button><p class="vs-phone-note">Same scale as home, which says “3 of 10.”</p></figure></div><div class="vs-flow vs-flow--2"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Before</span><span class="vs-phone-t">“Who’s it for?”</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: First summary screen asking Who is it for, with coach, physical therapist and doctor buttons"><img src="vitasalus/s/report-before.webp" width="480" height="1017" alt="First summary screen asking Who is it for, with coach, physical therapist and doctor buttons" loading="lazy" decoding="async"></button></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">After</span><span class="vs-badge">Final</span><span class="vs-phone-t">Written from your calendar</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Final summary, prepared for a physical therapy visit on Thursday from the calendar"><img src="vitasalus/s/appointment.webp" width="456" height="966" alt="Final summary, prepared for a physical therapy visit on Thursday from the calendar" loading="lazy" decoding="async"></button><p class="vs-phone-note">The app already knows who you’re seeing next.</p></figure></div></div>
                 </section>
 
-                <!-- 04 Final screens -->
                 <section class="vs-section" id="vs-final" aria-labelledby="vs-final-h">
                     <p class="vs-kicker">04 · The final screens</p>
                     <h2 class="serif vs-h2" id="vs-final-h">Verdict first, then the reason, then the action.</h2>
-                    <p class="project-description">Every screen opens with a plain sentence like “Running low” or “Behind,” so you know where you stand before you read anything else.</p>
-
-                    <div class="vs-screen">
-                        <div class="vs-screen-img"><img src="vitasalus/home.jpg" width="445" height="966" alt="Home screen: a ring showing energy 3 with a mark at 7 for your usual, Running low with a red down arrow and 4, why, next hour action Eat something with protein then walk outside, a Start button, and your biggest lever is bedtime." loading="lazy" decoding="async"></div>
-                        <div class="vs-screen-text">
-                            <p class="vs-label">01 · Home</p>
-                            <h3 class="serif">“Running low.” <span class="vs-delta">▼ 4</span></h3>
-                            <p>The ring is the first thing you see. The gold arc fills to your energy right now (3 of 10), and a small mark on the same circle shows what’s usual for you at this hour (7). I compare you to your own baseline instead of to other people, because that’s what an optimizer actually cares about. The gap between the arc and the mark is the problem, and you can see it before you read a word.</p>
-                            <p>The outer rings pulse faster when you’re strained and slower when you’ve recovered. The number and the sentence say the same thing, so nobody has to rely on motion, and the pulse turns off for anyone who has reduced motion set.</p>
-                            <p>Below that is one action for the next hour, a Start button, and what to expect: “lifts you ~2 pts within 30 min.” One action is easier to act on than a list, and the expected lift lets you check later whether it worked. “How I know” and “See why” keep the detail one tap away.</p>
-                        </div>
-                    </div>
-
-                    <div class="vs-screen">
-                        <div class="vs-screen-img"><img src="vitasalus/why.jpg" width="445" height="966" alt="Why screen: Mostly sleep, partly food. Causes ranked Sleep (Big, short last night, down 1.5 h), Food (Some, nothing since 9:00), Stress (A little, exam tomorrow). Your sources disagreed on sleep: WHOOP 5 h 40 vs. your phone 6 h 25. Confidence 88%, 3 sources point to sleep." loading="lazy" decoding="async"></div>
-                        <div class="vs-screen-text">
-                            <p class="vs-label">02 · Why</p>
-                            <h3 class="serif">“Mostly sleep. Partly food.”</h3>
-                            <p>Causes are ranked in plain words (Big, Some, A little), each with a thin line in its own color. I set “Big” in the same deep blue as the sleep line so the word and its line read as one thing.</p>
-                            <p>Accuracy was the top complaint in my research, so when sources disagree, the app says so. Here WHOOP says 5 h 40 and your phone says 6 h 25. The app tells you which one it went with and why (“it measures your sleep; your phone only knows when you put it down”), and you can switch with one tap.</p>
-                            <p>Confidence is a number, 88%, with “3 sources point to sleep” beside it so you can see where it comes from. The only red arrow is on sleep, because that’s the one cause with a real shortfall to measure.</p>
-                        </div>
-                    </div>
-
-                    <div class="vs-screen">
-                        <div class="vs-screen-img"><img src="vitasalus/goal.jpg" width="445" height="966" alt="Goal screen: Behind, 3 of 5 afternoons you crashed. Your biggest lever, asleep by 11. A thin line from 0 to 10 marks 4.9 after 11 and 7.4 by 11 with the gap hatched, down 2.5 points after late nights. This week shown as ring marks with day letters. Button: Wind down at 10:30 tonight." loading="lazy" decoding="async"></div>
-                        <div class="vs-screen-text">
-                            <p class="vs-label">03 · Goal</p>
-                            <h3 class="serif">“Behind. 3 of 5 afternoons, you crashed.”</h3>
-                            <p>The chart compares your afternoon energy after late nights (4.9) with nights you’re asleep by 11 (7.4). I hatched the gap in gold and added “▼ 2.5 points after late nights,” since that gap is the whole case for the habit.</p>
-                            <p>Each night this week is a ring with its day letter inside: solid blue for nights you hit, a coral double ring for misses. Shape carries the meaning as well as color, so it still works if you’re color-blind.</p>
-                            <p>The screen ends on a commitment, “Wind down at 10:30 tonight,” so the last thing you see is something to do.</p>
-                        </div>
-                    </div>
-
-                    <div class="vs-screen">
-                        <div class="vs-screen-img"><img src="vitasalus/checkin.jpg" width="456" height="989" alt="Check-in screen: How's your energy, 3 out of 10 on a slider. Anything else, just say it: Coffee at 3, big exam tomorrow, kind of anxious, turned into tags for caffeine, stress and mood. A large microphone button. Already syncing WHOOP, Apple Health and Calendar." loading="lazy" decoding="async"></div>
-                        <div class="vs-screen-text">
-                            <p class="vs-label">04 · Check-in</p>
-                            <h3 class="serif">“How’s your energy?”</h3>
-                            <p>The slider runs 0–10, the same scale as home.</p>
-                            <p>Then: “Anything else? Just say it.” You say one sentence, like “Coffee at 3, big exam tomorrow, kind of anxious,” and it becomes tags for caffeine, stress and mood. Talking takes less effort than filling in a form, and it picks up how you’re feeling, which a wearable can’t.</p>
-                            <p>“Already syncing: WHOOP · Apple Health · Calendar” tells you that you only need to add what your devices can’t.</p>
-                        </div>
-                    </div>
-
-                    <div class="vs-screen">
-                        <div class="vs-screen-img"><img src="vitasalus/appointment.jpg" width="456" height="989" alt="Before an appointment: Physical therapy, Thu 9:00, with Sam Lee, PT. What Sam reads first: your knee hurts after long runs, not after strength days. Left knee (watch), running volume up 20% (too fast), strength work (steady). Send to Sam button." loading="lazy" decoding="async"></div>
-                        <div class="vs-screen-text">
-                            <p class="vs-label">05 · Before an appointment</p>
-                            <h3 class="serif">“Physical therapy, Thu 9:00.”</h3>
-                            <p>The app sees physical therapy on your calendar for Thursday and writes the summary for your PT ahead of time. A coach or doctor gets their own version the same way.</p>
-                            <p>It leads with one headline for Sam (“Your knee hurts after long runs, not after strength days”), then three lines with one-word verdicts: Watch, Too fast, Steady. A PT can read it in under a minute.</p>
-                            <p>“Trends, not a diagnosis” keeps VitaSalus a wellness product, and “You choose what’s included” leaves you in charge of what gets shared.</p>
-                        </div>
-                    </div>
+<div class="vs-screen"><div class="vs-screen-img"><figure class="vs-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Home screen, finalist A2"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Home screen, finalist A2" loading="lazy" decoding="async"></button></figure></div><div class="vs-screen-text"><p class="vs-label">01 · Home</p><h3 class="serif">“Running low.” <span class="vs-delta">▼ 4</span></h3><p>The gold arc fills to your energy right now (3 of 10), and a mark on the same circle shows what’s usual for you at this hour (7). I compare you to your own baseline instead of other people, because that’s what an optimizer cares about, and the gap is visible before you read a word.</p><p>The outer rings pulse faster when you’re strained. The number and the sentence say the same thing, so nothing depends on motion, and the pulse turns off with reduced motion.</p><p>Below that is one action, a Start button and its expected effect (“lifts you ~2 pts within 30 min”), so you can check later whether it worked.</p></div></div>
+<div class="vs-screen"><div class="vs-screen-img"><figure class="vs-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Why screen, W5"><img src="vitasalus/s/why-w5.webp" width="445" height="943" alt="Why screen, W5" loading="lazy" decoding="async"></button></figure></div><div class="vs-screen-text"><p class="vs-label">02 · Why</p><h3 class="serif">“Mostly sleep. Partly food.”</h3><p>Causes are ranked in plain words, each with a thin line in its own color. “Big” is the same deep blue as the sleep line, so the word and the line read as one thing.</p><p>When sources disagree, the app says so: WHOOP says 5 h 40, your phone says 6 h 25. It tells you which one it trusted and why, and you can switch in one tap. I used a wearable and a phone because almost everyone owns that pair.</p><p>Confidence is a number, 88%, next to “3 sources point to sleep,” so you can see where it comes from.</p></div></div>
+<div class="vs-screen"><div class="vs-screen-img"><figure class="vs-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Goal screen"><img src="vitasalus/s/goal.webp" width="445" height="943" alt="Goal screen" loading="lazy" decoding="async"></button></figure></div><div class="vs-screen-text"><p class="vs-label">03 · Goal</p><h3 class="serif">“Behind. 3 of 5 afternoons, you crashed.”</h3><p>One thin chart compares your afternoon energy after late nights (4.9) with nights you’re asleep by 11 (7.4), and “<span class="vs-delta">▼ 2.5</span> points after late nights” says the cost in one line.</p><p>Each night is a ring with its day letter inside: solid blue for a hit, a coral double ring for a miss. Shape carries the meaning as well as color, so it works if you’re color-blind. The screen ends on a commitment, “Wind down at 10:30 tonight.”</p></div></div>
+<div class="vs-screen"><div class="vs-screen-img"><figure class="vs-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Check-in screen"><img src="vitasalus/s/checkin.webp" width="456" height="966" alt="Check-in screen" loading="lazy" decoding="async"></button></figure></div><div class="vs-screen-text"><p class="vs-label">04 · Check-in</p><h3 class="serif">“How’s your energy?”</h3><p>A 0–10 slider, then “Anything else? Just say it.” One spoken sentence, like “Coffee at 3, big exam tomorrow, kind of anxious,” becomes tags for caffeine, stress and mood. Talking takes less effort than a form and captures how you feel, which a wearable can’t.</p></div></div>
+<div class="vs-screen"><div class="vs-screen-img"><figure class="vs-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Before an appointment screen"><img src="vitasalus/s/appointment.webp" width="456" height="966" alt="Before an appointment screen" loading="lazy" decoding="async"></button></figure></div><div class="vs-screen-text"><p class="vs-label">05 · Before an appointment</p><h3 class="serif">“Physical therapy, Thu 9:00.”</h3><p>The app sees the appointment on your calendar and writes for that person: one headline, then three lines with one-word verdicts (Watch, Too fast, Steady). A PT can read it in under a minute.</p><p>“Trends, not a diagnosis” keeps it a wellness product, and “You choose what’s included” leaves you in charge of what gets shared.</p></div></div>
                 </section>
 
                 <!-- 05 Visual system -->
                 <section class="vs-section" id="vs-system" aria-labelledby="vs-system-h">
                     <p class="vs-kicker">05 · The visual system</p>
                     <h2 class="serif vs-h2" id="vs-system-h">A precision instrument with a human voice.</h2>
-                    <p class="project-description">VitaSalus measures you all night and says one sensible thing in the morning. I wanted it to look exact, like an instrument, and sound like a person.</p>
+                    <p class="project-description">VitaSalus measures you all night and says one sensible thing in the morning, so I wanted it to look exact, like an instrument, and sound like a person.</p>
 
                     <div class="vs-system">
                         <div class="vs-sys-block">
@@ -3966,8 +4095,8 @@
                                     <span class="vs-g-delta"></span>
                                 </div>
                             </div>
-                            <p>I dropped cards entirely. Content sits right on the background, with thin lines and space between sections. When every element is a box of the same weight, a screen reads as a dashboard, and dashboards are what my users are tired of.</p>
-                            <p>The engraved gutter (above) is my most recognizable element: a small caps label on the left, the value large on the right, and a thin line under each row. I based it on lab readouts and the engraved plates on instruments, and it’s much harder to copy than a color. Next to tiny monospace labels, a big serif number makes it obvious which line matters.</p>
+                            <p>No cards. Content sits on the background with thin lines between rows, because a screen full of equal boxes reads as a dashboard, which is what my users are tired of.</p>
+                            <p>The engraved gutter (above) is the signature element: a small caps label on the left and the value large on the right, based on lab readouts and engraved instrument plates.</p>
                         </div>
 
                         <div class="vs-sys-block">
@@ -3986,7 +4115,7 @@
                                     <p class="vs-type-meta"><b>IBM Plex Mono</b> · labels, units and timestamps. The “instrument” voice.</p>
                                 </div>
                             </div>
-                            <p class="vs-small">I tried and rejected Fraunces (it felt like a craft bakery, not a clinic), Geist (a developer tool) and Figtree (a consumer fitness app). For body text it came down to Manrope and Hanken Grotesk, so I put both on the real screens at real size and compared x-height, cap height and digit width. I went with Hanken Grotesk.</p>
+                            <p class="vs-small">Rejected: Fraunces (a craft bakery, not a clinic), Geist (a developer tool) and Figtree (a consumer fitness app). I chose Hanken Grotesk over Manrope after comparing x-height, cap height and digit width on the real screens.</p>
                         </div>
 
                         <div class="vs-sys-block">
@@ -3999,10 +4128,8 @@
                                 <li><span class="vs-sw" style="--c:#d95a3c"></span><b>Coral</b> Behind, and change arrows</li>
                                 <li><span class="vs-sw" style="--c:#d08f3e"></span><b>Amber</b> Watch</li>
                             </ul>
-                            <p>There’s no green status color. My first palette used green for the brand and for “good,” and the two were impossible to tell apart, so “on track” is blue, “behind” is coral and “watch” is amber. A health app without a green status color also stands out.</p>
-                            <p>Gold shows up once per screen, as a line or a mark. A big area of gold looks cheap; a thin gold line looks like brass on an instrument.</p>
-                            <p>Gold text gets its own darker shade. The brand gold only reaches 3.03:1 against the background, short of the 4.5:1 text needs, so text uses a darker gold at 4.71:1. Dark mode runs at half the color intensity so it stays warm without turning brown.</p>
-                            <p class="vs-small">I cut about ten palettes along the way, including my original cream and sage, and wrote down why for each one, so I wouldn’t reopen a decision without new information.</p>
+                            <p>No green status color. My first palette used green for the brand and for “good,” and you couldn’t tell them apart, so “on track” is blue, “behind” is coral and “watch” is amber.</p>
+                            <p>Gold appears once per screen, as a line. Gold text gets a darker shade, because the brand gold only reaches 3.03:1 contrast and text needs 4.5:1; the darker gold reaches 4.71:1.</p>
                         </div>
 
                         <div class="vs-sys-block">
@@ -4033,11 +4160,11 @@
                                     <input type="range" id="vs-ring-input" min="0" max="10" step="1" value="3">
                                 </div>
                             </div>
-                            <p class="vs-small">I coded this sketch for the page to show how the ring behaves; it isn’t the app itself. Drag the slider and the arc follows your energy while the mark stays at your usual. The further below usual you go, the faster the outer rings pulse. If you have reduced motion turned on, the rings stay still and the words carry the meaning.</p>
+                            <p class="vs-small">A sketch I coded for this page, not the app itself. Drag the slider: the arc follows your energy, the mark stays at your usual, and the rings pulse faster the further below usual you go. With reduced motion on, they stay still.</p>
                         </div>
                     </div>
 
-                    <p class="project-description" style="margin-top: 2.5rem">I built the design system in code (Next.js, React, Tailwind v4 and shadcn). Every color, font and spacing value lives in one file for light and dark mode, and the signature pieces, like the gutter rows, the gold score arc and the day curve, are reusable components. I check text contrast in both themes, never use color as the only signal, and respect reduced motion.</p>
+                    <p class="project-description" style="margin-top: 2.5rem">I built the design system in code (Next.js, React, Tailwind and shadcn), with every color, font and spacing value in one file for light and dark mode. Contrast is checked in both themes, and color is never the only signal.</p>
                 </section>
 
                 <!-- 06 What's next -->
@@ -4061,8 +4188,7 @@
                     <ul>
                         <li>Verdict first, then the reason, then the action.</li>
                         <li>If a chart can’t show success or failure at a glance, it goes.</li>
-                        <li>Make trust visible without making it noisy. Show disagreements and confidence in a form people can read in a second.</li>
-                        <li>Most data, least effort.</li>
+                        <li>Show disagreements and confidence in a form people can read in a second.</li>
                         <li>Arrows, color and charts all have to earn their place.</li>
                     </ul>
 
