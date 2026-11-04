@@ -1157,6 +1157,16 @@
             max-width: 46rem;
         }
 
+        .vs-ideas.pp-debate {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 700px) {
+            .vs-ideas.pp-debate {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .pp-row {
             display: grid;
             gap: 1rem;
@@ -2693,7 +2703,6 @@
             font-weight: 400;
             line-height: 1.2;
             margin-bottom: 1.75rem;
-            max-width: 40rem;
         }
 
         .vs-h3 {
@@ -4693,6 +4702,13 @@
                     <p class="vs-kicker">01 · The problem</p>
                     <h2 class="serif vs-h2" id="pp-problem-h">Finding events, and people to go with.</h2>
                     <p class="project-description">Students want to get involved in Boston and know what events are happening, but finding something worth going to, and people to go with, is harder than it should be. Retention was our biggest problem, so for V3 I focused on giving people a reason to come back to the app every day: discovery (finding events that fit you), a personalized feed, and onboarding that gets new users to that feed quickly.</p>
+
+                    <h3 class="vs-h3">The big debate: discoverability vs. searchability</h3>
+                    <div class="vs-ideas pp-debate">
+                        <div><span class="vs-label">Searchability</span><h3>“I know what I want.”</h3><p>For people who already know what they want to attend, or what type of event. The goal is to surface those events as fast as possible.</p><p class="vs-took">In the app: search and filters</p></div>
+                        <div><span class="vs-label">Discoverability</span><h3>“Show me something.”</h3><p>For people who don’t know what they want yet, or who open the app before they even plan to go to an event, and then come across something that looks interesting.</p><p class="vs-took">In the app: the scrolling home, picks and the feed</p></div>
+                    </div>
+                    <p class="project-description">Our team went back and forth on which one to prioritize. Since retention was our biggest problem, discovery became the focus of V3, because it gives people a reason to open the app even when they aren’t looking for anything. Search and filters stayed at the top of the home screen for people who already know what they want.</p>
                 </section>
 
                 <section class="vs-section" id="pp-process" aria-labelledby="pp-process-h">
