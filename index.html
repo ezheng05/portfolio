@@ -420,21 +420,23 @@
             z-index: 1;
         }
 
-        /* soft accent glow behind the headline: five blurred ovals roam, squash and wobble
-           on separate cycles of different lengths, so the combined shape never quite repeats */
+        /* soft accent bubble behind the headline. Script (see "home glow bubble") moves it in
+           straight lines, bounces it off the hero's edges and squishes it on each hit; inside it,
+           five blurred ovals jiggle on separate cycles so its outline never quite repeats */
         .hero-glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: min(140vw, 1100px);
+            width: min(95vw, 760px);
             aspect-ratio: 1.6;
             transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
-            animation: glow-drift 7.3s ease-in-out infinite, glow-breathe 2.3s ease-in-out infinite alternate;
+            animation: glow-breathe 2.3s ease-in-out infinite alternate;
+            will-change: transform;
         }
 
         /* each lobe's position is two independent axes (--gx, --gy) swinging back and forth
-           on different periods, so it wanders the whole area in a smooth, never-stopping loop */
+           on different periods, so the bubble's body jiggles without ever settling */
         @property --gx { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
         @property --gy { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 
@@ -462,29 +464,21 @@
         .hero-glow span:nth-child(4) { animation: glow-x-d 2.7s ease-in-out -1s infinite alternate, glow-y-d 3.9s ease-in-out -3s infinite alternate, glow-squash-d 2.6s ease-in-out -1s infinite, glow-wobble-d 3.7s ease-in-out -2s infinite; }
         .hero-glow span:nth-child(5) { animation: glow-x-e 3.4s ease-in-out -3s infinite alternate, glow-y-e 4.9s ease-in-out -1s infinite alternate, glow-squash-e 3.1s ease-in-out -2s infinite, glow-wobble-e 4.3s ease-in-out -1s infinite; }
 
-        @keyframes glow-drift {
-            0%, 100% { transform: translate(-50%, -50%) rotate(-12deg); }
-            20% { transform: translate(-40%, -58%) rotate(-2deg); }
-            45% { transform: translate(-60%, -43%) rotate(-24deg); }
-            70% { transform: translate(-45%, -40%) rotate(-6deg); }
-            85% { transform: translate(-57%, -59%) rotate(-19deg); }
-        }
-
         @keyframes glow-breathe {
             from { opacity: 0.65; }
             to { opacity: 0.9; }
         }
 
-        @keyframes glow-x-a { from { --gx: -26%; } to { --gx: 24%; } }
-        @keyframes glow-y-a { from { --gy: 18%; } to { --gy: -17%; } }
-        @keyframes glow-x-b { from { --gx: 25%; } to { --gx: -22%; } }
-        @keyframes glow-y-b { from { --gy: -18%; } to { --gy: 19%; } }
-        @keyframes glow-x-c { from { --gx: -20%; } to { --gx: 27%; } }
-        @keyframes glow-y-c { from { --gy: 20%; } to { --gy: -16%; } }
-        @keyframes glow-x-d { from { --gx: -38%; } to { --gx: 42%; } }
-        @keyframes glow-y-d { from { --gy: -30%; } to { --gy: 28%; } }
-        @keyframes glow-x-e { from { --gx: 36%; } to { --gx: -40%; } }
-        @keyframes glow-y-e { from { --gy: 26%; } to { --gy: -32%; } }
+        @keyframes glow-x-a { from { --gx: -10%; } to { --gx: 9%; } }
+        @keyframes glow-y-a { from { --gy: 8%; } to { --gy: -7%; } }
+        @keyframes glow-x-b { from { --gx: 10%; } to { --gx: -8%; } }
+        @keyframes glow-y-b { from { --gy: -8%; } to { --gy: 9%; } }
+        @keyframes glow-x-c { from { --gx: -8%; } to { --gx: 11%; } }
+        @keyframes glow-y-c { from { --gy: 9%; } to { --gy: -7%; } }
+        @keyframes glow-x-d { from { --gx: -18%; } to { --gx: 20%; } }
+        @keyframes glow-y-d { from { --gy: -14%; } to { --gy: 13%; } }
+        @keyframes glow-x-e { from { --gx: 17%; } to { --gx: -19%; } }
+        @keyframes glow-y-e { from { --gy: 12%; } to { --gy: -15%; } }
 
         @keyframes glow-squash-a {
             0%, 100% { scale: 0.8 1.22; }
@@ -7254,6 +7248,85 @@
                     try { sessionStorage.removeItem(SESSION_KEY); } catch (_) {}
                 });
             }
+        })();
+        // home glow bubble: travels in straight lines, bounces off the hero's edges, and squishes
+        // flat against whichever wall it hits before jiggling back into shape
+        (function() {
+            const glow = document.querySelector('.hero-glow');
+            if (!glow) return;
+            const hero = glow.parentElement;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            const MAX_SPEED = 280;  // px per second; slower on narrow screens, where the walls are close
+            const CORE = 0.34;      // share of the glow box that counts as the bubble's edge (the rest is soft haze)
+            const STIFF = 180;      // squash spring: higher snaps back faster
+            const DAMP = 7;         // squash spring: lower jiggles longer
+            const KICK = 2.4;       // how hard a wall hit squashes the bubble
+            const MIN_NORMAL = 0.3; // never skim along a wall: keep at least this share of speed off it
+
+            const speed = () => Math.min(MAX_SPEED, hero.clientWidth * 0.5);
+            const angle = Math.random() * Math.PI * 2;
+            let vx = Math.cos(angle) * MAX_SPEED, vy = Math.sin(angle) * MAX_SPEED;
+            let x = 0, y = 0;
+            let qx = 0, qvx = 0, qy = 0, qvy = 0;   // squash along each axis, and its rate
+            let spin = -12, spinV = 0;
+            let last = null, frame = null, visible = true;
+
+            // nudge the heading a little on each bounce so the path never settles into a loop
+            function bounce(axis, sign) {
+                const turn = (Math.random() - 0.5) * 0.5;
+                const c = Math.cos(turn), s = Math.sin(turn);
+                [vx, vy] = [vx * c - vy * s, vx * s + vy * c];
+                const n = axis === 'x' ? vx : vy;
+                const fixed = sign * Math.max(Math.abs(n), Math.hypot(vx, vy) * MIN_NORMAL);
+                if (axis === 'x') vx = fixed; else vy = fixed;
+                const scale = speed() / Math.hypot(vx, vy);
+                vx *= scale; vy *= scale;
+                if (axis === 'x') qvx += KICK; else qvy += KICK;
+                spinV += (Math.random() - 0.5) * 60;
+            }
+
+            function step(t) {
+                const dt = last === null ? 0 : Math.min((t - last) / 1000, 1 / 30);
+                last = t;
+                const maxX = Math.max(0, hero.clientWidth / 2 - glow.offsetWidth * CORE);
+                const maxY = Math.max(0, hero.clientHeight / 2 - glow.offsetHeight * CORE);
+
+                const k = speed() / Math.hypot(vx, vy);
+                if (k > 0) { vx *= k; vy *= k; }
+                x += vx * dt;
+                y += vy * dt;
+                if (maxX === 0) x = 0;
+                else if (x > maxX) { x = maxX; bounce('x', -1); }
+                else if (x < -maxX) { x = -maxX; bounce('x', 1); }
+                if (maxY === 0) y = 0;
+                else if (y > maxY) { y = maxY; bounce('y', -1); }
+                else if (y < -maxY) { y = -maxY; bounce('y', 1); }
+
+                qvx += (-STIFF * qx - DAMP * qvx) * dt; qx += qvx * dt;
+                qvy += (-STIFF * qy - DAMP * qvy) * dt; qy += qvy * dt;
+                spinV -= spinV * 0.8 * dt;
+                spin += spinV * dt;
+
+                // squash on the hit axis, bulge on the other, so the bubble keeps its volume
+                const sx = 1 - qx + qy * 0.6, sy = 1 - qy + qx * 0.6;
+                glow.style.transform = `translate(-50%, -50%) translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${sx.toFixed(3)}, ${sy.toFixed(3)}) rotate(${spin.toFixed(2)}deg)`;
+                frame = requestAnimationFrame(step);
+            }
+
+            function sync() {
+                const run = visible && !reduceMotion.matches;
+                if (run && frame === null) { last = null; frame = requestAnimationFrame(step); }
+                if (!run && frame !== null) { cancelAnimationFrame(frame); frame = null; }
+                if (reduceMotion.matches) glow.style.transform = '';
+            }
+
+            new IntersectionObserver(entries => {
+                visible = entries[0].isIntersecting;
+                sync();
+            }).observe(hero);
+            reduceMotion.addEventListener('change', sync);
+            sync();
         })();
     </script>
 </body>
