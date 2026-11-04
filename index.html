@@ -2656,7 +2656,7 @@
         /* final screens */
         .vs-screen {
             display: grid;
-            grid-template-columns: minmax(160px, 220px) 1fr;
+            grid-template-columns: minmax(200px, 300px) 1fr;
             gap: 2.5rem;
             align-items: start;
             padding: 2rem 0;
@@ -3181,7 +3181,7 @@
         }
 
         .vs-flow--2 > .vs-phone {
-            max-width: 220px;
+            max-width: 300px;
         }
 
         .vs-pairs {
@@ -3203,8 +3203,35 @@
         }
 
         .vs-grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-        .vs-grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 720px; }
-        .vs-grid2 { grid-template-columns: repeat(2, minmax(0, 240px)); justify-content: center; gap: 3rem; }
+        .vs-grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .vs-grid2 { grid-template-columns: repeat(2, minmax(0, 320px)); justify-content: center; gap: 3rem; }
+
+        /* screen rows break out of the text column so the screens can be larger */
+        @media (min-width: 1000px) {
+            .vs-hero,
+            .vs-flow--4,
+            .vs-grid4,
+            .vs-pairs,
+            .vs-grid3 {
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                width: min(1240px, calc(100vw - 8rem));
+            }
+
+            .vs-grid3 {
+                width: min(1000px, calc(100vw - 8rem));
+                gap: 2.5rem;
+            }
+
+            .vs-hero {
+                gap: 1.75rem;
+            }
+
+            .vs-pairs {
+                gap: 1rem 4rem;
+            }
+        }
 
         .vs-down {
             width: 1.75rem;
@@ -3415,8 +3442,10 @@
         @media (max-width: 700px) {
             .vs-hero,
             .vs-flow--4,
+            .vs-flow--2,
             .vs-grid4,
-            .vs-grid3 {
+            .vs-grid3,
+            .vs-grid2 {
                 display: flex;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
@@ -3428,19 +3457,17 @@
 
             .vs-hero > .vs-phone,
             .vs-flow--4 > .vs-phone,
+            .vs-flow--2 > .vs-phone,
             .vs-grid4 > .vs-phone,
-            .vs-grid3 > .vs-phone {
-                flex: 0 0 52%;
+            .vs-grid3 > .vs-phone,
+            .vs-grid2 > .vs-phone {
+                flex: 0 0 72%;
+                max-width: none;
                 scroll-snap-align: start;
             }
 
             .vs-flow--4 > .vs-arrow {
                 width: 2rem;
-            }
-
-            .vs-grid2 {
-                gap: 1.25rem;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .vs-arrow {
