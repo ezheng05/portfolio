@@ -1377,6 +1377,53 @@
             margin-bottom: 2.5rem;
         }
 
+        /* duration and tools, right under each project's title */
+        .project-page .project-meta:has(+ .project-glance) {
+            margin-bottom: 1.25rem;
+        }
+
+        .project-glance {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .project-glance dt {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .project-glance dd {
+            font-size: 0.92rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .project-page .glance-tools {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-page .glance-tools li {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0.1rem 0.55rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg-secondary);
+        }
+
         .project-page .project-description {
             font-size: 1.05rem;
             font-weight: 300;
@@ -2711,6 +2758,10 @@
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             margin-bottom: 2rem;
+        }
+
+        .vs-facts--3 {
+            grid-template-columns: repeat(3, 1fr);
         }
 
         .vs-facts dt,
@@ -4477,7 +4528,11 @@
             <div class="project-page vs">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">VitaSalus</h1>
-                <p class="project-meta">Personal project · Solo · Research, product strategy, UX/UI · Ongoing</p>
+                <p class="project-meta">Personal project · Solo · Research, product strategy, UX/UI</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>Ongoing</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Next.js</li><li>React</li><li>Tailwind</li><li>shadcn/ui</li><li>Claude</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">A health app that sits on top of the wearables you already own. Open it and it tells you where you stand on your goal, why, what to do in the next hour, and the one habit that would help most over time.</p>
 <div class="vs-hero"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Home</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Home"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Home: energy 3 of 10 on a gold ring that runs off the right edge, Running low, down 4, and one action for the next hour with a Start button" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Why</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Why"><img src="vitasalus/s/why-w5.webp" width="445" height="943" alt="Why: Mostly sleep, partly food. Causes ranked Big, Some and A little, WHOOP and your phone disagreeing on sleep, confidence 88%" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Goal</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Goal"><img src="vitasalus/s/goal.webp" width="445" height="943" alt="Goal: Behind, 3 of 5 afternoons you crashed. Asleep by 11 is the biggest lever, shown on a thin 0 to 10 line" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Check-in</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Check-in"><img src="vitasalus/s/checkin.webp" width="456" height="966" alt="Check-in: an energy slider at 3 of 10 and a microphone for one spoken sentence" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Appointment</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Before an appointment"><img src="vitasalus/s/appointment.webp" width="456" height="966" alt="Before an appointment: a summary for a physical therapist, prepared from the calendar" decoding="async"></button></figure></div>
 <p class="vs-hero-note">The five final screens. High-fidelity concepts built from my design system; names and health values are sample data. Click any screen to enlarge it.</p>
@@ -4728,7 +4783,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Prefill Data Orchestrator source selection</h1>
-                <p class="project-meta">Capital One · Business Analyst Intern · Jun to Aug 2026</p>
+                <p class="project-meta">Capital One · Business Analyst Intern</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>Jun to Aug 2026</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>SQL</li><li>Snowflake</li></ul></dd></div>
+                </dl>
                 <p class="project-description">When you apply for a Capital One credit card, prefill fills in your information so you type less. I defined the logic for deciding which data source should fill each field.</p>
 
                 <p class="project-description"><b>Context:</b> I interned on the Mainstreet Acquisitions team in the product management and analytics track. The Prefill Data Orchestrator (PDO) is a planned system that routes each field to the best available source, and my job was to define its business logic.</p>
@@ -4760,7 +4819,11 @@
             <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Enlaye</h1>
-                <p class="project-meta">Enlaye · First designer · Summer 2025</p>
+                <p class="project-meta">Enlaye · First designer</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>Summer 2025</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Figma</li><li>React</li><li>Next.js</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">I was the first designer at Enlaye, an AI risk management platform for construction. I designed 9+ features across the mobile app, web app and website, and the customer demos built on my designs validated new features and brought in new customers.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye/enlaye-logo.png" alt="Enlaye logo" loading="lazy" decoding="async"></a>
@@ -4813,6 +4876,9 @@
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Popple mobile app</h1>
                 <p class="project-meta">Social &amp; events app · Sole UX designer · V2 and V3</p>
+                <dl class="project-glance">
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Figma</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">I designed every screen in V2 and V3 of Popple, a social and events app for college students, and led its user growth.</p>
                 <div class="project-media project-media--logo">
                     <img src="popple/popple-logo.png" alt="Popple logo" loading="lazy" decoding="async">
@@ -4990,6 +5056,9 @@
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Air quality web app</h1>
                 <p class="project-meta">BU Multimedia Communications Lab · Undergraduate researcher</p>
+                <dl class="project-glance">
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Streamlit</li><li>Python</li><li>Plotly</li><li>Matplotlib</li><li>CAD</li></ul></dd></div>
+                </dl>
                 <p class="project-description">A public web app that turns continuous sensor data from BU classrooms into clear answers for facilities staff: which rooms are poorly ventilated, too hot or too cold, or exposed to particulates.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering" loading="lazy" decoding="async"></a>
@@ -5044,7 +5113,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">ReCo Digital web app</h1>
-                <p class="project-meta">ReCo Digital · Intern · 4 weeks</p>
+                <p class="project-meta">ReCo Digital · Intern</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>4 weeks</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Python</li><li>Gemini API</li><li>OpenAI API</li><li>Flask</li><li>JavaScript</li><li>CSS</li><li>Supabase</li></ul></dd></div>
+                </dl>
                 <p class="project-description">A web app that reads receipts and turns them into food waste data for a client.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco/reco-logo.png" alt="ReCo Digital" loading="lazy" decoding="async"></a>
@@ -5082,7 +5155,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">Designathon mobile app</h1>
-                <p class="project-meta">Catalyst Designathon 2026 · Team of 3 · 1.5 days</p>
+                <p class="project-meta">Catalyst Designathon 2026 · Team of 3</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>1.5 days</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Figma</li></ul></dd></div>
+                </dl>
                 <p class="project-description">Meet artscape - where the show never really ends!</p>
                 <div class="project-media project-media--logo">
                     <a href="https://devpost.com/software/the-space-in-between-proj" target="_blank" rel="noopener"><img src="artscape/cover-full.png" alt="Catalyst Designathon 2026" style="max-width: 55%;" loading="lazy" decoding="async"></a>
@@ -5178,7 +5255,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">Lovable hackathon mobile app</h1>
-                <p class="project-meta">Lovable collegiate hackathon · Solo · 1.5 hours</p>
+                <p class="project-meta">Lovable collegiate hackathon · Solo</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>1.5 hours</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Lovable</li></ul></dd></div>
+                </dl>
                 <p class="project-description">Vibe-coded complete mobile app using Lovable in under 1.5 hours (frontend + backend).</p>
                 <div class="project-media project-media--logo">
                     <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener"><img src="lovable/cover.png" alt="Lovable" loading="lazy" decoding="async"></a>
@@ -5227,7 +5308,11 @@
             <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">FlameFreeze</h1>
-                <p class="project-meta">EWB Design Corner 2025 · Team BUilders · Website design and build · One weekend</p>
+                <p class="project-meta">EWB Design Corner 2025 · Team BUilders · Website design and build</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>One weekend</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>Three.js</li><li>Recharts</li><li>Mapbox</li><li>AI coding tools</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">A wildfire response website for LA residents, community members and emergency responders. I designed and built the whole site in one weekend, and it was the main reason our team placed 2nd out of 30+ teams.</p>
                 <figure class="ff-hero">
                     <div class="ff-hero-grid">
@@ -5237,10 +5322,9 @@
                     </div>
                     <figcaption>The dashboard, the simulation and the community page. Everything on the site runs on dummy data and simulations, so it feels live without real sensors behind it. Click any image to enlarge it.</figcaption>
                 </figure>
-                <dl class="vs-facts">
+                <dl class="vs-facts vs-facts--3">
                     <div><dt>Role</dt><dd>Website design and build, solo, on a team of five</dd></div>
                     <div><dt>Users</dt><dd>LA residents, community members and emergency responders</dd></div>
-                    <div><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Three.js, Recharts, Mapbox and AI coding tools</dd></div>
                     <div><dt>Result</dt><dd>2nd place out of 30+ teams and 170+ participants</dd></div>
                 </dl>
                 <div class="vs-keys">
