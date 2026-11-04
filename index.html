@@ -427,7 +427,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: min(95vw, 760px);
+            width: min(95vw, 840px);
             aspect-ratio: 1.6;
             transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
@@ -7356,59 +7356,71 @@
                 });
             }
         })();
-        // home glow bubble: travels in straight lines, bounces off the hero's edges, and squishes
-        // flat against whichever wall it hits before jiggling back into shape
+        // home glow bubble: floats along a slowly curving path, bounces off the hero's edges, and
+        // squishes against whichever wall it hits before jiggling back into shape
         (function() {
             const glow = document.querySelector('.hero-glow');
             if (!glow) return;
             const hero = glow.parentElement;
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-            const MAX_SPEED = 280;  // px per second; slower on narrow screens, where the walls are close
-            const CORE = 0.34;      // share of the glow box that counts as the bubble's edge (the rest is soft haze)
-            const STIFF = 180;      // squash spring: higher snaps back faster
-            const DAMP = 7;         // squash spring: lower jiggles longer
-            const KICK = 2.4;       // how hard a wall hit squashes the bubble
-            const MIN_NORMAL = 0.3; // never skim along a wall: keep at least this share of speed off it
+            const MAX_SPEED = 230;  // px per second; slower on narrow screens, where the walls are close
+            const CORE_X = 0.34;    // share of the glow box that counts as the bubble's edge (the rest is soft haze)
+            const CORE_Y = 0.26;    // smaller vertically, so it has more room to float up and down
+            const STIFF = 120;      // squash spring: higher snaps back faster
+            const DAMP = 4.5;       // squash spring: lower jiggles longer
+            const KICK = 2.2;       // how hard a wall hit squashes the bubble
+            const MIN_TILT = 0.3;   // radians off horizontal it always keeps, so it never just slides sideways
+            const MAX_TILT = 0.95;  // radians off horizontal it never exceeds, so it doesn't just bob up and down
 
-            const speed = () => Math.min(MAX_SPEED, hero.clientWidth * 0.5);
-            const angle = Math.random() * Math.PI * 2;
-            let vx = Math.cos(angle) * MAX_SPEED, vy = Math.sin(angle) * MAX_SPEED;
-            let x = 0, y = 0;
+            const speed = () => Math.min(MAX_SPEED, hero.clientWidth * 0.45);
+            // heading: 0 is right, PI/2 is down. Start on a shallow diagonal in a random direction
+            let heading = (Math.random() * 0.4 + 0.45) * (Math.random() < 0.5 ? 1 : -1) + (Math.random() < 0.5 ? 0 : Math.PI);
+            let x = 0, y = 0, time = Math.random() * 100;
             let qx = 0, qvx = 0, qy = 0, qvy = 0;   // squash along each axis, and its rate
             let spin = -12, spinV = 0;
             let last = null, frame = null, visible = true;
 
-            // nudge the heading a little on each bounce so the path never settles into a loop
-            function bounce(axis, sign) {
-                const turn = (Math.random() - 0.5) * 0.5;
-                const c = Math.cos(turn), s = Math.sin(turn);
-                [vx, vy] = [vx * c - vy * s, vx * s + vy * c];
-                const n = axis === 'x' ? vx : vy;
-                const fixed = sign * Math.max(Math.abs(n), Math.hypot(vx, vy) * MIN_NORMAL);
-                if (axis === 'x') vx = fixed; else vy = fixed;
-                const scale = speed() / Math.hypot(vx, vy);
-                vx *= scale; vy *= scale;
-                if (axis === 'x') qvx += KICK; else qvy += KICK;
-                spinV += (Math.random() - 0.5) * 60;
+            function kick(axis, normalSpeed) {
+                const hit = KICK * Math.min(1, Math.abs(normalSpeed) / MAX_SPEED + 0.4);
+                if (axis === 'x') qvx += hit; else qvy += hit;
+                spinV += (Math.random() - 0.5) * 50;
+                heading += (Math.random() - 0.5) * 0.3;
             }
 
             function step(t) {
                 const dt = last === null ? 0 : Math.min((t - last) / 1000, 1 / 30);
                 last = t;
-                const maxX = Math.max(0, hero.clientWidth / 2 - glow.offsetWidth * CORE);
-                const maxY = Math.max(0, hero.clientHeight / 2 - glow.offsetHeight * CORE);
+                time += dt;
+                const maxX = Math.max(0, hero.clientWidth / 2 - glow.offsetWidth * CORE_X);
+                const maxY = Math.max(0, hero.clientHeight / 2 - glow.offsetHeight * CORE_Y);
 
-                const k = speed() / Math.hypot(vx, vy);
-                if (k > 0) { vx *= k; vy *= k; }
+                // drift: the heading slowly swings back and forth on two out-of-step rhythms,
+                // so the bubble floats in lazy curves instead of ruler-straight lines
+                heading += (0.55 * Math.sin(time * 0.47) + 0.35 * Math.sin(time * 1.13 + 2)) * dt;
+                // keep the tilt off horizontal within [MIN_TILT, MAX_TILT], easing back when it strays
+                const c = Math.cos(heading), s = Math.sin(heading);
+                const tilt = Math.atan2(Math.abs(s), Math.abs(c));
+                const push = tilt < MIN_TILT ? 1 : tilt > MAX_TILT ? -1 : 0;
+                if (push) heading += push * Math.sign(c * s || 1) * 1.4 * dt;
+
+                // speed swells and eases a little, like something carried on air
+                const v = speed() * (0.85 + 0.15 * Math.sin(time * 0.7));
+                let vx = Math.cos(heading) * v, vy = Math.sin(heading) * v;
                 x += vx * dt;
                 y += vy * dt;
+
+                // bounce: mirror the heading off whichever wall it reached, but only if still moving into it
                 if (maxX === 0) x = 0;
-                else if (x > maxX) { x = maxX; bounce('x', -1); }
-                else if (x < -maxX) { x = -maxX; bounce('x', 1); }
+                else if (Math.abs(x) > maxX) {
+                    x = Math.sign(x) * maxX;
+                    if (Math.sign(vx) === Math.sign(x)) { heading = Math.PI - heading; kick('x', vx); }
+                }
                 if (maxY === 0) y = 0;
-                else if (y > maxY) { y = maxY; bounce('y', -1); }
-                else if (y < -maxY) { y = -maxY; bounce('y', 1); }
+                else if (Math.abs(y) > maxY) {
+                    y = Math.sign(y) * maxY;
+                    if (Math.sign(vy) === Math.sign(y)) { heading = -heading; kick('y', vy); }
+                }
 
                 qvx += (-STIFF * qx - DAMP * qvx) * dt; qx += qvx * dt;
                 qvy += (-STIFF * qy - DAMP * qvy) * dt; qy += qvy * dt;
