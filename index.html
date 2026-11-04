@@ -420,7 +420,7 @@
             z-index: 1;
         }
 
-        /* soft accent glow behind the headline: five blurred ovals drift, squash and wobble
+        /* soft accent glow behind the headline: five blurred ovals roam, squash and wobble
            on separate cycles of different lengths, so the combined shape never quite repeats */
         .hero-glow {
             position: absolute;
@@ -430,8 +430,13 @@
             aspect-ratio: 1.6;
             transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
-            animation: glow-drift 13s ease-in-out infinite, glow-breathe 3.7s ease-in-out infinite alternate;
+            animation: glow-drift 7.3s ease-in-out infinite, glow-breathe 2.3s ease-in-out infinite alternate;
         }
+
+        /* each lobe's position is two independent axes (--gx, --gy) swinging back and forth
+           on different periods, so it wanders the whole area in a smooth, never-stopping loop */
+        @property --gx { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+        @property --gy { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 
         .hero-glow span {
             position: absolute;
@@ -441,6 +446,7 @@
                 color-mix(in srgb, var(--accent) 13%, transparent),
                 color-mix(in srgb, var(--accent) 5%, transparent) 55%,
                 transparent);
+            translate: var(--gx) var(--gy);
             will-change: transform, translate, scale;
         }
 
@@ -448,20 +454,20 @@
         .hero-glow span:nth-child(4) { inset: 12% 48% 22% 2%; }
         .hero-glow span:nth-child(5) { inset: 4% 2% 38% 50%; }
 
-        /* each lobe gets a path (translate), a squash (scale) and a wobble (transform),
+        /* each lobe gets an x swing, a y swing, a squash (scale) and a wobble (transform),
            each on its own period, so motion and shape drift out of sync */
-        .hero-glow span:nth-child(1) { animation: glow-path-a 9.3s ease-in-out infinite, glow-squash-a 5.1s ease-in-out infinite, glow-wobble-a 7.7s ease-in-out infinite; }
-        .hero-glow span:nth-child(2) { animation: glow-path-b 11.1s ease-in-out -3s infinite, glow-squash-b 6.3s ease-in-out -2s infinite, glow-wobble-b 8.9s ease-in-out -5s infinite; }
-        .hero-glow span:nth-child(3) { animation: glow-path-c 12.7s ease-in-out -6s infinite, glow-squash-c 7.3s ease-in-out -4s infinite, glow-wobble-c 10.3s ease-in-out -1s infinite; }
-        .hero-glow span:nth-child(4) { animation: glow-path-d 8.1s ease-in-out -2s infinite, glow-squash-d 4.7s ease-in-out -1s infinite, glow-wobble-d 6.9s ease-in-out -3s infinite; }
-        .hero-glow span:nth-child(5) { animation: glow-path-e 10.1s ease-in-out -5s infinite, glow-squash-e 5.9s ease-in-out -3s infinite, glow-wobble-e 7.1s ease-in-out -2s infinite; }
+        .hero-glow span:nth-child(1) { animation: glow-x-a 3.1s ease-in-out infinite alternate, glow-y-a 4.3s ease-in-out -1s infinite alternate, glow-squash-a 2.9s ease-in-out infinite, glow-wobble-a 4.1s ease-in-out infinite; }
+        .hero-glow span:nth-child(2) { animation: glow-x-b 3.7s ease-in-out -2s infinite alternate, glow-y-b 2.9s ease-in-out infinite alternate, glow-squash-b 3.4s ease-in-out -1s infinite, glow-wobble-b 4.7s ease-in-out -2s infinite; }
+        .hero-glow span:nth-child(3) { animation: glow-x-c 4.6s ease-in-out -1s infinite alternate, glow-y-c 3.3s ease-in-out -2s infinite alternate, glow-squash-c 3.8s ease-in-out -2s infinite, glow-wobble-c 5.3s ease-in-out -1s infinite; }
+        .hero-glow span:nth-child(4) { animation: glow-x-d 2.7s ease-in-out -1s infinite alternate, glow-y-d 3.9s ease-in-out -3s infinite alternate, glow-squash-d 2.6s ease-in-out -1s infinite, glow-wobble-d 3.7s ease-in-out -2s infinite; }
+        .hero-glow span:nth-child(5) { animation: glow-x-e 3.4s ease-in-out -3s infinite alternate, glow-y-e 4.9s ease-in-out -1s infinite alternate, glow-squash-e 3.1s ease-in-out -2s infinite, glow-wobble-e 4.3s ease-in-out -1s infinite; }
 
         @keyframes glow-drift {
             0%, 100% { transform: translate(-50%, -50%) rotate(-12deg); }
-            20% { transform: translate(-44%, -55%) rotate(-6deg); }
-            45% { transform: translate(-55%, -47%) rotate(-17deg); }
-            70% { transform: translate(-48%, -44%) rotate(-9deg); }
-            85% { transform: translate(-53%, -53%) rotate(-14deg); }
+            20% { transform: translate(-40%, -58%) rotate(-2deg); }
+            45% { transform: translate(-60%, -43%) rotate(-24deg); }
+            70% { transform: translate(-45%, -40%) rotate(-6deg); }
+            85% { transform: translate(-57%, -59%) rotate(-19deg); }
         }
 
         @keyframes glow-breathe {
@@ -469,94 +475,70 @@
             to { opacity: 0.9; }
         }
 
-        @keyframes glow-path-a {
-            0%, 100% { translate: -12% 6%; }
-            30% { translate: 10% -6%; }
-            55% { translate: 4% 10%; }
-            80% { translate: -8% -8%; }
-        }
-
-        @keyframes glow-path-b {
-            0%, 100% { translate: 14% 9%; }
-            25% { translate: -4% 12%; }
-            60% { translate: -12% -11%; }
-            85% { translate: 8% -6%; }
-        }
-
-        @keyframes glow-path-c {
-            0%, 100% { translate: -9% -12%; }
-            35% { translate: 12% -4%; }
-            65% { translate: 10% 13%; }
-            85% { translate: -6% 8%; }
-        }
-
-        @keyframes glow-path-d {
-            0%, 100% { translate: -20% 10%; }
-            30% { translate: 4% -14%; }
-            60% { translate: 16% 6%; }
-            80% { translate: -6% 14%; }
-        }
-
-        @keyframes glow-path-e {
-            0%, 100% { translate: 18% -9%; }
-            25% { translate: 2% 14%; }
-            55% { translate: -16% 8%; }
-            80% { translate: -4% -12%; }
-        }
+        @keyframes glow-x-a { from { --gx: -26%; } to { --gx: 24%; } }
+        @keyframes glow-y-a { from { --gy: 18%; } to { --gy: -17%; } }
+        @keyframes glow-x-b { from { --gx: 25%; } to { --gx: -22%; } }
+        @keyframes glow-y-b { from { --gy: -18%; } to { --gy: 19%; } }
+        @keyframes glow-x-c { from { --gx: -20%; } to { --gx: 27%; } }
+        @keyframes glow-y-c { from { --gy: 20%; } to { --gy: -16%; } }
+        @keyframes glow-x-d { from { --gx: -38%; } to { --gx: 42%; } }
+        @keyframes glow-y-d { from { --gy: -30%; } to { --gy: 28%; } }
+        @keyframes glow-x-e { from { --gx: 36%; } to { --gx: -40%; } }
+        @keyframes glow-y-e { from { --gy: 26%; } to { --gy: -32%; } }
 
         @keyframes glow-squash-a {
-            0%, 100% { scale: 0.82 1.2; }
-            40% { scale: 1.28 0.8; }
+            0%, 100% { scale: 0.8 1.22; }
+            40% { scale: 1.3 0.78; }
             70% { scale: 1 1.05; }
         }
 
         @keyframes glow-squash-b {
-            0%, 100% { scale: 0.7 1; }
-            35% { scale: 1.1 0.66; }
+            0%, 100% { scale: 0.7 1.02; }
+            35% { scale: 1.14 0.64; }
             65% { scale: 0.9 0.85; }
         }
 
         @keyframes glow-squash-c {
-            0%, 100% { scale: 0.64 1; }
-            45% { scale: 1 0.6; }
+            0%, 100% { scale: 0.62 1; }
+            45% { scale: 1.04 0.6; }
             75% { scale: 0.8 0.9; }
         }
 
         @keyframes glow-squash-d {
-            0%, 100% { scale: 0.76 0.95; }
-            35% { scale: 1.35 1.08; }
-            70% { scale: 1 0.8; }
+            0%, 100% { scale: 0.74 0.95; }
+            35% { scale: 1.38 1.1; }
+            70% { scale: 1 0.78; }
         }
 
         @keyframes glow-squash-e {
-            0%, 100% { scale: 1.25 0.76; }
-            40% { scale: 0.74 1.2; }
+            0%, 100% { scale: 1.28 0.74; }
+            40% { scale: 0.72 1.22; }
             70% { scale: 1 1; }
         }
 
         @keyframes glow-wobble-a {
-            0%, 100% { transform: rotate(0deg) skew(6deg, -3deg); }
-            50% { transform: rotate(10deg) skew(-6deg, 3deg); }
+            0%, 100% { transform: rotate(-8deg) skew(6deg, -3deg); }
+            50% { transform: rotate(18deg) skew(-6deg, 3deg); }
         }
 
         @keyframes glow-wobble-b {
-            0%, 100% { transform: rotate(22deg) skew(-5deg, 4deg); }
-            50% { transform: rotate(-20deg) skew(5deg, -4deg); }
+            0%, 100% { transform: rotate(30deg) skew(-5deg, 4deg); }
+            50% { transform: rotate(-28deg) skew(5deg, -4deg); }
         }
 
         @keyframes glow-wobble-c {
-            0%, 100% { transform: rotate(-28deg) skew(4deg, 5deg); }
-            50% { transform: rotate(24deg) skew(-4deg, -5deg); }
+            0%, 100% { transform: rotate(-36deg) skew(4deg, 5deg); }
+            50% { transform: rotate(32deg) skew(-4deg, -5deg); }
         }
 
         @keyframes glow-wobble-d {
-            0%, 100% { transform: rotate(-8deg) skew(-7deg, 2deg); }
-            50% { transform: rotate(12deg) skew(7deg, -2deg); }
+            0%, 100% { transform: rotate(-16deg) skew(-7deg, 2deg); }
+            50% { transform: rotate(20deg) skew(7deg, -2deg); }
         }
 
         @keyframes glow-wobble-e {
-            0%, 100% { transform: rotate(6deg) skew(5deg, -5deg); }
-            50% { transform: rotate(-10deg) skew(-5deg, 5deg); }
+            0%, 100% { transform: rotate(14deg) skew(5deg, -5deg); }
+            50% { transform: rotate(-18deg) skew(-5deg, 5deg); }
         }
 
         .hero h1 .word {
