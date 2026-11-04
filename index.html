@@ -1105,8 +1105,10 @@
             grid-row: span 2;
         }
 
+        /* the screenshot sits inside the card so the card itself follows the theme, like the other logo cards */
         .project-card[data-project="flamefreeze"] {
-            background-size: 100% auto;
+            background-size: 88%;
+            background-position: center 28%;
             background-color: var(--bg-secondary);
         }
 
@@ -2529,6 +2531,15 @@
             background-position: center 35%;
             background-repeat: no-repeat;
         }
+
+        /* dark versions of the card art, so every card follows the theme */
+        [data-theme="dark"] .project-card[data-project="vitasalus"] { background-image: url('vitasalus/card-dark.jpg'); }
+        [data-theme="dark"] .project-card[data-project="capitalone"] { background-image: url('capitalone/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="marl"] { background-image: url('marl/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="neuro"] { background-image: url('neurobionics/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="carla"] { background-image: url('carla/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="amyloid"] { background-image: url('amyloid/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="watchdog"] { background-image: url('watchdog/card-dark.svg'); }
 
         /* VitaSalus case study (.vs). Brand panels stay on the app's bone surface in both themes, like the screens. */
         .project-card[data-project="vitasalus"] {
