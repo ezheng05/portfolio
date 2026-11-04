@@ -783,6 +783,108 @@
             flex-shrink: 0;
         }
 
+        /* hobbies hover grid (desktop with a mouse only; touch and narrow screens keep the carousel).
+           Hovering a tile widens its column and heightens its row; JS sets the track sizes. */
+        .hobby-grid {
+            display: none;
+        }
+
+        @media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+            .about-grid:has(.hobby-grid) {
+                align-items: stretch;
+            }
+
+            .about-grid:has(.hobby-grid) .about-content {
+                align-self: center;
+            }
+
+            .about-grid .carousel {
+                display: none;
+            }
+
+            .hobby-grid {
+                display: grid;
+                gap: 6px;
+                width: 100%;
+                min-height: 820px;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(6, 1fr);
+                transition: grid-template-columns 0.4s ease, grid-template-rows 0.4s ease;
+            }
+        }
+
+        .hobby-tile {
+            position: relative;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            margin: 0;
+            outline: none;
+        }
+
+        .hobby-tile:focus-visible {
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .hobby-tile img,
+        .hobby-tile video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: filter 0.4s ease;
+        }
+
+        .hobby-grid.is-hovering .hobby-tile:not(.is-active) img,
+        .hobby-grid.is-hovering .hobby-tile:not(.is-active) video {
+            filter: saturate(0.7) brightness(0.85);
+        }
+
+        .hobby-tile figcaption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 2.5rem 0.9rem 0.7rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+            color: #fff;
+            font-size: 0.95rem;
+            line-height: 1.35;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .hobby-tile.is-active figcaption {
+            opacity: 1;
+            transform: none;
+        }
+
+        .hobby-tile .hobby-sound {
+            display: block;
+            margin-top: 0.15rem;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .hobby-tile.has-video {
+            cursor: pointer;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hobby-grid,
+            .hobby-tile img,
+            .hobby-tile video,
+            .hobby-tile figcaption {
+                transition: none;
+            }
+        }
+
         .about-content h2 {
             font-size: clamp(1.75rem, 4vw, 3rem);
             margin-bottom: 2rem;
@@ -3788,6 +3890,8 @@
                         <button type="button" class="carousel-thumb" data-index="17" aria-label="View 18"><img src="about/thumbs/surfing.jpg" alt="" loading="lazy" decoding="async"></button>
                     </div>
                 </div>
+                <!-- desktop-only hover grid, filled from the carousel slides by script below -->
+                <div class="hobby-grid" role="region" aria-label="Hobbies gallery"></div>
             </div>
             
             <div class="about-cards" role="list">
@@ -5640,6 +5744,98 @@
             prevBtn?.addEventListener('click', () => goTo(current - 1));
             nextBtn?.addEventListener('click', () => goTo(current + 1));
             thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+
+            // desktop hover grid: same media and captions as the carousel. Hovering a tile
+            // grows its column and row (like a 2D accordion) and reveals its caption.
+            const grid = document.querySelector('.hobby-grid');
+            if (!grid) return;
+            const COLS = 3;
+            const ROWS = Math.ceil(slides.length / COLS);
+            const COL_GROW = 2;   // hovered column vs. the others
+            const ROW_GROW = 3;   // hovered row vs. the others
+
+            const tiles = Array.from(slides).map((slide, i) => {
+                const src = slide.querySelector('img, video');
+                const tile = document.createElement('figure');
+                tile.className = 'hobby-tile';
+                tile.tabIndex = 0;
+                const caption = document.createElement('figcaption');
+                caption.textContent = captions[i] || '';
+                if (src.tagName === 'VIDEO') {
+                    tile.classList.add('has-video');
+                    const v = document.createElement('video');
+                    v.src = src.getAttribute('src');
+                    v.poster = src.getAttribute('poster');
+                    v.muted = true;
+                    v.loop = true;
+                    v.playsInline = true;
+                    v.preload = 'none';
+                    v.setAttribute('aria-hidden', 'true');
+                    tile.appendChild(v);
+                    const hint = document.createElement('span');
+                    hint.className = 'hobby-sound';
+                    hint.textContent = 'click for sound';
+                    caption.appendChild(hint);
+                    tile.setAttribute('role', 'button');
+                    tile.setAttribute('aria-label', (captions[i] || 'video') + ', video. Press to toggle sound');
+                    const toggleSound = () => {
+                        v.muted = !v.muted;
+                        hint.textContent = v.muted ? 'click for sound' : 'click to mute';
+                        if (v.paused) v.play().catch(() => {});
+                    };
+                    tile.addEventListener('click', toggleSound);
+                    tile.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSound(); }
+                    });
+                } else {
+                    const img = document.createElement('img');
+                    img.src = src.getAttribute('src');
+                    img.alt = captions[i] || '';
+                    img.loading = 'lazy';
+                    img.decoding = 'async';
+                    tile.appendChild(img);
+                }
+                tile.appendChild(caption);
+                grid.appendChild(tile);
+                return tile;
+            });
+
+            const tracks = (n, active, grow) =>
+                Array.from({ length: n }, (_, k) => (k === active ? grow : 1) + 'fr').join(' ');
+
+            let activeIndex = -1;
+            function setActive(i) {
+                if (i === activeIndex) return;
+                const prev = tiles[activeIndex];
+                if (prev) {
+                    prev.classList.remove('is-active');
+                    const pv = prev.querySelector('video');
+                    if (pv) { pv.pause(); pv.muted = true; const h = prev.querySelector('.hobby-sound'); if (h) h.textContent = 'click for sound'; }
+                }
+                activeIndex = i;
+                grid.classList.toggle('is-hovering', i >= 0);
+                if (i < 0) {
+                    grid.style.gridTemplateColumns = '';
+                    grid.style.gridTemplateRows = '';
+                    return;
+                }
+                const tile = tiles[i];
+                tile.classList.add('is-active');
+                grid.style.gridTemplateColumns = tracks(COLS, i % COLS, COL_GROW);
+                grid.style.gridTemplateRows = tracks(ROWS, Math.floor(i / COLS), ROW_GROW);
+                const v = tile.querySelector('video');
+                if (v) v.play().catch(() => {});
+            }
+
+            tiles.forEach((tile, i) => {
+                tile.addEventListener('mouseenter', () => setActive(i));
+                tile.addEventListener('focus', () => setActive(i));
+            });
+            // reset when the pointer leaves the whole grid, not each tile, so crossing a gap doesn't flicker
+            grid.addEventListener('mouseleave', () => setActive(-1));
+            grid.addEventListener('focusout', (e) => {
+                if (!grid.contains(e.relatedTarget)) setActive(-1);
+            });
         })();
 
         // VitaSalus page: in-page section links, image lightbox, and the energy ring sketch
