@@ -1025,60 +1025,27 @@
             background-repeat: no-repeat;
         }
 
-        .project-card[data-project="enlaye"] {
-            background-image: url('enlaye/enlaye-logo.png');
-            background-size: 90%;
-            background-position: center 30%;
-            background-repeat: no-repeat;
-            background-color: var(--bg-secondary);
-        }
+        /* every design cover shows the work: screens or a drawing on the same dotted background */
+        .project-card[data-project="enlaye"] { background-image: url('enlaye/card.svg'); }
+        .project-card[data-project="popple"] { background-image: url('popple/card.jpg'); }
+        .project-card[data-project="streamlit"] { background-image: url('streamlit/card.jpg'); }
+        .project-card[data-project="reco"] { background-image: url('reco/card.svg'); }
+        .project-card[data-project="artscape"] { background-image: url('artscape/card.jpg'); }
+        .project-card[data-project="lovable"] { background-image: url('lovable/card.jpg'); }
+        .project-card[data-project="flamefreeze"] { background-image: url('flamefreeze/card.jpg'); }
 
-        .project-card[data-project="popple"] {
-            background-image: url('popple/popple-logo.png');
-            background-size: 90%;
-            background-position: center 15%;
-            background-repeat: no-repeat;
-            background-color: var(--bg-secondary);
-        }
-
-        .project-card[data-project="streamlit"] {
-            background-image: url('streamlit/streamlit-logo.png');
-            background-size: 90%;
-            background-position: center 30%;
-            background-repeat: no-repeat;
-            background-color: var(--bg-secondary);
-        }
-
-        .project-card[data-project="reco"] {
-            background-image: url('reco/reco-logo.png');
-            background-size: 35%;
-            background-position: center 25%;
-            background-repeat: no-repeat;
-            background-color: var(--bg-secondary);
-        }
-
-        .project-card[data-project="artscape"] {
-            background-image: url('artscape/cover-full.png');
-            background-size: 60%;
-            background-position: center 25%;
-            background-repeat: no-repeat;
-            background-color: var(--bg-secondary);
-        }
-
-        .project-card[data-project="lovable"] {
-            background-image: url('lovable/cover.png');
-            background-size: 88%;
-            background-position: center 28%;
-            background-repeat: no-repeat;
-            background-color: var(--bg-secondary);
-        }
-
+        .project-card[data-project="enlaye"],
+        .project-card[data-project="popple"],
+        .project-card[data-project="streamlit"],
+        .project-card[data-project="reco"],
+        .project-card[data-project="artscape"],
+        .project-card[data-project="lovable"],
         .project-card[data-project="flamefreeze"] {
-            background-image: url('flamefreeze/card.jpg');
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
         }
+
 
         /* FlameFreeze case study: reuses the .vs layout, with wide desktop screenshots */
         .ff-hero {
@@ -1097,13 +1064,6 @@
 
         .ff-hero-main {
             grid-row: span 2;
-        }
-
-        /* the screenshot sits inside the card so the card itself follows the theme, like the other logo cards */
-        .project-card[data-project="flamefreeze"] {
-            background-size: 88%;
-            background-position: center 28%;
-            background-color: var(--bg-secondary);
         }
 
         .vs-screen.ff-screen {
@@ -2592,6 +2552,13 @@
         /* dark versions of the card art, so every card follows the theme */
         [data-theme="dark"] .project-card[data-project="vitasalus"] { background-image: url('vitasalus/card-dark.jpg'); }
         [data-theme="dark"] .project-card[data-project="capitalone"] { background-image: url('capitalone/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="enlaye"] { background-image: url('enlaye/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="popple"] { background-image: url('popple/card-dark.jpg'); }
+        [data-theme="dark"] .project-card[data-project="streamlit"] { background-image: url('streamlit/card-dark.jpg'); }
+        [data-theme="dark"] .project-card[data-project="reco"] { background-image: url('reco/card-dark.svg'); }
+        [data-theme="dark"] .project-card[data-project="artscape"] { background-image: url('artscape/card-dark.jpg'); }
+        [data-theme="dark"] .project-card[data-project="lovable"] { background-image: url('lovable/card-dark.jpg'); }
+        [data-theme="dark"] .project-card[data-project="flamefreeze"] { background-image: url('flamefreeze/card-dark.jpg'); }
         [data-theme="dark"] .project-card[data-project="marl"] { background-image: url('marl/card-dark.svg'); }
         [data-theme="dark"] .project-card[data-project="neuro"] { background-image: url('neurobionics/card-dark.svg'); }
         [data-theme="dark"] .project-card[data-project="carla"] { background-image: url('carla/card-dark.svg'); }
@@ -2604,6 +2571,22 @@
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
+        }
+
+        /* on narrow screens the cards are taller than wide, so fit each cover to the card's width */
+        @media (max-width: 768px) {
+            .project-card[data-project="vitasalus"],
+            .project-card[data-project="capitalone"],
+            .project-card[data-project="enlaye"],
+            .project-card[data-project="popple"],
+            .project-card[data-project="streamlit"],
+            .project-card[data-project="reco"],
+            .project-card[data-project="artscape"],
+            .project-card[data-project="lovable"],
+            .project-card[data-project="flamefreeze"] {
+                background-size: 100% auto;
+                background-color: var(--bg-secondary);
+            }
         }
 
         .vs {
