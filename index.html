@@ -968,6 +968,26 @@
             font-size: 0.85rem;
         }
 
+        /* skills are split into labelled groups so the list scans by area */
+        .skill-group + .skill-group {
+            margin-top: 1.1rem;
+        }
+
+        .skill-group h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-group .tag-list {
+            gap: 0.4rem;
+        }
+
+        .skill-group .tag-list li {
+            padding: 0.2rem 0.6rem;
+        }
+
         /* Design Page */
         .section-header {
             max-width: 1400px;
@@ -4228,52 +4248,92 @@
                 </section>
                 <section class="about-card" aria-labelledby="card-skills">
                     <h3 id="card-skills">Skills</h3>
-                    <ul class="tag-list" role="list">
-                        <li>Python</li>
-                        <li>C++</li>
-                        <li>MATLAB</li>
-                        <li>Verilog</li>
-                        <li>HTML</li>
-                        <li>PyTorch</li>
-                        <li>ROS</li>
-                        <li>Arduino</li>
-                        <li>Machine Learning</li>
-                        <li>Neural Networks</li>
-                        <li>Computer Vision</li>
-                        <li>Robotics</li>
-                        <li>CAD (Onshape)</li>
-                        <li>Systems Design</li>
-                        <li>Data Analysis</li>
-                        <li>Data Visualization</li>
-                        <li>Flutter</li>
-                        <li>Streamlit</li>
-                        <li>Supabase</li>
-                        <li>Firebase</li>
-                        <li>Web & Mobile Apps</li>
-                        <li>UI/UX Design</li>
-                        <li>User Research</li>
-                        <li>User Flows</li>
-                        <li>Wireframes</li>
-                        <li>Mockups</li>
-                        <li>Prototyping</li>
-                        <li>Interaction Design</li>
-                        <li>A/B Testing</li>
-                        <li>Figma</li>
-                        <li>Framer</li>
-                        <li>Miro</li>
-                        <li>Dovetail</li>
-                        <li>ATLAS.ti</li>
-                        <li>Illustrator</li>
-                        <li>Photoshop</li>
-                        <li>InDesign</li>
-                        <li>Premiere Pro</li>
-                        <li>Logic Pro</li>
-                        <li>Canva</li>
-                        <li>Agile</li>
-                        <li>Scrum</li>
-                        <li>Jira</li>
-                        <li>Trello</li>
-                    </ul>
+                    <div class="skill-groups">
+                        <div class="skill-group">
+                            <h4 id="skills-g1">Languages</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g1">
+                                <li>Python</li>
+                                <li>C++</li>
+                                <li>MATLAB</li>
+                                <li>Verilog</li>
+                                <li>HTML</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g2">AI &amp; Data</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g2">
+                                <li>Machine Learning</li>
+                                <li>Neural Networks</li>
+                                <li>Computer Vision</li>
+                                <li>PyTorch</li>
+                                <li>Data Analysis</li>
+                                <li>Data Visualization</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g3">Robotics &amp; Hardware</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g3">
+                                <li>Robotics</li>
+                                <li>ROS</li>
+                                <li>Arduino</li>
+                                <li>CAD (Onshape)</li>
+                                <li>Systems Design</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g4">App Development</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g4">
+                                <li>Web & Mobile Apps</li>
+                                <li>Flutter</li>
+                                <li>Streamlit</li>
+                                <li>Supabase</li>
+                                <li>Firebase</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g5">Design &amp; Research</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g5">
+                                <li>UI/UX Design</li>
+                                <li>User Research</li>
+                                <li>User Flows</li>
+                                <li>Wireframes</li>
+                                <li>Mockups</li>
+                                <li>Prototyping</li>
+                                <li>Interaction Design</li>
+                                <li>A/B Testing</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g6">Design &amp; Research Tools</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g6">
+                                <li>Figma</li>
+                                <li>Framer</li>
+                                <li>Miro</li>
+                                <li>Dovetail</li>
+                                <li>ATLAS.ti</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g7">Creative Tools</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g7">
+                                <li>Illustrator</li>
+                                <li>Photoshop</li>
+                                <li>InDesign</li>
+                                <li>Premiere Pro</li>
+                                <li>Logic Pro</li>
+                                <li>Canva</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g8">Product &amp; Process</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g8">
+                                <li>Agile</li>
+                                <li>Scrum</li>
+                                <li>Jira</li>
+                                <li>Trello</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
                 <section class="about-card" aria-labelledby="card-awards">
                     <h3 id="card-awards">Awards</h3>
