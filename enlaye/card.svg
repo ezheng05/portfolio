@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720">
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1.3" fill="#4a4a4a" opacity="0.18"/></pattern>
+  </defs>
+  <rect width="900" height="720" fill="#ebe6de"/>
+  <rect width="900" height="720" fill="url(#g)"/>
+  <!-- list of changes, by page -->
+  <rect x="62" y="72" width="168" height="258" rx="14" fill="#f5f1ea" stroke="#c9c2b8" stroke-width="2"/>
+  <rect x="82" y="92" width="70" height="10" rx="5" fill="#c9c2b8"/>
+  <g fill="none" stroke="#c9c2b8" stroke-width="2">
+    <rect x="82" y="118" width="128" height="44" rx="10"/>
+    <rect x="82" y="174" width="128" height="44" rx="10" stroke="#4D2E76" stroke-width="3"/>
+    <rect x="82" y="230" width="128" height="44" rx="10"/>
+  </g>
+  <rect x="82" y="174" width="128" height="44" rx="10" fill="#e3dcef" opacity="0.9"/>
+  <rect x="82" y="174" width="128" height="44" rx="10" fill="none" stroke="#4D2E76" stroke-width="3"/>
+  <g fill="#c9c2b8"><rect x="96" y="130" width="26" height="8" rx="4"/><rect x="96" y="242" width="26" height="8" rx="4"/></g>
+  <rect x="96" y="186" width="26" height="8" rx="4" fill="#4D2E76"/>
+  <g fill="#d6cfc4"><rect x="96" y="146" width="96" height="6" rx="3"/><rect x="96" y="258" width="80" height="6" rx="3"/></g>
+  <rect x="96" y="202" width="88" height="6" rx="3" fill="#4D2E76" opacity="0.45"/>
+  <rect x="82" y="286" width="128" height="26" rx="8" fill="none" stroke="#c9c2b8" stroke-width="2" stroke-dasharray="4 6"/>
+  <!-- the change jumps to its place in both versions -->
+  <path d="M230 196 C 262 196, 262 176, 288 176" fill="none" stroke="#4D2E76" stroke-width="4" stroke-linecap="round"/>
+  <!-- version 1 -->
+  <rect x="288" y="56" width="250" height="300" rx="12" fill="#f5f1ea" stroke="#c9c2b8" stroke-width="2"/>
+  <rect x="310" y="78" width="96" height="10" rx="5" fill="#c9c2b8"/>
+  <g fill="#d6cfc4">
+    <rect x="310" y="108" width="206" height="7" rx="3.5"/><rect x="310" y="124" width="190" height="7" rx="3.5"/><rect x="310" y="140" width="198" height="7" rx="3.5"/>
+    <rect x="310" y="204" width="200" height="7" rx="3.5"/><rect x="310" y="220" width="176" height="7" rx="3.5"/><rect x="310" y="236" width="206" height="7" rx="3.5"/>
+    <rect x="310" y="268" width="194" height="7" rx="3.5"/><rect x="310" y="284" width="206" height="7" rx="3.5"/><rect x="310" y="300" width="150" height="7" rx="3.5"/>
+  </g>
+  <!-- removed clause -->
+  <rect x="302" y="164" width="222" height="30" rx="6" fill="#e3dcef"/>
+  <g fill="#9b958d"><rect x="310" y="168" width="196" height="7" rx="3.5"/><rect x="310" y="182" width="140" height="7" rx="3.5"/></g>
+  <g stroke="#4D2E76" stroke-width="2.5" stroke-linecap="round"><line x1="308" y1="171.5" x2="508" y2="171.5"/><line x1="308" y1="185.5" x2="452" y2="185.5"/></g>
+  <!-- version 2 -->
+  <path d="M538 176 C 556 176, 562 176, 580 176" fill="none" stroke="#4D2E76" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 9"/>
+  <rect x="580" y="56" width="250" height="300" rx="12" fill="#f5f1ea" stroke="#c9c2b8" stroke-width="2"/>
+  <rect x="602" y="78" width="96" height="10" rx="5" fill="#c9c2b8"/>
+  <g fill="#d6cfc4">
+    <rect x="602" y="108" width="206" height="7" rx="3.5"/><rect x="602" y="124" width="190" height="7" rx="3.5"/><rect x="602" y="140" width="198" height="7" rx="3.5"/>
+    <rect x="602" y="204" width="200" height="7" rx="3.5"/><rect x="602" y="220" width="176" height="7" rx="3.5"/><rect x="602" y="236" width="206" height="7" rx="3.5"/>
+    <rect x="602" y="300" width="150" height="7" rx="3.5"/>
+  </g>
+  <!-- new clause -->
+  <rect x="594" y="164" width="222" height="30" rx="6" fill="#e3dcef" stroke="#4D2E76" stroke-width="2"/>
+  <g fill="#4D2E76"><rect x="602" y="168" width="200" height="7" rx="3.5"/><rect x="602" y="182" width="120" height="7" rx="3.5" opacity="0.6"/></g>
+  <!-- clause flagged for review -->
+  <rect x="594" y="260" width="222" height="32" rx="6" fill="none" stroke="#4D2E76" stroke-width="2" stroke-dasharray="5 5"/>
+  <g fill="#d6cfc4"><rect x="602" y="268" width="194" height="7" rx="3.5"/><rect x="602" y="280" width="206" height="7" rx="3.5"/></g>
+  <circle cx="816" cy="260" r="9" fill="#4D2E76"/>
+  <rect x="815" y="254" width="2" height="7" rx="1" fill="#f5f1ea"/><circle cx="816" cy="264.5" r="1.3" fill="#f5f1ea"/>
+</svg>
