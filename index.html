@@ -1253,6 +1253,18 @@
             display: block;
         }
 
+        .project-media:has(+ .media-caption) {
+            margin-bottom: 0.75rem;
+        }
+
+        .project-page .media-caption {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
         .project-media--logo {
             padding: 1.25rem 2rem;
             text-align: center;
@@ -4518,10 +4530,11 @@
 
                 <h2 class="project-gallery-title">Process</h2>
                 <ul>
-                    <li><b>Research.</b> Studied customer interviews to understand our users’ pain points.</li>
+                    <li><b>Research.</b> Watched customer interviews to understand our users’ pain points.</li>
                     <li><b>Define.</b> Wrote user requirements and PRDs for each feature, brainstormed new features, and presented suggestions to the team.</li>
-                    <li><b>Design.</b> Made wireframes to align the team, then built fully interactive prototypes in Figma with variables, interactions, and conditional flows.</li>
-                    <li><b>Hand off.</b> Set up Figma-to-code workflows so engineers could build faster, and built some features myself in React and Next.js.</li>
+                    <li><b>Design.</b> Built every prototype and flow from scratch, by myself, in Figma: wireframes to align the team, then fully interactive prototypes with variables, interactions, and conditional flows.</li>
+                    <li><b>Justify.</b> Presented my designs and met with the dev team and senior leadership to explain and defend my design decisions.</li>
+                    <li><b>Build and demo.</b> Worked with the dev team to implement the designs in code, then demoed them to customers. I set up Figma-to-code workflows so engineers could build faster, and built some features myself in React and Next.js.</li>
                     <li><b>Website.</b> Rebuilt the company website in Framer with the CEO, reworking the information architecture and navigation, and taught the team a Framer crash course so they can keep it updated.</li>
                 </ul>
 
@@ -4536,37 +4549,42 @@
                 <div id="enlaye-protected" class="enlaye-protected">
                     <h2 class="serif" style="font-size: 1.5rem; margin-bottom: 1rem;">Details</h2>
                     <p class="project-description">Features/projects I designed include mobile AI risk logging, document management system, commercial website, project management system, mobile chats, navigation bars, document comparison tools, settings page, and more.</p>
-                    <h2 class="project-gallery-title">Design decisions</h2>
-                    <ul>
-                        <li><b>Document comparison built for long contracts.</b> Construction contracts can run 170+ pages, so reading two versions side by side isn’t enough. A side panel lists every change by page and labels it Delete, Insert or Review, so people can jump straight to what changed and what needs a second look.</li>
-                        <li><b>Two ways to browse documents.</b> Grid view previews drawings and other visual files; list view shows owner, tags and file size for finding one specific file. Different documents get searched for in different ways.</li>
-                        <li><b>A home page that shows what needs attention.</b> Project tools sit up top, and the issue log and recent activity sit on the side with accept and reject right inline, so common approvals don’t need a separate page.</li>
-                        <li><b>Big, simple buttons on mobile.</b> The field app is used on job sites, not at a desk, so it’s a grid of large tiles with one clear action each.</li>
-                        <li><b>One consistent brand.</b> I rebuilt the brand identity so colors, type and components match across mobile, web and the website, which also made new features faster to design.</li>
-                    </ul>
                     <p class="project-description"><b>Figma:</b> I created fully interactive prototypes, becoming fluent in variables, interactions, and conditional flows. I worked on projects of various scales and complexities, modernizing features to be more user-friendly, mobile-responsive, and intuitive. I also revamped the company’s brand identity for consistency and scalability.</p>
                     <p class="project-description"><b>Framer:</b> I learned to use Framer to build a new website. I learned about information architecture and content strategy. Working directly with the CEO, we improved the user journey and navigation to better serve user needs. I created wireframes to align the team. I taught a crash course on Framer so the team can continually update the website.</p>
                     <p class="project-description"><b>Other:</b> I researched AWS S3 and ML features in my free time to better understand backend implementation.</p>
-                    <p class="project-description">For additional details, examples, or demos, please contact me!</p>
+
+                    <h2 class="project-gallery-title">Design decisions</h2>
+                    <div class="project-media">
+                        <img src="enlaye/enlaye%20home.png" alt="Enlaye project home with project tools, project progress, site weather, an issue log and recent activity" loading="lazy" decoding="async">
+                    </div>
+                    <p class="media-caption"><b>Project home.</b> Project tools sit up top, with the issue log and recent activity beside them, so what needs attention on a project is visible as soon as you open it.</p>
 
                     <div class="project-media">
-                        <img src="enlaye/enlaye%20home.png" alt="Enlaye home" loading="lazy" decoding="async">
+                        <img src="enlaye/doc%20management.png" alt="Document management system in grid view, with project folders and file previews" loading="lazy" decoding="async">
                     </div>
+                    <p class="media-caption"><b>Document management system.</b> All project files in one place, organized in folders, with a grid view that previews drawings and a list view for finding a specific file.</p>
+
                     <div class="project-media">
-                        <img src="enlaye/doc%20management.png" alt="Document management" loading="lazy" decoding="async">
+                        <img src="enlaye/doc%20comparison.png" alt="Document comparison tool showing two versions of a 170 page contract side by side, with a list of changes by page labeled Delete, Insert and Review" loading="lazy" decoding="async">
                     </div>
+                    <p class="media-caption"><b>Document comparison tool.</b> Nobody asked me to build this. While watching customer interviews, I kept hearing customers complain that they couldn’t easily see edits, changes, or updates in their really long, dense documents, so I designed it on my own. Two versions sit side by side, and a panel lists every change by page, labeled Delete, Insert, or Review, so you can jump straight to what changed.</p>
+
                     <div class="project-media">
-                        <img src="enlaye/doc%20comparison.png" alt="Document comparison" loading="lazy" decoding="async">
+                        <img src="enlaye/doc%20preview.png" alt="Document management in list view with a preview window open in tabs and a file menu with Preview, Summarize and Compare options" loading="lazy" decoding="async">
                     </div>
-                    <div class="project-media">
-                        <img src="enlaye/doc%20preview.png" alt="Document preview" loading="lazy" decoding="async">
-                    </div>
+                    <p class="media-caption"><b>File preview.</b> I added a preview function to the document management system because of needs I heard in customer interviews. Files open in tabs on top of the list, so you can check several without leaving the page or downloading them.</p>
+
                     <div class="project-media">
                         <video src="enlaye/project%20settings.mp4" poster="enlaye/project-settings-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
                     </div>
+                    <p class="media-caption"><b>Project settings.</b></p>
+
                     <div class="project-media" style="max-width: 35%; margin-left: auto; margin-right: auto;">
                         <video src="enlaye/guardian%20angel.mp4" poster="enlaye/guardian-angel-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
                     </div>
+                    <p class="media-caption" style="text-align: center; max-width: 32rem; margin-left: auto; margin-right: auto;"><b>Mobile issue logging.</b> Logging an issue is really tedious across the construction industry today. I kept only the information that’s truly necessary, so logging an issue is as easy, quick, and effective as possible.</p>
+
+                    <p class="project-description">For additional details, examples, or demos, please contact me!</p>
                 </div>
             </div>
         </section>
