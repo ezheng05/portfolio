@@ -4605,30 +4605,40 @@
         </section>
 
         <section id="project-enlaye" class="page project-detail">
-            <div class="project-page">
+            <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Enlaye</h1>
                 <p class="project-meta">Enlaye · First designer · Summer 2025</p>
-                <p class="project-description">Product and design work across Enlaye’s mobile app, web app, and company website.</p>
+                <p class="vs-lede">I was the first designer at Enlaye, an AI risk management platform for construction. I designed 9+ features across the mobile app, web app and website, and the customer demos built on my designs validated new features and brought in new customers.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye/enlaye-logo.png" alt="Enlaye logo" loading="lazy" decoding="async"></a>
                 </div>
-                <p class="project-description"><b>Context:</b> Enlaye is an AI-powered risk management platform for the construction industry. I joined the team as the first designer the summer of 2025, and created mockups and prototypes for 9+ features across the mobile and web product suite.</p>
-                <p class="project-description"><b>Skills:</b> Figma, Framer, user research, systems design, product management, interaction design.</p>
-                <p class="project-description"><b>Impact:</b> My designs were what we demoed to customers. Those demos validated demand for new features and led to onboarding new customers, which wouldn’t have happened without the designs. I also sped up product development by 2x, improved usability, and modernized the company’s brand identity.</p>
 
-                <h2 class="project-gallery-title">Problem</h2>
-                <p class="project-description">Construction teams manage huge contracts, drawings, and safety issues across the office and the job site. Enlaye uses AI to flag risks in all of it. As the first designer, my job was to make those tools easy to use and consistent across mobile, web, and the website.</p>
+                <dl class="vs-facts">
+                    <div><dt>Role</dt><dd>First designer. I built every prototype and flow from scratch, by myself, in Figma</dd></div>
+                    <div><dt>Research</dt><dd>Customer interviews, a comparison of document management systems, requirements and PRDs</dd></div>
+                    <div><dt>Design</dt><dd>9+ features across mobile and web, the company website and the brand identity</dd></div>
+                    <div><dt>Result</dt><dd>Demos of my designs validated new features and led to onboarding new customers. Product development 2x faster</dd></div>
+                </dl>
 
-                <h2 class="project-gallery-title">Process</h2>
-                <ul>
-                    <li><b>Research.</b> Watched customer interviews to understand our users’ pain points.</li>
-                    <li><b>Define.</b> Wrote user requirements and PRDs for each feature, brainstormed new features, and presented suggestions to the team.</li>
-                    <li><b>Design.</b> Built every prototype and flow from scratch, by myself, in Figma: wireframes to align the team, then fully interactive prototypes with variables, interactions, and conditional flows.</li>
-                    <li><b>Justify.</b> Presented my designs and met with the dev team and senior leadership to explain and defend my design decisions.</li>
-                    <li><b>Build and demo.</b> Worked with the dev team to implement the designs in code, then demoed them to customers. Those demos validated demand for the new features and brought in new customers. I set up Figma-to-code workflows so engineers could build faster, and built some features myself in React and Next.js.</li>
-                    <li><b>Website.</b> Rebuilt the company website in Framer with the CEO, reworking the information architecture and navigation, and taught the team a Framer crash course so they can keep it updated.</li>
-                </ul>
+                <section class="vs-section" aria-labelledby="en-problem-h">
+                    <p class="vs-kicker">01 · The problem</p>
+                    <h2 class="serif vs-h2" id="en-problem-h">Construction teams are buried in documents and issues.</h2>
+                    <p class="project-description">A construction project produces huge contracts, drawings, change orders and safety issues, split between the office and the job site. Enlaye uses AI to flag risks in all of it. The people using it are busy project managers and field crews, so if a tool takes too long to learn or to use, it doesn’t get used. My job was to make Enlaye’s tools fast and clear, and consistent across mobile, web and the website.</p>
+                </section>
+
+                <section class="vs-section" aria-labelledby="en-process-h">
+                    <p class="vs-kicker">02 · Process</p>
+                    <h2 class="serif vs-h2" id="en-process-h">From customer interviews to customer demos.</h2>
+                    <ul class="vs-plain">
+                        <li><b>Research.</b> Watched customer interviews to understand our users’ pain points, and compared existing products before designing anything new.</li>
+                        <li><b>Define.</b> Wrote user requirements and PRDs for each feature, and proposed new features based on what I heard in the interviews.</li>
+                        <li><b>Design.</b> Built every prototype and flow from scratch, by myself, in Figma: wireframes to align the team, then fully interactive prototypes with variables, interactions and conditional flows.</li>
+                        <li><b>Justify.</b> Presented my designs and met with the dev team and senior leadership to explain and defend my design decisions.</li>
+                        <li><b>Build and demo.</b> Worked with the dev team to implement the designs in code, then demoed them to customers. Those demos validated demand for the new features and led to onboarding new customers. I also set up Figma-to-code workflows so engineers could build faster, and built some features myself in React and Next.js.</li>
+                    </ul>
+                    <p class="project-description" style="margin-top: 1.5rem">The screens and the thinking behind each feature are below.</p>
+                </section>
 
                 <div id="enlaye-gate" class="enlaye-gate">
                     <form id="enlaye-gate-form" class="enlaye-gate-form" aria-describedby="enlaye-gate-error">
@@ -4640,6 +4650,10 @@
                 </div>
                 <div id="enlaye-protected" class="enlaye-protected"></div>
             </div>
+            <dialog class="vs-lightbox" id="en-lightbox" aria-label="Enlarged image">
+                <button type="button" class="vs-lightbox-close" aria-label="Close">&times;</button>
+                <img alt="">
+            </dialog>
         </section>
 
         <section id="project-popple" class="page project-detail">
@@ -4678,7 +4692,7 @@
                 <section class="vs-section" id="pp-problem" aria-labelledby="pp-problem-h">
                     <p class="vs-kicker">01 · The problem</p>
                     <h2 class="serif vs-h2" id="pp-problem-h">Finding events, and people to go with.</h2>
-                    <p class="project-description">Students want to get involved in Boston and know what events are happening, but finding something worth going to, and people to go with, is harder than it should be. For V3 I focused on three things: discovery (finding events that fit you), a personalized feed, and onboarding that gets new users to that feed quickly.</p>
+                    <p class="project-description">Students want to get involved in Boston and know what events are happening, but finding something worth going to, and people to go with, is harder than it should be. Retention was our biggest problem, so for V3 I focused on giving people a reason to come back to the app every day: discovery (finding events that fit you), a personalized feed, and onboarding that gets new users to that feed quickly.</p>
                 </section>
 
                 <section class="vs-section" id="pp-process" aria-labelledby="pp-process-h">
@@ -6736,6 +6750,37 @@
                     box.showModal();
                 });
             });
+            box.querySelector('.vs-lightbox-close').addEventListener('click', () => box.close());
+            box.addEventListener('click', (e) => {
+                if (e.target === box) box.close();
+            });
+        })();
+
+        // Enlaye page: the gated content is injected after unlock, so delegate clicks
+        (function() {
+            const page = document.getElementById('project-enlaye');
+            if (!page) return;
+            const box = document.getElementById('en-lightbox');
+            const boxImg = box?.querySelector('img');
+            const canZoom = box && typeof box.showModal === 'function';
+            page.addEventListener('click', (e) => {
+                const jump = e.target.closest('[data-en-jump]');
+                if (jump) {
+                    e.preventDefault();
+                    const target = document.getElementById(jump.getAttribute('href').slice(1));
+                    target?.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+                    return;
+                }
+                const btn = e.target.closest('.vs-zoom');
+                if (btn && canZoom) {
+                    const img = btn.querySelector('img');
+                    if (!img || !img.src) return;
+                    boxImg.src = img.currentSrc || img.src;
+                    boxImg.alt = img.alt;
+                    box.showModal();
+                }
+            });
+            if (!canZoom) return;
             box.querySelector('.vs-lightbox-close').addEventListener('click', () => box.close());
             box.addEventListener('click', (e) => {
                 if (e.target === box) box.close();
