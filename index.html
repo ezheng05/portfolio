@@ -809,8 +809,8 @@
                 min-height: 820px;
                 grid-template-columns: repeat(3, 1fr);
                 grid-template-rows: repeat(6, 1fr);
-                transition: grid-template-columns 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                            grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                transition: grid-template-columns 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                            grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             }
         }
 
@@ -823,6 +823,23 @@
             background: var(--bg-secondary);
             margin: 0;
             outline: none;
+            /* tiles never size to their content, so let the browser lay out and paint each one on its own */
+            contain: strict;
+        }
+
+        /* dim the tiles you're not on with a cheap overlay (a filter would repaint every photo each frame) */
+        .hobby-tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .hobby-grid.is-hovering .hobby-tile:not(.is-active)::after {
+            opacity: 1;
         }
 
         .hobby-tile:focus-visible {
@@ -837,12 +854,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: filter 0.4s ease;
-        }
-
-        .hobby-grid.is-hovering .hobby-tile:not(.is-active) img,
-        .hobby-grid.is-hovering .hobby-tile:not(.is-active) video {
-            filter: saturate(0.7) brightness(0.85);
         }
 
         .hobby-tile figcaption {
@@ -879,8 +890,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             .hobby-grid,
-            .hobby-tile img,
-            .hobby-tile video,
+            .hobby-tile::after,
             .hobby-tile figcaption {
                 transition: none;
             }
@@ -5908,66 +5918,92 @@
             if (!grid) return;
             const COLS = 3;
             const ROWS = Math.ceil(slides.length / COLS);
+            // the grid uses lighter copies of the photos (about/grid, longest side 960px) so resizing
+            // tiles stays smooth; their width x height is listed here so a hover never waits on a download
+            const GRID_DIR = 'about/grid/';
+            const SIZES = {
+                atv: [720, 960], beli: [960, 848], camel: [720, 960], construction: [720, 960],
+                drum: [960, 491], drumming: [540, 960], guitar: [224, 128], 'hike-2': [443, 960],
+                hike: [720, 960], hult: [960, 593], pickleball: [960, 640], scuba: [960, 720],
+                skydive: [960, 540], sled: [540, 960], snowboarding: [540, 960], sunset: [719, 960],
+                surfing: [960, 960], tennis: [544, 960]
+            };
+            const baseName = (path) => path.split('/').pop().replace(/\.\w+$/, '');
+            const gridSrc = (path) => GRID_DIR + path.split('/').pop();
+            const aspects = [];
 
-            const tiles = Array.from(slides).map((slide, i) => {
+            // tiles are only built once the desktop layout applies, so phones never download grid media
+            const tiles = [];
+            function buildTiles() {
+            tiles.push(...Array.from(slides).map((slide, i) => {
                 const src = slide.querySelector('img, video');
+                const isVideo = src.tagName === 'VIDEO';
+                const still = isVideo ? src.getAttribute('poster') : src.getAttribute('src');
+                const size = SIZES[baseName(still)];
+                if (size) aspects[i] = size[0] / size[1];
+
                 const tile = document.createElement('figure');
                 tile.className = 'hobby-tile';
                 tile.tabIndex = 0;
                 const caption = document.createElement('figcaption');
                 caption.textContent = captions[i] || '';
-                if (src.tagName === 'VIDEO' && src.hasAttribute('data-no-sound')) {
-                    // silent clip: just loops on hover, no sound toggle
+                if (isVideo) {
                     const v = document.createElement('video');
                     v.src = src.getAttribute('src');
-                    v.poster = src.getAttribute('poster');
+                    v.poster = size ? gridSrc(still) : still;
                     v.muted = true;
                     v.loop = true;
                     v.playsInline = true;
                     v.preload = 'none';
-                    v.setAttribute('aria-label', captions[i] || '');
                     tile.appendChild(v);
-                } else if (src.tagName === 'VIDEO') {
-                    tile.classList.add('has-video');
-                    const v = document.createElement('video');
-                    v.src = src.getAttribute('src');
-                    v.poster = src.getAttribute('poster');
-                    v.muted = true;
-                    v.loop = true;
-                    v.playsInline = true;
-                    v.preload = 'none';
-                    v.setAttribute('aria-hidden', 'true');
-                    tile.appendChild(v);
-                    const hint = document.createElement('span');
-                    hint.className = 'hobby-sound';
-                    hint.textContent = 'click for sound';
-                    caption.appendChild(hint);
-                    tile.setAttribute('role', 'button');
-                    tile.setAttribute('aria-label', (captions[i] || 'video') + ', video. Press to toggle sound');
-                    const toggleSound = () => {
-                        v.muted = !v.muted;
-                        hint.textContent = v.muted ? 'click for sound' : 'click to mute';
-                        if (v.paused) v.play().catch(() => {});
-                    };
-                    tile.addEventListener('click', toggleSound);
-                    tile.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSound(); }
-                    });
+                    if (src.hasAttribute('data-no-sound')) {
+                        // silent clip: just loops on hover, no sound toggle
+                        v.setAttribute('aria-label', captions[i] || '');
+                    } else {
+                        tile.classList.add('has-video');
+                        v.setAttribute('aria-hidden', 'true');
+                        const hint = document.createElement('span');
+                        hint.className = 'hobby-sound';
+                        hint.textContent = 'click for sound';
+                        caption.appendChild(hint);
+                        tile.setAttribute('role', 'button');
+                        tile.setAttribute('aria-label', (captions[i] || 'video') + ', video. Press to toggle sound');
+                        const toggleSound = () => {
+                            v.muted = !v.muted;
+                            hint.textContent = v.muted ? 'click for sound' : 'click to mute';
+                            if (v.paused) v.play().catch(() => {});
+                        };
+                        tile.addEventListener('click', toggleSound);
+                        tile.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSound(); }
+                        });
+                    }
                 } else {
                     const img = document.createElement('img');
-                    img.src = src.getAttribute('src');
+                    img.src = size ? gridSrc(still) : still;
                     img.alt = captions[i] || '';
                     img.loading = 'lazy';
                     img.decoding = 'async';
+                    if (size) { img.width = size[0]; img.height = size[1]; }
                     tile.appendChild(img);
                 }
                 tile.appendChild(caption);
                 grid.appendChild(tile);
                 return tile;
-            });
+            }));
+            }
+            const desktopGrid = window.matchMedia('(min-width: 1025px) and (hover: hover) and (pointer: fine)');
+            if (desktopGrid.matches) {
+                buildTiles();
+            } else {
+                desktopGrid.addEventListener('change', function onChange(e) {
+                    if (!e.matches) return;
+                    buildTiles();
+                    desktopGrid.removeEventListener('change', onChange);
+                });
+            }
 
-            // photo width / height, read from the loaded media (or its poster) the first time it's hovered
-            const aspects = [];
+            // fallback for media missing from SIZES: read its shape once it loads
             function aspectOf(i) {
                 if (aspects[i]) return aspects[i];
                 const el = tiles[i].querySelector('img, video');
