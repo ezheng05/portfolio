@@ -955,6 +955,13 @@
             background-color: var(--bg-secondary);
         }
 
+        .project-card[data-project="flamefreeze"] {
+            background-image: url('flamefreeze/card.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
         /* tilt toward the cursor; --rx/--ry/--mx/--my are set from JS on fine pointers */
         .project-card.is-visible {
             transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--lift, 1));
@@ -1081,11 +1088,13 @@
             margin-bottom: 2.5rem;
         }
 
-        .project-page .project-description:has(+ ul) {
+        .project-page .project-description:has(+ ul),
+        .project-page .project-description:has(+ ol) {
             margin-bottom: 0.35rem;
         }
 
         .project-page ul,
+        .project-page ol,
         .project-page .project-description ul {
             font-size: 1.05rem;
             font-weight: 300;
@@ -3948,6 +3957,13 @@
                         <p>Mobile app</p>
                     </div>
                 </div>
+                <div class="project-card" data-project="flamefreeze" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">09</div>
+                        <h3>FlameFreeze wildfire hackathon</h3>
+                        <p>Wildfire prevention system · Team BUilders</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -4475,6 +4491,54 @@
                     <div class="gallery-item"><img src="lovable/screen-profile.png" alt="Profile and settings" loading="lazy" decoding="async"></div>
                     <div class="gallery-item"><img src="lovable/screen-home-light.png" alt="Home in light theme with cardiovascular card" loading="lazy" decoding="async"></div>
                     <div class="gallery-item"><img src="lovable/screen-insights-cards.png" alt="Insights with hydration and stress charts" loading="lazy" decoding="async"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-flamefreeze" class="page project-detail">
+            <div class="project-page">
+                <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
+                <h1 class="serif">FlameFreeze wildfire hackathon</h1>
+                <p class="project-meta">Wildfire hackathon · Team BUilders · Mar 2025</p>
+                <p class="project-description">An AI-driven, autonomous system that detects wildfires early and puts them out before they spread through LA neighborhoods.</p>
+                <div class="project-media project-media--logo">
+                    <a href="https://flamefreeze.vercel.app/" target="_blank" rel="noopener"><img src="flamefreeze/logo.jpg" alt="FlameFreeze wildfire prevention logo" style="max-width: 70%; border-radius: 8px;" loading="lazy" decoding="async"></a>
+                </div>
+                <p class="project-description"><b>Context:</b> Built with team BUilders for a wildfire hackathon after the January 2025 LA fires. During the Palisades Fire, water demand was four times what the hydrants were built for, elevated tanks ran dry within hours, and Santa Ana gusts above 60 mph carried embers into unburned areas. Narrow, hilly roads also slowed evacuation and kept fire engines out.</p>
+                <p class="project-description"><b>Problem statement:</b> Develop an AI-driven, autonomous wildfire prevention system that detects and resolves fires at the root, keeping LA residents safe while promoting sustainability and equity.</p>
+                <p class="project-description"><b>Skills:</b> Research, problem framing, audience mapping, systems design, pitch and poster design.</p>
+                <p class="project-description"><b>Who it&rsquo;s for:</b>
+                <ul>
+                    <li><b>Residents:</b> homeowners of all income levels in fire-prone zones, who face property loss and slow emergency response. FlameFreeze gives them automated protection that fits any home and budget.</li>
+                    <li><b>City of LA:</b> agencies like LADWP, LAFD and city planners, whose crews and water systems are stretched thin at peak fire. FlameFreeze distributes water on its own, suppresses fires before they escalate, and plugs into existing infrastructure.</li>
+                    <li><b>Communities:</b> HOAs, rural neighborhoods and community centers with no coordinated way to protect themselves together. FlameFreeze links multiple properties into one shared suppression network.</li>
+                </ul>
+                <p class="project-description"><b>How it works:</b>
+                <ol>
+                    <li><b>AI fire mapping:</b> uses Google&rsquo;s FireSat satellite data to detect fires and map vulnerable areas.</li>
+                    <li><b>Autonomous water flow:</b> an underground collection system draws from designated boreholes and routes water to the areas the AI flags.</li>
+                    <li><b>Dispense water on detection:</b> sprinklers on valley summits spray the area, with rotating heads that adjust pressure as needed.</li>
+                    <li><b>Drones collect weather data:</b> wind patterns, temperature and expected fire trajectory.</li>
+                    <li><b>Monitor or escalate:</b> if the fire is decaying, keep monitoring until it&rsquo;s gone and make sure it doesn&rsquo;t flare back up. If it&rsquo;s growing, dispense biodegradable fire retardants from the summit sprinklers and send fire trucks.</li>
+                    <li><b>Alert communities:</b> assigned fire wardens walk residents through an action plan, with resources and live status on our website and notifications through NotifyLA.</li>
+                    <li><b>Smoke response:</b> purifiers mounted on building exteriors turn on automatically when smoke passes a threshold.</li>
+                </ol>
+                <p class="project-description"><b>Sustainability and cost:</b> The system is gravity-fed to cut pumping energy, runs on reclaimed stormwater and deep groundwater instead of fresh hydrant water, sprays only where it&rsquo;s needed, and uses biodegradable retardants. It&rsquo;s designed for LA&rsquo;s hills, scales from one neighborhood to the whole city, and brings the same protection to underserved and remote communities.</p>
+                <p class="project-description" style="margin-top: 1rem;">
+                    <a href="https://flamefreeze.vercel.app/" target="_blank" rel="noopener">Visit the FlameFreeze site &rarr;</a><br>
+                    <a href="flamefreeze/poster-1.jpg" target="_blank" rel="noopener">View full poster &rarr;</a>
+                </p>
+
+                <h2 class="project-gallery-title">Concept visuals</h2>
+                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0;">
+                    <div class="gallery-item"><img src="flamefreeze/risk-map.jpg" alt="AI-powered fire risk map of Los Angeles with high-risk zones in red and yellow" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="flamefreeze/summit-sprinkler.jpg" alt="Concept render of the summit sprinkler system on an LA hillside" loading="lazy" decoding="async"></div>
+                </div>
+
+                <h2 class="project-gallery-title">Hackathon poster</h2>
+                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0;">
+                    <div class="gallery-item"><a href="flamefreeze/poster-1.jpg" target="_blank" rel="noopener"><img src="flamefreeze/poster-1.jpg" alt="Poster page 1: the problem, problem statement, audience, and sustainability" loading="lazy" decoding="async"></a></div>
+                    <div class="gallery-item"><a href="flamefreeze/poster-2.jpg" target="_blank" rel="noopener"><img src="flamefreeze/poster-2.jpg" alt="Poster page 2: the seven-step solution and LA-specific features" loading="lazy" decoding="async"></a></div>
                 </div>
             </div>
         </section>
@@ -5411,7 +5475,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-vitasalus', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-ccl'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-vitasalus', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-flamefreeze', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-ccl'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
