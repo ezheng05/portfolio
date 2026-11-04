@@ -1086,6 +1086,66 @@
             background-repeat: no-repeat;
         }
 
+        /* FlameFreeze case study: reuses the .vs layout, with wide desktop screenshots */
+        .ff-hero {
+            margin: 0 0 2.5rem;
+        }
+
+        .ff-hero figcaption {
+            margin-top: 0.75rem;
+        }
+
+        .ff-hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .ff-hero-main {
+            grid-row: span 2;
+        }
+
+        .project-card[data-project="flamefreeze"] {
+            background-size: 100% auto;
+            background-color: var(--bg-secondary);
+        }
+
+        .vs-screen.ff-screen {
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+        }
+
+        .ff .vs-screen-img {
+            padding: 0;
+        }
+
+        .ff .project-gallery .vs-zoom img {
+            border: none;
+            border-radius: 0;
+        }
+
+        @media (max-width: 700px) {
+            .vs-screen.ff-screen {
+                grid-template-columns: 1fr;
+            }
+
+            .ff-hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ff-hero-main {
+                grid-row: auto;
+                grid-column: span 2;
+            }
+
+            .ff .vs-screen.ff-screen .vs-screen-img {
+                max-width: none;
+            }
+
+            .ff .vs-screen:not(.ff-screen) .vs-screen-img {
+                max-width: 220px;
+            }
+        }
+
         /* tilt toward the cursor; --rx/--ry/--mx/--my are set from JS on fine pointers */
         .project-card.is-visible {
             transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--lift, 1));
@@ -4855,53 +4915,162 @@
         </section>
 
         <section id="project-flamefreeze" class="page project-detail">
-            <div class="project-page">
+            <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
-                <h1 class="serif">FlameFreeze wildfire hackathon</h1>
-                <p class="project-meta">Wildfire hackathon · Team BUilders · 2nd place · Mar 2025</p>
-                <p class="project-description">An AI-driven, autonomous system that detects wildfires early and puts them out before they spread through LA neighborhoods.</p>
-                <div class="project-media project-media--logo">
-                    <a href="https://flamefreeze.vercel.app/" target="_blank" rel="noopener"><img src="flamefreeze/logo.jpg" alt="FlameFreeze wildfire prevention logo" style="max-width: 70%; border-radius: 8px;" loading="lazy" decoding="async"></a>
+                <h1 class="serif">FlameFreeze</h1>
+                <p class="project-meta">EWB Design Corner 2025 · Team BUilders · Website design and build · One weekend</p>
+                <p class="vs-lede">A wildfire response website for LA residents, community members and emergency responders. I designed and built the whole site in one weekend, and it was the main reason our team placed 2nd out of 30+ teams.</p>
+                <figure class="ff-hero">
+                    <div class="ff-hero-grid">
+                        <button type="button" class="vs-zoom ff-hero-main" aria-label="Enlarge: Dashboard"><img src="flamefreeze/s/dashboard.webp" width="1800" height="1125" alt="FlameFreeze dashboard: a red high fire danger banner, a hero for the summit-based suppression system, four status cards for water storage, sensors, active alerts and system status, and a card inviting residents to join the community network" decoding="async"></button>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Simulation"><img src="flamefreeze/s/simulation.webp" width="1200" height="750" alt="Simulation page on the air purification tab, with a labeled model of the purifier" decoding="async"></button>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Community"><img src="flamefreeze/s/community-page.webp" width="1200" height="750" alt="Community page on the fire warden program tab" decoding="async"></button>
+                    </div>
+                    <figcaption>The dashboard, the simulation and the community page. Everything on the site runs on dummy data and simulations, so it feels live without real sensors behind it. Click any image to enlarge it.</figcaption>
+                </figure>
+                <dl class="vs-facts">
+                    <div><dt>Role</dt><dd>Website design and build, solo, on a team of five</dd></div>
+                    <div><dt>Users</dt><dd>LA residents, community members and emergency responders</dd></div>
+                    <div><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Three.js, Recharts, Mapbox and AI coding tools</dd></div>
+                    <div><dt>Result</dt><dd>2nd place out of 30+ teams and 170+ participants</dd></div>
+                </dl>
+                <div class="vs-keys">
+                    <h2 class="vs-label">Key design decisions</h2>
+                    <ol>
+                        <li><b>One question per page:</b> each page answers what one group of users needs to know, from “Am I in danger?” to “How will this fire spread?”</li>
+                        <li><b>The most urgent information comes first:</b> the fire danger banner sits above everything else, and live status comes before any explanation.</li>
+                        <li><b>A working site instead of mockups,</b> because maps, live status and a simulation only make sense when you can use them.</li>
+                        <li><b>Plain language and familiar names,</b> like neighborhoods people know, so residents can read the site without any training.</li>
+                    </ol>
                 </div>
-                <p class="project-description"><b>Context:</b> My team, BUilders, entered a wildfire hackathon after the January 2025 LA fires. During the Palisades Fire, water demand was four times what the hydrants were built for, elevated tanks ran dry within hours, and Santa Ana gusts above 60 mph carried embers into unburned areas. Narrow, hilly roads also slowed evacuation and kept fire engines out.</p>
-                <p class="project-description"><b>My role:</b> I built the whole FlameFreeze website, from first page to live deployment, in one weekend.</p>
-                <p class="project-description"><b>Problem statement:</b> Develop an AI-driven, autonomous wildfire prevention system that detects and resolves fires at the root, keeping LA residents safe while promoting sustainability and equity.</p>
-                <p class="project-description"><b>Skills:</b> Web development, front-end design, research, problem framing, systems design.</p>
-                <p class="project-description"><b>Impact:</b> Won 2nd place out of 30+ teams and 170+ participants.</p>
-                <p class="project-description"><b>Who it&rsquo;s for:</b>
-                <ul>
-                    <li><b>Residents:</b> homeowners of all income levels in fire-prone zones, who face property loss and slow emergency response. FlameFreeze gives them automated protection that fits any home and budget.</li>
-                    <li><b>City of LA:</b> agencies like LADWP, LAFD and city planners, whose crews and water systems are stretched thin at peak fire. FlameFreeze distributes water on its own, suppresses fires before they escalate, and plugs into existing infrastructure.</li>
-                    <li><b>Communities:</b> HOAs, rural neighborhoods and community centers with no coordinated way to protect themselves together. FlameFreeze links multiple properties into one shared suppression network.</li>
-                </ul>
-                <p class="project-description"><b>How it works:</b>
-                <ol>
-                    <li><b>AI fire mapping:</b> uses Google&rsquo;s FireSat satellite data to detect fires and map vulnerable areas.</li>
-                    <li><b>Autonomous water flow:</b> an underground collection system draws from designated boreholes and routes water to the areas the AI flags.</li>
-                    <li><b>Dispense water on detection:</b> sprinklers on valley summits spray the area, with rotating heads that adjust pressure as needed.</li>
-                    <li><b>Drones collect weather data:</b> wind patterns, temperature and expected fire trajectory.</li>
-                    <li><b>Monitor or escalate:</b> if the fire is decaying, keep monitoring until it&rsquo;s gone and make sure it doesn&rsquo;t flare back up. If it&rsquo;s growing, dispense biodegradable fire retardants from the summit sprinklers and send fire trucks.</li>
-                    <li><b>Alert communities:</b> assigned fire wardens walk residents through an action plan, with resources and live status on our website and notifications through NotifyLA.</li>
-                    <li><b>Smoke response:</b> purifiers mounted on building exteriors turn on automatically when smoke passes a threshold.</li>
-                </ol>
-                <p class="project-description"><b>Sustainability and cost:</b> The system is gravity-fed to cut pumping energy, runs on reclaimed stormwater and deep groundwater instead of fresh hydrant water, sprays only where it&rsquo;s needed, and uses biodegradable retardants. It&rsquo;s designed for LA&rsquo;s hills, scales from one neighborhood to the whole city, and brings the same protection to underserved and remote communities.</p>
-                <p class="project-description" style="margin-top: 1rem;">
-                    <a href="https://flamefreeze.vercel.app/" target="_blank" rel="noopener">Visit the FlameFreeze site &rarr;</a><br>
-                    <a href="flamefreeze/poster.pdf" target="_blank" rel="noopener">View full poster (PDF) &rarr;</a>
-                </p>
+                <div class="vs-toc" role="navigation" aria-label="On this page">
+                    <div class="vs-toc-group">
+                        <span class="vs-toc-label">Design process</span>
+                        <a href="#ff-challenge" data-ff-jump><span>01</span> Challenge</a>
+                        <a href="#ff-users" data-ff-jump><span>02</span> Users</a>
+                        <a href="#ff-approach" data-ff-jump><span>03</span> Approach</a>
+                    </div>
+                    <div class="vs-toc-group">
+                        <span class="vs-toc-label">Design execution</span>
+                        <a href="#ff-decisions" data-ff-jump><span>04</span> The site</a>
+                        <a href="#ff-result" data-ff-jump><span>05</span> Result</a>
+                        <a href="#ff-next" data-ff-jump><span>06</span> What I’d improve</a>
+                    </div>
+                </div>
 
-                <h2 class="project-gallery-title">Concept visuals</h2>
-                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0;">
-                    <div class="gallery-item"><img src="flamefreeze/risk-map.jpg" alt="AI-powered fire risk map of Los Angeles with high-risk zones in red and yellow" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="flamefreeze/summit-sprinkler.jpg" alt="Concept render of the summit sprinkler system on an LA hillside" loading="lazy" decoding="async"></div>
-                </div>
+                <section class="vs-section" id="ff-challenge" aria-labelledby="ff-challenge-h">
+                    <p class="vs-kicker">01 · The challenge</p>
+                    <h2 class="serif vs-h2" id="ff-challenge-h">LA’s fire systems ran out of water and time.</h2>
+                    <p class="project-description">After the January 2025 LA fires, our team of five entered Engineers Without Borders’ Design Corner. During the Palisades Fire, water demand was four times what the hydrants were built for, elevated tanks ran dry within hours, and Santa Ana gusts above 60 mph carried embers into unburned areas. Narrow, hilly roads also slowed evacuation and kept fire engines out.</p>
+                    <p class="project-description">Our answer was FlameFreeze, a system that responds on its own: Google’s FireSat satellites spot fires early, sprinklers on hilltops run on stormwater and groundwater, drones track the wind, and air purifiers switch on when smoke rolls in. My teammates developed the system and the pitch. My job was the website, which had to turn a concept into something people could see and use.</p>
+                </section>
 
-                <h2 class="project-gallery-title">Hackathon poster</h2>
-                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0;">
-                    <div class="gallery-item"><a href="flamefreeze/poster-1.jpg" target="_blank" rel="noopener"><img src="flamefreeze/poster-1.jpg" alt="Poster page 1: the problem, problem statement, audience, and sustainability" loading="lazy" decoding="async"></a></div>
-                    <div class="gallery-item"><a href="flamefreeze/poster-2.jpg" target="_blank" rel="noopener"><img src="flamefreeze/poster-2.jpg" alt="Poster page 2: the seven-step solution and LA-specific features" loading="lazy" decoding="async"></a></div>
-                </div>
+                <section class="vs-section" id="ff-users" aria-labelledby="ff-users-h">
+                    <p class="vs-kicker">02 · Who it’s for</p>
+                    <h2 class="serif vs-h2" id="ff-users-h">Three groups, each with a different question.</h2>
+                    <ul class="vs-plain">
+                        <li><b>Residents: “Am I in danger, and what should I do?”</b> They need the risk level and the next step, fast, without learning how the system works.</li>
+                        <li><b>Community members: “How can I help my neighborhood?”</b> Fire wardens, HOAs and neighbors need a way to organize, train and stay informed.</li>
+                        <li><b>Emergency responders: “Where is the fire, what’s nearby, and how will it spread?”</b> They need live status at a glance and a way to test scenarios before they happen.</li>
+                    </ul>
+                    <p class="project-description" style="margin-top: 1.5rem">I designed the site as a product for these people, not as a demo for the judges. Every page had to answer one of their questions.</p>
+                </section>
+
+                <section class="vs-section" id="ff-approach" aria-labelledby="ff-approach-h">
+                    <p class="vs-kicker">03 · Approach</p>
+                    <h2 class="serif vs-h2" id="ff-approach-h">Features first, then straight into code.</h2>
+                    <p class="project-description">With one weekend, I skipped mockups. I started from what each group needed, turned those needs into features, grouped the features into pages, and then built the site page by page.</p>
+                    <ol class="vs-ranked">
+                        <li><b>“Am I in danger?”</b> A danger banner, status cards and fire risk by neighborhood, on the <b>Dashboard</b>.</li>
+                        <li><b>“Where is the fire?”</b> Active incidents, resource status and a live map, on <b>Live Monitoring</b>.</li>
+                        <li><b>“How will it spread?”</b> Weather and water pressure controls, plus a model of the air purifier, on <b>Simulation</b>.</li>
+                        <li><b>“How can I help?”</b> The fire warden program, alerts, learning resources and a forum, on <b>Community</b>.</li>
+                        <li><b>“How does this work?”</b> The system explained in three stages, on <b>System</b>.</li>
+                    </ol>
+                    <p class="project-description" style="margin-top: 1.5rem">Designing straight in code fit this project. Maps, live status and a simulation are hard to judge in a static mockup, and a working site shows how the system behaves, not just how it looks. I filled it with dummy data and simulations so every page feels real.</p>
+                    <p class="project-description">I used AI coding tools to build quickly. The features, the page structure and the design decisions on this page are mine.</p>
+                </section>
+
+                <section class="vs-section" id="ff-decisions" aria-labelledby="ff-decisions-h">
+                    <p class="vs-kicker">04 · The site</p>
+                    <h2 class="serif vs-h2" id="ff-decisions-h">The most urgent information always comes first.</h2>
+
+                    <div class="vs-screen ff-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Dashboard"><img src="flamefreeze/s/dashboard-status.webp" width="1500" height="673" alt="Top of the dashboard: the fire danger banner, shortcuts to monitoring, system and simulation, the hero and four status cards" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">01 · Dashboard</p><h3 class="serif">Status before story.</h3><p>A red banner sits at the very top, above even the hero, because a fire warning matters more than anything else on the page. You can dismiss it once you’ve read it.</p><p>Four status cards answer “is the system ready?” at a glance: water storage, sensors, active alerts and system status. Each has its own icon and color, so you can scan them without reading.</p><p>From there, the dashboard sends each group where it needs to go: shortcuts to monitoring and simulation for responders, and a sign-up card for residents.</p></div>
+                    </div>
+
+                    <div class="vs-screen ff-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Fire risk by area"><img src="flamefreeze/s/risk.webp" width="1500" height="624" alt="Bar chart of fire risk from 0 to 100 for Mandeville Canyon, Laurel Canyon, Santa Monica Mountains, Brentwood, Bel-Air, Hollywood Hills and Mount Washington" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">02 · Fire risk by area</p><h3 class="serif">Neighborhoods people recognize.</h3><p>Residents think in neighborhoods, not coordinates, so fire risk is a bar chart of named areas like Mandeville Canyon and Laurel Canyon on one 0 to 100 scale. You can find your area and compare it to the rest in a few seconds.</p><p>All the bars are the same orange, so the eye compares heights, not colors.</p></div>
+                    </div>
+
+                    <div class="vs-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Live monitoring panels"><img src="flamefreeze/s/monitoring.webp" width="608" height="1248" alt="Live monitoring panels: two active incidents at 80% and 60%, a fire truck responding with a 5 minute ETA, a sprinkler onsite, and a map legend" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">03 · Live monitoring</p><h3 class="serif">Built for a responder’s glance.</h3><p>Responders scan for status, so each line holds one thing, its state and its time. Incidents show severity as a large red percentage. Resources show a colored badge, Responding or Onsite, with an ETA.</p><p>These panels sit beside a live map of fires, trucks and sprinklers, and the legend uses the same names as the lists so the two read together.</p></div>
+                    </div>
+
+                    <div class="vs-screen ff-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Air purifier model"><img src="flamefreeze/s/air-purifier.webp" width="1200" height="771" alt="Labeled model of the air purifier: main housing, air quality sensors, ultrasonic nebulizer, ventilation fan, electrostatic system, microcontroller, aerosol dispenser and HEPA and carbon filter" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">04 · Simulation</p><h3 class="serif">Let responders test “what if.”</h3><p>The simulation is for emergency responders. Controls for temperature, humidity, wind speed, wind direction and water pressure let them see how conditions change the response before a fire happens.</p><p>The air purifier view labels every part, from the sensors to the HEPA and carbon filter, and can split into an exploded view. People can understand hardware they’ll never open, and the labels can be hidden once they know it.</p></div>
+                    </div>
+
+                    <div class="vs-screen ff-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: System flow"><img src="flamefreeze/s/system-flow.webp" width="1400" height="1305" alt="System flow in four rows: FireSat network, IoT sensors and weather data; FireBench AI, real-time processing and risk assessment; the FireBench dataset; and the sprinkler network, early warning and resource dispatch" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">05 · System</p><h3 class="serif">The system without the jargon.</h3><p>The system has a lot of moving parts, so I split it into stages that read top to bottom: what it senses (satellites, sensors, weather), how it decides (AI models and risk assessment) and how it responds (sprinklers, NotifyLA alerts and dispatch).</p><p>Each part gets an icon, a name and one line. Color groups the stages: orange for sensing, yellow for analysis, green for data and red for the response.</p></div>
+                    </div>
+
+                    <div class="vs-screen ff-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Community page"><img src="flamefreeze/s/community.webp" width="1500" height="1092" alt="Community page on the Fire Warden Program tab: warden responsibilities, warden training, requirements, upcoming training sessions and an Apply Now button" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">06 · Community</p><h3 class="serif">One place for everything a neighbor can do.</h3><p>The fire warden program, alerts, learning resources and a forum sit under tabs on one page, so community members don’t have to hunt across the site.</p><p>Every tab follows the same pattern: what it is, what’s involved, and one clear action like Apply Now or Register for Alerts.</p></div>
+                    </div>
+
+                    <h3 class="vs-h3">Visual system</h3>
+                    <p class="project-description">Orange is the brand, taken from fire, and it carries the header, the hero and the main buttons. Red is saved for danger: the warning banner, active incidents and the response stage. Content sits in white cards with soft shadows on a light gray background, which keeps a lot of information separated and easy to scan.</p>
+                </section>
+
+                <section class="vs-section" id="ff-result" aria-labelledby="ff-result-h">
+                    <p class="vs-kicker">05 · Result</p>
+                    <h2 class="serif vs-h2" id="ff-result-h">2nd place out of 30+ teams.</h2>
+                    <p class="project-description">The judges were very impressed by the site, and it was the main reason we placed 2nd out of 30+ teams and 170+ participants. A working product made our system feel real in a way a poster couldn’t.</p>
+                    <p class="project-description">
+                        <a href="https://flamefreeze.vercel.app/" target="_blank" rel="noopener">Try the live site &rarr;</a>
+                    </p>
+                </section>
+
+                <section class="vs-section" id="ff-next" aria-labelledby="ff-next-h">
+                    <p class="vs-kicker">06 · What I’d improve</p>
+                    <h2 class="serif vs-h2" id="ff-next-h">What I’d change with more than a weekend.</h2>
+                    <ul class="vs-plain">
+                        <li><b>Test with real users.</b> I’d put the dashboard in front of residents and responders and check that each group can answer its question within a few seconds.</li>
+                        <li><b>Label the demo data.</b> Every number is dummy data. I’d mark it clearly so no one mistakes it for real readings.</li>
+                        <li><b>Sliders that show their value.</b> The middle labels on the simulation sliders are fixed, so temperature can read 30°C over a 20°C label. I’d label only the ends and show the live value.</li>
+                        <li><b>A sprinkler view that tells a story.</b> It opens as an empty grid. I’d show the fire and the spray coverage right away.</li>
+                        <li><b>A flow diagram that flows.</b> Arrows between the stages would show the order, not just the groups.</li>
+                        <li><b>One color for actions.</b> “Join Now” is blue while the rest of the brand is orange. I’d use one color for every main button.</li>
+                        <li><b>Mobile polish.</b> On phones, the dashboard shows two menus and the simulation buttons run off the screen.</li>
+                    </ul>
+                </section>
+
+                <section class="vs-section" aria-labelledby="ff-team-h">
+                    <p class="vs-kicker">Team materials</p>
+                    <h2 class="serif vs-h2" id="ff-team-h">The concept the site was built on.</h2>
+                    <p class="project-description">Our team’s poster and concept visuals for the FlameFreeze system.</p>
+                    <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 1rem;">
+                        <div class="gallery-item"><button type="button" class="vs-zoom" aria-label="Enlarge: Poster page 1"><img src="flamefreeze/poster-1.jpg" width="1400" height="1975" alt="Poster page 1: the problem, problem statement, audience and sustainability" loading="lazy" decoding="async"></button></div>
+                        <div class="gallery-item"><button type="button" class="vs-zoom" aria-label="Enlarge: Poster page 2"><img src="flamefreeze/poster-2.jpg" width="1400" height="1975" alt="Poster page 2: the seven-step solution and LA-specific features" loading="lazy" decoding="async"></button></div>
+                        <div class="gallery-item"><button type="button" class="vs-zoom" aria-label="Enlarge: Fire risk map concept"><img src="flamefreeze/risk-map.jpg" width="1015" height="580" alt="Concept map of fire risk zones across Los Angeles" loading="lazy" decoding="async"></button></div>
+                        <div class="gallery-item"><button type="button" class="vs-zoom" aria-label="Enlarge: Summit sprinkler concept"><img src="flamefreeze/summit-sprinkler.jpg" width="972" height="552" alt="Concept render of the summit sprinkler system on an LA hillside" loading="lazy" decoding="async"></button></div>
+                    </div>
+                    <p class="project-description" style="margin-top: 1.5rem">
+                        <a href="flamefreeze/poster.pdf" target="_blank" rel="noopener">View the full poster (PDF) &rarr;</a>
+                    </p>
+                </section>
             </div>
+            <dialog class="vs-lightbox" id="ff-lightbox" aria-label="Enlarged image">
+                <button type="button" class="vs-lightbox-close" aria-label="Close">&times;</button>
+                <img alt="">
+            </dialog>
         </section>
 
         <!-- Research Page -->
@@ -6390,6 +6559,36 @@
 
             input.addEventListener('input', render);
             render();
+        })();
+
+        // FlameFreeze page: in-page section links and image lightbox
+        (function() {
+            const page = document.getElementById('project-flamefreeze');
+            if (!page) return;
+
+            page.querySelectorAll('[data-ff-jump]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.getElementById(link.getAttribute('href').slice(1));
+                    target?.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+                });
+            });
+
+            const box = document.getElementById('ff-lightbox');
+            const boxImg = box?.querySelector('img');
+            if (!box || typeof box.showModal !== 'function') return;
+            page.querySelectorAll('.vs-zoom').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const img = btn.querySelector('img');
+                    boxImg.src = img.currentSrc || img.src;
+                    boxImg.alt = img.alt;
+                    box.showModal();
+                });
+            });
+            box.querySelector('.vs-lightbox-close').addEventListener('click', () => box.close());
+            box.addEventListener('click', (e) => {
+                if (e.target === box) box.close();
+            });
         })();
 
         // haptic page: system diagram details and safety-filter widget
