@@ -2400,6 +2400,14 @@
             }
         }
 
+        /* vLLM benchmarking page (watchdog); layout reuses the .hp page styles */
+        .project-card[data-project="watchdog"] {
+            background-image: url('watchdog/card.svg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
         /* indoor air quality research page; layout reuses the .hp page styles */
         .project-card[data-project="ccl"] {
             background-image: url('ccl/card.jpg');
@@ -4921,9 +4929,16 @@
                         <p>MedAI Hackathon · PyTorch · 3D CNNs · vision transformers</p>
                     </div>
                 </div>
-                <div class="project-card" data-project="ccl" tabindex="0" role="button">
+                <div class="project-card" data-project="watchdog" tabindex="0" role="button">
                     <div class="project-info">
                         <div class="project-number">06</div>
+                        <h3>Performance Analysis for vLLM Inference</h3>
+                        <p>Team Watchdog · vLLM · GuideLLM · LLM serving</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="ccl" tabindex="0" role="button">
+                    <div class="project-info">
+                        <div class="project-number">07</div>
                         <h3>Continuous Indoor Air Quality Assessment</h3>
                         <p>Multimedia Communications Lab · IoT · MongoDB · Streamlit</p>
                     </div>
@@ -5379,6 +5394,64 @@
                     </tbody>
                 </table>
                 <p class="hp-note">The ResNet trained for up to 80 epochs with early stopping patience of 15.</p>
+            </div>
+        </section>
+
+        <section id="project-watchdog" class="page project-detail" data-parent="research">
+            <div class="project-page hp">
+                <a href="#research" class="project-back" data-page="research">← Back to research</a>
+                <h1 class="serif">Performance Analysis for vLLM Inference</h1>
+                <p class="project-meta">Track 6: Compounding Optimizations on RedHatAI Qwen · Team Watchdog</p>
+                <p class="project-description">A reproducible benchmarking framework for large language model serving. It runs controlled workloads against a vLLM server and measures latency and throughput, so that two configurations of the same model can be compared directly.</p>
+                <p class="project-description">In plain terms: a way to tell whether a change to how an AI model is served made it faster or slower, before users notice.</p>
+
+                <p class="project-description"><b>Context:</b> As LLMs move into production, inference systems have to meet latency, throughput, and cost targets while running at scale on GPUs. Unlike functional failures, performance regressions usually happen silently. They raise cost and make the experience worse without triggering any alert. Our track asked how optimizations compound on Red Hat AI’s quantized Qwen models, and answering that needs baselines you can trust and comparisons where only one thing changes.</p>
+                <p class="project-description"><b>Skills:</b> vLLM, GuideLLM, LLM inference and serving, FP8 quantization, benchmark design, latency and throughput analysis, Python, data visualization.</p>
+                <p class="project-description"><b>Impact:</b> Established reproducible baselines for RedHatAI/Qwen3-8B-FP8-dynamic on chat and code workloads, including about 974 output tokens per second at concurrency 32 on chat, and a repeatable process for checking whether a configuration change helps or hurts.</p>
+
+                <h2 class="project-gallery-title">Method</h2>
+                <p class="project-description">GuideLLM generates the workload against a vLLM server. Each benchmark varies prompt length, output length, and concurrency, while the model, hardware, and workload stay fixed across runs. Because configuration is the only variable, a difference in the metrics reflects a real performance change.</p>
+                <ol>
+                    <li>Run a baseline benchmark.</li>
+                    <li>Change one configuration, such as batching, quantization, or decoding.</li>
+                    <li>Re-run the same workload.</li>
+                    <li>Compare the TTFT distributions and throughput against the baseline.</li>
+                </ol>
+
+                <h2 class="project-gallery-title">Metrics</h2>
+                <table class="ce-table">
+                    <thead>
+                        <tr><th>Metric</th><th>What it measures</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Time to first token (TTFT)</td><td>Latency: how long a user waits before the response starts</td></tr>
+                        <tr><td>Output tokens per second</td><td>Decoding efficiency</td></tr>
+                        <tr><td>Requests per second</td><td>Throughput: how much traffic the server handles</td></tr>
+                    </tbody>
+                </table>
+                <p class="hp-note" style="margin-bottom: 2.5rem">Every run uses the same model, hardware, and workload, so only the configuration differs.</p>
+
+                <h2 class="project-gallery-title">Results: FP8 Qwen3-8B</h2>
+                <table class="ce-table">
+                    <thead>
+                        <tr><th></th><th>Chat</th><th>Code</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Prompt / output tokens</td><td>128 / 128</td><td>512 / 1024</td></tr>
+                        <tr><td>Concurrency</td><td>32</td><td>8</td></tr>
+                        <tr><td>Requests per second</td><td>~7.5</td><td>~0.3</td></tr>
+                        <tr><td>Output tokens per second</td><td>~974</td><td>~254</td></tr>
+                        <tr><td>Time to first token</td><td>~850 ms</td><td>~781 ms</td></tr>
+                    </tbody>
+                </table>
+                <p class="hp-note" style="margin-bottom: 2.5rem">Model: RedHatAI/Qwen3-8B-FP8-dynamic. The results show the expected scaling: higher concurrency raises throughput and also raises latency.</p>
+
+                <p class="project-description"><b>Scope and limitations:</b> The framework provides reproducible benchmarking, structured metrics, and baseline performance numbers. Regression detection is shown through manual comparison of benchmark outputs and plots. Automated regression detection, Prometheus-based observability, CI/CD integration, and automated root-cause analysis are the next steps.</p>
+                <p class="project-description"><b>Takeaway:</b> Controlled, reproducible benchmarking makes the performance of an LLM inference system measurable and comparable, which is the foundation for catching regressions and improving reliability in production.</p>
+
+                <p class="project-description" style="margin-top: 1rem;">
+                    <a href="https://github.com/ryansenn/watchdog" target="_blank" rel="noopener">View code on GitHub &rarr;</a>
+                </p>
             </div>
         </section>
 
@@ -5868,7 +5941,7 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-vitasalus', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-flamefreeze', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-amyloid', 'project-ccl'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-vitasalus', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-flamefreeze', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-amyloid', 'project-watchdog', 'project-ccl'];
         if (validPages.includes(hash)) {
             showPage(hash);
         }
