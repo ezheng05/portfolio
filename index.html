@@ -5350,32 +5350,41 @@
             <div class="project-page hp am">
                 <a href="#research" class="project-back" data-page="research">← Back to research</a>
                 <h1 class="serif">Amyloid PET Centiloid Prediction</h1>
-                <p class="project-meta">MedAI Hackathon 2026 · Apr 2026</p>
-                <p class="project-description">I trained a 3D CNN and a vision transformer to predict how much amyloid, a hallmark of Alzheimer’s, is in a brain from its PET scan. My submission had the lowest error on the held-out test set of 12 teams.</p>
+                <p class="project-meta">Inaugural MedAI Hackathon · Boston University · Team of 6 · Apr 2026</p>
+                <p class="project-description">At BU’s first MedAI Hackathon, my team built models that predict how much amyloid, a hallmark of Alzheimer’s, is in a brain from its 3D PET scan. I built the two models in our final ensemble, which had the lowest test error of the 12 teams in our track.</p>
 
-                <p class="project-description"><b>Context:</b> The Centiloid scale is how Alzheimer’s research reports amyloid burden in a standard way. The challenge was to predict it directly from preprocessed 3D amyloid PET scans. The scans came from 4 different radiotracers (FBP, FBB, NAV, and PIB), and each one shows the same amount of amyloid differently, so the core difficulty was the domain shift between tracers. We had 2,000 training scans and 500 validation scans, each a 128 × 128 × 128 volume normalized to [0, 1], and judges scored a held-out test set by running <code>predict.sh</code> against each team’s submitted checkpoint. Strong solutions could be included in a publishable research paper.</p>
+                <p class="project-description"><b>Context:</b> The hackathon drew 230+ registrants and 30 teams across 3 tracks, each built on real, de-identified data from a BU research group. Teams formed and saw the challenges Friday evening, then had Saturday to build before judging. Our track asked for the Centiloid score, the standard scale Alzheimer’s research uses for amyloid burden, from preprocessed amyloid PET scans. The scans came from 4 radiotracers (FBP, FBB, NAV, and PIB), and each one shows the same amount of amyloid differently, so the core difficulty was the domain shift between tracers. NAV was rare, only 68 of the 2,000 training scans. We also had 500 validation scans, each a 128 × 128 × 128 volume, and judges ranked teams on a held-out test set by running each team’s <code>predict.sh</code> on its submitted checkpoint. Strong solutions could be included in a publishable research paper.</p>
+                <p class="project-description"><b>My role:</b> I built the modeling side: the tracer-conditioned 3D ResNet-18, the Swin Transformer, the training script, and the ensemble prediction we submitted. Teammates built the shared data pipeline and augmentation, and explored a CycleGAN that makes a scan from one tracer look like another.</p>
                 <p class="project-description"><b>Skills:</b> Python, PyTorch, 3D CNNs, vision transformers, conditioning for domain shift (FiLM), ensembling, test-time augmentation, medical imaging, GPU cluster jobs (BU SCC).</p>
-                <p class="project-description"><b>Impact:</b> Best held-out error of 12 teams: a mean absolute error of 12.5 Centiloid, 56% below the 28.1 baseline.</p>
+                <p class="project-description"><b>Impact:</b> Lowest test error of the 12 teams in the track: a mean absolute error of 12.5 Centiloid, 56% below the 28.1 baseline.</p>
 
-                <h2 class="project-gallery-title">Held-out test error</h2>
-                <div class="am-bars" role="img" aria-label="Mean absolute error on the held-out test set: baseline 28.1 Centiloid, my ensemble 12.5 Centiloid">
+                <h2 class="project-gallery-title">Held-out test leaderboard</h2>
+                <div class="am-bars" role="img" aria-label="Mean absolute error on the held-out test set: our team 12.5, next best team 14.3, third best 15.1, baseline 28.1 Centiloid">
+                    <div class="am-bar">
+                        <span class="am-bar-label"><b>Our team</b></span>
+                        <div class="am-bar-track"><div class="am-bar-fill am-mine" style="width: 44.3%">12.5</div></div>
+                    </div>
+                    <div class="am-bar">
+                        <span class="am-bar-label"><b>Next best team</b></span>
+                        <div class="am-bar-track"><div class="am-bar-fill" style="width: 50.9%">14.3</div></div>
+                    </div>
+                    <div class="am-bar">
+                        <span class="am-bar-label"><b>Third best</b></span>
+                        <div class="am-bar-track"><div class="am-bar-fill" style="width: 53.6%">15.1</div></div>
+                    </div>
                     <div class="am-bar">
                         <span class="am-bar-label"><b>Baseline</b></span>
                         <div class="am-bar-track"><div class="am-bar-fill" style="width: 100%">28.1</div></div>
                     </div>
-                    <div class="am-bar">
-                        <span class="am-bar-label"><b>My ensemble</b><br>best of 12 teams</span>
-                        <div class="am-bar-track"><div class="am-bar-fill am-mine" style="width: 44.5%">12.5</div></div>
-                    </div>
                 </div>
-                <p class="hp-note" style="margin-bottom: 2.5rem">Mean absolute error in Centiloid units. Lower is better.</p>
+                <p class="hp-note" style="margin-bottom: 2.5rem">Mean absolute error in Centiloid units on the judges’ held-out test set. Lower is better. The baseline scored 19.8 on validation but 28.1 on test, so the test set was much harder than validation suggested.</p>
 
                 <p class="project-description"><b>Details:</b>
                 <ul>
-                    <li>Built on the provided starter codebase instead of replacing it, so my checkpoints stayed compatible with the judges’ <code>predict.sh</code>. I changed <code>model.py</code>, <code>losses.py</code>, <code>train.py</code>, and <code>predict.py</code>, and added <code>predict_ensemble.py</code>.</li>
+                    <li>Built on the provided starter codebase instead of replacing it, so our checkpoints stayed compatible with the judges’ <code>predict.sh</code>. I changed <code>model.py</code>, <code>losses.py</code>, <code>train.py</code>, and <code>predict.py</code>, and added <code>predict_ensemble.py</code>.</li>
                     <li>Main model: a 3D ResNet-18 with FiLM (feature-wise linear modulation) conditioned on tracer type, which scales and shifts the network’s features for each radiotracer so one model can adapt to all four.</li>
-                    <li>Second model: the starter’s 3D Swin Transformer, a different architecture from the ResNet.</li>
-                    <li>Trained both with AdamW, a cosine annealing learning rate schedule, Huber loss (δ = 10), data augmentation, fixed seeds, and early stopping.</li>
+                    <li>Second model: a 3D Swin Transformer (a Swin UNETR encoder plus a tracer embedding), a very different architecture from the ResNet.</li>
+                    <li>Trained both with AdamW, a cosine annealing learning rate schedule, Huber loss (δ = 10), data augmentation, fixed seeds, and early stopping. Huber loss acts like squared error for small misses and like absolute error for big ones, so the few scans with very high Centiloid values don’t dominate training.</li>
                     <li>Used test-time augmentation at inference.</li>
                     <li>Submitted an ensemble of the ResNet and the Swin Transformer. Different architectures make partly uncorrelated errors, so with limited time I chose a second architecture over extra seeds of the same one.</li>
                     <li>Trained on BU’s Shared Computing Cluster with one NVIDIA L40S (48 GB), 8 CPU cores, and 64 GB of RAM, in a virtualenv because conda wasn’t allowed.</li>
