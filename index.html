@@ -1146,15 +1146,10 @@
             }
         }
 
-        /* Popple case study: wide boards full width, text underneath */
+        /* Popple case study: wide boards full width, label and text above the image */
         .pp-wide {
             padding: 2rem 0;
             border-bottom: 1px solid var(--border);
-        }
-
-        .pp-wide .vs-screen-text {
-            margin-top: 1.25rem;
-            max-width: 46rem;
         }
 
         .vs-ideas.pp-debate {
@@ -1164,6 +1159,18 @@
         @media (max-width: 700px) {
             .vs-ideas.pp-debate {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        .pp-wide .vs-screen-text {
+            margin: 0 0 1.25rem;
+        }
+
+        /* on phones, keep the label and text above the screen like everywhere else */
+        @media (max-width: 700px) {
+            .pp .vs-screen .vs-screen-text,
+            .enlaye-protected .vs-screen .vs-screen-text {
+                order: -1;
             }
         }
 
@@ -4716,25 +4723,24 @@
                     <h2 class="serif vs-h2" id="pp-v2-h">V2 was built around the map and groups.</h2>
 
                     <div class="pp-wide">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge: Sign in, sign up and reset password"><img src="popple/sign-in.png" width="774" height="576" alt="Sign in with email or Google, sign up, and reset password" loading="lazy" decoding="async"></button>
                         <div class="vs-screen-text">
                             <p class="vs-label">01 · Signing in</p>
                             <h3 class="serif">Sign in, sign up, or reset your password.</h3>
                             <p>The screens before onboarding. People can sign in with their email or Google, create an account, or reset a forgotten password.</p>
                         </div>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Sign in, sign up and reset password"><img src="popple/sign-in.png" width="774" height="576" alt="Sign in with email or Google, sign up, and reset password" loading="lazy" decoding="async"></button>
                     </div>
 
                     <div class="pp-wide">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge: V2 onboarding flow"><img src="popple/onboarding.png" width="1356" height="1166" alt="V2 onboarding: university, graduation year, gender, up to 5 interests, relationship status, major, and how did you hear about us, one question per screen" loading="lazy" decoding="async"></button>
                         <div class="vs-screen-text">
                             <p class="vs-label">02 · Onboarding</p>
                             <h3 class="serif">One question per screen.</h3>
                             <p>The screens I created for how new users build their profile: school, graduation year, gender, interests, relationship status, major, and how they heard about us. Each question gets its own screen with a progress bar. This V2 flow was still more basic than V3.</p>
                         </div>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: V2 onboarding flow"><img src="popple/onboarding.png" width="1356" height="1166" alt="V2 onboarding: university, graduation year, gender, up to 5 interests, relationship status, major, and how did you hear about us, one question per screen" loading="lazy" decoding="async"></button>
                     </div>
 
                     <div class="pp-wide">
-                        <button type="button" class="vs-zoom" aria-label="Enlarge: V2 home, event details, groups, chat and group details"><img src="popple/misc-2.png" width="1628" height="1000" alt="Five V2 screens: a home page with the map first, event details with Join group and Create group, My Groups, a group chat, and group details" loading="lazy" decoding="async"></button>
                         <div class="vs-screen-text">
                             <p class="vs-label">03 · Home, events and groups</p>
                             <h3 class="serif">Find an event, then find your group.</h3>
@@ -4746,6 +4752,7 @@
                                 <li><b>Group details</b> shows who’s in the group and what it’s about.</li>
                             </ul>
                         </div>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: V2 home, event details, groups, chat and group details"><img src="popple/misc-2.png" width="1628" height="1000" alt="Five V2 screens: a home page with the map first, event details with Join group and Create group, My Groups, a group chat, and group details" loading="lazy" decoding="async"></button>
                     </div>
 
                     <div class="vs-screen">
@@ -4765,23 +4772,18 @@
                     <p class="project-description">Before V3, I brainstormed what information would help someone decide to attend an event. We weren’t trying to show all of these cards. These were ideas to test and choose from.</p>
 
                     <div class="pp-wide">
-                        <div class="pp-row pp-row--2">
-                            <button type="button" class="vs-zoom" aria-label="Enlarge: Event stats, top"><img src="popple/find-people-1.png" width="362" height="780" alt="Music fest stats: at a glance, views in the last hour, friends attending and match, then interested stats by school, relationship status and gender" loading="lazy" decoding="async"></button>
-                            <button type="button" class="vs-zoom" aria-label="Enlarge: Event stats, continued"><img src="popple/find-people-2.png" width="412" height="1526" alt="More event cards: people you may know attending, people in your major attending, highest compatibility, hot topics, photo gallery from the venue and similar events" loading="lazy" decoding="async"></button>
-                        </div>
                         <div class="vs-screen-text">
                             <p class="vs-label">01 · Event stats</p>
                             <h3 class="serif">Who’s going, at a glance.</h3>
                             <p>On the left, statistics for one event: who’s interested, by school, relationship status and gender, so you have an idea of the type of people going. On the right, the rest of the screen: people you may know who are going, people in your major, people with similar interests, hot topics, photos from the venue, and similar events.</p>
                         </div>
+                        <div class="pp-row pp-row--2">
+                            <button type="button" class="vs-zoom" aria-label="Enlarge: Event stats, top"><img src="popple/find-people-1.png" width="362" height="780" alt="Music fest stats: at a glance, views in the last hour, friends attending and match, then interested stats by school, relationship status and gender" loading="lazy" decoding="async"></button>
+                            <button type="button" class="vs-zoom" aria-label="Enlarge: Event stats, continued"><img src="popple/find-people-2.png" width="412" height="1526" alt="More event cards: people you may know attending, people in your major attending, highest compatibility, hot topics, photo gallery from the venue and similar events" loading="lazy" decoding="async"></button>
+                        </div>
                     </div>
 
                     <div class="pp-wide">
-                        <div class="pp-row pp-row--3">
-                            <button type="button" class="vs-zoom" aria-label="Enlarge: Stats on event details"><img src="popple/event-details-2.png" width="514" height="1230" alt="Event details with interested stats by school, relationship status and gender, and Request matches and Buy tickets buttons" loading="lazy" decoding="async"></button>
-                            <button type="button" class="vs-zoom" aria-label="Enlarge: Reviews on event details"><img src="popple/event-details.png" width="310" height="1304" alt="Event details with reviews from past events at the venue" loading="lazy" decoding="async"></button>
-                            <button type="button" class="vs-zoom" aria-label="Enlarge: Home feed with different cards"><img src="popple/feed.png" width="264" height="1528" alt="Home feed with a quick poll, top events, weekend picks, friends’ activity, similar interests, latest reviews, hot topics, a photo gallery and events popular among CS majors" loading="lazy" decoding="async"></button>
-                        </div>
                         <div class="vs-screen-text">
                             <p class="vs-label">02 · Event details and the home feed</p>
                             <h3 class="serif">Stats, reviews and a feed of cards.</h3>
@@ -4790,6 +4792,11 @@
                                 <li><b>Middle:</b> showing reviews of an event when the venue hosts it regularly.</li>
                                 <li><b>Right:</b> a home feed with different types of cards, from interactive ones like polls to photo galleries, recommended events and recommended profiles, plus reviews on home.</li>
                             </ul>
+                        </div>
+                        <div class="pp-row pp-row--3">
+                            <button type="button" class="vs-zoom" aria-label="Enlarge: Stats on event details"><img src="popple/event-details-2.png" width="514" height="1230" alt="Event details with interested stats by school, relationship status and gender, and Request matches and Buy tickets buttons" loading="lazy" decoding="async"></button>
+                            <button type="button" class="vs-zoom" aria-label="Enlarge: Reviews on event details"><img src="popple/event-details.png" width="310" height="1304" alt="Event details with reviews from past events at the venue" loading="lazy" decoding="async"></button>
+                            <button type="button" class="vs-zoom" aria-label="Enlarge: Home feed with different cards"><img src="popple/feed.png" width="264" height="1528" alt="Home feed with a quick poll, top events, weekend picks, friends’ activity, similar interests, latest reviews, hot topics, a photo gallery and events popular among CS majors" loading="lazy" decoding="async"></button>
                         </div>
                     </div>
                 </section>
