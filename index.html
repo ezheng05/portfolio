@@ -834,7 +834,7 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
             transition: filter 0.4s ease;
         }
@@ -846,23 +846,26 @@
 
         .hobby-tile figcaption {
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 2.5rem 0.9rem 0.7rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+            left: 50%;
+            bottom: 0.75rem;
+            max-width: calc(100% - 1.5rem);
+            width: max-content;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.65);
+            text-align: center;
             color: #fff;
             font-size: 0.95rem;
             line-height: 1.35;
             opacity: 0;
-            transform: translateY(6px);
+            transform: translate(-50%, 6px);
             transition: opacity 0.3s ease, transform 0.3s ease;
             pointer-events: none;
         }
 
         .hobby-tile.is-active figcaption {
             opacity: 1;
-            transform: none;
+            transform: translate(-50%, 0);
         }
 
         .hobby-tile .hobby-sound {
@@ -3916,7 +3919,7 @@
                         <div class="carousel-slide" data-index="10"><img src="about/web/pickleball.jpg" alt="" loading="lazy" decoding="async"></div>
                         <div class="carousel-slide" data-index="11"><img src="about/web/scuba.jpg" alt="" loading="lazy" decoding="async"></div>
                         <div class="carousel-slide" data-index="12"><img src="about/web/skydive.jpg" alt="" loading="lazy" decoding="async"></div>
-                        <div class="carousel-slide" data-index="13"><video src="about/web/sled.mp4" poster="about/web/sled.jpg" controls playsinline preload="none"></video></div>
+                        <div class="carousel-slide" data-index="13"><video src="about/web/sled.mp4" poster="about/web/sled.jpg" controls muted playsinline preload="none" data-no-sound></video></div>
                         <div class="carousel-slide" data-index="14"><video src="about/web/snowboarding.mp4" poster="about/web/snowboarding.jpg" controls playsinline preload="none"></video></div>
                         <div class="carousel-slide" data-index="15"><img src="about/web/sunset.jpg" alt="" loading="lazy" decoding="async"></div>
                         <div class="carousel-slide" data-index="16"><img src="about/web/tennis.jpg" alt="" loading="lazy" decoding="async"></div>
@@ -5825,7 +5828,18 @@
                 tile.tabIndex = 0;
                 const caption = document.createElement('figcaption');
                 caption.textContent = captions[i] || '';
-                if (src.tagName === 'VIDEO') {
+                if (src.tagName === 'VIDEO' && src.hasAttribute('data-no-sound')) {
+                    // silent clip: just loops on hover, no sound toggle
+                    const v = document.createElement('video');
+                    v.src = src.getAttribute('src');
+                    v.poster = src.getAttribute('poster');
+                    v.muted = true;
+                    v.loop = true;
+                    v.playsInline = true;
+                    v.preload = 'none';
+                    v.setAttribute('aria-label', captions[i] || '');
+                    tile.appendChild(v);
+                } else if (src.tagName === 'VIDEO') {
                     tile.classList.add('has-video');
                     const v = document.createElement('video');
                     v.src = src.getAttribute('src');
