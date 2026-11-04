@@ -2656,7 +2656,7 @@
         /* final screens */
         .vs-screen {
             display: grid;
-            grid-template-columns: minmax(200px, 300px) 1fr;
+            grid-template-columns: minmax(180px, 240px) 1fr;
             gap: 2.5rem;
             align-items: start;
             padding: 2rem 0;
@@ -3181,7 +3181,7 @@
         }
 
         .vs-flow--2 > .vs-phone {
-            max-width: 300px;
+            max-width: 240px;
         }
 
         .vs-pairs {
@@ -3204,7 +3204,7 @@
 
         .vs-grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         .vs-grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .vs-grid2 { grid-template-columns: repeat(2, minmax(0, 320px)); justify-content: center; gap: 3rem; }
+        .vs-grid2 { grid-template-columns: repeat(2, minmax(0, 250px)); justify-content: center; gap: 3rem; }
 
         /* screen rows break out of the text column so the screens can be larger */
         @media (min-width: 1000px) {
@@ -3219,8 +3219,17 @@
                 width: min(1240px, calc(100vw - 8rem));
             }
 
-            .vs-grid3 {
+            .vs-flow--4,
+            .vs-pairs {
+                width: min(1060px, calc(100vw - 8rem));
+            }
+
+            .vs-grid4 {
                 width: min(1000px, calc(100vw - 8rem));
+            }
+
+            .vs-grid3 {
+                width: min(820px, calc(100vw - 8rem));
                 gap: 2.5rem;
             }
 
