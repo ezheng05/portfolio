@@ -1147,6 +1147,105 @@
             }
         }
 
+        /* Designathon page: journey map, user flows and wireframes, all drawn in theme colors */
+        .jm-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .jm {
+            display: grid;
+            grid-template-columns: 6.5rem repeat(4, minmax(140px, 1fr));
+            min-width: 700px;
+            border-top: 1px solid var(--border);
+        }
+
+        .jm > div {
+            padding: 0.75rem 0.9rem 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .jm > .jm-h {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .jm-h span {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 0.2rem;
+        }
+
+        .jm > .jm-l {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .jm > .jm-curve {
+            grid-column: 2 / 6;
+            padding-right: 0;
+        }
+
+        .jm-curve svg {
+            display: block;
+            width: 100%;
+            height: 72px;
+            overflow: visible;
+        }
+
+        .jm-line {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 2.5;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .jm-mid {
+            stroke: var(--border);
+            stroke-dasharray: 3 5;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .jm-moods {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            font-size: 0.8rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .jm > .jm-opp {
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .jm > .jm-opp::before {
+            content: '';
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin-bottom: 0.4rem;
+            background: var(--accent);
+        }
+
+        .project-page .jm-note {
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
         /* Designathon page: phones sit right on the page under the decision they show */
         .project-page .as-links {
             display: flex;
@@ -5567,6 +5666,46 @@
                     <li><b>Pitch.</b> Explained our design decisions in a written proposal and a pitch video. Working virtually with two people I’d never met, we had to be deliberate about writing decisions down.</li>
                 </ul>
 
+                <h2 class="project-gallery-title">Journey map</h2>
+                <p class="project-description">We mapped a fan’s night from the show to the weeks after, using our own experiences and what we heard from fans and creatives. The biggest drop comes right after the show ends, and each low point became a feature idea.</p>
+                <div class="jm-wrap" role="region" aria-label="Fan journey map" tabindex="0">
+                    <div class="jm">
+                        <div class="jm-h"></div>
+                        <div class="jm-h"><span>01</span>At the show</div>
+                        <div class="jm-h"><span>02</span>Leaving the venue</div>
+                        <div class="jm-h"><span>03</span>The next day</div>
+                        <div class="jm-h"><span>04</span>Weeks later</div>
+
+                        <div class="jm-l">Feeling</div>
+                        <div class="jm-curve">
+                            <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+                                <line class="jm-mid" x1="0" y1="40" x2="400" y2="40"/>
+                                <path class="jm-line" d="M50 14 C 110 14, 120 44, 150 44 S 220 66, 250 66 S 320 70, 350 72"/>
+                            </svg>
+                            <div class="jm-moods"><span>Euphoric</span><span>“Everyone just goes home”</span><span>Wants to relive it</span><span>The memory fades</span></div>
+                        </div>
+
+                        <div class="jm-l">Doing</div>
+                        <div>Films the best songs and takes photos</div>
+                        <div>Walks out with a crowd of strangers who just shared the same night</div>
+                        <div>Posts a story and texts friends, most of whom weren’t there</div>
+                        <div>Maybe scrolls past a great photo of the show, often not</div>
+
+                        <div class="jm-l">Pain point</div>
+                        <div>Can’t capture everything, and the best shots are on other people’s phones</div>
+                        <div>No way to find or talk to the people who were there</div>
+                        <div>Memories end up split across camera rolls, Instagram and TikTok</div>
+                        <div>Local creatives’ work never reaches the fans who were there</div>
+
+                        <div class="jm-l jm-l--opp">Opportunity</div>
+                        <div class="jm-opp">One archive per show, with everyone’s uploads</div>
+                        <div class="jm-opp">A community space for each event</div>
+                        <div class="jm-opp">Memory capsules, organized by event</div>
+                        <div class="jm-opp">Creative profiles and commissions</div>
+                    </div>
+                </div>
+                <p class="project-description jm-note">These four opportunities became the features we scored below.</p>
+
                 <table class="ce-table as-score">
                     <thead>
                         <tr><th>Feature</th><th>Impact</th><th>Feasibility</th><th>Reach</th><th>Fit</th><th>Total</th></tr>
@@ -5581,6 +5720,14 @@
                     </tbody>
                 </table>
                 <p class="project-description" style="margin-top: 1rem;">The event archive scored highest, so it became the core of the app. Next came a community space for each event, creative profiles that work as portfolios, and search with genre filters. Messaging and the map scored lowest, so we left them for later.</p>
+
+                <h2 class="project-gallery-title">User flows</h2>
+                <p class="project-description">Next we mapped how fans and creatives move through the app. Both start at the same screen and split right away. They meet on each show’s Creatives tab, where a fan can find a creator and commission them.</p>
+                <div class="fc-wrap"><svg class="fc" viewBox="0 18 860 450" role="img" aria-labelledby="as-fc-t"><title id="as-fc-t">artscape user flows. Open the app and choose fan or creator. Fans pick genres, discover shows and open a concert page. From its Capsule tab they add photos, reflect, choose who sees it, and the capsule is saved to the show. Creators say what they create, set up a portfolio and upload work to a show, where it appears on the show’s Creatives tab. Fans browse that tab from the concert page, open a creator’s profile and send a commission request, which lands in the creator’s inbox to accept, decline or answer with a message.</title><defs><marker id="as-fc-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fc-head"/></marker></defs><rect class="fc-step fc-end" x="5" y="48" width="100" height="44" rx="8"/><text class="fc-t" x="55.0" y="74.5" text-anchor="middle">Open artscape</text><path class="fc-a" d="M105 70H125" marker-end="url(#as-fc-head)"/><polygon class="fc-dec" points="200,28 272,70 200,112 128,70"/><text class="fc-t" x="200" y="67" text-anchor="middle">Fan or</text><text class="fc-t" x="200" y="84" text-anchor="middle">creator?</text><path class="fc-a" d="M272 70H298" marker-end="url(#as-fc-head)"/><text class="fc-yn" x="278" y="62">FAN</text><rect class="fc-step" x="300" y="45" width="130" height="50" rx="8"/><text class="fc-t" x="365.0" y="67.0" text-anchor="middle">Pick genres</text><text class="fc-s" x="365.0" y="83.0" text-anchor="middle">a personal feed</text><path class="fc-a" d="M430 70H453" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="455" y="45" width="140" height="50" rx="8"/><text class="fc-t" x="525.0" y="67.0" text-anchor="middle">Discover</text><text class="fc-s" x="525.0" y="83.0" text-anchor="middle">shows for you</text><path class="fc-a" d="M595 70H618" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="620" y="45" width="180" height="50" rx="8"/><text class="fc-t" x="710.0" y="67.0" text-anchor="middle">Concert page</text><text class="fc-s" x="710.0" y="83.0" text-anchor="middle">archive, community, creatives</text><path class="fc-a" d="M710 95V163" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="640" y="165" width="140" height="50" rx="8"/><text class="fc-t" x="710.0" y="187.0" text-anchor="middle">Capsule tab</text><text class="fc-s" x="710.0" y="203.0" text-anchor="middle">make a memory</text><path class="fc-a" d="M640 190H617" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="490" y="165" width="125" height="50" rx="8"/><text class="fc-t" x="552.5" y="187.0" text-anchor="middle">Add photos</text><text class="fc-s" x="552.5" y="203.0" text-anchor="middle">from the show</text><path class="fc-a" d="M490 190H467" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="335" y="165" width="130" height="50" rx="8"/><text class="fc-t" x="400.0" y="187.0" text-anchor="middle">Reflect</text><text class="fc-s" x="400.0" y="203.0" text-anchor="middle">a few words, feelings</text><path class="fc-a" d="M335 190H312" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="180" y="165" width="130" height="50" rx="8"/><text class="fc-t" x="245.0" y="187.0" text-anchor="middle">Who sees it?</text><text class="fc-s" x="245.0" y="203.0" text-anchor="middle">private, friends, public</text><path class="fc-a" d="M180 190H162" marker-end="url(#as-fc-head)"/><rect class="fc-step fc-end" x="50" y="167" width="110" height="50" rx="8"/><text class="fc-t" x="105.0" y="189.0" text-anchor="middle">Saved to</text><text class="fc-s" x="105.0" y="205.0" text-anchor="middle">the show</text><path class="fc-a" d="M200 112V128H25V308H48" marker-end="url(#as-fc-head)"/><text class="fc-yn" x="208" y="124">CREATOR</text><rect class="fc-step" x="50" y="285" width="140" height="50" rx="8"/><text class="fc-t" x="120.0" y="307.0" text-anchor="middle">What do you create?</text><text class="fc-s" x="120.0" y="323.0" text-anchor="middle">photo, design, video</text><path class="fc-a" d="M190 310H213" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="215" y="285" width="130" height="50" rx="8"/><text class="fc-t" x="280.0" y="307.0" text-anchor="middle">Set up portfolio</text><text class="fc-s" x="280.0" y="323.0" text-anchor="middle">work grouped by show</text><path class="fc-a" d="M345 310H368" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="370" y="285" width="150" height="50" rx="8"/><text class="fc-t" x="445.0" y="307.0" text-anchor="middle">Upload to a show</text><text class="fc-s" x="445.0" y="323.0" text-anchor="middle">photos, art, video</text><path class="fc-a" d="M520 310H543" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="545" y="285" width="125" height="50" rx="8"/><text class="fc-t" x="607.5" y="307.0" text-anchor="middle">Creatives tab</text><text class="fc-s" x="607.5" y="323.0" text-anchor="middle">on the show’s page</text><path class="fc-a" d="M670 310H693" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="695" y="285" width="150" height="50" rx="8"/><text class="fc-t" x="770.0" y="307.0" text-anchor="middle">Creator profile</text><text class="fc-s" x="770.0" y="323.0" text-anchor="middle">where fans find them</text><path class="fc-a" d="M800 70H825V255H608V283" marker-end="url(#as-fc-head)"/><text class="fc-yn" x="612" y="248">FANS BROWSE</text><path class="fc-a" d="M770 335V403" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="695" y="405" width="150" height="50" rx="8"/><text class="fc-t" x="770.0" y="427.0" text-anchor="middle">Commission</text><text class="fc-s" x="770.0" y="443.0" text-anchor="middle">a fan sends a request</text><path class="fc-a" d="M695 430H672" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="530" y="405" width="140" height="50" rx="8"/><text class="fc-t" x="600.0" y="427.0" text-anchor="middle">Commission inbox</text><text class="fc-s" x="600.0" y="443.0" text-anchor="middle">price, item, show</text><path class="fc-a" d="M530 430H507" marker-end="url(#as-fc-head)"/><rect class="fc-step fc-end" x="320" y="407" width="185" height="44" rx="8"/><text class="fc-t" x="412.5" y="433.5" text-anchor="middle">Accept, decline or message</text></svg></div>
+
+                <h2 class="project-gallery-title">Wireframes</h2>
+                <p class="project-description">Before any visual design, we laid out the core screens in grayscale to agree on structure: what comes first, and what’s one tap away. Redrawn here for the six screens that carry the flows above.</p>
+                <div class="wf-row"><figure class="wf"><figcaption><span>01</span> First open</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-center"><i class="wf-logo"></i><span class="wf-t">artscape</span><i class="wf-line" style="width:60%"></i></div><span class="wf-t">What moves you?</span><i class="wf-line" style="width:80%"></i><div class="wf-chips"><i class="wf-chip is-on"></i><i class="wf-chip is-on"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip is-on"></i></div><div class="wf-foot"><span class="wf-btn">Enter artscape</span><span class="wf-link">I’m an organizer or creative</span></div></div><p class="wf-note">Genres first, so the feed is personal from the start. Creators get their own path, so fans go straight in.</p></figure><figure class="wf"><figcaption><span>02</span> Discover</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-field">Search events, artists, places</span><span class="wf-meta">For you</span><div class="wf-img" style="flex:none;height:78px"></div><span class="wf-meta">Event archive</span><div class="wf-deck"><i></i><i></i><i></i></div><span class="wf-meta">Upcoming</span><div class="wf-item"><span>Show · venue · date</span><span class="wf-mini">RSVP</span></div><div class="wf-item"><span>Show · venue · date</span><span class="wf-mini">RSVP</span></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Shows are the main unit, not people or posts. Past shows stay findable in the archive.</p></figure><figure class="wf"><figcaption><span>03</span> Concert page</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-img" style="flex:none;height:70px"></div><span class="wf-t">Artist @ venue</span><i class="wf-line" style="width:70%"></i><div class="wf-opt"><span class="wf-meta">Uploads</span><span class="wf-meta">Capsules</span><span class="wf-meta">Creatives</span></div><div class="wf-tabs"><i class="is-on"></i><i></i><i></i><i></i></div><div class="wf-deck" style="grid-template-columns:1fr 1fr"><i style="height:64px"></i><i style="height:64px"></i></div><div class="wf-deck" style="grid-template-columns:1fr 1fr"><i style="height:64px"></i><i style="height:64px"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">One page per show. Tabs give creatives’ work its own space and keep fans’ capsules personal.</p></figure><figure class="wf"><figcaption><span>04</span> Memory capsule</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-card"><span class="wf-meta">Memory capsule</span><span class="wf-t">Artist @ venue</span></div><span class="wf-meta">Your photos</span><div class="wf-deck" style="grid-template-columns:repeat(3,1fr)"><i></i><i></i><i style="background:none;border-style:dashed"></i></div><span class="wf-meta">Your reflection</span><div class="wf-card"><i class="wf-line" style="width:95%"></i><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:60%"></i></div><span class="wf-meta">How did it feel?</span><div class="wf-chips"><i class="wf-chip is-on"></i><i class="wf-chip"></i><i class="wf-chip"></i></div><span class="wf-meta">Who sees it</span><div class="wf-seg"><i></i><i class="is-on"></i><i></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Photos first, writing optional, and a privacy choice on every capsule.</p></figure><figure class="wf"><figcaption><span>05</span> A creator’s profile</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-opt" style="justify-content:flex-start"><i class="wf-logo" style="width:38px;height:38px;flex:none"></i><div style="flex:1;display:flex;flex-direction:column;gap:4px"><span class="wf-t">Creator name</span><i class="wf-line" style="width:80%"></i></div></div><i class="wf-line" style="width:95%"></i><i class="wf-line" style="width:70%"></i><div class="wf-card"><span class="wf-meta">Commission rates</span><div class="wf-tr"><i class="wf-line" style="width:55%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><div class="wf-tr"><i class="wf-line" style="width:65%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><div class="wf-tr"><i class="wf-line" style="width:50%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div></div><div class="wf-actions"><span class="wf-btn">Commission</span><span class="wf-btn wf-btn--ghost">Follow</span></div><div class="wf-tabs"><i class="is-on"></i><i></i></div><div class="wf-deck" style="grid-template-columns:1fr 1fr"><i style="height:58px"></i><i style="height:58px"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">As a fan sees it: rates up front, and Commission is the main action.</p></figure><figure class="wf"><figcaption><span>06</span> Commission inbox</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">Commission inbox</span><div class="wf-seg" style="height:32px"><i></i><i></i><i></i></div><span class="wf-meta">Pending requests</span><div class="wf-card"><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:45%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:70%"></i><div class="wf-actions"><span class="wf-btn wf-btn--ghost">Accept</span><span class="wf-btn wf-btn--ghost">Decline</span><span class="wf-btn wf-btn--ghost">Message</span></div></div><div class="wf-card"><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:40%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:60%"></i><div class="wf-actions"><span class="wf-btn wf-btn--ghost">Accept</span><span class="wf-btn wf-btn--ghost">Decline</span><span class="wf-btn wf-btn--ghost">Message</span></div></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Pending, potential and earned at a glance, and every request answered right on its card.</p></figure></div>
 
                 <h2 class="project-gallery-title">Design decisions</h2>
 
