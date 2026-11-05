@@ -3249,7 +3249,13 @@
         .bs-tag--v2, .bs-tag--v3 { background: var(--accent); border-color: var(--accent); color: var(--bg-primary); }
 
         /* color swatches and type samples */
-        .sw-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+        .rb { display: grid; grid-template-columns: 1fr auto 1.4fr; gap: 1.25rem; align-items: center; margin-bottom: 0.75rem; }
+        .rb-item { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; color: var(--text-secondary); }
+        .rb-item i { display: block; height: 88px; border-radius: 10px; border: 1px solid var(--border); margin: 0.35rem 0 0.45rem; }
+        .rb-item b { color: var(--text-primary); font-weight: 500; }
+        .rb-arrow { color: var(--accent); font-size: 1.4rem; padding-top: 1rem; }
+        .project-page .rb-note { margin: 0 0 1.75rem; }
+        .sw-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 1rem 0.85rem; }
         .sw { display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.82rem; line-height: 1.4; color: var(--text-secondary); }
         .sw i { display: block; height: 64px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 0.4rem; }
         .sw b { color: var(--text-primary); font-weight: 500; }
@@ -3333,6 +3339,8 @@
             .wf--desk .wf-phone { width: 290px; }
             .vs-ideas--2 { grid-template-columns: 1fr; }
             .ty-row { grid-template-columns: 1fr; gap: 0.6rem; }
+            .sw i { height: 48px; }
+            .rb-item i { height: 64px; }
         }
 
         .vs-ideas .vs-took {
@@ -5451,11 +5459,11 @@
                 <section class="vs-section" id="pp-visual" aria-labelledby="pp-visual-h">
                     <p class="vs-kicker">07 · Visual language</p>
                     <h2 class="serif vs-h2" id="pp-visual-h">Playful enough for students, clear enough to act on.</h2>
-                    <p class="project-description">The gradient and lowercase titles give Popple its personality. Indigo is saved for things you can tap, so actions stand out on every screen.</p>
+                    <p class="project-description">Popple started out solid purple. For V3 we rebranded to a violet-to-sky gradient because we wanted the app to look more modern, and kept the original purple for anything you can tap, so actions still stand out. Everything is set in Poppins.</p>
                     <h3 class="vs-h3">Color</h3>
-                    <div class="sw-row"><div class="sw sw--grad"><i style="background:linear-gradient(120deg,#824BE2,#7FA7F5)"></i><b>Header gradient</b><span>Violet to sky</span></div><div class="sw"><i style="background:#824BE2"></i><b>Violet</b><span class="sw-hex">#824BE2</span><span>Gradient start, screen headers</span></div><div class="sw"><i style="background:#7FA7F5"></i><b>Sky</b><span class="sw-hex">#7FA7F5</span><span>Gradient end</span></div><div class="sw"><i style="background:#605AC6"></i><b>Indigo</b><span class="sw-hex">#605AC6</span><span>Buttons, links and chart bars</span></div><div class="sw"><i style="background:#CCB4E4"></i><b>Lilac</b><span class="sw-hex">#CCB4E4</span><span>Card tints and highlights</span></div><div class="sw"><i style="background:#F4F2FC"></i><b>Mist</b><span class="sw-hex">#F4F2FC</span><span>Light surfaces</span></div></div>
-                    <h3 class="vs-h3">Typography</h3>
-                    <div class="ty-list"><div class="ty-row"><div class="ty-meta"><span class="vs-label">Display</span><span>Rounded and lowercase, for screen titles</span></div><img src="popple/s/type-display.webp" width="300" height="117" alt="Display sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Headline</span><span>The same face, smaller, for section titles</span></div><img src="popple/s/type-headline.webp" width="330" height="52" alt="Headline sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Event title</span><span>Bold caps, so each event reads as a name</span></div><img src="popple/s/type-title.webp" width="262" height="48" alt="Event title sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Body and meta</span><span>A rounded sans in gray, with icons inline</span></div><img src="popple/s/type-body.webp" width="420" height="146" alt="Body and meta sample from the app" loading="lazy" decoding="async"></div></div>
+                    <div class="rb"><div class="rb-item"><span class="vs-label">Before · V2</span><i style="background:#605AC6"></i><b>Solid purple</b><span class="sw-hex">#605AC6</span></div><span class="rb-arrow" aria-hidden="true">→</span><div class="rb-item"><span class="vs-label">After · V3 rebrand</span><i style="background:linear-gradient(120deg,#824BE2,#7FA7F5)"></i><b>Violet to sky gradient</b><span class="sw-hex">#824BE2 → #7FA7F5</span></div></div><p class="vs-small rb-note">The gradient took over headers and backgrounds. The original purple stayed on buttons, links and chart bars.</p><div class="sw-row"><div class="sw"><i style="background:#605AC6"></i><b>Purple</b><span class="sw-hex">#605AC6</span><span>Buttons, links and chart bars</span></div><div class="sw"><i style="background:#824BE2"></i><b>Violet</b><span class="sw-hex">#824BE2</span><span>Gradient start</span></div><div class="sw"><i style="background:#7FA7F5"></i><b>Sky</b><span class="sw-hex">#7FA7F5</span><span>Gradient end</span></div><div class="sw"><i style="background:#CCB4E4"></i><b>Lilac</b><span class="sw-hex">#CCB4E4</span><span>Card tints and highlights</span></div><div class="sw"><i style="background:#F4F2FC"></i><b>Mist</b><span class="sw-hex">#F4F2FC</span><span>Light surfaces</span></div></div>
+                    <h3 class="vs-h3">Typography: Poppins</h3>
+                    <div class="ty-list"><div class="ty-row"><div class="ty-meta"><span class="vs-label">Display</span><span>Poppins, lowercase, for screen titles</span></div><img src="popple/s/type-display.webp" width="300" height="117" alt="Display sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Headline</span><span>Poppins, smaller, for section titles</span></div><img src="popple/s/type-headline.webp" width="330" height="52" alt="Headline sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Event title</span><span>Poppins in bold caps, so each event reads as a name</span></div><img src="popple/s/type-title.webp" width="262" height="48" alt="Event title sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Body and meta</span><span>Poppins in gray, with icons inline</span></div><img src="popple/s/type-body.webp" width="420" height="146" alt="Body and meta sample from the app" loading="lazy" decoding="async"></div></div>
                 </section>
 
                 <section class="vs-section" id="pp-result" aria-labelledby="pp-result-h">
