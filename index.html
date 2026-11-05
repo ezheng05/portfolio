@@ -427,7 +427,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: min(95vw, 760px);
+            width: min(95vw, 920px);
             aspect-ratio: 1.6;
             transform: translate(-50%, -50%) rotate(-12deg);
             pointer-events: none;
@@ -906,15 +906,40 @@
 
         .about-cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             max-width: 1400px;
             margin: 4rem auto 0;
         }
 
-        /* classes, skills, and awards share the top row; favorites runs full width below */
-        .about-card[aria-labelledby="card-favorites"] {
-            grid-column: 1 / -1;
+        /* desktop: classes | awards on top, then skills and favorites full width (phones keep the page order) */
+        @media (min-width: 1025px) {
+            .about-card[aria-labelledby="card-classes"] { grid-area: 1 / 1; }
+            .about-card[aria-labelledby="card-awards"] { grid-area: 1 / 2; }
+            .about-card[aria-labelledby="card-skills"] { grid-area: 2 / 1 / 3 / 3; }
+            .about-card[aria-labelledby="card-favorites"] { grid-area: 3 / 1 / 4 / 3; }
+
+            /* the class list runs in two columns so it sits level with awards */
+            .about-card[aria-labelledby="card-classes"] ul {
+                column-count: 2;
+                column-gap: 2rem;
+            }
+
+            .about-card[aria-labelledby="card-classes"] li {
+                break-inside: avoid;
+            }
+
+            /* skill groups sit in four columns */
+            .skill-groups {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem 2rem;
+                align-items: start;
+            }
+
+            .skill-groups .skill-group + .skill-group {
+                margin-top: 0;
+            }
         }
 
         .about-card {
@@ -966,6 +991,26 @@
             background: var(--bg-primary);
             border-radius: 4px;
             font-size: 0.85rem;
+        }
+
+        /* skills are split into labelled groups so the list scans by area */
+        .skill-group + .skill-group {
+            margin-top: 1.1rem;
+        }
+
+        .skill-group h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-group .tag-list {
+            gap: 0.4rem;
+        }
+
+        .skill-group .tag-list li {
+            padding: 0.2rem 0.6rem;
         }
 
         /* Design Page */
@@ -1100,6 +1145,105 @@
             .ff .vs-screen:not(.ff-screen) .vs-screen-img {
                 max-width: 220px;
             }
+        }
+
+        /* Designathon page: journey map, user flows and wireframes, all drawn in theme colors */
+        .jm-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .jm {
+            display: grid;
+            grid-template-columns: 6.5rem repeat(4, minmax(140px, 1fr));
+            min-width: 700px;
+            border-top: 1px solid var(--border);
+        }
+
+        .jm > div {
+            padding: 0.75rem 0.9rem 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .jm > .jm-h {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .jm-h span {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 0.2rem;
+        }
+
+        .jm > .jm-l {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .jm > .jm-curve {
+            grid-column: 2 / 6;
+            padding-right: 0;
+        }
+
+        .jm-curve svg {
+            display: block;
+            width: 100%;
+            height: 72px;
+            overflow: visible;
+        }
+
+        .jm-line {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 2.5;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .jm-mid {
+            stroke: var(--border);
+            stroke-dasharray: 3 5;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .jm-moods {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            font-size: 0.8rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .jm > .jm-opp {
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .jm > .jm-opp::before {
+            content: '';
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin-bottom: 0.4rem;
+            background: var(--accent);
+        }
+
+        .project-page .jm-note {
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
         }
 
         /* Designathon page: phones sit right on the page under the decision they show */
@@ -1330,6 +1474,53 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             margin-bottom: 2.5rem;
+        }
+
+        /* duration and tools, right under each project's title */
+        .project-page .project-meta:has(+ .project-glance) {
+            margin-bottom: 1.25rem;
+        }
+
+        .project-glance {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .project-glance dt {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .project-glance dd {
+            font-size: 0.92rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .project-page .glance-tools {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-page .glance-tools li {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0.1rem 0.55rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg-secondary);
         }
 
         .project-page .project-description {
@@ -2668,6 +2859,10 @@
             margin-bottom: 2rem;
         }
 
+        .vs-facts--3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
         .vs-facts dt,
         .vs-label,
         .vs-kicker {
@@ -2891,6 +3086,338 @@
             font-weight: 300;
             line-height: 1.55;
             color: var(--text-secondary);
+        }
+
+        /* VitaSalus flows & wireframes: plain HTML diagrams, no images */
+        .project-page .vs-chain {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem 2rem;
+        }
+
+        .project-page .vs-chain li {
+            position: relative;
+            margin: 0;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .vs-chain li:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -1.45rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+        }
+
+        .vs-chain-n {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+
+        .vs-chain b {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin: 0.15rem 0 0.35rem;
+        }
+
+        .vs-chain-note {
+            display: block;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .project-page .vs-tree3 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-page .vs-tree3 li {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            margin: 0 0 0.3rem;
+        }
+
+        .vs-more {
+            margin-top: 1.5rem;
+        }
+
+        .vs-more summary {
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 0.92rem;
+        }
+
+        .vs-more[open] summary {
+            margin-bottom: 0.75rem;
+        }
+
+        .vs-tree3 {
+            display: grid;
+            grid-template-columns: 0.8fr auto 1fr auto 1.4fr;
+            gap: 1.25rem;
+            align-items: start;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .vs-tree3 .vs-label {
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        .vs-tree3 > div:last-child ul {
+            columns: 2;
+            column-gap: 1.25rem;
+        }
+
+        .vs-tree-arrow {
+            align-self: center;
+            color: var(--accent);
+        }
+
+        /* low-fidelity wireframes: grayscale blocks drawn from the text color, so they work in both themes */
+        .wf-row {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 200px;
+            gap: 1.25rem;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .wf {
+            margin: 0;
+            scroll-snap-align: start;
+        }
+
+        .wf figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            min-height: 2.8em;
+        }
+
+        .wf figcaption span {
+            color: var(--accent);
+        }
+
+        .wf-phone {
+            --wf: color-mix(in srgb, var(--text-primary) 42%, transparent);
+            --wf-fill: color-mix(in srgb, var(--text-primary) 12%, transparent);
+            position: relative;
+            aspect-ratio: 9 / 19;
+            border: 1.5px solid var(--wf);
+            border-radius: 22px;
+            padding: 1.5rem 0.75rem 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow: hidden;
+            color: var(--text-primary);
+            line-height: 1.25;
+        }
+
+        .wf-phone::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 34px;
+            height: 5px;
+            margin-left: -17px;
+            border-radius: 3px;
+            background: var(--wf-fill);
+        }
+
+        .wf-t { font-size: 0.72rem; font-weight: 600; margin-bottom: 2px; }
+        .wf-line { display: block; flex: none; height: 5px; border-radius: 3px; background: var(--wf-fill); }
+        .wf-gap { height: 4px; flex: none; }
+        .wf-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-secondary); }
+        .wf-center { margin: auto 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .wf-logo { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--wf); }
+        .wf-foot { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+        .wf-btn { display: block; text-align: center; font-size: 0.56rem; padding: 0.32rem; border-radius: 5px; background: var(--wf); color: var(--bg-primary); }
+        .wf-btn--ghost { background: transparent; border: 1px solid var(--wf); color: var(--text-primary); }
+        .wf-link, .wf-or { font-size: 0.52rem; text-align: center; color: var(--text-secondary); }
+        .wf-link { text-decoration: underline; }
+        .wf-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 4px; }
+        .wf-chip { height: 22px; border-radius: 11px; border: 1px solid var(--wf); }
+        .wf-chip.is-on, .wf-seg .is-on { background: var(--wf); }
+        .wf-opt { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .wf-toggle { position: relative; flex: none; width: 20px; height: 11px; border-radius: 6px; border: 1px solid var(--wf); }
+        .wf-toggle::after { content: ''; position: absolute; top: 1px; left: 1px; width: 7px; height: 7px; border-radius: 50%; background: var(--wf); }
+        .wf-toggle.is-on { background: var(--wf); }
+        .wf-toggle.is-on::after { left: auto; right: 1px; background: var(--bg-primary); }
+        .wf-field { font-size: 0.5rem; color: var(--text-secondary); border: 1px solid var(--wf); border-radius: 4px; padding: 0.2rem 0.35rem; }
+        .wf-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+        .wf-swatches i { aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--wf); }
+        .wf-swatches i:nth-child(2) { background: var(--wf-fill); }
+        .wf-swatches i:nth-child(3) { background: color-mix(in srgb, var(--text-primary) 28%, transparent); }
+        .wf-swatches i:nth-child(4) { background: var(--wf); }
+        .wf-slider { position: relative; height: 3px; border-radius: 2px; background: var(--wf-fill); margin: 4px 0 12px; }
+        .wf-slider i { position: absolute; top: -4px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; border: 1.5px solid var(--wf); background: var(--bg-primary); }
+        .wf-slider::before, .wf-slider::after { position: absolute; top: 6px; font-size: 0.45rem; color: var(--text-secondary); }
+        .wf-slider::before { content: attr(data-l); left: 0; }
+        .wf-slider::after { content: attr(data-r); right: 0; }
+        .wf-seg { display: grid; grid-template-columns: repeat(3, 1fr); height: 14px; border: 1px solid var(--wf); border-radius: 4px; overflow: hidden; }
+        .wf-seg i + i { border-left: 1px solid var(--wf); }
+        .wf-item { display: flex; align-items: center; gap: 6px; padding: 0.35rem; border: 1px solid var(--wf); border-radius: 6px; font-size: 0.56rem; }
+        .wf-item span:first-of-type { flex: 1; }
+        .wf-dot { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--wf-fill); }
+        .wf-mini { font-size: 0.48rem; padding: 1px 4px; border: 1px solid var(--wf); border-radius: 3px; }
+        .wf-step { display: flex; gap: 7px; align-items: flex-start; padding: 0.2rem 0; }
+        .wf-step > div { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 0.6rem; font-weight: 500; }
+        .wf-n { flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--wf); font-size: 0.5rem; display: grid; place-items: center; }
+        .wf-center .wf-line { margin: 0 auto; }
+        .project-page .wf-note { font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary); margin: 0.6rem 0 0; font-weight: 300; }
+
+        .vs-chain--flow li:nth-child(4n)::after { content: none; }
+        .vs-ideas--2 { grid-template-columns: 1fr 1fr; }
+
+        /* brainstorm board: ideas grouped into columns, each tagged with where it ended up */
+        .bs-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .bs-board--3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem 1rem; }
+        .bs-col { display: flex; flex-direction: column; gap: 0.5rem; }
+        .bs-col .vs-label { margin-bottom: 0.15rem; }
+        .project-page .bs-note {
+            margin: 0;
+            padding: 0.6rem 0.7rem;
+            border-radius: 6px;
+            background: color-mix(in srgb, var(--accent) 9%, var(--bg-primary));
+            border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+            font-size: 0.86rem;
+            line-height: 1.4;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+        .bs-col:nth-child(odd) .bs-note:nth-child(even), .bs-col:nth-child(even) .bs-note:nth-child(odd) { transform: rotate(-0.6deg); }
+        .bs-col:nth-child(odd) .bs-note:nth-child(odd), .bs-col:nth-child(even) .bs-note:nth-child(even) { transform: rotate(0.5deg); }
+        .bs-tag { display: inline-block; margin-left: 0.4rem; padding: 0 0.4rem; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.04em; vertical-align: 1px; border: 1px solid var(--border); color: var(--text-secondary); }
+        .bs-tag--v2, .bs-tag--v3 { background: var(--accent); border-color: var(--accent); color: var(--bg-primary); }
+
+        /* color swatches and type samples */
+        .rb { display: grid; grid-template-columns: 1fr auto 1.4fr; gap: 1.25rem; align-items: center; margin-bottom: 0.75rem; }
+        .rb-item { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; color: var(--text-secondary); }
+        .rb-item i { display: block; height: 88px; border-radius: 10px; border: 1px solid var(--border); margin: 0.35rem 0 0.45rem; }
+        .rb-item b { color: var(--text-primary); font-weight: 500; }
+        .rb-arrow { color: var(--accent); font-size: 1.4rem; padding-top: 1rem; }
+        .project-page .rb-note { margin: 0 0 1.75rem; }
+        .sw-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 1rem 0.85rem; }
+        .sw { display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.82rem; line-height: 1.4; color: var(--text-secondary); }
+        .sw i { display: block; height: 64px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 0.4rem; }
+        .sw b { color: var(--text-primary); font-weight: 500; }
+        .sw-hex { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; }
+        .ty-list { border-top: 1px solid var(--border); }
+        .ty-row { display: grid; grid-template-columns: minmax(0, 14rem) 1fr; gap: 1.5rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .ty-meta { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.86rem; line-height: 1.45; color: var(--text-secondary); }
+        .ty-row img { display: block; max-width: 100%; height: auto; max-height: 104px; width: auto; border-radius: 6px; border: 1px solid var(--border); }
+
+        /* decision flowchart (site map) */
+        .fc-wrap { overflow-x: auto; margin: 1rem 0 0.5rem; }
+        .fc { display: block; width: 100%; min-width: 640px; height: auto; }
+        .fc .fc-step { fill: var(--bg-primary); stroke: color-mix(in srgb, var(--text-primary) 40%, transparent); stroke-width: 1.2; }
+        .fc .fc-end { fill: color-mix(in srgb, var(--accent) 10%, var(--bg-primary)); stroke: var(--accent); }
+        .fc .fc-dec { fill: var(--bg-primary); stroke: var(--accent); stroke-width: 1.2; }
+        .fc .fc-a { fill: none; stroke: color-mix(in srgb, var(--text-primary) 55%, transparent); stroke-width: 1.3; }
+        .fc .fc-head { fill: color-mix(in srgb, var(--text-primary) 55%, transparent); }
+        .fc text { font-family: 'DM Sans', sans-serif; fill: var(--text-primary); }
+        .fc .fc-t { font-size: 13px; }
+        .fc .fc-s { font-size: 11px; fill: var(--text-secondary); }
+        .fc .fc-yn { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.06em; fill: var(--accent); }
+        .project-page .en-type p { margin: 0; color: var(--text-primary); }
+        .en-type { margin-top: 0; }
+        .vs-label.en-sub { display: block; margin-bottom: 0.75rem; }
+        .vs-label.en-sub--type { margin-top: 2rem; }
+        .en-type-s { font-size: clamp(1.15rem, 2.4vw, 1.5rem); font-weight: 600; line-height: 1.3; }
+        .en-f-avenir { font-family: 'Avenir Next', Avenir, 'DM Sans', sans-serif; }
+        .en-f-inter { font-family: Inter, 'DM Sans', sans-serif; }
+        .en-f-plex { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; }
+        .en-f-geist { font-family: Geist, 'DM Sans', sans-serif; }
+        .ty-row.is-pick .en-type-s { color: var(--accent); }
+        .project-page .pp-poppins { margin: 0; font-family: Poppins, 'DM Sans', sans-serif; font-size: 1.15rem; color: var(--text-primary); }
+        .pp-poppins b { font-weight: 600; color: #605AC6; }
+        .project-page .en-type-note { margin: 0.6rem 0 0; font-size: 0.8rem; }
+        
+        /* extra wireframe parts: map, cards, sheets, desktop frames */
+        .wf-map { position: relative; flex: 1; border-radius: 6px; border: 1px solid var(--wf); background:
+            linear-gradient(var(--wf-fill) 1px, transparent 1px) 0 0 / 100% 18px,
+            linear-gradient(90deg, var(--wf-fill) 1px, transparent 1px) 0 0 / 18px 100%; }
+        .wf-map--short { flex: none; height: 30%; }
+        .wf-pin { position: absolute; width: 9px; height: 9px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--wf); }
+        .wf-nav { display: flex; justify-content: space-around; padding-top: 6px; border-top: 1px solid var(--wf-fill); margin-top: auto; }
+        .wf-nav i { width: 12px; height: 12px; border-radius: 3px; background: var(--wf-fill); }
+        .wf-tabs { display: flex; gap: 6px; }
+        .wf-tabs i { flex: 1; height: 5px; border-radius: 3px; background: var(--wf-fill); }
+        .wf-tabs i.is-on { background: var(--wf); }
+        .wf-img { flex: 1; border-radius: 8px; background: var(--wf-fill); border: 1px solid var(--wf); }
+        .wf-actions { display: flex; align-items: center; gap: 6px; }
+        .wf-actions .wf-btn { flex: 1; }
+        .wf-round { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--wf); }
+        .wf-sheet { flex: 1; display: flex; flex-direction: column; gap: 5px; padding: 6px; margin: 0 -0.75rem; border-top: 1px solid var(--wf); border-radius: 12px 12px 0 0; }
+        .wf-handle { width: 26px; height: 3px; border-radius: 2px; background: var(--wf); margin: 0 auto 4px; }
+        .wf-deck { display: grid; grid-template-columns: repeat(3, 44%); gap: 5px; overflow: hidden; }
+        .wf-deck i { height: 46px; border-radius: 5px; border: 1px solid var(--wf); background: var(--wf-fill); }
+        .wf-row--mixed { grid-auto-columns: max-content; }
+        .wf--desk .wf-phone { width: 300px; aspect-ratio: 16 / 10; border-radius: 10px; padding: 1.1rem 0.6rem 0.6rem; }
+        .wf--desk .wf-phone::before { left: 12px; margin-left: 0; width: 26px; top: 6px; height: 4px; }
+        .wf:not(.wf--desk) .wf-phone { width: 200px; }
+        .wf-desk { flex: 1; display: grid; grid-template-columns: 26% 1fr; gap: 8px; }
+        .wf-desk--split { grid-template-columns: 1fr 1fr; }
+        .wf-side, .wf-main { display: flex; flex-direction: column; gap: 6px; padding: 6px; border-radius: 5px; border: 1px solid var(--wf-fill); }
+        .wf-side { background: var(--wf-fill); }
+        .wf-tr { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-bottom: 1px solid var(--wf-fill); }
+        .wf-tr .wf-line { flex: none; }
+        .wf-tr .wf-dot { width: 9px; height: 9px; }
+        .wf-flag { margin-left: auto; width: 16px; height: 7px; border-radius: 3px; border: 1px solid var(--wf); }
+        .wf-flag.is-on { background: var(--wf); }
+        .wf-hl { background: color-mix(in srgb, var(--accent) 35%, transparent); height: 7px; }
+        .wf-hl--new { background: color-mix(in srgb, var(--accent) 60%, transparent); }
+        .wf-mic { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid var(--wf); background: var(--wf-fill); }
+        .wf-card { position: relative; display: flex; flex-direction: column; gap: 5px; padding: 7px; border: 1px solid var(--wf); border-radius: 6px; }
+        .wf-card .wf-flag { position: absolute; right: 7px; top: 7px; }
+        .wf-row--mixed .wf-note { max-width: 300px; }
+        .wf:not(.wf--desk) .wf-note { max-width: 200px; }
+
+        @media (max-width: 768px) {
+            .project-page .vs-chain { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+            .vs-chain li:not(:last-child)::after { content: none; }
+            .project-page .vs-chain li { padding: 0.75rem; font-size: 0.82rem; }
+            .vs-chain b { font-size: 1rem; }
+            .project-page .bs-note { font-size: 0.8rem; padding: 0.5rem 0.55rem; }
+            .bs-board--3 { grid-template-columns: 1fr 1fr; }
+            .vs-tree3 { grid-template-columns: 1fr; }
+            .vs-tree-arrow { transform: rotate(90deg); justify-self: start; }
+            .wf-row { grid-auto-columns: 180px; }
+            .wf-row--mixed { grid-auto-columns: max-content; }
+            .wf:not(.wf--desk) .wf-phone { width: 180px; }
+            .wf--desk .wf-phone { width: 290px; }
+            .vs-ideas--2 { grid-template-columns: 1fr; }
+            .ty-row { grid-template-columns: 1fr; gap: 0.6rem; }
+            .sw i { height: 48px; }
+            .rb-item i { height: 64px; }
         }
 
         .vs-ideas .vs-took {
@@ -4228,52 +4755,92 @@
                 </section>
                 <section class="about-card" aria-labelledby="card-skills">
                     <h3 id="card-skills">Skills</h3>
-                    <ul class="tag-list" role="list">
-                        <li>Python</li>
-                        <li>C++</li>
-                        <li>MATLAB</li>
-                        <li>Verilog</li>
-                        <li>HTML</li>
-                        <li>PyTorch</li>
-                        <li>ROS</li>
-                        <li>Arduino</li>
-                        <li>Machine Learning</li>
-                        <li>Neural Networks</li>
-                        <li>Computer Vision</li>
-                        <li>Robotics</li>
-                        <li>CAD (Onshape)</li>
-                        <li>Systems Design</li>
-                        <li>Data Analysis</li>
-                        <li>Data Visualization</li>
-                        <li>Flutter</li>
-                        <li>Streamlit</li>
-                        <li>Supabase</li>
-                        <li>Firebase</li>
-                        <li>Web & Mobile Apps</li>
-                        <li>UI/UX Design</li>
-                        <li>User Research</li>
-                        <li>User Flows</li>
-                        <li>Wireframes</li>
-                        <li>Mockups</li>
-                        <li>Prototyping</li>
-                        <li>Interaction Design</li>
-                        <li>A/B Testing</li>
-                        <li>Figma</li>
-                        <li>Framer</li>
-                        <li>Miro</li>
-                        <li>Dovetail</li>
-                        <li>ATLAS.ti</li>
-                        <li>Illustrator</li>
-                        <li>Photoshop</li>
-                        <li>InDesign</li>
-                        <li>Premiere Pro</li>
-                        <li>Logic Pro</li>
-                        <li>Canva</li>
-                        <li>Agile</li>
-                        <li>Scrum</li>
-                        <li>Jira</li>
-                        <li>Trello</li>
-                    </ul>
+                    <div class="skill-groups">
+                        <div class="skill-group">
+                            <h4 id="skills-g1">Languages</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g1">
+                                <li>Python</li>
+                                <li>C++</li>
+                                <li>MATLAB</li>
+                                <li>Verilog</li>
+                                <li>HTML</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g2">AI &amp; Data</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g2">
+                                <li>Machine Learning</li>
+                                <li>Neural Networks</li>
+                                <li>Computer Vision</li>
+                                <li>PyTorch</li>
+                                <li>Data Analysis</li>
+                                <li>Data Visualization</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g3">Robotics &amp; Hardware</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g3">
+                                <li>Robotics</li>
+                                <li>ROS</li>
+                                <li>Arduino</li>
+                                <li>CAD (Onshape)</li>
+                                <li>Systems Design</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g4">App Development</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g4">
+                                <li>Web & Mobile Apps</li>
+                                <li>Flutter</li>
+                                <li>Streamlit</li>
+                                <li>Supabase</li>
+                                <li>Firebase</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g5">Design &amp; Research</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g5">
+                                <li>UI/UX Design</li>
+                                <li>User Research</li>
+                                <li>User Flows</li>
+                                <li>Wireframes</li>
+                                <li>Mockups</li>
+                                <li>Prototyping</li>
+                                <li>Interaction Design</li>
+                                <li>A/B Testing</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g6">Design &amp; Research Tools</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g6">
+                                <li>Figma</li>
+                                <li>Framer</li>
+                                <li>Miro</li>
+                                <li>Dovetail</li>
+                                <li>ATLAS.ti</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g7">Creative Tools</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g7">
+                                <li>Illustrator</li>
+                                <li>Photoshop</li>
+                                <li>InDesign</li>
+                                <li>Premiere Pro</li>
+                                <li>Logic Pro</li>
+                                <li>Canva</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group">
+                            <h4 id="skills-g8">Product &amp; Process</h4>
+                            <ul class="tag-list" role="list" aria-labelledby="skills-g8">
+                                <li>Agile</li>
+                                <li>Scrum</li>
+                                <li>Jira</li>
+                                <li>Trello</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
                 <section class="about-card" aria-labelledby="card-awards">
                     <h3 id="card-awards">Awards</h3>
@@ -4392,7 +4959,11 @@
             <div class="project-page vs">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">VitaSalus</h1>
-                <p class="project-meta">Personal project · Solo · Research, product strategy, UX/UI · Ongoing</p>
+                <p class="project-meta">Personal project · Solo · Research, product strategy, UX/UI</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>Ongoing</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Next.js</li><li>React</li><li>Tailwind</li><li>shadcn/ui</li><li>Claude</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">A health app that sits on top of the wearables you already own. Open it and it tells you where you stand on your goal, why, what to do in the next hour, and the one habit that would help most over time.</p>
 <div class="vs-hero"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Home</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Home"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Home: energy 3 of 10 on a gold ring that runs off the right edge, Running low, down 4, and one action for the next hour with a Start button" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Why</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Why"><img src="vitasalus/s/why-w5.webp" width="445" height="943" alt="Why: Mostly sleep, partly food. Causes ranked Big, Some and A little, WHOOP and your phone disagreeing on sleep, confidence 88%" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Goal</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Goal"><img src="vitasalus/s/goal.webp" width="445" height="943" alt="Goal: Behind, 3 of 5 afternoons you crashed. Asleep by 11 is the biggest lever, shown on a thin 0 to 10 line" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Check-in</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Check-in"><img src="vitasalus/s/checkin.webp" width="456" height="966" alt="Check-in: an energy slider at 3 of 10 and a microphone for one spoken sentence" decoding="async"></button></figure><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-t">Appointment</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Before an appointment"><img src="vitasalus/s/appointment.webp" width="456" height="966" alt="Before an appointment: a summary for a physical therapist, prepared from the calendar" decoding="async"></button></figure></div>
 <p class="vs-hero-note">The five final screens. High-fidelity concepts built from my design system; names and health values are sample data. Click any screen to enlarge it.</p>
@@ -4416,13 +4987,14 @@
                         <span class="vs-toc-label">Design process</span>
                         <a href="#vs-problem" data-vs-jump><span>01</span> Problem</a>
                         <a href="#vs-research" data-vs-jump><span>02</span> Research</a>
-                        <a href="#vs-iteration" data-vs-jump><span>03</span> Iteration</a>
+                        <a href="#vs-map" data-vs-jump><span>03</span> Flows &amp; wireframes</a>
+                        <a href="#vs-iteration" data-vs-jump><span>04</span> Iteration</a>
                     </div>
                     <div class="vs-toc-group">
                         <span class="vs-toc-label">Design execution</span>
-                        <a href="#vs-final" data-vs-jump><span>04</span> Final screens</a>
-                        <a href="#vs-system" data-vs-jump><span>05</span> Visual system</a>
-                        <a href="#vs-next" data-vs-jump><span>06</span> What’s next</a>
+                        <a href="#vs-final" data-vs-jump><span>05</span> Final screens</a>
+                        <a href="#vs-system" data-vs-jump><span>06</span> Visual system</a>
+                        <a href="#vs-next" data-vs-jump><span>07</span> What’s next</a>
                     </div>
                 </div>
 
@@ -4476,8 +5048,28 @@
                     </div>
                 </section>
 
+                <section class="vs-section" id="vs-map" aria-labelledby="vs-map-h">
+                    <p class="vs-kicker">03 · Flows &amp; wireframes</p>
+                    <h2 class="serif vs-h2" id="vs-map-h">Before drawing any screens, I mapped what the app does and how someone gets in.</h2>
+                    <p class="project-description">I started on paper with the whole loop: set a goal, learn your history, turn it into what to do now, and track whether it worked.</p>
+                    <ol class="vs-chain vs-chain--4"><li><span class="vs-chain-n">01</span><b>Goals</b><span class="vs-chain-note">1–3 goals, each broken into short-term goals of 1–3 months</span></li><li><span class="vs-chain-n">02</span><b>History</b><span class="vs-chain-note">Data from your devices and apps, plus the context around it</span></li><li><span class="vs-chain-n">03</span><b>Present</b><span class="vs-chain-note">1–3 things to do today or this week</span></li><li><span class="vs-chain-n">04</span><b>Progress</b><span class="vs-chain-note">Tracking that keeps you coming back, and outputs you can export</span></li></ol>
+
+                    <h3 class="vs-h3">Brainstormed features</h3>
+                    <p class="project-description">Everything I brainstormed for the app, grouped by where it would live. I picked the first version’s features from this list.</p>
+                    <div class="bs-board bs-board--3"><div class="bs-col"><span class="vs-label">Home</span><p class="bs-note">Where your body and mind are</p><p class="bs-note">What to do today</p><p class="bs-note">Why: your data plus the research behind it</p><p class="bs-note">Sent as a text, calendar event or voice notification</p></div><div class="bs-col"><span class="vs-label">Progress</span><p class="bs-note">Calendar</p><p class="bs-note">Milestones</p><p class="bs-note">Goals hit</p><p class="bs-note">Badges</p><p class="bs-note">Streaks</p></div><div class="bs-col"><span class="vs-label">Log</span><p class="bs-note">Photos</p><p class="bs-note">Text</p><p class="bs-note">Files</p><p class="bs-note">Workouts &amp; events</p></div><div class="bs-col"><span class="vs-label">Learn</span><p class="bs-note">Research</p><p class="bs-note">Blogs</p><p class="bs-note">Community</p><p class="bs-note">Experts</p><p class="bs-note">Deep insights</p></div><div class="bs-col"><span class="vs-label">Settings</span><p class="bs-note">Integrations</p><p class="bs-note">Data &amp; privacy</p><p class="bs-note">Add, delete or change goals</p><p class="bs-note">Edit history &amp; context</p><p class="bs-note">Review &amp; confirm data</p><p class="bs-note">Export data</p></div><div class="bs-col"><span class="vs-label">Onboarding</span><p class="bs-note">Disclosure, privacy &amp; terms</p><p class="bs-note">Goals, profile, preferences</p><p class="bs-note">Connecting data</p></div></div>
+                    <details class="vs-more">
+                        <summary>How I got from “wellbeing” to these features</summary>
+                        <p class="vs-small">I split health and wellbeing into three parts, listed what moves each one, and turned those factors into features.</p>
+                        <div class="vs-tree3"><div><span class="vs-label">Wellbeing</span><ul><li>Spiritual</li><li>Physical</li><li>Mental</li></ul></div><span class="vs-tree-arrow" aria-hidden="true">→</span><div><span class="vs-label">What shapes it</span><ul><li>Nutrition</li><li>Exercise</li><li>Sleep</li><li>Stress</li><li>Anxiety</li><li>Age, sex &amp; identity</li><li>Medical conditions</li></ul></div><span class="vs-tree-arrow" aria-hidden="true">→</span><div><span class="vs-label">Features</span><ul><li>Sentiment analysis</li><li>Diet</li><li>Workouts &amp; activity</li><li>Check-ins &amp; self-evaluation</li><li>Sleep tracking</li><li>Meditation</li><li>Calendar &amp; schedule</li><li>Weather &amp; season</li><li>Travel</li><li>Medication &amp; medical history</li><li>Family medical history</li></ul></div></div>
+                    </details>
+
+                    <h3 class="vs-h3">Onboarding, in low fidelity</h3>
+                    <p class="project-description">Onboarding is seven screens. Goals come first, and the privacy promise comes before any personal questions. These are grayscale wireframes; I haven’t designed onboarding in high fidelity yet.</p>
+                    <div class="wf-row"><figure class="wf"><figcaption><span>01</span> Welcome</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-center"><i class="wf-logo"></i><span class="wf-t">Vita</span><i class="wf-line" style="width:70%"></i><i class="wf-line" style="width:50%"></i></div><div class="wf-foot"><span class="wf-btn">Get started</span><span class="wf-link">I have an account</span></div></div></figure><figure class="wf"><figcaption><span>02</span> Focus on up to 3 goals</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">Focus on up to 3 goals</span><i class="wf-line" style="width:80%"></i><div class="wf-chips"><i class="wf-chip is-on"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip is-on"></i><i class="wf-chip is-on"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i></div><span class="wf-meta">3 of 3 picked</span><div class="wf-foot"><span class="wf-btn">Continue</span></div></div></figure><figure class="wf"><figcaption><span>03</span> What we promise</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">What we promise</span><i class="wf-line" style="width:95%"></i><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:70%"></i><div class="wf-gap"></div><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:60%"></i><div class="wf-gap"></div><div class="wf-opt"><i class="wf-line" style="width:55%"></i><i class="wf-toggle is-on"></i></div><div class="wf-opt"><i class="wf-line" style="width:55%"></i><i class="wf-toggle is-on"></i></div><div class="wf-opt"><i class="wf-line" style="width:55%"></i><i class="wf-toggle"></i></div><div class="wf-foot"><span class="wf-btn">Continue</span></div></div><p class="wf-note">Privacy and disclaimers written with some personality. It says what data we use and how, and lets people choose what to opt into.</p></figure><figure class="wf"><figcaption><span>04</span> A little more about you</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">A little more about you</span><span class="wf-btn wf-btn--ghost">Google</span><span class="wf-btn wf-btn--ghost">Apple ID</span><span class="wf-btn wf-btn--ghost">Email</span><span class="wf-or">or fill in</span><span class="wf-field">Name</span><span class="wf-field">Date of birth</span><span class="wf-field">Sex</span><span class="wf-field">Gender / pronouns</span><span class="wf-field">Phone number</span><span class="wf-field">Location</span><span class="wf-field">Current health</span><span class="wf-field">Why you’re here</span><span class="wf-field">How you heard about us</span></div><p class="wf-note">Sign up with Google, Apple ID or email. If location is off, ask for a time zone or city.</p></figure><figure class="wf"><figcaption><span>05</span> Personalize your experience</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">Personalize your experience</span><span class="wf-meta">Color / theme</span><div class="wf-swatches"><i></i><i></i><i></i><i></i></div><span class="wf-meta">Explanations</span><div class="wf-slider" data-l="Simple" data-r="Detailed"><i style="left:35%"></i></div><span class="wf-meta">Pace toward goals</span><div class="wf-slider" data-l="Gentle" data-r="Fast"><i style="left:60%"></i></div><span class="wf-meta">Time in app</span><div class="wf-seg"><i></i><i class="is-on"></i><i></i></div><span class="wf-meta">How to reach you</span><div class="wf-seg"><i class="is-on"></i><i></i><i></i></div><div class="wf-opt"><span class="wf-meta">Notifications</span><i class="wf-toggle is-on"></i></div></div></figure><figure class="wf"><figcaption><span>06</span> Connect your data</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">Connect your data</span><i class="wf-line" style="width:75%"></i><div class="wf-item"><i class="wf-dot"></i><span>Other apps</span><span class="wf-mini">Connect</span></div><div class="wf-item"><i class="wf-dot"></i><span>Wearables</span><span class="wf-mini">Connect</span></div><div class="wf-item"><i class="wf-dot"></i><span>Calendars</span><span class="wf-mini">Connect</span></div><div class="wf-foot"><span class="wf-btn">Continue</span></div></div></figure><figure class="wf"><figcaption><span>07</span> How Vita works</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">How Vita works</span><div class="wf-step"><span class="wf-n">1</span><div><span>Getting started</span><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:65%"></i></div></div><div class="wf-step"><span class="wf-n">2</span><div><span>Our promise to users</span><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:65%"></i></div></div><div class="wf-step"><span class="wf-n">3</span><div><span>Our mission &amp; values</span><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:65%"></i></div></div><div class="wf-foot"><span class="wf-btn">Go to home</span></div></div></figure></div>
+                </section>
+
                 <section class="vs-section" id="vs-iteration" aria-labelledby="vs-iteration-h">
-                    <p class="vs-kicker">03 · Iteration</p>
+                    <p class="vs-kicker">04 · Iteration</p>
                     <h2 class="serif vs-h2" id="vs-iteration-h">Four rounds of home, each fixing a problem I found in the last.</h2>
                     <p class="project-description">I reviewed every round as the person I’m designing for: an optimizer who already owns a wearable and is tired of digging for answers. One of them told me the four things they want to know when they open the app: where am I with my goal, why, what do I do in the next hour, and what would help most so this doesn’t happen again. They also said they ignore any chart that doesn’t show right away whether they’re succeeding or failing, or what to do next. That became my test for every screen: if it can’t answer those questions at a glance, it isn’t serving the person using it.</p>
 <div class="vs-flow vs-flow--4"><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Round 1</span><span class="vs-phone-t">A nicer dashboard</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 1 home"><img src="vitasalus/s/r1-home.webp" width="480" height="1013" alt="Round 1 home: a readiness score of 72 in a green ring, an AI insight card and a next step card" loading="lazy" decoding="async"></button><p class="vs-phone-note">Every piece sat in its own card, so it looked like every other health app.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Round 2</span><span class="vs-phone-t">A real brand system</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 2 home"><img src="vitasalus/s/r2-home.webp" width="458" height="970" alt="Round 2 home: readiness 72 with a gold arc off the edge, a day curve, a focus action and two metric rows" loading="lazy" decoding="async"></button><p class="vs-phone-note">No cards and gold only as a line, but still a score, a curve and two metrics to decode.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone"><p class="vs-phone-cap"><span class="vs-phone-k">Round 3</span><span class="vs-phone-t">Four questions</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 3 home"><img src="vitasalus/s/r3-home.webp" width="447" height="947" alt="Round 3 home: Running low with a horizontal energy bar, why, next 10 minutes and the biggest lever" loading="lazy" decoding="async"></button><p class="vs-phone-note">Answers only the four questions. Clear, but flat, and it lost the trust signals.</p></figure><span class="vs-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l11 9-11 9"/></svg></span><figure class="vs-phone is-chosen"><p class="vs-phone-cap"><span class="vs-phone-k">Round 4</span><span class="vs-badge">Final</span><span class="vs-phone-t">A ring that pulses</span></p><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Round 4 home"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Round 4 home: a pulsing gold ring off the edge, Running low, down 4, and a Start button" loading="lazy" decoding="async"></button><p class="vs-phone-note">The bar became a ring you can read before any text.</p></figure></div>
@@ -4501,7 +5093,7 @@
                 </section>
 
                 <section class="vs-section" id="vs-final" aria-labelledby="vs-final-h">
-                    <p class="vs-kicker">04 · The final screens</p>
+                    <p class="vs-kicker">05 · The final screens</p>
                     <h2 class="serif vs-h2" id="vs-final-h">Each screen tells you where you stand, then why, then what to do.</h2>
                     <p class="project-description">Every screen in the app opens with a plain status line like “Running low” or “Behind,” so you know how you’re doing before you read anything else. The reason and the next step come after it.</p>
 <div class="vs-screen"><div class="vs-screen-img"><figure class="vs-phone"><button type="button" class="vs-zoom vs-zoom--phone" aria-label="Enlarge: Home screen, finalist A2"><img src="vitasalus/s/home-a2.webp" width="480" height="1017" alt="Home screen, finalist A2" loading="lazy" decoding="async"></button></figure></div><div class="vs-screen-text"><p class="vs-label">01 · Home</p><h3 class="serif">“Running low.” <span class="vs-delta">▼ 4</span></h3><p>The gold arc shows your energy now (3), and the mark shows your usual for this hour (7). Comparing you to your own baseline makes the gap visible at a glance.</p><p>Below it is one action with a Start button and its expected effect (“lifts you ~2 pts within 30 min”), so you can check later whether it worked. The rings pulse faster when you’re strained and stay still with reduced motion.</p></div></div>
@@ -4513,7 +5105,7 @@
 
                 <!-- 05 Visual system -->
                 <section class="vs-section" id="vs-system" aria-labelledby="vs-system-h">
-                    <p class="vs-kicker">05 · The visual system</p>
+                    <p class="vs-kicker">06 · The visual system</p>
                     <h2 class="serif vs-h2" id="vs-system-h">Inspired by lab instruments, but easy to read.</h2>
                     <p class="project-description">The screens borrow from lab readouts and instrument panels: thin lines, small monospace labels and exact numbers. The sentences stay plain, like “Running low” or “Mostly sleep,” so the data looks measured without being hard to read.</p>
 
@@ -4606,7 +5198,7 @@
 
                 <!-- 06 What's next -->
                 <section class="vs-section" id="vs-next" aria-labelledby="vs-next-h">
-                    <p class="vs-kicker">06 · What’s next</p>
+                    <p class="vs-kicker">07 · What’s next</p>
                     <h2 class="serif vs-h2" id="vs-next-h">I made a starting call on each open question. Now I want to test them.</h2>
                     <table class="ce-table vs-table">
                         <thead>
@@ -4616,6 +5208,7 @@
                             <tr><td>Home: ring off the edge (A2) or centered (B2)?</td><td>Keeping both</td><td>Which one people remember, and which one they act on faster</td></tr>
                             <tr><td>Confidence as a number or in words?</td><td>A number (88%)</td><td>Which one people understand and trust more</td></tr>
                             <tr><td>Show the raw numbers behind the “why”?</td><td>Hidden, so it doesn’t become another dashboard</td><td>Whether users want them, or a “show the data” toggle</td></tr>
+                            <tr><td>Onboarding: does the order work?</td><td>Wireframed, not yet in high fidelity</td><td>How many people reach home, and which questions they skip</td></tr>
                             <tr><td>Cause names: gutter caps (W5) or title case (W3)?</td><td>W5, with W3 as backup</td><td>Which one people scan fastest. The amber “Some” also needs a darker shade for text contrast</td></tr>
                         </tbody>
                     </table>
@@ -4643,7 +5236,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Prefill Data Orchestrator source selection</h1>
-                <p class="project-meta">Capital One · Business Analyst Intern · Jun to Aug 2026</p>
+                <p class="project-meta">Capital One · Business Analyst Intern</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>Jun to Aug 2026</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>SQL</li><li>Snowflake</li></ul></dd></div>
+                </dl>
                 <p class="project-description">When you apply for a Capital One credit card, prefill fills in your information so you type less. I defined the logic for deciding which data source should fill each field.</p>
 
                 <p class="project-description"><b>Context:</b> I interned on the Mainstreet Acquisitions team in the product management and analytics track. The Prefill Data Orchestrator (PDO) is a planned system that routes each field to the best available source, and my job was to define its business logic.</p>
@@ -4675,7 +5272,11 @@
             <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Enlaye</h1>
-                <p class="project-meta">Enlaye · First designer · Summer 2025</p>
+                <p class="project-meta">Enlaye · First designer</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>Summer 2025</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Figma</li><li>React</li><li>Next.js</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">I was the first designer at Enlaye, an AI risk management platform for construction. I designed 9+ features across the mobile app, web app and website, and the customer demos built on my designs validated new features and brought in new customers.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://www.enlaye.com/" target="_blank" rel="noopener"><img src="enlaye/enlaye-logo.png" alt="Enlaye logo" loading="lazy" decoding="async"></a>
@@ -4728,6 +5329,10 @@
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Popple mobile app</h1>
                 <p class="project-meta">Social &amp; events app · Sole UX designer · V2 and V3</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>1.5 years</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Figma</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">I designed every screen in V2 and V3 of Popple, a social and events app for college students, and led its user growth.</p>
                 <div class="project-media project-media--logo">
                     <img src="popple/popple-logo.png" alt="Popple logo" loading="lazy" decoding="async">
@@ -4746,13 +5351,15 @@
                         <span class="vs-toc-label">Design process</span>
                         <a href="#pp-problem" data-pp-jump><span>01</span> Problem</a>
                         <a href="#pp-process" data-pp-jump><span>02</span> Process</a>
-                        <a href="#pp-v2" data-pp-jump><span>03</span> V2</a>
+                        <a href="#pp-concepts" data-pp-jump><span>03</span> Concepts</a>
+                        <a href="#pp-v2" data-pp-jump><span>04</span> V2</a>
                     </div>
                     <div class="vs-toc-group">
                         <span class="vs-toc-label">Design execution</span>
-                        <a href="#pp-ideas" data-pp-jump><span>04</span> Exploring ideas</a>
-                        <a href="#pp-v3" data-pp-jump><span>05</span> V3</a>
-                        <a href="#pp-result" data-pp-jump><span>06</span> Result</a>
+                        <a href="#pp-ideas" data-pp-jump><span>05</span> Exploring ideas</a>
+                        <a href="#pp-visual" data-pp-jump><span>06</span> Visual language</a>
+                        <a href="#pp-v3" data-pp-jump><span>07</span> V3</a>
+                        <a href="#pp-result" data-pp-jump><span>08</span> Result</a>
                     </div>
                 </div>
 
@@ -4778,10 +5385,24 @@
                         <li><b>Design.</b> Designed every V2 and V3 screen myself in Figma, including 40+ mockups for V3, and brainstormed ideas before deciding what to build.</li>
                         <li><b>Test and ship.</b> Ran A/B tests to choose between options, and worked with the rest of the team to ship them.</li>
                     </ul>
+                    <h3 class="vs-h3">Brainstorm</h3>
+                    <p class="project-description">Before V3, I sorted every idea by when it helps: finding an event, deciding to go, going with people, or coming back. Each tag shows where the idea ended up: V2, V3, or explored but not shipped.</p>
+                    <div class="bs-board"><div class="bs-col"><span class="vs-label">Find events</span><p class="bs-note">A map of what’s happening near you<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">Search and filters<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">A full-screen feed of event cards<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Event decks by category on the map<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Weekend picks<span class="bs-tag bs-tag--v3">V3</span></p></div><div class="bs-col"><span class="vs-label">Decide to go</span><p class="bs-note">Who’s interested, by school and more<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">People you may know who are going<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Reviews from past events<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">Photos from the venue<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Hot topics and similar events<span class="bs-tag bs-tag--explored">Explored</span></p></div><div class="bs-col"><span class="vs-label">Go together</span><p class="bs-note">Join or create a group<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">Group chat<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">Request matches<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Highest compatibility<span class="bs-tag bs-tag--explored">Explored</span></p></div><div class="bs-col"><span class="vs-label">Come back</span><p class="bs-note">Rate and review after the event<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">A Taste Map of past events<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">A personalized feed<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">Polls in the feed<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Popple DNA stats<span class="bs-tag bs-tag--explored">Explored</span></p></div></div>
+                </section>
+
+                <section class="vs-section" id="pp-concepts" aria-labelledby="pp-concepts-h">
+                    <p class="vs-kicker">03 · Concepts</p>
+                    <h2 class="serif vs-h2" id="pp-concepts-h">The core loop, and three directions for home.</h2>
+                    <p class="project-description">Every idea had to fit one loop: find an event, decide, go with people, and come back for better picks. I mapped the loop with the decisions people make along the way, including searching versus browsing. Then I sketched three directions for home, one for each side of the discover vs. search debate and one that combines them.</p>
+                    <h3 class="vs-h3">Site map: the core loop</h3>
+                    <div class="fc-wrap"><svg class="fc" viewBox="0 18 860 330" role="img" aria-labelledby="pp-fc-t"><title id="pp-fc-t">Popple core loop: open the app. If you know what you want, use search and filters to reach an event. If not, browse home; skip events that don't look interesting and open the ones that do. From event details, join or create a group, plan in the group chat, go, review the event, and your Taste Map updates, which makes the next round of picks on home better.</title><defs><marker id="fc-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fc-head"/></marker></defs><rect class="fc-step fc-end" x="5" y="50" width="100" height="40" rx="8"/><text class="fc-t" x="55" y="75" text-anchor="middle">Open app</text><path class="fc-a" d="M105 70H123" marker-end="url(#fc-head)"/><polygon class="fc-dec" points="200,27 275,70 200,113 125,70"/><text class="fc-t" x="200" y="67" text-anchor="middle">Know what</text><text class="fc-t" x="200" y="84" text-anchor="middle">you want?</text><path class="fc-a" d="M275 70H298" marker-end="url(#fc-head)"/><text class="fc-yn" x="279" y="62">YES</text><rect class="fc-step" x="300" y="47" width="150" height="46" rx="8"/><text class="fc-t" x="375" y="67" text-anchor="middle">Search &amp; filters</text><text class="fc-s" x="375" y="83" text-anchor="middle">the searchability side</text><path class="fc-a" d="M450 70H545V163" marker-end="url(#fc-head)"/><path class="fc-a" d="M200 113V163" marker-end="url(#fc-head)"/><text class="fc-yn" x="208" y="145">NO</text><rect class="fc-step" x="125" y="165" width="150" height="50" rx="8"/><text class="fc-t" x="200" y="187" text-anchor="middle">Browse home</text><text class="fc-s" x="200" y="203" text-anchor="middle">feed, decks, picks</text><path class="fc-a" d="M275 190H298" marker-end="url(#fc-head)"/><polygon class="fc-dec" points="375,147 450,190 375,233 300,190"/><text class="fc-t" x="375" y="187" text-anchor="middle">Looks</text><text class="fc-t" x="375" y="204" text-anchor="middle">interesting?</text><path class="fc-a" d="M375 147V128H250V163" marker-end="url(#fc-head)"/><text class="fc-yn" x="262" y="122">NO, SKIP</text><path class="fc-a" d="M450 190H468" marker-end="url(#fc-head)"/><text class="fc-yn" x="447" y="180">YES</text><rect class="fc-step" x="470" y="165" width="150" height="50" rx="8"/><text class="fc-t" x="545" y="187" text-anchor="middle">Event details</text><text class="fc-s" x="545" y="203" text-anchor="middle">who’s going, reviews</text><path class="fc-a" d="M620 190H638" marker-end="url(#fc-head)"/><rect class="fc-step" x="640" y="165" width="150" height="50" rx="8"/><text class="fc-t" x="715" y="187" text-anchor="middle">Join or create</text><text class="fc-s" x="715" y="203" text-anchor="middle">a group</text><path class="fc-a" d="M715 215V285" marker-end="url(#fc-head)"/><rect class="fc-step" x="640" y="287" width="150" height="46" rx="8"/><text class="fc-t" x="715" y="307" text-anchor="middle">Group chat</text><text class="fc-s" x="715" y="323" text-anchor="middle">plan with them</text><path class="fc-a" d="M640 310H602" marker-end="url(#fc-head)"/><rect class="fc-step" x="490" y="287" width="110" height="46" rx="8"/><text class="fc-t" x="545" y="315" text-anchor="middle">Go</text><path class="fc-a" d="M490 310H442" marker-end="url(#fc-head)"/><rect class="fc-step" x="310" y="287" width="130" height="46" rx="8"/><text class="fc-t" x="375" y="307" text-anchor="middle">Review it</text><text class="fc-s" x="375" y="323" text-anchor="middle">stars, tags, photos</text><path class="fc-a" d="M310 310H277" marker-end="url(#fc-head)"/><rect class="fc-step fc-end" x="125" y="287" width="150" height="46" rx="8"/><text class="fc-t" x="200" y="307" text-anchor="middle">Taste Map</text><text class="fc-s" x="200" y="323" text-anchor="middle">learns what you like</text><path class="fc-a" d="M200 287V217" marker-end="url(#fc-head)"/><text class="fc-yn" x="208" y="258">BETTER PICKS</text></svg></div>
+                    
+                    <h3 class="vs-h3">Home, in low fidelity</h3>
+                    <div class="wf-row"><figure class="wf"><figcaption><span>A</span> Map first</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-field">Search…</span><div class="wf-map"><i class="wf-pin" style="left:22%;top:30%"></i><i class="wf-pin" style="left:58%;top:22%"></i><i class="wf-pin" style="left:40%;top:55%"></i><i class="wf-pin" style="left:72%;top:62%"></i><i class="wf-pin" style="left:30%;top:78%"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Built for searching. You see what’s around you, but you need to know where to look. This became V2.</p></figure><figure class="wf"><figcaption><span>B</span> Full-screen cards</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-tabs"><i class="is-on"></i><i></i><i></i></div><div class="wf-img"></div><i class="wf-line" style="width:60%"></i><i class="wf-line" style="width:85%"></i><div class="wf-actions"><i class="wf-round"></i><span class="wf-btn">Join group</span><i class="wf-round"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Built for discovery. You see one event at a time, like a video feed, with a group to join on each card.</p></figure><figure class="wf"><figcaption><span>C</span> Map with decks</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-field">Search…</span><div class="wf-map wf-map--short"><i class="wf-pin" style="left:22%;top:30%"></i><i class="wf-pin" style="left:58%;top:22%"></i><i class="wf-pin" style="left:40%;top:55%"></i><i class="wf-pin" style="left:72%;top:62%"></i><i class="wf-pin" style="left:30%;top:78%"></i></div><div class="wf-sheet"><i class="wf-handle"></i><i class="wf-line" style="width:55%"></i><div class="wf-deck"><i></i><i></i><i></i></div><i class="wf-line" style="width:45%"></i><div class="wf-deck"><i></i><i></i><i></i></div></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Combines the two. It keeps the V2 map, and pulling up the sheet shows decks like “BU students are attending.”</p></figure></div>
                 </section>
 
                 <section class="vs-section" id="pp-v2" aria-labelledby="pp-v2-h">
-                    <p class="vs-kicker">03 · V2</p>
+                    <p class="vs-kicker">04 · V2</p>
                     <h2 class="serif vs-h2" id="pp-v2-h">V2 was built around the map and groups.</h2>
 
                     <div class="pp-wide">
@@ -4820,7 +5441,7 @@
                 </section>
 
                 <section class="vs-section" id="pp-ideas" aria-labelledby="pp-ideas-h">
-                    <p class="vs-kicker">04 · Exploring ideas</p>
+                    <p class="vs-kicker">05 · Exploring ideas</p>
                     <h2 class="serif vs-h2" id="pp-ideas-h">What would people want to see before they decide to go?</h2>
                     <p class="project-description">Before V3, I brainstormed what information would help someone decide to attend an event. We weren’t trying to show all of these cards. These were ideas to test and choose from.</p>
 
@@ -4854,8 +5475,18 @@
                     </div>
                 </section>
 
+                <section class="vs-section" id="pp-visual" aria-labelledby="pp-visual-h">
+                    <p class="vs-kicker">06 · Visual language</p>
+                    <h2 class="serif vs-h2" id="pp-visual-h">From solid purple to a gradient.</h2>
+                    <p class="project-description">Popple started out solid purple. For V3 we rebranded to a violet-to-sky gradient because we wanted the app to look more modern, and kept the original purple for anything you can tap, so actions still stand out. Most of the app is set in Poppins.</p>
+                    <h3 class="vs-h3">Color</h3>
+                    <div class="rb"><div class="rb-item"><span class="vs-label">Before · V2</span><i style="background:#605AC6"></i><b>Solid purple</b><span class="sw-hex">#605AC6</span></div><span class="rb-arrow" aria-hidden="true">→</span><div class="rb-item"><span class="vs-label">After · V3 rebrand</span><i style="background:linear-gradient(120deg,#824BE2,#7FA7F5)"></i><b>Violet to sky gradient</b><span class="sw-hex">#824BE2 → #7FA7F5</span></div></div><p class="vs-small rb-note">The gradient took over headers and backgrounds. The original purple stayed on buttons, links and chart bars.</p><div class="sw-row"><div class="sw"><i style="background:#605AC6"></i><b>Purple</b><span class="sw-hex">#605AC6</span><span>Buttons, links and chart bars</span></div><div class="sw"><i style="background:#824BE2"></i><b>Violet</b><span class="sw-hex">#824BE2</span><span>Gradient start</span></div><div class="sw"><i style="background:#7FA7F5"></i><b>Sky</b><span class="sw-hex">#7FA7F5</span><span>Gradient end</span></div><div class="sw"><i style="background:#CCB4E4"></i><b>Lilac</b><span class="sw-hex">#CCB4E4</span><span>Card tints and highlights</span></div><div class="sw"><i style="background:#F4F2FC"></i><b>Mist</b><span class="sw-hex">#F4F2FC</span><span>Light surfaces</span></div></div>
+                    <h3 class="vs-h3">Typography</h3>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap&amp;text=%20%2B02JPdefginoprstu%C2%B7" media="print" onload="this.media='all'"><div class="ty-list"><div class="ty-row"><div class="ty-meta"><span class="vs-label">Poppins</span><span>Most of the interface text</span></div><p class="pp-poppins"><b>Join group</b> · 20+ friends interested</p></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Display</span><span>Rounded lowercase lettering for screen titles</span></div><img src="popple/s/type-display.webp" width="300" height="117" alt="Display sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Headline</span><span>The same lettering, smaller, for section titles</span></div><img src="popple/s/type-headline.webp" width="330" height="52" alt="Headline sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Event title</span><span>Bold caps, so each event reads as a name</span></div><img src="popple/s/type-title.webp" width="262" height="48" alt="Event title sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Body and meta</span><span>Gray details with icons inline</span></div><img src="popple/s/type-body.webp" width="420" height="146" alt="Body and meta sample from the app" loading="lazy" decoding="async"></div></div>
+                </section>
+
                 <section class="vs-section" id="pp-v3" aria-labelledby="pp-v3-h">
-                    <p class="vs-kicker">05 · V3</p>
+                    <p class="vs-kicker">07 · V3</p>
                     <h2 class="serif vs-h2" id="pp-v3-h">A new homepage, and an app that learns your taste.</h2>
 
                     <div class="vs-screen ff-screen">
@@ -4889,7 +5520,7 @@
                 </section>
 
                 <section class="vs-section" id="pp-result" aria-labelledby="pp-result-h">
-                    <p class="vs-kicker">06 · Result</p>
+                    <p class="vs-kicker">08 · Result</p>
                     <h2 class="serif vs-h2" id="pp-result-h">From 100 to 3,000+ users.</h2>
                     <p class="project-description">I led user growth from 100 to 3,000+ users with 20% month over month growth. The new discovery features and personalized feed raised daily active users by 15%, and Popple won the UX Standout Award at Spark! Launch Lab.</p>
                 </section>
@@ -4905,6 +5536,9 @@
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Air quality web app</h1>
                 <p class="project-meta">BU Multimedia Communications Lab · Undergraduate researcher</p>
+                <dl class="project-glance">
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Streamlit</li><li>Python</li><li>Plotly</li><li>Matplotlib</li><li>CAD</li></ul></dd></div>
+                </dl>
                 <p class="project-description">A public web app that turns continuous sensor data from BU classrooms into clear answers for facilities staff: which rooms are poorly ventilated, too hot or too cold, or exposed to particulates.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering" loading="lazy" decoding="async"></a>
@@ -4959,7 +5593,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">ReCo Digital web app</h1>
-                <p class="project-meta">ReCo Digital · Intern · 4 weeks</p>
+                <p class="project-meta">ReCo Digital · Intern</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>4 weeks</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Python</li><li>Gemini API</li><li>OpenAI API</li><li>Flask</li><li>JavaScript</li><li>CSS</li><li>Supabase</li></ul></dd></div>
+                </dl>
                 <p class="project-description">A web app that reads receipts and turns them into food waste data for a client.</p>
                 <div class="project-media project-media--logo">
                     <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco/reco-logo.png" alt="ReCo Digital" loading="lazy" decoding="async"></a>
@@ -4997,7 +5635,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">Designathon mobile app</h1>
-                <p class="project-meta">Catalyst Designathon 2026 · Team of 3 · 1.5 days</p>
+                <p class="project-meta">Catalyst Designathon 2026 · Team of 3</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>1.5 days</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Figma</li></ul></dd></div>
+                </dl>
                 <p class="project-description">Meet artscape - where the show never really ends!</p>
                 <div class="project-media project-media--logo">
                     <a href="https://devpost.com/software/the-space-in-between-proj" target="_blank" rel="noopener"><img src="artscape/cover-full.png" alt="Catalyst Designathon 2026" style="max-width: 55%;" loading="lazy" decoding="async"></a>
@@ -5024,6 +5666,46 @@
                     <li><b>Pitch.</b> Explained our design decisions in a written proposal and a pitch video. Working virtually with two people I’d never met, we had to be deliberate about writing decisions down.</li>
                 </ul>
 
+                <h2 class="project-gallery-title">Journey map</h2>
+                <p class="project-description">We mapped a fan’s night from the show to the weeks after, using our own experiences and what we heard from fans and creatives. The biggest drop comes right after the show ends, and each low point became a feature idea.</p>
+                <div class="jm-wrap" role="region" aria-label="Fan journey map" tabindex="0">
+                    <div class="jm">
+                        <div class="jm-h"></div>
+                        <div class="jm-h"><span>01</span>At the show</div>
+                        <div class="jm-h"><span>02</span>Leaving the venue</div>
+                        <div class="jm-h"><span>03</span>The next day</div>
+                        <div class="jm-h"><span>04</span>Weeks later</div>
+
+                        <div class="jm-l">Feeling</div>
+                        <div class="jm-curve">
+                            <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+                                <line class="jm-mid" x1="0" y1="40" x2="400" y2="40"/>
+                                <path class="jm-line" d="M50 14 C 110 14, 120 44, 150 44 S 220 66, 250 66 S 320 70, 350 72"/>
+                            </svg>
+                            <div class="jm-moods"><span>Euphoric</span><span>“Everyone just goes home”</span><span>Wants to relive it</span><span>The memory fades</span></div>
+                        </div>
+
+                        <div class="jm-l">Doing</div>
+                        <div>Films the best songs and takes photos</div>
+                        <div>Walks out with a crowd of strangers who just shared the same night</div>
+                        <div>Posts a story and texts friends, most of whom weren’t there</div>
+                        <div>Maybe scrolls past a great photo of the show, often not</div>
+
+                        <div class="jm-l">Pain point</div>
+                        <div>Can’t capture everything, and the best shots are on other people’s phones</div>
+                        <div>No way to find or talk to the people who were there</div>
+                        <div>Memories end up split across camera rolls, Instagram and TikTok</div>
+                        <div>Local creatives’ work never reaches the fans who were there</div>
+
+                        <div class="jm-l jm-l--opp">Opportunity</div>
+                        <div class="jm-opp">One archive per show, with everyone’s uploads</div>
+                        <div class="jm-opp">A community space for each event</div>
+                        <div class="jm-opp">Memory capsules, organized by event</div>
+                        <div class="jm-opp">Creative profiles and commissions</div>
+                    </div>
+                </div>
+                <p class="project-description jm-note">These four opportunities became the features we scored below.</p>
+
                 <table class="ce-table as-score">
                     <thead>
                         <tr><th>Feature</th><th>Impact</th><th>Feasibility</th><th>Reach</th><th>Fit</th><th>Total</th></tr>
@@ -5038,6 +5720,14 @@
                     </tbody>
                 </table>
                 <p class="project-description" style="margin-top: 1rem;">The event archive scored highest, so it became the core of the app. Next came a community space for each event, creative profiles that work as portfolios, and search with genre filters. Messaging and the map scored lowest, so we left them for later.</p>
+
+                <h2 class="project-gallery-title">User flows</h2>
+                <p class="project-description">Next we mapped how fans and creatives move through the app. Both start at the same screen and split right away. They meet on each show’s Creatives tab, where a fan can find a creator and commission them.</p>
+                <div class="fc-wrap"><svg class="fc" viewBox="0 18 860 450" role="img" aria-labelledby="as-fc-t"><title id="as-fc-t">artscape user flows. Open the app and choose fan or creator. Fans pick genres, discover shows and open a concert page. From its Capsule tab they add photos, reflect, choose who sees it, and the capsule is saved to the show. Creators say what they create, set up a portfolio and upload work to a show, where it appears on the show’s Creatives tab. Fans browse that tab from the concert page, open a creator’s profile and send a commission request, which lands in the creator’s inbox to accept, decline or answer with a message.</title><defs><marker id="as-fc-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fc-head"/></marker></defs><rect class="fc-step fc-end" x="5" y="48" width="100" height="44" rx="8"/><text class="fc-t" x="55.0" y="74.5" text-anchor="middle">Open artscape</text><path class="fc-a" d="M105 70H125" marker-end="url(#as-fc-head)"/><polygon class="fc-dec" points="200,28 272,70 200,112 128,70"/><text class="fc-t" x="200" y="67" text-anchor="middle">Fan or</text><text class="fc-t" x="200" y="84" text-anchor="middle">creator?</text><path class="fc-a" d="M272 70H298" marker-end="url(#as-fc-head)"/><text class="fc-yn" x="278" y="62">FAN</text><rect class="fc-step" x="300" y="45" width="130" height="50" rx="8"/><text class="fc-t" x="365.0" y="67.0" text-anchor="middle">Pick genres</text><text class="fc-s" x="365.0" y="83.0" text-anchor="middle">a personal feed</text><path class="fc-a" d="M430 70H453" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="455" y="45" width="140" height="50" rx="8"/><text class="fc-t" x="525.0" y="67.0" text-anchor="middle">Discover</text><text class="fc-s" x="525.0" y="83.0" text-anchor="middle">shows for you</text><path class="fc-a" d="M595 70H618" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="620" y="45" width="180" height="50" rx="8"/><text class="fc-t" x="710.0" y="67.0" text-anchor="middle">Concert page</text><text class="fc-s" x="710.0" y="83.0" text-anchor="middle">archive, community, creatives</text><path class="fc-a" d="M710 95V163" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="640" y="165" width="140" height="50" rx="8"/><text class="fc-t" x="710.0" y="187.0" text-anchor="middle">Capsule tab</text><text class="fc-s" x="710.0" y="203.0" text-anchor="middle">make a memory</text><path class="fc-a" d="M640 190H617" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="490" y="165" width="125" height="50" rx="8"/><text class="fc-t" x="552.5" y="187.0" text-anchor="middle">Add photos</text><text class="fc-s" x="552.5" y="203.0" text-anchor="middle">from the show</text><path class="fc-a" d="M490 190H467" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="335" y="165" width="130" height="50" rx="8"/><text class="fc-t" x="400.0" y="187.0" text-anchor="middle">Reflect</text><text class="fc-s" x="400.0" y="203.0" text-anchor="middle">a few words, feelings</text><path class="fc-a" d="M335 190H312" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="180" y="165" width="130" height="50" rx="8"/><text class="fc-t" x="245.0" y="187.0" text-anchor="middle">Who sees it?</text><text class="fc-s" x="245.0" y="203.0" text-anchor="middle">private, friends, public</text><path class="fc-a" d="M180 190H162" marker-end="url(#as-fc-head)"/><rect class="fc-step fc-end" x="50" y="167" width="110" height="50" rx="8"/><text class="fc-t" x="105.0" y="189.0" text-anchor="middle">Saved to</text><text class="fc-s" x="105.0" y="205.0" text-anchor="middle">the show</text><path class="fc-a" d="M200 112V128H25V308H48" marker-end="url(#as-fc-head)"/><text class="fc-yn" x="208" y="124">CREATOR</text><rect class="fc-step" x="50" y="285" width="140" height="50" rx="8"/><text class="fc-t" x="120.0" y="307.0" text-anchor="middle">What do you create?</text><text class="fc-s" x="120.0" y="323.0" text-anchor="middle">photo, design, video</text><path class="fc-a" d="M190 310H213" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="215" y="285" width="130" height="50" rx="8"/><text class="fc-t" x="280.0" y="307.0" text-anchor="middle">Set up portfolio</text><text class="fc-s" x="280.0" y="323.0" text-anchor="middle">work grouped by show</text><path class="fc-a" d="M345 310H368" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="370" y="285" width="150" height="50" rx="8"/><text class="fc-t" x="445.0" y="307.0" text-anchor="middle">Upload to a show</text><text class="fc-s" x="445.0" y="323.0" text-anchor="middle">photos, art, video</text><path class="fc-a" d="M520 310H543" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="545" y="285" width="125" height="50" rx="8"/><text class="fc-t" x="607.5" y="307.0" text-anchor="middle">Creatives tab</text><text class="fc-s" x="607.5" y="323.0" text-anchor="middle">on the show’s page</text><path class="fc-a" d="M670 310H693" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="695" y="285" width="150" height="50" rx="8"/><text class="fc-t" x="770.0" y="307.0" text-anchor="middle">Creator profile</text><text class="fc-s" x="770.0" y="323.0" text-anchor="middle">where fans find them</text><path class="fc-a" d="M800 70H825V255H608V283" marker-end="url(#as-fc-head)"/><text class="fc-yn" x="612" y="248">FANS BROWSE</text><path class="fc-a" d="M770 335V403" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="695" y="405" width="150" height="50" rx="8"/><text class="fc-t" x="770.0" y="427.0" text-anchor="middle">Commission</text><text class="fc-s" x="770.0" y="443.0" text-anchor="middle">a fan sends a request</text><path class="fc-a" d="M695 430H672" marker-end="url(#as-fc-head)"/><rect class="fc-step" x="530" y="405" width="140" height="50" rx="8"/><text class="fc-t" x="600.0" y="427.0" text-anchor="middle">Commission inbox</text><text class="fc-s" x="600.0" y="443.0" text-anchor="middle">price, item, show</text><path class="fc-a" d="M530 430H507" marker-end="url(#as-fc-head)"/><rect class="fc-step fc-end" x="320" y="407" width="185" height="44" rx="8"/><text class="fc-t" x="412.5" y="433.5" text-anchor="middle">Accept, decline or message</text></svg></div>
+
+                <h2 class="project-gallery-title">Wireframes</h2>
+                <p class="project-description">Before any visual design, we laid out the core screens in grayscale to agree on structure: what comes first, and what’s one tap away. Redrawn here for the six screens that carry the flows above.</p>
+                <div class="wf-row"><figure class="wf"><figcaption><span>01</span> First open</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-center"><i class="wf-logo"></i><span class="wf-t">artscape</span><i class="wf-line" style="width:60%"></i></div><span class="wf-t">What moves you?</span><i class="wf-line" style="width:80%"></i><div class="wf-chips"><i class="wf-chip is-on"></i><i class="wf-chip is-on"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip"></i><i class="wf-chip is-on"></i></div><div class="wf-foot"><span class="wf-btn">Enter artscape</span><span class="wf-link">I’m an organizer or creative</span></div></div><p class="wf-note">Genres first, so the feed is personal from the start. Creators get their own path, so fans go straight in.</p></figure><figure class="wf"><figcaption><span>02</span> Discover</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-field">Search events, artists, places</span><span class="wf-meta">For you</span><div class="wf-img" style="flex:none;height:78px"></div><span class="wf-meta">Event archive</span><div class="wf-deck"><i></i><i></i><i></i></div><span class="wf-meta">Upcoming</span><div class="wf-item"><span>Show · venue · date</span><span class="wf-mini">RSVP</span></div><div class="wf-item"><span>Show · venue · date</span><span class="wf-mini">RSVP</span></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Shows are the main unit, not people or posts. Past shows stay findable in the archive.</p></figure><figure class="wf"><figcaption><span>03</span> Concert page</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-img" style="flex:none;height:70px"></div><span class="wf-t">Artist @ venue</span><i class="wf-line" style="width:70%"></i><div class="wf-opt"><span class="wf-meta">Uploads</span><span class="wf-meta">Capsules</span><span class="wf-meta">Creatives</span></div><div class="wf-tabs"><i class="is-on"></i><i></i><i></i><i></i></div><div class="wf-deck" style="grid-template-columns:1fr 1fr"><i style="height:64px"></i><i style="height:64px"></i></div><div class="wf-deck" style="grid-template-columns:1fr 1fr"><i style="height:64px"></i><i style="height:64px"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">One page per show. Tabs give creatives’ work its own space and keep fans’ capsules personal.</p></figure><figure class="wf"><figcaption><span>04</span> Memory capsule</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-card"><span class="wf-meta">Memory capsule</span><span class="wf-t">Artist @ venue</span></div><span class="wf-meta">Your photos</span><div class="wf-deck" style="grid-template-columns:repeat(3,1fr)"><i></i><i></i><i style="background:none;border-style:dashed"></i></div><span class="wf-meta">Your reflection</span><div class="wf-card"><i class="wf-line" style="width:95%"></i><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:60%"></i></div><span class="wf-meta">How did it feel?</span><div class="wf-chips"><i class="wf-chip is-on"></i><i class="wf-chip"></i><i class="wf-chip"></i></div><span class="wf-meta">Who sees it</span><div class="wf-seg"><i></i><i class="is-on"></i><i></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Photos first, writing optional, and a privacy choice on every capsule.</p></figure><figure class="wf"><figcaption><span>05</span> A creator’s profile</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-opt" style="justify-content:flex-start"><i class="wf-logo" style="width:38px;height:38px;flex:none"></i><div style="flex:1;display:flex;flex-direction:column;gap:4px"><span class="wf-t">Creator name</span><i class="wf-line" style="width:80%"></i></div></div><i class="wf-line" style="width:95%"></i><i class="wf-line" style="width:70%"></i><div class="wf-card"><span class="wf-meta">Commission rates</span><div class="wf-tr"><i class="wf-line" style="width:55%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><div class="wf-tr"><i class="wf-line" style="width:65%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><div class="wf-tr"><i class="wf-line" style="width:50%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div></div><div class="wf-actions"><span class="wf-btn">Commission</span><span class="wf-btn wf-btn--ghost">Follow</span></div><div class="wf-tabs"><i class="is-on"></i><i></i></div><div class="wf-deck" style="grid-template-columns:1fr 1fr"><i style="height:58px"></i><i style="height:58px"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">As a fan sees it: rates up front, and Commission is the main action.</p></figure><figure class="wf"><figcaption><span>06</span> Commission inbox</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">Commission inbox</span><div class="wf-seg" style="height:32px"><i></i><i></i><i></i></div><span class="wf-meta">Pending requests</span><div class="wf-card"><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:45%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:70%"></i><div class="wf-actions"><span class="wf-btn wf-btn--ghost">Accept</span><span class="wf-btn wf-btn--ghost">Decline</span><span class="wf-btn wf-btn--ghost">Message</span></div></div><div class="wf-card"><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:40%"></i><span class="wf-mini" style="margin-left:auto">$$</span></div><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:60%"></i><div class="wf-actions"><span class="wf-btn wf-btn--ghost">Accept</span><span class="wf-btn wf-btn--ghost">Decline</span><span class="wf-btn wf-btn--ghost">Message</span></div></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Pending, potential and earned at a glance, and every request answered right on its card.</p></figure></div>
 
                 <h2 class="project-gallery-title">Design decisions</h2>
 
@@ -5093,7 +5783,11 @@
             <div class="project-page">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">Lovable hackathon mobile app</h1>
-                <p class="project-meta">Lovable collegiate hackathon · Solo · 1.5 hours</p>
+                <p class="project-meta">Lovable collegiate hackathon · Solo</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>1.5 hours</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Lovable</li></ul></dd></div>
+                </dl>
                 <p class="project-description">Vibe-coded complete mobile app using Lovable in under 1.5 hours (frontend + backend).</p>
                 <div class="project-media project-media--logo">
                     <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener"><img src="lovable/cover.png" alt="Lovable" loading="lazy" decoding="async"></a>
@@ -5142,7 +5836,11 @@
             <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">FlameFreeze</h1>
-                <p class="project-meta">EWB Design Corner 2025 · Team BUilders · Website design and build · One weekend</p>
+                <p class="project-meta">EWB Design Corner 2025 · Team BUilders · Website design and build</p>
+                <dl class="project-glance">
+                    <div><dt>Duration</dt><dd>One weekend</dd></div>
+                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>Three.js</li><li>Recharts</li><li>Mapbox</li><li>AI coding tools</li></ul></dd></div>
+                </dl>
                 <p class="vs-lede">A wildfire response website for LA residents, community members and emergency responders. I designed and built the whole site in one weekend, and it was the main reason our team placed 2nd out of 30+ teams.</p>
                 <figure class="ff-hero">
                     <div class="ff-hero-grid">
@@ -5152,10 +5850,9 @@
                     </div>
                     <figcaption>The dashboard, the simulation and the community page. Everything on the site runs on dummy data and simulations, so it feels live without real sensors behind it. Click any image to enlarge it.</figcaption>
                 </figure>
-                <dl class="vs-facts">
+                <dl class="vs-facts vs-facts--3">
                     <div><dt>Role</dt><dd>Website design and build, solo, on a team of five</dd></div>
                     <div><dt>Users</dt><dd>LA residents, community members and emergency responders</dd></div>
-                    <div><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Three.js, Recharts, Mapbox and AI coding tools</dd></div>
                     <div><dt>Result</dt><dd>2nd place out of 30+ teams and 170+ participants</dd></div>
                 </dl>
                 <div class="vs-keys">
@@ -6197,7 +6894,10 @@
             const protectedEl = document.getElementById('enlaye-protected');
             // decrypting the fragment doubles as the password check: a wrong key fails GCM authentication
             const html = new TextDecoder().decode(await enlayeDecrypt(key, 'enlaye/protected.html.enc'));
-            protectedEl.innerHTML = html;
+            // early thinking (users, brainstorm, wireframes, design system) is a second fragment under the same key
+            let early = '';
+            try { early = new TextDecoder().decode(await enlayeDecrypt(key, 'enlaye/early.html.enc')); } catch (_) {}
+            protectedEl.innerHTML = early + html;
             await Promise.all([...protectedEl.querySelectorAll('[data-enc]')].map(async (el) => {
                 el.src = await enlayeDecryptToUrl(key, el.dataset.enc, el.dataset.type);
                 if (el.dataset.posterEnc) el.poster = await enlayeDecryptToUrl(key, el.dataset.posterEnc, el.dataset.posterType);
@@ -7356,68 +8056,77 @@
                 });
             }
         })();
-        // home glow bubble: travels in straight lines, bounces off the hero's edges, and squishes
-        // flat against whichever wall it hits before jiggling back into shape
+        // home glow bubble: floats along a slowly curving path and bounces off the hero's edges.
+        // Each edge is a soft cushion: the bubble presses into it, flattens, and springs back out
         (function() {
             const glow = document.querySelector('.hero-glow');
             if (!glow) return;
             const hero = glow.parentElement;
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-            const MAX_SPEED = 280;  // px per second; slower on narrow screens, where the walls are close
-            const CORE = 0.34;      // share of the glow box that counts as the bubble's edge (the rest is soft haze)
-            const STIFF = 180;      // squash spring: higher snaps back faster
-            const DAMP = 7;         // squash spring: lower jiggles longer
-            const KICK = 2.4;       // how hard a wall hit squashes the bubble
-            const MIN_NORMAL = 0.3; // never skim along a wall: keep at least this share of speed off it
+            const MAX_SPEED = 190;  // px per second; slower on narrow screens, where the walls are close
+            const CORE_X = 0.34;    // share of the glow box that counts as the bubble's edge (the rest is soft haze)
+            const CORE_Y = 0.26;    // smaller vertically, so it has more room to float up and down
+            const CUSHION = 110;    // wall springiness: lower makes each bounce slower and squishier
+            const SQUISH = 0.011;   // how much it flattens per px pressed into a wall
+            const STIFF = 90;       // shape spring: higher snaps back into shape faster
+            const DAMP = 5;         // shape spring: lower jiggles longer after a bounce
+            const MIN_TILT = 0.3;   // radians off horizontal it always keeps, so it never just slides sideways
+            const MAX_TILT = 0.95;  // radians off horizontal it never exceeds, so it doesn't just bob up and down
 
-            const speed = () => Math.min(MAX_SPEED, hero.clientWidth * 0.5);
-            const angle = Math.random() * Math.PI * 2;
-            let vx = Math.cos(angle) * MAX_SPEED, vy = Math.sin(angle) * MAX_SPEED;
-            let x = 0, y = 0;
-            let qx = 0, qvx = 0, qy = 0, qvy = 0;   // squash along each axis, and its rate
-            let spin = -12, spinV = 0;
+            const speed = () => Math.min(MAX_SPEED, hero.clientWidth * 0.4);
+            // start on a shallow diagonal in a random direction
+            const start = (Math.random() * 0.4 + 0.45) * (Math.random() < 0.5 ? 1 : -1) + (Math.random() < 0.5 ? 0 : Math.PI);
+            let vx = Math.cos(start) * MAX_SPEED, vy = Math.sin(start) * MAX_SPEED;
+            let x = 0, y = 0, time = Math.random() * 100;
+            let qx = 0, qvx = 0, qy = 0, qvy = 0;   // shape: squash along each axis, and its rate
+            let lean = 0;
             let last = null, frame = null, visible = true;
 
-            // nudge the heading a little on each bounce so the path never settles into a loop
-            function bounce(axis, sign) {
-                const turn = (Math.random() - 0.5) * 0.5;
-                const c = Math.cos(turn), s = Math.sin(turn);
+            function turn(a) {
+                const c = Math.cos(a), s = Math.sin(a);
                 [vx, vy] = [vx * c - vy * s, vx * s + vy * c];
-                const n = axis === 'x' ? vx : vy;
-                const fixed = sign * Math.max(Math.abs(n), Math.hypot(vx, vy) * MIN_NORMAL);
-                if (axis === 'x') vx = fixed; else vy = fixed;
-                const scale = speed() / Math.hypot(vx, vy);
-                vx *= scale; vy *= scale;
-                if (axis === 'x') qvx += KICK; else qvy += KICK;
-                spinV += (Math.random() - 0.5) * 60;
             }
 
             function step(t) {
                 const dt = last === null ? 0 : Math.min((t - last) / 1000, 1 / 30);
                 last = t;
-                const maxX = Math.max(0, hero.clientWidth / 2 - glow.offsetWidth * CORE);
-                const maxY = Math.max(0, hero.clientHeight / 2 - glow.offsetHeight * CORE);
+                time += dt;
+                const maxX = Math.max(0, hero.clientWidth / 2 - glow.offsetWidth * CORE_X);
+                const maxY = Math.max(0, hero.clientHeight / 2 - glow.offsetHeight * CORE_Y);
+                const penX = maxX > 1 ? Math.max(0, Math.abs(x) - maxX) : 0;
+                const penY = maxY > 1 ? Math.max(0, Math.abs(y) - maxY) : 0;
 
-                const k = speed() / Math.hypot(vx, vy);
-                if (k > 0) { vx *= k; vy *= k; }
+                // out in the open: the heading swings gently on two out-of-step rhythms so the path
+                // curves lazily, and its tilt eases back whenever it strays too flat or too steep
+                if (!penX && !penY) {
+                    turn((0.4 * Math.sin(time * 0.37) + 0.25 * Math.sin(time * 0.83 + 2)) * dt);
+                    const tilt = Math.atan2(Math.abs(vy), Math.abs(vx));
+                    const push = tilt < MIN_TILT ? 1 : tilt > MAX_TILT ? -1 : 0;
+                    if (push) turn(push * Math.sign(vx * vy || 1) * 0.9 * dt);
+                    // speed swells and eases a little, like something carried on air
+                    const want = speed() * (0.88 + 0.12 * Math.sin(time * 0.5));
+                    const k = 1 + (want / (Math.hypot(vx, vy) || 1) - 1) * Math.min(1, 1.5 * dt);
+                    vx *= k; vy *= k;
+                }
+
+                // pressed into a wall: the cushion pushes back, turning it around smoothly
+                vx -= Math.sign(x) * CUSHION * penX * dt;
+                vy -= Math.sign(y) * CUSHION * penY * dt;
                 x += vx * dt;
                 y += vy * dt;
-                if (maxX === 0) x = 0;
-                else if (x > maxX) { x = maxX; bounce('x', -1); }
-                else if (x < -maxX) { x = -maxX; bounce('x', 1); }
-                if (maxY === 0) y = 0;
-                else if (y > maxY) { y = maxY; bounce('y', -1); }
-                else if (y < -maxY) { y = -maxY; bounce('y', 1); }
+                if (maxX <= 1) x = 0;
+                if (maxY <= 1) y = 0;
 
-                qvx += (-STIFF * qx - DAMP * qvx) * dt; qx += qvx * dt;
-                qvy += (-STIFF * qy - DAMP * qvy) * dt; qy += qvy * dt;
-                spinV -= spinV * 0.8 * dt;
-                spin += spinV * dt;
+                // shape follows how hard it's pressing, then jiggles back once it leaves the wall
+                qvx += (STIFF * (penX * SQUISH - qx) - DAMP * qvx) * dt; qx += qvx * dt;
+                qvy += (STIFF * (penY * SQUISH - qy) - DAMP * qvy) * dt; qy += qvy * dt;
+                // lean a little into the direction of travel
+                lean += ((vx * vy) / (MAX_SPEED * MAX_SPEED) * 16 - lean) * Math.min(1, 1.2 * dt);
 
                 // squash on the hit axis, bulge on the other, so the bubble keeps its volume
                 const sx = 1 - qx + qy * 0.6, sy = 1 - qy + qx * 0.6;
-                glow.style.transform = `translate(-50%, -50%) translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${sx.toFixed(3)}, ${sy.toFixed(3)}) rotate(${spin.toFixed(2)}deg)`;
+                glow.style.transform = `translate(-50%, -50%) translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) scale(${sx.toFixed(4)}, ${sy.toFixed(4)}) rotate(${(lean - 12).toFixed(2)}deg)`;
                 frame = requestAnimationFrame(step);
             }
 
