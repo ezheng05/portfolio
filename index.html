@@ -3225,13 +3225,95 @@
         .wf-center .wf-line { margin: 0 auto; }
         .project-page .wf-note { font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary); margin: 0.6rem 0 0; font-weight: 300; }
 
+        .vs-chain--flow li:nth-child(4n)::after { content: none; }
+        .vs-ideas--2 { grid-template-columns: 1fr 1fr; }
+
+        /* brainstorm board: ideas grouped into columns, each tagged with where it ended up */
+        .bs-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .bs-col { display: flex; flex-direction: column; gap: 0.5rem; }
+        .bs-col .vs-label { margin-bottom: 0.15rem; }
+        .project-page .bs-note {
+            margin: 0;
+            padding: 0.6rem 0.7rem;
+            border-radius: 6px;
+            background: color-mix(in srgb, var(--accent) 9%, var(--bg-primary));
+            border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+            font-size: 0.86rem;
+            line-height: 1.4;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+        .bs-col:nth-child(odd) .bs-note:nth-child(even), .bs-col:nth-child(even) .bs-note:nth-child(odd) { transform: rotate(-0.6deg); }
+        .bs-col:nth-child(odd) .bs-note:nth-child(odd), .bs-col:nth-child(even) .bs-note:nth-child(even) { transform: rotate(0.5deg); }
+        .bs-tag { display: inline-block; margin-left: 0.4rem; padding: 0 0.4rem; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.04em; vertical-align: 1px; border: 1px solid var(--border); color: var(--text-secondary); }
+        .bs-tag--v2, .bs-tag--v3 { background: var(--accent); border-color: var(--accent); color: var(--bg-primary); }
+
+        /* color swatches and type samples */
+        .sw-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+        .sw { display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.82rem; line-height: 1.4; color: var(--text-secondary); }
+        .sw i { display: block; height: 64px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 0.4rem; }
+        .sw b { color: var(--text-primary); font-weight: 500; }
+        .sw-hex { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; }
+        .ty-list { border-top: 1px solid var(--border); }
+        .ty-row { display: grid; grid-template-columns: minmax(0, 14rem) 1fr; gap: 1.5rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .ty-meta { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.86rem; line-height: 1.45; color: var(--text-secondary); }
+        .ty-row img { display: block; max-width: 100%; height: auto; max-height: 104px; width: auto; border-radius: 6px; border: 1px solid var(--border); }
+
+        /* extra wireframe parts: map, cards, sheets, desktop frames */
+        .wf-map { position: relative; flex: 1; border-radius: 6px; border: 1px solid var(--wf); background:
+            linear-gradient(var(--wf-fill) 1px, transparent 1px) 0 0 / 100% 18px,
+            linear-gradient(90deg, var(--wf-fill) 1px, transparent 1px) 0 0 / 18px 100%; }
+        .wf-map--short { flex: none; height: 30%; }
+        .wf-pin { position: absolute; width: 9px; height: 9px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--wf); }
+        .wf-nav { display: flex; justify-content: space-around; padding-top: 6px; border-top: 1px solid var(--wf-fill); margin-top: auto; }
+        .wf-nav i { width: 12px; height: 12px; border-radius: 3px; background: var(--wf-fill); }
+        .wf-tabs { display: flex; gap: 6px; }
+        .wf-tabs i { flex: 1; height: 5px; border-radius: 3px; background: var(--wf-fill); }
+        .wf-tabs i.is-on { background: var(--wf); }
+        .wf-img { flex: 1; border-radius: 8px; background: var(--wf-fill); border: 1px solid var(--wf); }
+        .wf-actions { display: flex; align-items: center; gap: 6px; }
+        .wf-actions .wf-btn { flex: 1; }
+        .wf-round { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--wf); }
+        .wf-sheet { flex: 1; display: flex; flex-direction: column; gap: 5px; padding: 6px; margin: 0 -0.75rem; border-top: 1px solid var(--wf); border-radius: 12px 12px 0 0; }
+        .wf-handle { width: 26px; height: 3px; border-radius: 2px; background: var(--wf); margin: 0 auto 4px; }
+        .wf-deck { display: grid; grid-template-columns: repeat(3, 44%); gap: 5px; overflow: hidden; }
+        .wf-deck i { height: 46px; border-radius: 5px; border: 1px solid var(--wf); background: var(--wf-fill); }
+        .wf-row--mixed { grid-auto-columns: max-content; }
+        .wf--desk .wf-phone { width: 300px; aspect-ratio: 16 / 10; border-radius: 10px; padding: 1.1rem 0.6rem 0.6rem; }
+        .wf--desk .wf-phone::before { left: 12px; margin-left: 0; width: 26px; top: 6px; height: 4px; }
+        .wf:not(.wf--desk) .wf-phone { width: 200px; }
+        .wf-desk { flex: 1; display: grid; grid-template-columns: 26% 1fr; gap: 8px; }
+        .wf-desk--split { grid-template-columns: 1fr 1fr; }
+        .wf-side, .wf-main { display: flex; flex-direction: column; gap: 6px; padding: 6px; border-radius: 5px; border: 1px solid var(--wf-fill); }
+        .wf-side { background: var(--wf-fill); }
+        .wf-tr { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-bottom: 1px solid var(--wf-fill); }
+        .wf-tr .wf-line { flex: none; }
+        .wf-tr .wf-dot { width: 9px; height: 9px; }
+        .wf-flag { margin-left: auto; width: 16px; height: 7px; border-radius: 3px; border: 1px solid var(--wf); }
+        .wf-flag.is-on { background: var(--wf); }
+        .wf-hl { background: color-mix(in srgb, var(--accent) 35%, transparent); height: 7px; }
+        .wf-hl--new { background: color-mix(in srgb, var(--accent) 60%, transparent); }
+        .wf-mic { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid var(--wf); background: var(--wf-fill); }
+        .wf-card { position: relative; display: flex; flex-direction: column; gap: 5px; padding: 7px; border: 1px solid var(--wf); border-radius: 6px; }
+        .wf-card .wf-flag { position: absolute; right: 7px; top: 7px; }
+        .wf-row--mixed .wf-note { max-width: 300px; }
+        .wf:not(.wf--desk) .wf-note { max-width: 200px; }
+
         @media (max-width: 768px) {
-            .project-page .vs-chain { grid-template-columns: 1fr; gap: 1.6rem; }
-            .vs-chain li:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -1.45rem; transform: translateX(-50%); }
+            .project-page .vs-chain { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+            .vs-chain li:not(:last-child)::after { content: none; }
+            .project-page .vs-chain li { padding: 0.75rem; font-size: 0.82rem; }
+            .vs-chain b { font-size: 1rem; }
+            .project-page .bs-note { font-size: 0.8rem; padding: 0.5rem 0.55rem; }
             .vs-ia-branches { grid-template-columns: 1fr 1fr; }
             .vs-tree3 { grid-template-columns: 1fr; }
             .vs-tree-arrow { transform: rotate(90deg); justify-self: start; }
             .wf-row { grid-auto-columns: 180px; }
+            .wf-row--mixed { grid-auto-columns: max-content; }
+            .wf:not(.wf--desk) .wf-phone { width: 180px; }
+            .wf--desk .wf-phone { width: 290px; }
+            .vs-ideas--2 { grid-template-columns: 1fr; }
+            .ty-row { grid-template-columns: 1fr; gap: 0.6rem; }
         }
 
         .vs-ideas .vs-took {
@@ -5121,6 +5203,20 @@
                     <p class="project-description" style="margin-top: 1.5rem">The screens and the thinking behind each feature are below.</p>
                 </section>
 
+                <section class="vs-section" aria-labelledby="en-early-h">
+                    <p class="vs-kicker">03 · Early thinking</p>
+                    <h2 class="serif vs-h2" id="en-early-h">Two kinds of users, in two very different places.</h2>
+                    <div class="vs-ideas vs-ideas--2">
+                        <div><span class="vs-label">In the office</span><h3>Project managers</h3><p>Work through contracts, drawings and change orders. They need the risks in those documents flagged early, without reading every page.</p></div>
+                        <div><span class="vs-label">On the job site</span><h3>Field crews</h3><p>On a phone, between tasks. They need to raise an issue in seconds, with nothing new to learn.</p></div>
+                    </div>
+                    <h3 class="vs-h3">From interviews to ideas</h3>
+                    <div class="bs-board"><div class="bs-col"><span class="vs-label">What I heard</span><p class="bs-note">Documents live in too many places</p><p class="bs-note">Changes hide inside long contracts</p><p class="bs-note">Issues from the field reach the office late</p><p class="bs-note">New tools take too long to learn</p></div><div class="bs-col"><span class="vs-label">Ideas</span><p class="bs-note">One home for every project document</p><p class="bs-note">Show exactly what changed between versions</p><p class="bs-note">Report an issue from your phone, by voice</p><p class="bs-note">The same patterns on mobile, web and the website</p></div></div>
+                    <h3 class="vs-h3">Wireframes to align the team</h3>
+                    <p class="project-description">I start with grayscale wireframes so the team agrees on what a screen does before anyone debates how it looks. These show the shape of that stage; the real screens are behind the password below.</p>
+                    <div class="wf-row wf-row--mixed"><figure class="wf wf--desk"><figcaption><span>A</span> Web · Project documents</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-desk"><div class="wf-side"><i class="wf-line" style="width:70%"></i><i class="wf-line" style="width:55%"></i><i class="wf-line" style="width:60%"></i><i class="wf-line" style="width:45%"></i></div><div class="wf-main"><i class="wf-line" style="width:35%"></i><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:55%"></i><span class="wf-flag"></span></div><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:55%"></i><span class="wf-flag is-on"></span></div><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:55%"></i><span class="wf-flag"></span></div><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:55%"></i><span class="wf-flag is-on"></span></div><div class="wf-tr"><i class="wf-dot"></i><i class="wf-line" style="width:55%"></i><span class="wf-flag"></span></div></div></div></div><p class="wf-note">Every document in one table, with a flag wherever the AI found a risk.</p></figure><figure class="wf wf--desk"><figcaption><span>B</span> Web · Compare versions</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-desk wf-desk--split"><div class="wf-main"><i class="wf-line" style="width:30%"></i><i class="wf-line" style="width:90%"></i><i class="wf-line wf-hl" style="width:80%"></i><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:70%"></i></div><div class="wf-main"><i class="wf-line" style="width:30%"></i><i class="wf-line" style="width:90%"></i><i class="wf-line wf-hl wf-hl--new" style="width:88%"></i><i class="wf-line" style="width:85%"></i><i class="wf-line" style="width:70%"></i></div></div></div><p class="wf-note">Two versions side by side, with the changed clause highlighted in both.</p></figure><figure class="wf"><figcaption><span>C</span> Mobile · Report from the field</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-t">Report an issue</span><i class="wf-line" style="width:80%"></i><div class="wf-center"><i class="wf-mic"></i><span class="wf-meta">Tap and talk</span></div><div class="wf-card"><i class="wf-line" style="width:90%"></i><i class="wf-line" style="width:70%"></i><span class="wf-flag is-on"></span></div><div class="wf-foot"><span class="wf-btn">Send to the office</span></div></div><p class="wf-note">One big button, because hands are busy on site.</p></figure></div>
+                </section>
+
                 <div id="enlaye-gate" class="enlaye-gate">
                     <form id="enlaye-gate-form" class="enlaye-gate-form" aria-describedby="enlaye-gate-error">
                         <label for="enlaye-password">Password to view more:</label>
@@ -5163,13 +5259,15 @@
                         <span class="vs-toc-label">Design process</span>
                         <a href="#pp-problem" data-pp-jump><span>01</span> Problem</a>
                         <a href="#pp-process" data-pp-jump><span>02</span> Process</a>
-                        <a href="#pp-v2" data-pp-jump><span>03</span> V2</a>
+                        <a href="#pp-concepts" data-pp-jump><span>03</span> Concepts</a>
+                        <a href="#pp-v2" data-pp-jump><span>04</span> V2</a>
                     </div>
                     <div class="vs-toc-group">
                         <span class="vs-toc-label">Design execution</span>
-                        <a href="#pp-ideas" data-pp-jump><span>04</span> Exploring ideas</a>
-                        <a href="#pp-v3" data-pp-jump><span>05</span> V3</a>
-                        <a href="#pp-result" data-pp-jump><span>06</span> Result</a>
+                        <a href="#pp-ideas" data-pp-jump><span>05</span> Exploring ideas</a>
+                        <a href="#pp-v3" data-pp-jump><span>06</span> V3</a>
+                        <a href="#pp-visual" data-pp-jump><span>07</span> Visual language</a>
+                        <a href="#pp-result" data-pp-jump><span>08</span> Result</a>
                     </div>
                 </div>
 
@@ -5195,10 +5293,22 @@
                         <li><b>Design.</b> Designed every V2 and V3 screen myself in Figma, including 40+ mockups for V3, and brainstormed ideas before deciding what to build.</li>
                         <li><b>Test and ship.</b> Ran A/B tests to choose between options, and worked with the rest of the team to ship them.</li>
                     </ul>
+                    <h3 class="vs-h3">Brainstorm</h3>
+                    <p class="project-description">Before V3, I sorted every idea by the moment it helps with: finding an event, deciding to go, going with people, and coming back. The tags show where each idea ended up.</p>
+                    <div class="bs-board"><div class="bs-col"><span class="vs-label">Find events</span><p class="bs-note">A map of what’s happening near you<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">Search and filters<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">A full-screen feed of event cards<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Event decks by category on the map<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Weekend picks<span class="bs-tag bs-tag--v3">V3</span></p></div><div class="bs-col"><span class="vs-label">Decide to go</span><p class="bs-note">Who’s interested, by school and more<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">People you may know who are going<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Reviews from past events<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">Photos from the venue<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Hot topics and similar events<span class="bs-tag bs-tag--explored">Explored</span></p></div><div class="bs-col"><span class="vs-label">Go together</span><p class="bs-note">Join or create a group<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">Group chat<span class="bs-tag bs-tag--v2">V2</span></p><p class="bs-note">Request matches<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Highest compatibility<span class="bs-tag bs-tag--explored">Explored</span></p></div><div class="bs-col"><span class="vs-label">Come back</span><p class="bs-note">Rate and review after the event<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">A Taste Map of past events<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">A personalized feed<span class="bs-tag bs-tag--v3">V3</span></p><p class="bs-note">Polls in the feed<span class="bs-tag bs-tag--explored">Explored</span></p><p class="bs-note">Popple DNA stats<span class="bs-tag bs-tag--explored">Explored</span></p></div></div>
+                </section>
+
+                <section class="vs-section" id="pp-concepts" aria-labelledby="pp-concepts-h">
+                    <p class="vs-kicker">03 · Concepts</p>
+                    <h2 class="serif vs-h2" id="pp-concepts-h">One flow, and three ways into it.</h2>
+                    <p class="project-description">Every idea had to fit one path: find an event, decide, go with people, then come back. I mapped that first, then sketched three directions for home, one for each side of the discover vs. search debate and one in between.</p>
+                    <ol class="vs-chain vs-chain--4 vs-chain--flow"><li><span class="vs-chain-n">01</span><b>Find an event</b><span class="vs-chain-note">Map, feed or search</span></li><li><span class="vs-chain-n">02</span><b>Event details</b><span class="vs-chain-note">Who’s going and what it’s like</span></li><li><span class="vs-chain-n">03</span><b>Join a group</b><span class="vs-chain-note">Or create one</span></li><li><span class="vs-chain-n">04</span><b>Group chat</b><span class="vs-chain-note">Plan with the people going</span></li><li><span class="vs-chain-n">05</span><b>Go</b></li><li><span class="vs-chain-n">06</span><b>Review it</b><span class="vs-chain-note">Stars, tags, photos</span></li><li><span class="vs-chain-n">07</span><b>Taste Map</b><span class="vs-chain-note">Every event you’ve been to</span></li></ol>
+                    <h3 class="vs-h3">Home, in low fidelity</h3>
+                    <div class="wf-row"><figure class="wf"><figcaption><span>A</span> Map first</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-field">Search…</span><div class="wf-map"><i class="wf-pin" style="left:22%;top:30%"></i><i class="wf-pin" style="left:58%;top:22%"></i><i class="wf-pin" style="left:40%;top:55%"></i><i class="wf-pin" style="left:72%;top:62%"></i><i class="wf-pin" style="left:30%;top:78%"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Search side. You see what’s around you, but you have to know where to look. This became V2.</p></figure><figure class="wf"><figcaption><span>B</span> Full-screen cards</figcaption><div class="wf-phone" aria-hidden="true"><div class="wf-tabs"><i class="is-on"></i><i></i><i></i></div><div class="wf-img"></div><i class="wf-line" style="width:60%"></i><i class="wf-line" style="width:85%"></i><div class="wf-actions"><i class="wf-round"></i><span class="wf-btn">Join group</span><i class="wf-round"></i></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Discover side. One event at a time, like a video feed, with a group to join on every card.</p></figure><figure class="wf"><figcaption><span>C</span> Map with decks</figcaption><div class="wf-phone" aria-hidden="true"><span class="wf-field">Search…</span><div class="wf-map wf-map--short"><i class="wf-pin" style="left:22%;top:30%"></i><i class="wf-pin" style="left:58%;top:22%"></i><i class="wf-pin" style="left:40%;top:55%"></i><i class="wf-pin" style="left:72%;top:62%"></i><i class="wf-pin" style="left:30%;top:78%"></i></div><div class="wf-sheet"><i class="wf-handle"></i><i class="wf-line" style="width:55%"></i><div class="wf-deck"><i></i><i></i><i></i></div><i class="wf-line" style="width:45%"></i><div class="wf-deck"><i></i><i></i><i></i></div></div><div class="wf-nav"><i></i><i></i><i></i><i></i></div></div><p class="wf-note">Both. Keeps the V2 map, and pulling up the sheet shows decks like “BU students are attending.”</p></figure></div>
                 </section>
 
                 <section class="vs-section" id="pp-v2" aria-labelledby="pp-v2-h">
-                    <p class="vs-kicker">03 · V2</p>
+                    <p class="vs-kicker">04 · V2</p>
                     <h2 class="serif vs-h2" id="pp-v2-h">V2 was built around the map and groups.</h2>
 
                     <div class="pp-wide">
@@ -5237,7 +5347,7 @@
                 </section>
 
                 <section class="vs-section" id="pp-ideas" aria-labelledby="pp-ideas-h">
-                    <p class="vs-kicker">04 · Exploring ideas</p>
+                    <p class="vs-kicker">05 · Exploring ideas</p>
                     <h2 class="serif vs-h2" id="pp-ideas-h">What would people want to see before they decide to go?</h2>
                     <p class="project-description">Before V3, I brainstormed what information would help someone decide to attend an event. We weren’t trying to show all of these cards. These were ideas to test and choose from.</p>
 
@@ -5272,7 +5382,7 @@
                 </section>
 
                 <section class="vs-section" id="pp-v3" aria-labelledby="pp-v3-h">
-                    <p class="vs-kicker">05 · V3</p>
+                    <p class="vs-kicker">06 · V3</p>
                     <h2 class="serif vs-h2" id="pp-v3-h">A new homepage, and an app that learns your taste.</h2>
 
                     <div class="vs-screen ff-screen">
@@ -5305,8 +5415,18 @@
                     </div>
                 </section>
 
+                <section class="vs-section" id="pp-visual" aria-labelledby="pp-visual-h">
+                    <p class="vs-kicker">07 · Visual language</p>
+                    <h2 class="serif vs-h2" id="pp-visual-h">Playful enough for students, clear enough to act on.</h2>
+                    <p class="project-description">The gradient and lowercase titles give Popple its personality. Indigo is saved for things you can tap, so actions stand out on every screen.</p>
+                    <h3 class="vs-h3">Color</h3>
+                    <div class="sw-row"><div class="sw sw--grad"><i style="background:linear-gradient(120deg,#824BE2,#7FA7F5)"></i><b>Header gradient</b><span>Violet to sky</span></div><div class="sw"><i style="background:#824BE2"></i><b>Violet</b><span class="sw-hex">#824BE2</span><span>Gradient start, screen headers</span></div><div class="sw"><i style="background:#7FA7F5"></i><b>Sky</b><span class="sw-hex">#7FA7F5</span><span>Gradient end</span></div><div class="sw"><i style="background:#605AC6"></i><b>Indigo</b><span class="sw-hex">#605AC6</span><span>Buttons, links and chart bars</span></div><div class="sw"><i style="background:#CCB4E4"></i><b>Lilac</b><span class="sw-hex">#CCB4E4</span><span>Card tints and highlights</span></div><div class="sw"><i style="background:#F4F2FC"></i><b>Mist</b><span class="sw-hex">#F4F2FC</span><span>Light surfaces</span></div></div>
+                    <h3 class="vs-h3">Typography</h3>
+                    <div class="ty-list"><div class="ty-row"><div class="ty-meta"><span class="vs-label">Display</span><span>Rounded and lowercase, for screen titles</span></div><img src="popple/s/type-display.webp" width="300" height="117" alt="Display sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Headline</span><span>The same face, smaller, for section titles</span></div><img src="popple/s/type-headline.webp" width="330" height="52" alt="Headline sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Event title</span><span>Bold caps, so each event reads as a name</span></div><img src="popple/s/type-title.webp" width="262" height="48" alt="Event title sample from the app" loading="lazy" decoding="async"></div><div class="ty-row"><div class="ty-meta"><span class="vs-label">Body and meta</span><span>A rounded sans in gray, with icons inline</span></div><img src="popple/s/type-body.webp" width="420" height="146" alt="Body and meta sample from the app" loading="lazy" decoding="async"></div></div>
+                </section>
+
                 <section class="vs-section" id="pp-result" aria-labelledby="pp-result-h">
-                    <p class="vs-kicker">06 · Result</p>
+                    <p class="vs-kicker">08 · Result</p>
                     <h2 class="serif vs-h2" id="pp-result-h">From 100 to 3,000+ users.</h2>
                     <p class="project-description">I led user growth from 100 to 3,000+ users with 20% month over month growth. The new discovery features and personalized feed raised daily active users by 15%, and Popple won the UX Standout Award at Spark! Launch Lab.</p>
                 </section>
