@@ -1147,6 +1147,29 @@
             }
         }
 
+        /* shared case study parts: stat tiles, theme-matched images, short chains, screen strips */
+        .ff-hero > img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        .ff-hero > img.cs-light, .ff-hero > img.cs-dark { aspect-ratio: 900 / 400; object-fit: cover; object-position: top; }
+        .ff-hero > img.cs-dark { display: none; }
+        [data-theme="dark"] .ff-hero > img.cs-light { display: none; }
+        [data-theme="dark"] .ff-hero > img.cs-dark { display: block; }
+        .vs-ideas.cs-4 { grid-template-columns: repeat(4, 1fr); margin-bottom: 1.5rem; }
+        .vs-ideas.cs-4 > div { padding: 1rem; }
+        .vs-ideas.cs-4 h3 { font-size: 1.05rem; margin: 0.4rem 0 0; }
+        .project-page .vs-chain.cs-3 { grid-template-columns: repeat(3, 1fr); }
+        .cs-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin: 0.5rem 0 1.75rem; }
+        .cs-stat { border-top: 2px solid var(--accent); padding-top: 0.8rem; }
+        .cs-stat b { display: block; font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 1.1; color: var(--text-primary); margin-bottom: 0.4rem; }
+        .cs-stat span { font-size: 0.86rem; line-height: 1.45; color: var(--text-secondary); }
+        .project-page .cs-more-label { margin: 2rem 0 0.9rem; }
+        .cs-more { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.85rem; }
+
+        @media (max-width: 700px) {
+            .vs-ideas.cs-4, .cs-stats { grid-template-columns: 1fr 1fr; }
+            .project-page .vs-chain.cs-3 { grid-template-columns: 1fr; }
+            .cs-more { grid-template-columns: repeat(3, 1fr); }
+        }
+
         /* Designathon page: journey map, user flows and wireframes, all drawn in theme colors */
         .jm-wrap {
             overflow-x: auto;
@@ -4923,30 +4946,23 @@
                         <p>Product analytics &amp; strategy · Credit card applications</p>
                     </div>
                 </div>
-                <div class="project-card" data-project="streamlit" tabindex="0" role="button">
-                    <div class="project-info">
-                        <div class="project-number">06</div>
-                        <h3>Air quality web app</h3>
-                        <p>Information design &amp; data visualization · Web app</p>
-                    </div>
-                </div>
                 <div class="project-card" data-project="reco" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">07</div>
+                        <div class="project-number">06</div>
                         <h3>ReCo Digital web app</h3>
                         <p>Product development &amp; data analytics · AI web app</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="lovable" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">08</div>
+                        <div class="project-number">07</div>
                         <h3>Lovable hackathon mobile app</h3>
                         <p>UX &amp; navigation design · Mobile app</p>
                     </div>
                 </div>
                 <div class="project-card" data-project="flamefreeze" tabindex="0" role="button">
                     <div class="project-info">
-                        <div class="project-number">09</div>
+                        <div class="project-number">08</div>
                         <h3>FlameFreeze wildfire hackathon</h3>
                         <p>Front-end design &amp; development · Website · 2nd of 30+ teams</p>
                     </div>
@@ -5233,38 +5249,79 @@
         </section>
 
         <section id="project-capitalone" class="page project-detail">
-            <div class="project-page">
+            <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">Prefill Data Orchestrator source selection</h1>
-                <p class="project-meta">Capital One · Business Analyst Intern</p>
+                <p class="project-meta">Capital One · Business Analyst Intern · Jun to Aug 2026</p>
                 <dl class="project-glance">
                     <div><dt>Duration</dt><dd>Jun to Aug 2026</dd></div>
                     <div><dt>Tools</dt><dd><ul class="glance-tools"><li>SQL</li><li>Snowflake</li></ul></dd></div>
                 </dl>
-                <p class="project-description">When you apply for a Capital One credit card, prefill fills in your information so you type less. I defined the logic for deciding which data source should fill each field.</p>
+                <p class="vs-lede">When you apply for a Capital One credit card, prefill fills in your information so you type less. I defined the logic for deciding which data source should fill each field.</p>
 
-                <p class="project-description"><b>Context:</b> I interned on the Mainstreet Acquisitions team in the product management and analytics track. The Prefill Data Orchestrator (PDO) is a planned system that routes each field to the best available source, and my job was to define its business logic.</p>
-                <p class="project-description"><b>Skills:</b> SQL (Snowflake), data profiling and segmentation, scoring model design, NPV and opportunity sizing, risk analysis, cross functional collaboration, executive communication.</p>
-                <p class="project-description"><b>Impact:</b> Prefill is one of the highest return levers in card acquisition: the program has delivered $60M in annualized NPV over the last two years, and consolidating sources alone was a $10M to $20M opportunity. At Capital One’s application volume, small gains in completion mean tens of thousands of new accounts. My source hierarchy is informing the next phase of PDO implementation, and Phase 1 testing is rolling out with an expected 3 to 8% lift in application completion, projected at 40K to 100K incremental accounts and $9M to $25M NPV.</p>
-                <h2 class="project-gallery-title">Problem</h2>
-                <p class="project-description">Every application entry point was hardwired to a single data source, but no one source is best for every field, customer segment, and entry point. That meant stale or incomplete prefills, more typing, and more applicants dropping off before finishing.</p>
+                <dl class="vs-facts">
+                    <div><dt>Team</dt><dd>Mainstreet Acquisitions, product management and analytics track</dd></div>
+                    <div><dt>Method</dt><dd>Profiled every source in SQL, by field, entry point and customer segment</dd></div>
+                    <div><dt>Output</dt><dd>A ranked source hierarchy, a scoring function and a two tier recommendation</dd></div>
+                    <div><dt>Result</dt><dd>Informing the next phase of PDO, presented to a VP and a senior business director</dd></div>
+                </dl>
 
-                <h2 class="project-gallery-title">Process</h2>
-                <ul>
-                    <li><b>Frame.</b> Broke the problem into what drives source quality: coverage, freshness, accuracy, and cost. I built the analysis plan around those four.</li>
-                    <li><b>Research.</b> Profiled every source on those four drivers by field, entry point, and customer segment using SQL in Snowflake.</li>
-                    <li><b>Define.</b> Turned the analysis into a ranked source hierarchy for each field.</li>
-                    <li><b>Design the system.</b> Compared architecture options for how PDO should pick a source, and chose one.</li>
-                    <li><b>Test the case.</b> Sized the NPV impact and evaluated the risks.</li>
-                    <li><b>Present.</b> Worked with product, site, and business teams, and presented my findings and recommendations to a VP and a senior business director.</li>
-                </ul>
+                <div class="vs-toc" role="navigation" aria-label="On this page">
+                    <div class="vs-toc-group">
+                        <a href="#co-problem" data-cs-jump><span>01</span> Problem</a>
+                        <a href="#co-process" data-cs-jump><span>02</span> Process</a>
+                        <a href="#co-decisions" data-cs-jump><span>03</span> Decisions</a>
+                        <a href="#co-impact" data-cs-jump><span>04</span> Impact</a>
+                    </div>
+                </div>
 
-                <h2 class="project-gallery-title">Decisions</h2>
-                <ul>
-                    <li><b>A scoring function, not a judgment call.</b> I formalized the hierarchy as a scoring function, so ranking sources is systematic and can be rerun as the data changes.</li>
-                    <li><b>Two tiers with fallback.</b> I recommended a two tier hierarchy with fallback and exception rules, so every field still gets filled when its best source is missing or out of date.</li>
-                    <li><b>Check identity before prefill.</b> On my own initiative, I recommended identity verification prompts before prefill, tailored to each entry point, so we confirm it’s the right person before showing their personal information.</li>
-                </ul>
+                <section class="vs-section" id="co-problem" aria-labelledby="co-problem-h">
+                    <p class="vs-kicker">01 · The problem</p>
+                    <h2 class="serif vs-h2" id="co-problem-h">Every entry point was wired to one data source.</h2>
+                    <p class="project-description">No one source is best for every field, customer segment and entry point. That meant stale or incomplete prefills, more typing, and more applicants dropping off before they finished. The Prefill Data Orchestrator (PDO) is a planned system that routes each field to the best available source, and my job was to define its business logic.</p>
+                    <figure class="ff-hero">
+                        <img class="cs-light" src="capitalone/card.svg" alt="Four data sources on the left, one highlighted, routed through a two tier orchestrator into the matching field of an application form" loading="lazy" decoding="async">
+                        <img class="cs-dark" src="capitalone/card-dark.svg" alt="" loading="lazy" decoding="async">
+                        <figcaption>What PDO does: send each field to its best source, instead of using one source for everything.</figcaption>
+                    </figure>
+                </section>
+
+                <section class="vs-section" id="co-process" aria-labelledby="co-process-h">
+                    <p class="vs-kicker">02 · Process</p>
+                    <h2 class="serif vs-h2" id="co-process-h">First, define what makes a source good.</h2>
+                    <p class="project-description">“Best source” is vague, so I broke it into four things I could measure for every field.</p>
+                    <div class="vs-ideas cs-4">
+                        <div><span class="vs-label">Coverage</span><h3>Does it have the field?</h3></div>
+                        <div><span class="vs-label">Freshness</span><h3>How recent is it?</h3></div>
+                        <div><span class="vs-label">Accuracy</span><h3>Is it right?</h3></div>
+                        <div><span class="vs-label">Cost</span><h3>What does it cost to use?</h3></div>
+                    </div>
+                    <ol class="vs-chain vs-chain--4"><li><span class="vs-chain-n">01</span><b>Frame</b><span class="vs-chain-note">The four drivers became the analysis plan</span></li><li><span class="vs-chain-n">02</span><b>Profile</b><span class="vs-chain-note">Every source in Snowflake, by field, entry point and segment</span></li><li><span class="vs-chain-n">03</span><b>Rank</b><span class="vs-chain-note">A source hierarchy for each field, written as a scoring function</span></li><li><span class="vs-chain-n">04</span><b>Recommend</b><span class="vs-chain-note">Compared architectures, sized NPV and risks, presented to leadership</span></li></ol>
+                    <p class="project-description">I worked with product, site and business teams throughout.</p>
+                </section>
+
+                <section class="vs-section" id="co-decisions" aria-labelledby="co-decisions-h">
+                    <p class="vs-kicker">03 · Decisions</p>
+                    <h2 class="serif vs-h2" id="co-decisions-h">Rules anyone can rerun.</h2>
+                    <div class="fc-wrap"><svg class="fc" viewBox="0 18 860 240" role="img" aria-labelledby="co-fc-t" style="min-width:640px"><title id="co-fc-t">Two-tier source selection: an application starts, the identity check runs, then for each field, if the top-ranked source has the field and it is current, prefill from it. If not, and the fallback source has it, prefill from the fallback. Otherwise exception rules apply.</title><defs><marker id="co-fc-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fc-head"/></marker></defs><rect class="fc-step fc-end" x="5" y="48" width="125" height="50" rx="8"/><text class="fc-t" x="67.5" y="70.0" text-anchor="middle">Application</text><text class="fc-s" x="67.5" y="86.0" text-anchor="middle">starts</text><path class="fc-a" d="M130 73H153" marker-end="url(#co-fc-head)"/><rect class="fc-step" x="155" y="48" width="150" height="50" rx="8"/><text class="fc-t" x="230.0" y="70.0" text-anchor="middle">Identity check</text><text class="fc-s" x="230.0" y="86.0" text-anchor="middle">my recommendation</text><path class="fc-a" d="M305 73H328" marker-end="url(#co-fc-head)"/><rect class="fc-step" x="330" y="48" width="120" height="50" rx="8"/><text class="fc-t" x="390.0" y="70.0" text-anchor="middle">Next field</text><text class="fc-s" x="390.0" y="86.0" text-anchor="middle">address, income…</text><path class="fc-a" d="M450 73H478" marker-end="url(#co-fc-head)"/><polygon class="fc-dec" points="560,31 640,73 560,115 480,73"/><text class="fc-t" x="560" y="70" text-anchor="middle">Top source has</text><text class="fc-t" x="560" y="87" text-anchor="middle">it, and current?</text><path class="fc-a" d="M640 73H668" marker-end="url(#co-fc-head)"/><text class="fc-yn" x="645" y="65">YES</text><rect class="fc-step fc-end" x="670" y="48" width="185" height="50" rx="8"/><text class="fc-t" x="762.5" y="70.0" text-anchor="middle">Prefill</text><text class="fc-s" x="762.5" y="86.0" text-anchor="middle">from the top-ranked source</text><path class="fc-a" d="M560 115V149" marker-end="url(#co-fc-head)"/><text class="fc-yn" x="568" y="136">NO</text><polygon class="fc-dec" points="560,151 640,193 560,235 480,193"/><text class="fc-t" x="560" y="190" text-anchor="middle">Fallback source</text><text class="fc-t" x="560" y="207" text-anchor="middle">has it?</text><path class="fc-a" d="M640 193H668" marker-end="url(#co-fc-head)"/><text class="fc-yn" x="645" y="185">YES</text><rect class="fc-step fc-end" x="670" y="168" width="185" height="50" rx="8"/><text class="fc-t" x="762.5" y="190.0" text-anchor="middle">Prefill</text><text class="fc-s" x="762.5" y="206.0" text-anchor="middle">from the fallback source</text><path class="fc-a" d="M480 193H452" marker-end="url(#co-fc-head)"/><text class="fc-yn" x="452" y="185">NO</text><rect class="fc-step" x="300" y="170" width="150" height="44" rx="8"/><text class="fc-t" x="375.0" y="196.5" text-anchor="middle">Exception rules</text></svg></div>
+                    <ul class="vs-plain">
+                        <li><b>A scoring function, not a judgment call.</b> Ranking sources is systematic and can be rerun as the data changes.</li>
+                        <li><b>Two tiers with fallback.</b> Every field still gets filled when its best source is missing or out of date, with exception rules for the rest.</li>
+                        <li><b>Check identity before prefill.</b> On my own initiative, I recommended identity verification prompts tailored to each entry point, so we confirm it’s the right person before showing their personal information.</li>
+                    </ul>
+                </section>
+
+                <section class="vs-section" id="co-impact" aria-labelledby="co-impact-h">
+                    <p class="vs-kicker">04 · Impact</p>
+                    <h2 class="serif vs-h2" id="co-impact-h">Small gains, at Capital One’s scale.</h2>
+                    <div class="cs-stats">
+                        <div class="cs-stat"><b>$60M</b><span>annualized NPV from prefill over the last two years</span></div>
+                        <div class="cs-stat"><b>$10–20M</b><span>opportunity from consolidating sources alone</span></div>
+                        <div class="cs-stat"><b>3–8%</b><span>expected lift in application completion from Phase 1 testing</span></div>
+                        <div class="cs-stat"><b>40K–100K</b><span>projected new accounts, worth $9M to $25M NPV</span></div>
+                    </div>
+                    <p class="project-description">Prefill is one of the highest return levers in card acquisition. My source hierarchy is informing the next phase of PDO, and Phase 1 testing is rolling out.</p>
+                </section>
             </div>
         </section>
 
@@ -5531,103 +5588,66 @@
             </dialog>
         </section>
 
-        <section id="project-streamlit" class="page project-detail">
-            <div class="project-page">
-                <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
-                <h1 class="serif">Air quality web app</h1>
-                <p class="project-meta">BU Multimedia Communications Lab · Undergraduate researcher</p>
-                <dl class="project-glance">
-                    <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Streamlit</li><li>Python</li><li>Plotly</li><li>Matplotlib</li><li>CAD</li></ul></dd></div>
-                </dl>
-                <p class="project-description">A public web app that turns continuous sensor data from BU classrooms into clear answers for facilities staff: which rooms are poorly ventilated, too hot or too cold, or exposed to particulates.</p>
-                <div class="project-media project-media--logo">
-                    <a href="https://sites.bu.edu/mcl/" target="_blank" rel="noopener"><img src="streamlit/streamlit-logo.png" alt="BU College of Engineering" loading="lazy" decoding="async"></a>
-                </div>
-                <p class="project-description"><b>Context:</b> As one of three undergraduate researchers in BU’s Multimedia Communications Lab, I helped deploy sensors that measure CO2, particulates, temperature, humidity, and occupancy in classrooms. I designed the web app and the sensor enclosures. Our partner and main user was BU Operations.</p>
-                <p class="project-description"><b>Skills:</b> Streamlit, Python, Plotly, Matplotlib, CAD, stakeholder interviews, information design, data visualization.</p>
-                <p class="project-description"><b>Impact:</b> Gave BU Operations evidence they could act on: rooms that need more ventilation, rooms where heating and cooling could save energy, and rooms that need air filtering. The project won the Anthony Janetos Climate Action Prize.</p>
-                <h2 class="project-gallery-title">Problem</h2>
-                <p class="project-description">Raw readings from sensors in 20+ classrooms are unreadable to a facilities team. They don’t need more data; they need to know which rooms to fix.</p>
-
-                <h2 class="project-gallery-title">Process</h2>
-                <ul>
-                    <li><b>Define the user.</b> Started from who would use it: facilities staff who need to decide what to fix, not researchers exploring data.</li>
-                    <li><b>Research.</b> Met with Operations to learn the questions they ask about their buildings.</li>
-                    <li><b>Design.</b> Turned those questions into the app’s controls and charts, built it in Streamlit with Plotly and Matplotlib, and published it so Operations could use it directly.</li>
-                    <li><b>Hardware.</b> Designed the sensor enclosures in CAD so the devices could be mounted in classrooms.</li>
-                </ul>
-
-                <h2 class="project-gallery-title">Design decisions</h2>
-                <ul>
-                    <li><b>Controls that match their questions.</b> A custom date range, a metric picker, and comparing many sensors at once came straight from what Operations asked in our meetings.</li>
-                    <li><b>Thresholds on every chart.</b> Every reading is plotted against health and comfort thresholds, so a chart answers “is this a problem?” without needing to know what a CO2 reading in ppm means.</li>
-                    <li><b>Exposure, not averages.</b> Summary metrics are time above threshold, time occupied, maximum exposure, and time occupied and above threshold, since a bad reading in an empty room matters less than one during class.</li>
-                </ul>
-                <p class="project-description">For the data pipeline, database design, and findings, see the <a href="#project-ccl">research version of this project</a>.</p>
-
-                <h2 class="project-gallery-title">Project media</h2>
-                <div class="project-media">
-                    <img src="streamlit/poster.png" alt="Project poster" loading="lazy" decoding="async">
-                </div>
-                <div class="project-media-row project-media-row--video-2-3">
-                    <div>
-                        <video id="streamlit-demo" poster="ccl/demo-poster.jpg" controls playsinline preload="none">
-                            <source src="ccl/demo.mp4" type="video/mp4">
-                            <source src="ccl/demo.webm" type="video/webm">
-                        </video>
-                    </div>
-                    <div>
-                        <img src="streamlit/news.png" alt="News coverage" loading="lazy" decoding="async">
-                    </div>
-                </div>
-                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="gallery-item"><img src="streamlit/CAD1.png" alt="CAD 1" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="streamlit/CAD2.png" alt="CAD 2" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="streamlit/CAD3.png" alt="CAD 3" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="streamlit/CAD4.png" alt="CAD 4" loading="lazy" decoding="async"></div>
-                </div>
-            </div>
-        </section>
-
         <section id="project-reco" class="page project-detail">
-            <div class="project-page">
+            <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">← Back to featured work</a>
                 <h1 class="serif">ReCo Digital web app</h1>
-                <p class="project-meta">ReCo Digital · Intern</p>
+                <p class="project-meta">ReCo Digital · Intern · 4 weeks</p>
                 <dl class="project-glance">
                     <div><dt>Duration</dt><dd>4 weeks</dd></div>
                     <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Python</li><li>Gemini API</li><li>OpenAI API</li><li>Flask</li><li>JavaScript</li><li>CSS</li><li>Supabase</li></ul></dd></div>
                 </dl>
-                <p class="project-description">A web app that reads receipts and turns them into food waste data for a client.</p>
-                <div class="project-media project-media--logo">
-                    <a href="https://www.reco.net.au/" target="_blank" rel="noopener"><img src="reco/reco-logo.png" alt="ReCo Digital" loading="lazy" decoding="async"></a>
+                <p class="vs-lede">A web app that reads receipts and turns them into food waste data, for a client of ReCo Digital, a design and strategy consulting firm.</p>
+                <figure class="ff-hero">
+                    <video src="reco/demo.mp4" poster="reco/demo-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:8px; border:1px solid var(--border)"></video>
+                    <figcaption>Uploading a receipt and getting back its items, sorted by food group.</figcaption>
+                </figure>
+
+                <dl class="vs-facts">
+                    <div><dt>Role</dt><dd>One of two interns. I led product development, from picking the tech to deployment</dd></div>
+                    <div><dt>Client</dt><dd>A sustainability project to measure food waste</dd></div>
+                    <div><dt>Built</dt><dd>Receipt reading, sorting into 12 food groups, a database and a dashboard</dd></div>
+                    <div><dt>Result</dt><dd>98% parsing accuracy and 40% faster page loads, delivered in 4 weeks</dd></div>
+                </dl>
+
+                <div class="vs-toc" role="navigation" aria-label="On this page">
+                    <div class="vs-toc-group">
+                        <a href="#rc-problem" data-cs-jump><span>01</span> Problem</a>
+                        <a href="#rc-process" data-cs-jump><span>02</span> Process</a>
+                        <a href="#rc-system" data-cs-jump><span>03</span> How it works</a>
+                        <a href="#rc-decisions" data-cs-jump><span>04</span> Decisions</a>
+                    </div>
                 </div>
-                <p class="project-description"><b>Context:</b> ReCo Digital is a design and strategy consulting firm. I was one of two interns in charge of a sustainability project for a client. Our objective was to automate the quantification of food waste through receipt image recognition.</p>
-                <p class="project-description"><b>Skills:</b> Python, computer vision, OpenAI API, Gemini API, data analytics, data visualization, web development, Flask, Supabase.</p>
-                <p class="project-description"><b>Impact:</b> Delivered solution to client in 4 weeks, achieved 98% accuracy in receipt parsing, improved client’s operational efficiency, reduced page load times by 40%.</p>
-                <h2 class="project-gallery-title">Problem</h2>
-                <p class="project-description">To measure food waste, the client needed an input-to-waste ratio: how much food came in versus how much was thrown out. The “input” side was stuck on paper receipts, and turning those into numbers by hand was slow.</p>
 
-                <h2 class="project-gallery-title">Process</h2>
-                <ul>
-                    <li><b>Own it.</b> Led product development and managed the project from choosing the technology to testing and deployment.</li>
-                    <li><b>Research.</b> Tested several LLM APIs and computer vision models on receipts and compared accuracy and speed before choosing a stack.</li>
-                    <li><b>Scope.</b> Evaluated feature tradeoffs and used prioritization frameworks to decide what fit in 4 weeks.</li>
-                    <li><b>Build.</b> Built the pipeline: Gemini reads each receipt, OpenAI sorts every item into one of 12 food groups and totals the weight by group, and Supabase (PostgreSQL) stores the results.</li>
-                    <li><b>Iterate.</b> Built the dashboard in Flask, JavaScript and CSS, presented it to the client, and kept iterating on their feedback.</li>
-                </ul>
+                <section class="vs-section" id="rc-problem" aria-labelledby="rc-problem-h">
+                    <p class="vs-kicker">01 · The problem</p>
+                    <h2 class="serif vs-h2" id="rc-problem-h">The input data was stuck on paper.</h2>
+                    <p class="project-description">To measure food waste, the client needed an input-to-waste ratio. The input side lived on paper receipts, and turning those into numbers by hand was slow.</p>
+                    <ol class="vs-chain cs-3"><li><span class="vs-chain-n">In</span><b>Food bought</b><span class="vs-chain-note">On paper receipts, counted by hand</span></li><li><span class="vs-chain-n">Out</span><b>Food wasted</b><span class="vs-chain-note">What was thrown out</span></li><li><span class="vs-chain-n">Goal</span><b>Input-to-waste ratio</b><span class="vs-chain-note">What the client needed to track</span></li></ol>
+                </section>
 
-                <h2 class="project-gallery-title">Design decisions</h2>
-                <ul>
-                    <li><b>Reading and sorting as separate steps.</b> Splitting the work between two models made it easier to see where errors came from and fix each step on its own.</li>
-                    <li><b>12 food groups.</b> Detailed enough to show where waste comes from, small enough to stay readable on a chart.</li>
-                    <li><b>Single and bulk upload.</b> One receipt for a quick check, or a whole batch at once, because the client collects receipts over time and shouldn’t have to upload them one by one.</li>
-                    <li><b>A monthly view,</b> so the client sees totals and trends over time instead of receipt by receipt.</li>
-                </ul>
+                <section class="vs-section" id="rc-process" aria-labelledby="rc-process-h">
+                    <p class="vs-kicker">02 · Process</p>
+                    <h2 class="serif vs-h2" id="rc-process-h">Test the models before building anything.</h2>
+                    <ol class="vs-chain vs-chain--4"><li><span class="vs-chain-n">01</span><b>Test</b><span class="vs-chain-note">LLM APIs and vision models on receipts, for accuracy and speed</span></li><li><span class="vs-chain-n">02</span><b>Scope</b><span class="vs-chain-note">Weighed feature tradeoffs to fit 4 weeks</span></li><li><span class="vs-chain-n">03</span><b>Build</b><span class="vs-chain-note">The pipeline, the database and the dashboard</span></li><li><span class="vs-chain-n">04</span><b>Iterate</b><span class="vs-chain-note">Presented to the client and kept improving it from their feedback</span></li></ol>
+                </section>
 
-                <div class="project-media">
-                    <video src="reco/demo.mp4" poster="reco/demo-poster.jpg" preload="none" playsinline controls style="width:100%; border-radius:12px;"></video>
-                </div>
+                <section class="vs-section" id="rc-system" aria-labelledby="rc-system-h">
+                    <p class="vs-kicker">03 · How it works</p>
+                    <h2 class="serif vs-h2" id="rc-system-h">Two models, two jobs.</h2>
+                    <div class="fc-wrap"><svg class="fc" viewBox="0 18 860 92" role="img" aria-labelledby="rc-fc-t" style="min-width:640px"><title id="rc-fc-t">How the app works: a receipt is uploaded, Gemini reads it, OpenAI sorts every item into 12 food groups with weights, Supabase stores the results, and the dashboard shows totals by group and by month.</title><defs><marker id="rc-fc-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fc-head"/></marker></defs><rect class="fc-step fc-end" x="5" y="40" width="140" height="50" rx="8"/><text class="fc-t" x="75.0" y="62.0" text-anchor="middle">Receipt</text><text class="fc-s" x="75.0" y="78.0" text-anchor="middle">photo or PDF</text><path class="fc-a" d="M145 65H166" marker-end="url(#rc-fc-head)"/><rect class="fc-step" x="168" y="40" width="135" height="50" rx="8"/><text class="fc-t" x="235.5" y="62.0" text-anchor="middle">Read it</text><text class="fc-s" x="235.5" y="78.0" text-anchor="middle">Gemini</text><path class="fc-a" d="M303 65H324" marker-end="url(#rc-fc-head)"/><rect class="fc-step" x="326" y="40" width="185" height="50" rx="8"/><text class="fc-t" x="418.5" y="62.0" text-anchor="middle">Sort into 12 food groups</text><text class="fc-s" x="418.5" y="78.0" text-anchor="middle">OpenAI, with weights</text><path class="fc-a" d="M511 65H532" marker-end="url(#rc-fc-head)"/><rect class="fc-step" x="534" y="40" width="115" height="50" rx="8"/><text class="fc-t" x="591.5" y="62.0" text-anchor="middle">Store</text><text class="fc-s" x="591.5" y="78.0" text-anchor="middle">Supabase</text><path class="fc-a" d="M649 65H670" marker-end="url(#rc-fc-head)"/><rect class="fc-step fc-end" x="672" y="40" width="183" height="50" rx="8"/><text class="fc-t" x="763.5" y="62.0" text-anchor="middle">Dashboard</text><text class="fc-s" x="763.5" y="78.0" text-anchor="middle">totals by group, by month</text></svg></div>
+                </section>
+
+                <section class="vs-section" id="rc-decisions" aria-labelledby="rc-decisions-h">
+                    <p class="vs-kicker">04 · Decisions</p>
+                    <h2 class="serif vs-h2" id="rc-decisions-h">Built around how the client works.</h2>
+                    <ul class="vs-plain">
+                        <li><b>Reading and sorting as separate steps.</b> Splitting the work between two models made it easier to see where errors came from and fix each step on its own.</li>
+                        <li><b>12 food groups.</b> Detailed enough to show where waste comes from, small enough to stay readable on a chart.</li>
+                        <li><b>Single and bulk upload.</b> One receipt for a quick check, or a whole batch at once, since the client collects receipts over time.</li>
+                        <li><b>A monthly view,</b> so the client sees totals and trends instead of going receipt by receipt.</li>
+                    </ul>
+                </section>
             </div>
         </section>
 
@@ -5780,56 +5800,85 @@
         </section>
 
         <section id="project-lovable" class="page project-detail">
-            <div class="project-page">
+            <div class="project-page vs ff">
                 <a href="#design" class="project-back" data-page="design">&larr; Back to featured work</a>
                 <h1 class="serif">Lovable hackathon mobile app</h1>
-                <p class="project-meta">Lovable collegiate hackathon · Solo</p>
+                <p class="project-meta">Lovable collegiate hackathon · Solo · 1.5 hours</p>
                 <dl class="project-glance">
                     <div><dt>Duration</dt><dd>1.5 hours</dd></div>
                     <div><dt>Tools</dt><dd><ul class="glance-tools"><li>Lovable</li></ul></dd></div>
                 </dl>
-                <p class="project-description">Vibe-coded complete mobile app using Lovable in under 1.5 hours (frontend + backend).</p>
-                <div class="project-media project-media--logo">
-                    <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener"><img src="lovable/cover.png" alt="Lovable" loading="lazy" decoding="async"></a>
+                <p class="vs-lede">A health app I vibe-coded in Lovable in under 1.5 hours, frontend and backend. It’s where the idea for <a href="#project-vitasalus">VitaSalus</a> started.</p>
+                <p class="project-description"><a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener">Open live app &rarr;</a></p>
+
+                <dl class="vs-facts">
+                    <div><dt>Role</dt><dd>Solo: problem, features, information architecture and build</dd></div>
+                    <div><dt>Time</dt><dd>Under 1.5 hours, at a Lovable collegiate hackathon</dd></div>
+                    <div><dt>Built</dt><dd>A working mobile app, frontend and backend</dd></div>
+                    <div><dt>Next</dt><dd>Grew into VitaSalus</dd></div>
+                </dl>
+
+                <div class="vs-toc" role="navigation" aria-label="On this page">
+                    <div class="vs-toc-group">
+                        <a href="#lv-problem" data-cs-jump><span>01</span> Problem</a>
+                        <a href="#lv-process" data-cs-jump><span>02</span> Process</a>
+                        <a href="#lv-decisions" data-cs-jump><span>03</span> Decisions</a>
+                        <a href="#lv-next" data-cs-jump><span>04</span> Looking back</a>
+                    </div>
                 </div>
-                <p class="project-description"><b>Context:</b> Invited to participate in a Lovable collegiate hackathon where we vibe coded entire web and mobile apps.</p>
-                <p class="project-description"><b>Skills:</b> Lovable, information hierarchy, UX design, navigation design.</p>
-                <p class="project-description"><b>Impact:</b> Learned to prioritize features and speed-run MVP development under extreme time pressure.</p>
-                <p class="project-description"><b>About the app:</b> A health intelligence layer that connects all your health data and wearable devices. Solves the problem of fragmented data, incomplete insights, and users' frustration of not understanding the why behind outcomes. Vita uncovers true causation and provides personalized and actionable insights, helping you achieve your goals faster and smarter.</p>
 
-                <h2 class="project-gallery-title">Process</h2>
-                <ul>
-                    <li><b>Define.</b> Wrote down the problem and user pain points first: data spread across devices, insights that stop short, and not knowing why things happen.</li>
-                    <li><b>Prioritize.</b> Picked the must-have features from those pain points and cut everything else.</li>
-                    <li><b>Plan.</b> Mapped out the navigation, information hierarchy, layouts, user flow, theme and how to show the data before writing a single prompt.</li>
-                    <li><b>Build and iterate.</b> Built the MVP in Lovable, then spent the rest of the time iterating on it, balancing how much the product does against how much fits on a phone screen.</li>
-                </ul>
+                <section class="vs-section" id="lv-problem" aria-labelledby="lv-problem-h">
+                    <p class="vs-kicker">01 · The problem</p>
+                    <h2 class="serif vs-h2" id="lv-problem-h">Plenty of health data, not much of the why.</h2>
+                    <p class="project-description">Health data is spread across devices and apps, the insights stop short, and it’s frustrating not to understand the why behind your results. Vita connects your health data and wearables and turns them into personal, actionable insights.</p>
+                </section>
 
-                <h2 class="project-gallery-title">Design decisions</h2>
-                <ul>
-                    <li><b>Goals at the top.</b> Home opens with your goals and how on track you are (“Run a Marathon, 34% on track”), so every number below has a reason to be there.</li>
-                    <li><b>A body you can read before the numbers.</b> The 3D body view marks each region as optimal, attention or warning, so you can see what needs care at a glance.</li>
-                    <li><b>Every insight ends in an action.</b> Each card has a plain-language finding, one suggestion (“Consider a noon cutoff”), a confidence score, a chart of the two things that move together, and a cited study. That answers the “why” and gives people a reason to trust it.</li>
-                    <li><b>Logging is one tap from anywhere.</b> A single center button opens journal, meal photo, face scan and file upload, so adding data never means hunting through menus.</li>
-                </ul>
-                <p class="project-description">In the process, I learned how to communicate large amounts of data in intuitive ways. This hackathon is also where the idea for <a href="#project-vitasalus">VitaSalus</a> started. Looking back, this version shows a lot at once, and that’s what I worked on cutting down there.</p>
-                <p class="project-description" style="margin-top: 1rem;">
-                    <a href="https://vita-health.lovable.app/home" target="_blank" rel="noopener">Open live app &rarr;</a>
-                </p>
+                <section class="vs-section" id="lv-process" aria-labelledby="lv-process-h">
+                    <p class="vs-kicker">02 · Process</p>
+                    <h2 class="serif vs-h2" id="lv-process-h">Plan first, then prompt.</h2>
+                    <ol class="vs-chain vs-chain--4"><li><span class="vs-chain-n">01</span><b>Define</b><span class="vs-chain-note">The problem and the pain points</span></li><li><span class="vs-chain-n">02</span><b>Prioritize</b><span class="vs-chain-note">Must-have features only, everything else cut</span></li><li><span class="vs-chain-n">03</span><b>Plan</b><span class="vs-chain-note">Navigation, hierarchy, layouts, flow, theme and charts</span></li><li><span class="vs-chain-n">04</span><b>Build</b><span class="vs-chain-note">An MVP in Lovable, then iterate with the time left</span></li></ol>
+                    <p class="project-description">The hard part was balancing how much the product does against how much fits on a phone screen.</p>
+                </section>
 
-                <h2 class="project-gallery-title">App screens</h2>
-                <div class="project-gallery">
-                    <div class="gallery-item"><img src="lovable/screen-home-metrics.png" alt="Home dashboard with body scan and health metrics" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/screen-home-warning.png" alt="Home with lower body recovery warning" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/insights-feed.png" alt="Activity and insights feed" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/ai-insights.png" alt="AI insights and causal analysis" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/screen-log-capture.png" alt="Log and capture menu" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/screen-learn.png" alt="Learn resources for goals" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/screen-profile.png" alt="Profile and settings" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/screen-home-light.png" alt="Home in light theme with cardiovascular card" loading="lazy" decoding="async"></div>
-                    <div class="gallery-item"><img src="lovable/screen-insights-cards.png" alt="Insights with hydration and stress charts" loading="lazy" decoding="async"></div>
-                </div>
+                <section class="vs-section" id="lv-decisions" aria-labelledby="lv-decisions-h">
+                    <p class="vs-kicker">03 · Decisions</p>
+                    <h2 class="serif vs-h2" id="lv-decisions-h">A lot of data on a small screen.</h2>
+                    <div class="vs-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Home"><img src="lovable/screen-home-metrics.png" width="628" height="1024" alt="Home: goals with how on track you are, a 3D body view and energy, HRV, sleep and recovery" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">01 · Home</p><h3 class="serif">Goals at the top.</h3><p>Home opens with your goals and how on track you are (“Run a Marathon, 34% on track”), so every number below has a reason to be there.</p></div>
+                    </div>
+                    <div class="vs-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Body view with a warning"><img src="lovable/screen-home-warning.png" width="608" height="1024" alt="Home with the 3D body view flagging lower body recovery as a warning" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">02 · Body view</p><h3 class="serif">A body you can read before the numbers.</h3><p>The 3D body marks each region as optimal, attention or warning, so you can see what needs care at a glance.</p></div>
+                    </div>
+                    <div class="vs-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: AI insights"><img src="lovable/ai-insights.png" width="570" height="1024" alt="AI insights: a sleep and caffeine correlation with 92% confidence, a chart and a cited study" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">03 · Insights</p><h3 class="serif">Every insight ends in an action.</h3><p>Each card has a plain finding, one suggestion (“Consider a noon cutoff”), a confidence score, a chart of the two things that move together, and a cited study. That answers the why and gives people a reason to trust it.</p></div>
+                    </div>
+                    <div class="vs-screen">
+                        <div class="vs-screen-img"><button type="button" class="vs-zoom" aria-label="Enlarge: Log and capture"><img src="lovable/screen-log-capture.png" width="628" height="1024" alt="Log and capture: journal entry, log a meal, face scan and other data" loading="lazy" decoding="async"></button></div>
+                        <div class="vs-screen-text"><p class="vs-label">04 · Logging</p><h3 class="serif">One tap from anywhere.</h3><p>A single center button opens journal, meal photo, face scan and file upload, so adding data never means hunting through menus.</p></div>
+                    </div>
+                    <p class="vs-label cs-more-label">More screens</p>
+                    <div class="cs-more">
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Insights feed"><img src="lovable/insights-feed.png" alt="Activity and insights feed" loading="lazy" decoding="async"></button>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Insight cards"><img src="lovable/screen-insights-cards.png" alt="Insights with hydration and stress charts" loading="lazy" decoding="async"></button>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Learn"><img src="lovable/screen-learn.png" alt="Learn resources for your goals" loading="lazy" decoding="async"></button>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Profile"><img src="lovable/screen-profile.png" alt="Profile and settings" loading="lazy" decoding="async"></button>
+                        <button type="button" class="vs-zoom" aria-label="Enlarge: Light theme"><img src="lovable/screen-home-light.png" alt="Home in the light theme" loading="lazy" decoding="async"></button>
+                    </div>
+                </section>
+
+                <section class="vs-section" id="lv-next" aria-labelledby="lv-next-h">
+                    <p class="vs-kicker">04 · Looking back</p>
+                    <h2 class="serif vs-h2" id="lv-next-h">Where VitaSalus started.</h2>
+                    <p class="project-description">Building this taught me how to show a lot of data in ways that are easy to understand. It also showed me its weak spot: this version shows a lot at once. In <a href="#project-vitasalus">VitaSalus</a>, I worked on cutting that down to one clear next step.</p>
+                </section>
             </div>
+            <dialog class="vs-lightbox" id="lv-lightbox" aria-label="Enlarged image">
+                <button type="button" class="vs-lightbox-close" aria-label="Close">&times;</button>
+                <img alt="">
+            </dialog>
         </section>
 
         <section id="project-flamefreeze" class="page project-detail">
@@ -6596,7 +6645,7 @@
                 </figure>
 
                 <p class="project-description"><b>Context:</b> Campus buildings had no continuous data on air quality or comfort for each room, so facilities couldn’t tell whether classrooms were ventilated enough, too hot or too cold, or exposing people to particulates. Our goal was to collect CO2, PM2.5, temperature, humidity, and occupancy data in each room, give facilities evidence to act on, and show people in the room their air quality. I was one of three undergraduate researchers, advised by Prof. Thomas Little, funded by the BU Institute for Global Sustainability with BU Sustainability and the Office of Research, and working with BU Operations as our facilities partner.</p>
-                <p class="project-description"><b>Skills:</b> Python (NumPy, Pandas), time series data pipelines, MongoDB schema design, Streamlit, Plotly, Matplotlib, CAD, IoT sensor deployment, data cleaning, exposure metric design.</p>
+                <p class="project-description"><b>Skills:</b> Stakeholder interviews, information design, Python (NumPy, Pandas), time series data pipelines, MongoDB schema design, Streamlit, Plotly, Matplotlib, CAD, IoT sensor deployment, data cleaning, exposure metric design.</p>
                 <p class="project-description"><b>Impact:</b> Gave BU facilities data for each room showing which classrooms need more ventilation, which are too warm or too cold and wasting energy, and which need air filtering. The project won the Anthony Janetos Climate Action Prize, and we presented it at the IGS Month of Energy and Sustainability in March 2025.</p>
                 <p class="project-description"><b>System:</b> As a team, we installed sensors in 20+ classrooms across the EPIC building on March 7, 2025. Readings travel over the campus network to a lab server for logging, then to the Streamlit portal for analysis and to live gauge displays for people in the room.</p>
                 <p class="project-description"><b>Details:</b>
@@ -6608,7 +6657,14 @@
                     <li>Designed the metrics it reports, including time above threshold and time occupied and above threshold, which measures how long people were actually exposed.</li>
                     <li>Worked with the team across hardware and software, and with BU Operations as the end user.</li>
                 </ul>
-                <p class="project-description">For how the portal was designed around its users, see the <a href="#project-streamlit">design version of this project</a>.</p>
+                <h2 class="project-gallery-title">Designing the portal</h2>
+                <p class="project-description">Raw readings from 20+ classrooms mean little to a facilities team, who need to know which rooms to fix. I designed the portal for them rather than for researchers exploring data, and met with BU Operations to learn the questions they ask.</p>
+                <div class="vs-ideas">
+                    <div><span class="vs-label">Controls</span><h3>Their questions, as filters</h3><p>A date range, a metric picker and comparing many sensors at once, straight from what Operations asked.</p></div>
+                    <div><span class="vs-label">Thresholds</span><h3>Is this a problem?</h3><p>Every reading sits against health and comfort thresholds, so no one has to know what a CO2 reading in ppm means.</p></div>
+                    <div><span class="vs-label">Exposure</span><h3>Exposure, not averages</h3><p>Time above threshold while a room is occupied, since a bad reading in an empty room matters less than one during class.</p></div>
+                </div>
+
 
                 <h2 class="project-gallery-title">What the data showed</h2>
                 <figure>
@@ -6620,6 +6676,12 @@
                     <li><b>Temperature:</b> several classrooms ran above the comfort range while others were over chilled, two separate chances to save energy.</li>
                     <li><b>PM2.5:</b> rooms 201-1, 201-2, and 102 had episodic particulate spikes, making them candidates for local air filtering.</li>
                 </ul>
+
+                <h2 class="project-gallery-title">Poster and press</h2>
+                <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0; margin-bottom: 2.5rem;">
+                    <div class="gallery-item"><img src="streamlit/poster.png" alt="Research poster for the indoor air quality project" loading="lazy"></div>
+                    <div class="gallery-item"><img src="streamlit/news.png" alt="News coverage of the project" loading="lazy"></div>
+                </div>
 
                 <h2 class="project-gallery-title">Sensor hardware</h2>
                 <div class="project-gallery" style="grid-template-columns: repeat(2, 1fr); margin-top: 0; margin-bottom: 2.5rem;">
@@ -6790,8 +6852,6 @@
             }
 
             // demo video only loads and plays while its page is open
-            const streamlitDemo = document.getElementById('streamlit-demo');
-            if (streamlitDemo && pageName !== 'project-streamlit') streamlitDemo.pause();
 
             const cclDemo = document.getElementById('ccl-demo');
             if (cclDemo && pageName !== 'project-ccl') cclDemo.pause();
@@ -7110,14 +7170,19 @@
         }
 
         const hash = window.location.hash.slice(1);
-        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-vitasalus', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-streamlit', 'project-reco', 'project-artscape', 'project-lovable', 'project-flamefreeze', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-amyloid', 'project-watchdog', 'project-ccl'];
+        const validPages = ['home', 'about', 'design', 'research', 'resume', 'project-vitasalus', 'project-capitalone', 'project-enlaye', 'project-popple', 'project-reco', 'project-artscape', 'project-lovable', 'project-flamefreeze', 'project-haptic', 'project-neuro', 'project-marl', 'project-carla', 'project-amyloid', 'project-watchdog', 'project-ccl'];
+        // the air quality web app moved from the design page into its research page
+        const pageAliases = { 'project-streamlit': 'project-ccl' };
         if (validPages.includes(hash)) {
             showPage(hash);
+        } else if (pageAliases[hash]) {
+            showPage(pageAliases[hash]);
         }
 
         window.addEventListener('hashchange', () => {
             const h = window.location.hash.slice(1);
             if (validPages.includes(h)) showPage(h);
+            else if (pageAliases[h]) showPage(pageAliases[h]);
         });
 
         moveNavIndicator(true);
@@ -7586,6 +7651,30 @@
             box.addEventListener('click', (e) => {
                 if (e.target === box) box.close();
             });
+        })();
+
+        // Capital One, ReCo and Lovable pages: section links and image lightbox
+        document.addEventListener('click', (e) => {
+            const jump = e.target.closest('[data-cs-jump]');
+            if (jump) {
+                e.preventDefault();
+                document.getElementById(jump.getAttribute('href').slice(1))?.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+                return;
+            }
+            const btn = e.target.closest('#project-lovable .vs-zoom');
+            const box = document.getElementById('lv-lightbox');
+            if (btn && box && typeof box.showModal === 'function') {
+                const img = btn.querySelector('img');
+                box.querySelector('img').src = img.currentSrc || img.src;
+                box.querySelector('img').alt = img.alt;
+                box.showModal();
+            }
+        });
+        (function() {
+            const box = document.getElementById('lv-lightbox');
+            if (!box || typeof box.showModal !== 'function') return;
+            box.querySelector('.vs-lightbox-close').addEventListener('click', () => box.close());
+            box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
         })();
 
         // Designathon page: image lightbox
